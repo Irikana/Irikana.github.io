@@ -1,0 +1,9 @@
+/* 添加响应式设计 */
+@media (max-width: 768px) {
+  .notion-page { padding: 10px; }
+}
+
+/* 暗色模式支持 */
+@media (prefers-color-scheme: dark) {
+  body { background: #1a1a1a; color: #fff; }
+}
