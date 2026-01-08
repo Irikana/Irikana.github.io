@@ -1,0 +1,715 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>图书馆功能</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2e0ffe07-069e-805b-a8c6-ee635fd0f4c2" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/book_blue.svg"/></div><h1 class="page-title" dir="auto">图书馆功能</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e1ffe07-069e-809a-a1c9-dc01cbe821f2"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/alert_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-802c-ad55-c0729969dd06" class="">创建于2026.1.7</p></div></div></figure></div><div style="display:contents" dir="auto"><hr id="2e1ffe07-069e-807e-9c08-dc71ab41d260"/></div><div style="display:contents" dir="ltr"><nav id="2e1ffe07-069e-80e3-9282-cca633201e48" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2e1ffe07-069e-8076-a24e-fabf8280d3b6">基本功能</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2e1ffe07-069e-8014-89f5-c65c39cc1148">图标</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2e1ffe07-069e-80a5-88cd-c359cc18d4d8">注意</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2e1ffe07-069e-8083-ae30-c21db3c20008">页面</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2e2ffe07-069e-80a9-aace-ffe4f3260e52">金色图标</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2e2ffe07-069e-808f-9a04-cd2d0507124b">按钮</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2e2ffe07-069e-8015-9c18-d68c942b761d">一些例子</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2e2ffe07-069e-8082-8d19-d818ca32e233">进阶功能</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2e2ffe07-069e-8089-b42f-e97e38489e71">嵌套</a></div></nav></div><div style="display:contents" dir="auto"><h1 id="2e1ffe07-069e-8076-a24e-fabf8280d3b6" class="block-color-blue_background">基本功能</h1></div><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-80b1-98b4-c67034ee71c8" class="">基本功能是指在图书馆里，起到基本作用的那些功能，包括页面与页面之间的连接，辅助阅读等，基本上，它们由图书馆的创建工具，也就是Notion决定。</p></div><div style="display:contents" dir="auto"><h2 id="2e1ffe07-069e-8014-89f5-c65c39cc1148" class="block-color-blue_background">图标</h2></div><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-80d0-9358-c3af540b3b96" class="">这是伴随着图书馆创建之初就一起需要考虑的功能，图标，现在主要指emoji和ui矢量符号，它们是我在Notion中编辑最新的图书馆页面时就能使用的内容，并且导出成html后不需要依赖文件或其他内容就能渲染成你所看到的样子，它们常常出现在页面连接到页面，标题，字里行间，固定重复出现的图标通常被赋予一些指导意义，所有的有意义图标应当被列出在此。</p></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">注意</summary><div class="indented"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e1ffe07-069e-8077-b6b7-c199c2c3005e"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/alert_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-806f-8ffb-e8d3dac0c952" class="">一级注意（通知）</p></div><div style="display:contents" dir="auto"><hr id="2e1ffe07-069e-802c-a7d6-c180a85d644b"/></div><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-80f7-a415-f98a6be91601" class="">通常表示通知</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e1ffe07-069e-80df-a681-c596756f4083"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/alert_blue.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-802a-853d-d005a26ac976" class="">二级注意（高亮）</p></div><div style="display:contents" dir="auto"><hr id="2e1ffe07-069e-80f7-9e4c-f4f16a340678"/></div><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-809b-98bc-f34d2876f292" class="">通常代表具有功能性和代表性的正面影响注意事项</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e1ffe07-069e-804f-93b1-c8ccb3974d9f"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/alert_yellow.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-803b-bf4a-d61ce9b4819e" class="">三级注意（危险）</p></div><div style="display:contents" dir="auto"><hr id="2e1ffe07-069e-80c6-8212-c9dbceab812c"/></div><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-8047-bf59-e854cc6e3174" class="">通常代表需要关注关注的负面影响注意事项</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e1ffe07-069e-80bb-a573-dde86eb9544f"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/alert_red.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-802d-81c5-e1f304bb0f40" class="">四级注意（警告）</p></div><div style="display:contents" dir="auto"><hr id="2e1ffe07-069e-801e-af7d-d3ea0011526f"/></div><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-8086-a436-e98e03cd052f" class="">通常代表紧急通知</p></div></div></figure></div></div></details></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">页面</summary><div class="indented"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e2ffe07-069e-8063-87d3-ed093801c5de"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/book_lightgray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-80e1-aa17-d5e13d939674" class="">零级页面（预设页面）</p></div><div style="display:contents" dir="auto"><hr id="2e2ffe07-069e-8060-acd9-f78848be45ba"/></div><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-8001-b09b-c7667d59c670" class="">通常代表由于建设中导致无内容或内容过少的可浏览页面</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e1ffe07-069e-8081-9af1-d28d17421f5c"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/book_gray.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-8077-8930-c01e137192bb" class="">一级页面（普通页面）</p></div><div style="display:contents" dir="auto"><hr id="2e1ffe07-069e-8066-9cac-c729208af15d"/></div><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-800d-803e-e4e739cff9ff" class="">通常代表普通的可浏览页面</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e1ffe07-069e-806d-a592-e181c232ce8b"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/book_green.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-8054-af27-fa953b83596e" class="">二级页面（兴趣页面）</p></div><div style="display:contents" dir="auto"><hr id="2e1ffe07-069e-80ea-9f3c-dc0c3e66a95a"/></div><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-8051-9272-cf12a0e4948a" class="">通常代表较为重要的可浏览页面</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e1ffe07-069e-80d6-9dc1-fe659d735787"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/book_blue.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-80bf-99c3-f02439bab9e1" class="">三级页面（高亮页面）</p></div><div style="display:contents" dir="auto"><hr id="2e1ffe07-069e-8043-9ada-de9d98c2e739"/></div><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-8042-9499-db6afd66729a" class="">通常代表非常重要的可浏览页面</p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e1ffe07-069e-80b2-9a59-dfc125900481"><div style="font-size:1.5em"><img class="icon notion-static-icon" src="https://www.notion.so/icons/book_red.svg"/></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-8031-9257-d548ead7de99" class="">四级页面（禁止浏览页面）</p></div><div style="display:contents" dir="auto"><hr id="2e1ffe07-069e-8073-9672-d767aa0310a1"/></div><div style="display:contents" dir="auto"><p id="2e1ffe07-069e-804d-a959-e42a4e0c5b64" class="">通常代表禁止浏览的不可浏览页面</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-80cb-bf01-f9cdcbcb1dc1" class="">
+</p></div></div></details></div><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-800a-91d1-c030776c1fd2" class="">如果你在一些页面的最顶端，或者在被引用时，看到金色的图标时，这意味着它们是除去所有内容之后，那些起到结构性作用的页面，这里展示了目前所有的这些页面。</p></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">金色图标</summary><div class="indented"><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e2ffe07-069e-804e-a6dd-c60c04b2c2a8"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-800a-967b-c6b7dddf1e71" class=""><a href="index.html"><img class="icon notion-static-icon" src="https://www.notion.so/icons/geography_yellow.svg"/>牧羊人图书馆主页</a> </p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e2ffe07-069e-80ac-996d-c404828414aa"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-80c9-90ba-dd4b307d2d32" class=""><a href="library.html"><img class="icon notion-static-icon" src="https://www.notion.so/icons/book_yellow.svg"/>牧羊人图书馆</a> </p></div></div></figure></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e2ffe07-069e-8058-a942-c8501787369b"><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-8077-8d90-ee1c267875a8" class=""><a href="navigator.html"><img class="icon notion-static-icon" src="https://www.notion.so/icons/compass_yellow.svg"/>牧羊人图书馆导航枢纽</a> </p></div></div></figure></div></div></details></div><div style="display:contents" dir="auto"><h2 id="2e2ffe07-069e-808f-9a04-cd2d0507124b" class="block-color-blue_background">按钮</h2></div><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-80b2-a119-c73f71ab4593" class="">由于通过github pages托管成网站后，在notion里编辑时可以互动的返回上一个页面等软件内置功能消失了，所以为了各位读者方便穿梭于页面之间，我特意在每个页面顶部和底部添加一些按钮（实际上可能以区块形式存在）来做到这一点，下面是一些例子。</p></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">一些例子</summary></details></div><div style="display:contents" dir="auto"><h1 id="2e2ffe07-069e-8082-8d19-d818ca32e233" class="block-color-blue_background">进阶功能</h1></div><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-801c-a3d4-ea8428dc20b1" class="">进阶功能是在基本功能的基础上，通过我的一些安排，使得它们以相对而言稍微复杂一些的情况出现。</p></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">嵌套</summary><div class="indented"><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-80ef-8278-f5b60049d57d" class="">比如嵌套，查看该例子。</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2e2ffe07-069e-8002-80ce-c4a9d347c0ba"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-804c-9c52-c4f244b8f258" class="">这是一个标注</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-8073-be8c-f47557f85987" class="">我会新建一个页面来存放一些页面连接到页面的按钮，使得读者能够从任意一个页面都有可能转移到该页面，并进行下一步转移，作为一个例子，请查看 <a href="navigator.html"><img class="icon notion-static-icon" src="https://www.notion.so/icons/compass_yellow.svg"/>牧羊人图书馆导航枢纽</a> 。</p></div><div style="display:contents" dir="auto"><p id="2e2ffe07-069e-8054-acb7-ee421436244c" class="">
+</p></div></div></details></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
