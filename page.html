@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆页面模板</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="css/plugins.css">
+<link rel="stylesheet" href="css/style.css">
+<style id="ext-inline-css-import-0">
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* 颜色定义 */
+        :root {
+            --primary-color: #333;
+            --secondary-color: #666;
+            --accent-color: #999;
+            --background-color: #f5f5f5;
+            --card-background: #fff;
+            --border-color: #ddd;
+            --title-background: #003366;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部 */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 导航 */
+        nav {
+            background-color: var(--secondary-color);
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-title {
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            margin: 0 20px;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* 主要内容 */
+        main {
+            padding: 40px 0;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: var(--title-background);
+            display: block;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: var(--title-background);
+            display: inline-block;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        /* 标注样式 */
+        .note {
+            background-color: #ffebee;
+            border-left: 5px solid #c62828;
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #c62828;
+            font-weight: 600;
+        }
+
+        /* 链接样式 */
+        .card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .card a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            .nav-title {
+                writing-mode: horizontal-tb;
+                margin: 10px 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    </style>
+<style id="htmlpage-inline-styles">* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+</style>
+</head>
+<body>
+<header>
+    <div class="container">
+      <h1>牧羊人图书馆</h1>
+      <p>存放所有知识之地</p>
+    </div>
+  </header>
+  <nav>
+    <div class="nav-title">目录</div>
+    <div class="container">
+      <ul>
+        <li><a href="#intro">前情提要</a></li>
+        <li><a href="#entrance">图书馆入口</a></li>
+        <li><a href="#news">新闻</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main class="container"></main>
+  <div class="gjs-row"></div>
+  <footer>
+    <div class="container">
+      <p>© 2026 牧羊人图书馆 | 创建于2026.1.4</p>
+    </div>
+  </footer>
+<script src="js/plugins.js"></script>
+<script src="js/theme.js"></script>
+</body>
+</html>
