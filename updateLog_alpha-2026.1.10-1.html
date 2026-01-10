@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆页面模板</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="css/plugins.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/plugins.css">
+<link rel="stylesheet" href="css/style.css">
+<style id="ext-inline-css-import-0">
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* 颜色定义 */
+        :root {
+            --primary-color: #333;
+            --secondary-color: #666;
+            --accent-color: #999;
+            --background-color: #f5f5f5;
+            --card-background: #fff;
+            --border-color: #ddd;
+            --title-background: #003366;
+        }
+
+        /* 容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部 */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 导航 */
+        nav {
+            background-color: var(--secondary-color);
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-title {
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            margin: 0 20px;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* 主要内容 */
+        main {
+            padding: 40px 0;
+        }
+
+        /* 卡片样式 */
+        .card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: var(--title-background);
+            display: block;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .card h3 {
+            color: white;
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: var(--title-background);
+            display: inline-block;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        /* 标注样式 */
+        .note {
+            background-color: #ffebee;
+            border-left: 5px solid #c62828;
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #c62828;
+            font-weight: 600;
+        }
+
+        /* 链接样式 */
+        .card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .card a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            .nav-title {
+                writing-mode: horizontal-tb;
+                margin: 10px 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    </style>
+<style id="ext-inline-css-import-1">* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#i4e3r {
+  width: 384px;
+  height: 216px;
+}
+
+#iy9g {
+  color: #ffffff;
+}
+
+.gjs-row {
+  display: table;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.c1022 {
+  color: grey;
+}
+
+.c3808 {
+  color: black;
+}
+</style>
+<style id="ext-inline-css-import-2">* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.c2889 {
+  width: 384px;
+  height: 216px;
+}
+
+.c2897 {
+  color: #ffffff;
+}
+
+.c2963 {
+  color: grey;
+}
+</style>
+<style id="ext-inline-css-import-3">* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#id5j3 {
+  text-align: center;
+  font-size: 35px;
+}
+
+#id8eo {
+  color: white;
+  background-color: #666666;
+  font-size: 35px;
+}
+
+#i0yde {
+  font-size: 20px;
+}
+
+.gjs-row {
+  display: table;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.gjs-cell {
+  width: 8%;
+  display: table-cell;
+  height: 75px;
+}
+
+.c5014 {
+  padding: 10px;
+}
+
+.c7406 {
+  color: rgb(51, 51, 51);
+  font-size: 25px;
+  text-align: start;
+  word-spacing: 0px;
+  background-color: rgb(255, 255, 255);
+}
+
+.c10828 {
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .gjs-cell {
+    width: 100%;
+    display: block;
+  }
+}
+</style>
+<style id="htmlpage-inline-styles">* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#i3h1n {
+  color: white;
+}
+
+#i6soh {
+  font-size: 20px;
+  text-align: right;
+  color: white;
+}
+
+.c17652 {
+  text-align: center;
+  font-size: 35px;
+}
+
+.gjs-row {
+  display: table;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.gjs-cell {
+  width: 8%;
+  display: table-cell;
+  height: 75px;
+}
+
+.c23711 {
+  font-size: 20px;
+}
+
+.c23729 {
+  font-size: 20px;
+}
+
+.c23738 {
+  font-size: 20px;
+}
+
+.c23756 {
+  font-size: 20px;
+}
+
+.c23765 {
+  font-size: 20px;
+}
+
+.c23783 {
+  font-size: 20px;
+}
+
+.c23792 {
+  font-size: 20px;
+}
+
+.c23810 {
+  font-size: 20px;
+}
+
+.c23819 {
+  font-size: 20px;
+}
+
+.c23837 {
+  font-size: 20px;
+}
+
+.c23846 {
+  font-size: 20px;
+}
+
+.c23864 {
+  font-size: 20px;
+}
+
+.c23873 {
+  font-size: 20px;
+}
+
+.c23891 {
+  font-size: 20px;
+}
+
+.c23900 {
+  font-size: 20px;
+}
+
+.c23918 {
+  font-size: 20px;
+}
+
+.c23927 {
+  font-size: 20px;
+}
+
+.c23945 {
+  font-size: 20px;
+}
+
+.c23954 {
+  font-size: 20px;
+}
+
+.c23972 {
+  font-size: 20px;
+}
+
+.c23981 {
+  font-size: 20px;
+}
+
+.c23999 {
+  font-size: 20px;
+}
+
+.c24008 {
+  font-size: 20px;
+}
+
+.c24026 {
+  font-size: 20px;
+}
+
+.c24035 {
+  font-size: 20px;
+}
+
+.c24053 {
+  font-size: 20px;
+}
+
+.c24062 {
+  font-size: 20px;
+}
+
+.c24080 {
+  font-size: 20px;
+}
+
+.c24089 {
+  font-size: 20px;
+}
+
+.c24107 {
+  font-size: 20px;
+}
+
+.c24116 {
+  font-size: 20px;
+}
+
+.c24134 {
+  font-size: 20px;
+}
+
+.c24143 {
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .gjs-cell {
+    width: 100%;
+    display: block;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+    <div class="container"><img src="https://cms-api.htmlpage.cn/uploads/14162_1768014137936_k25llh0esgo_35d57f19f7.svg" class="c3808 c2889">
+      <h1 class="c2897">新闻</h1>
+      <p>存放所有知识之地</p>
+    </div>
+  </header>
+  <div class="gjs-row c1022 c2963"></div>
+  <nav>
+    <div class="container">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <div class="c5014 c17652"><span style="color:white;">牧羊人图书馆alpha-26.1.10-1版本更新<br></span>
+        <div style="font-size:20px;text-align:right;color:white;">2026.1.10</div>
+      </div>
+      <div class="gjs-row"></div>
+    </div>
+  </nav>
+  <main class="container"></main>
+  <div class="gjs-row">
+    <div class="gjs-cell card">
+      <div class="c23981"><span class="c23711"># ShepherdsLibrary</span><br id="ihy5c" draggable="true" class="c23729"><span class="c23738">---</span><br id="iwbx6" draggable="true" class="c23756"><span class="c23765">## Alpha 2026.1.10-1</span><br id="ig0k8" draggable="true" class="c23783"><span class="c23792">在项目根目录下新增updateLog文件夹，用于存放更新日志</span><br id="iq5n5" draggable="true" class="c23810"><span class="c23819">对于updateLog目录</span><br id="iqulk" draggable="true" class="c23837"><span class="c23846">添加了updateLog_alpha-2026.1.10-1.html</span><br id="io0ig" draggable="true" class="c23864"><span class="c23873">对于structure.html</span><br id="i3s7b" draggable="true" class="c23891"><span class="c23900">更新了顶端图片引用，现在引用的是我在htmlpage.cn中上传的logo矢量图</span><br id="ihdqm" draggable="true" class="c23918"><span class="c23927">对于index.html</span><br id="i0l25" draggable="true" class="c23945"><span class="c23954">更新了顶端图片引用，现在引用的是我在htmlpage.cn中上传的logo矢量图</span><br id="iwlrl" draggable="true" class="c23972"><span class="c23981">更新了顶端标题，现在是"牧羊人图书馆主页"而不是"牧羊人图书馆"，防止混淆</span><br id="i3uqm" draggable="true" class="c23999"><span class="c24008">更新了部分排版</span><br id="ib5dg" draggable="true" class="c24026"><span class="c24035">更新了新闻卡片及其内容，现在新闻卡片放在目录之下</span><br id="iiuun" draggable="true" class="c24053"><span class="c24062">更新了图书馆入口按钮的样式</span><br id="i3tn8" draggable="true" class="c24080"><span class="c24089">建设中的note现在向上放置到了顶端和目录之间</span><br id="i6vuu" draggable="true" class="c24107"><span class="c24116">修改了note内容</span><br id="ibwqv" draggable="true" class="c24134"><span class="c24143">---</span></div>
+    </div>
+  </div>
+  <div class="gjs-row"></div>
+  <footer>
+    <div class="container">
+      <p>© 2026 Shepherd's Library 牧羊人图书馆 |该图书馆创建于2026.1.4</p>
+    </div>
+  </footer>
+<script src="js/plugins.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/theme.js"></script>
+</body>
+</html>
