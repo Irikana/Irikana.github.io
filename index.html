@@ -3,270 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>牧羊人图书馆</title>
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="Shepherd's Library" />
-<link rel="manifest" href="/site.webmanifest" />
+<title>牧羊人图书馆 - 主页</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
 <link rel="stylesheet" href="css/plugins.css">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/plugins.css">
-<link rel="stylesheet" href="css/style.css">
-<style id="ext-inline-css-import-0">
-        /* 全局样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
-        }
-
-        /* 颜色定义 */
-        :root {
-            --primary-color: #333;
-            --secondary-color: #666;
-            --accent-color: #999;
-            --background-color: #f5f5f5;
-            --card-background: #fff;
-            --border-color: #ddd;
-            --title-background: #003366;
-        }
-
-        /* 容器 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* 头部 */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* 导航 */
-        nav {
-            background-color: var(--secondary-color);
-            padding: 10px 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-title {
-            color: white;
-            font-weight: 700;
-            font-size: 1.2rem;
-            writing-mode: vertical-rl;
-            text-orientation: upright;
-            margin: 0 20px;
-            padding: 10px 0;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            flex: 1;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* 主要内容 */
-        main {
-            padding: 40px 0;
-        }
-
-        /* 卡片样式 */
-        .card {
-            background-color: var(--card-background);
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .card h2 {
-            color: white;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            padding: 10px 15px;
-            background-color: var(--title-background);
-            display: block;
-            width: 100%;
-            border-radius: 5px;
-        }
-
-        .card h3 {
-            color: white;
-            font-size: 1.4rem;
-            margin: 25px 0 15px 0;
-            padding: 8px 12px;
-            border-radius: 5px;
-            background-color: var(--title-background);
-            display: inline-block;
-        }
-
-        .card p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: #555;
-        }
-
-        /* 标注样式 */
-        .note {
-            background-color: #ffebee;
-            border-left: 5px solid #c62828;
-            padding: 15px;
-            margin: 20px 0;
-            font-style: italic;
-            color: #c62828;
-            font-weight: 600;
-        }
-
-        /* 链接样式 */
-        .card a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .card a:hover {
-            color: var(--secondary-color);
-            text-decoration: underline;
-        }
-
-        /* 按钮样式 */
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .btn:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* 页脚 */
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-
-        footer p {
-            opacity: 0.9;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-
-            nav {
-                flex-direction: column;
-            }
-
-            .nav-title {
-                writing-mode: horizontal-tb;
-                margin: 10px 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                margin: 5px 0;
-            }
-
-            .card {
-                padding: 20px;
-            }
-        }
-
-        /* 动画效果 */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .card {
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        .card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .card:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-    </style>
-<style id="ext-inline-css-import-1">* {
+<style id="htmlpage-inline-styles">* {
   box-sizing: border-box;
 }
 
@@ -274,75 +16,117 @@ body {
   margin: 0;
 }
 
-#i4e3r {
-  width: 384px;
-  height: 216px;
+.logo-img {
+  width: 336px;
+  height: 188px;
 }
 
-#iy9g {
-  color: #ffffff;
+.desc-font {
+  font-size: 16px;
 }
 
-.gjs-row {
-  display: table;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  width: 100%;
-}
-
-.c1022 {
-  color: grey;
-}
-
-.c3808 {
-  color: black;
-}
-</style>
-<style id="ext-inline-css-import-2">* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-.c2011 {
-  width: 384px;
-  height: 216px;
-}
-
-.c2019 {
-  color: #ffffff;
-}
-
-.c2085 {
-  color: grey;
-}
-
-.c4990 {
-  padding: 10px;
-}
-
-.c6783 {
-  padding: 10px;
-}
-
-.c1875 {
+.title-text {
+  text-align: center;
+  color: white;
   font-size: 25px;
 }
 
-.c1893 {
-  font-size: 25px;
+.nav-height {
+  height: 174px;
 }
 
-.c1955 {
+.nav-title {
+  font-size: 20px;
+}
+
+.white-text {
+  color: white;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.content-bg {
+  background-color: lightgrey;
+}
+
+.section-header {
+  background-color: olivedrab;
+  margin: 0 0px 5px 0px;
+}
+
+.section-title {
+  background-color: yellowgreen;
+  font-size: 20px;
+}
+
+.content-box {
+  background-color: lightgrey;
+  height: 88px;
+}
+
+.notice-box {
+  padding: 0px 0px 0px 10px;
+  background-color: red;
+}
+
+.full-width {
+  width: 1151px;
+  background-color: lightcoral;
+}
+
+.left-text {
+  text-align: left;
+}
+
+.bg-image-reset {
   background-image: unset;
   background-repeat: unset;
   background-position: unset;
   background-attachment: unset;
   background-size: unset;
+}
+
+.nav-subtitle {
+  font-size: 20px;
+}
+
+.content-section {
+  background-color: lightgrey;
+}
+
+.blue-bg {
+  background-color: blue;
+}
+
+.lightblue-bg {
+  background-color: lightblue;
+}
+
+.no-margin {
+  margin: 0px 0px 0px 0px;
+}
+
+.yellowgreen-title {
+  background-color: yellowgreen;
+  font-size: 20px;
+}
+
+.content-bg-alt {
+  background-color: lightgrey;
+}
+
+.grey-bg {
+  background-color: grey;
+}
+
+.darkgrey-bg {
+  background-color: darkgrey;
+}
+
+.footer-height {
+  height: 88px;
 }
 
 .gjs-row {
@@ -360,19 +144,115 @@ body {
   height: 75px;
 }
 
-.c42001 {
-  display: block;
-  padding: 20px;
-  min-height: 40px;
+.logo-border {
+  color: black;
 }
 
-.c2369 {
+.logo-size {
+  width: 303px;
+  height: 170px;
+}
+
+.section-title-text {
+  font-size: 20px;
+  color: white;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.header-row {
+  height: 63px;
+  background-color: olivedrab;
+}
+
+.nav-padding {
+  padding: 10px;
+}
+
+.logo-container {
+  text-align: left;
+  width: 186px;
+  height: 186px;
+}
+
+.logo-align {
   text-align: center;
-  font-size: 25px;
-  border: 5px solid black;
-  margin: 0px 0px 0px 0px;
-  padding: 20px 20px 20px 20px;
-  border-radius: 0px;
+}
+
+.title-color {
+  color: white;
+}
+
+.nav-center {
+  text-align: center;
+}
+
+.copyright-color {
+  color: white;
+}
+
+.main-container {
+  height: 211px;
+  background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
+}
+
+.content-row {
+  background-color: yellowgreen;
+  height: 204px;
+}
+
+.footer-row {
+  background-color: darkolivegreen;
+  height: 69px;
+}
+
+.notice-header {
+  background-color: limegreen;
+  background-image: none;
+  background-repeat: repeat;
+  background-position: left top;
+  background-attachment: scroll;
+  background-size: auto;
+  margin-bottom: 15px;
+}
+
+.content-bg-yellow {
+  background-color: yellowgreen;
+}
+
+.content-bg-white {
+  background-color: white;
+  height: 299px;
+}
+
+.footer-row-alt {
+  height: 126px;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.yellowgreen-bg {
+  background-color: yellowgreen;
+}
+
+.section-header-alt {
+  background-color: yellowgreen;
+}
+
+.section-header-repeat {
+  background-color: olivedrab;
+  margin: 0 0px 5px 0px;
+}
+
+.content-padding {
+  padding: 10px;
+}
+
+.bg-reset {
   background-image: unset;
   background-repeat: unset;
   background-position: unset;
@@ -380,8 +260,270 @@ body {
   background-size: unset;
 }
 
-.c2069 {
-  position: static;
+.section-padding {
+  padding: 10px;
+}
+
+.content-padding-alt {
+  padding: 10px;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.notice-full-width {
+  width: 1151px;
+  background-color: indianred;
+}
+
+.notice-box-alt {
+  padding: 0px 0px 0px 10px;
+  background-color: red;
+}
+
+.gold-bg {
+  background-color: gold;
+}
+
+.yellow-bg {
+  background-color: yellow;
+}
+
+/* 注意事项和引用内容样式 */
+.notice-box-red {
+  background-color: rgba(255, 0, 0, 0.25);
+  padding: 15px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.notice-box-red::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-color: #ff0000;
+  background: linear-gradient(180deg, #ff0000 0%, #cc0000 100%);
+}
+
+.function-box-blue {
+  background-color: rgba(0, 0, 255, 0.25);
+  padding: 15px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.function-box-blue::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-color: #0000ff;
+  background: linear-gradient(180deg, #0000ff 0%, #0000cc 100%);
+}
+
+.quote-box-grey {
+  background-color: rgba(128, 128, 128, 0.25);
+  padding: 15px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-box-grey::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-color: #666666;
+  background: linear-gradient(180deg, #808080 0%, #606060 100%);
+}
+
+/* 页脚渐变 */
+.footer-gradient {
+  background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
+}
+
+/* 浮动按钮样式 */
+.float-button {
+  position: fixed;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #556b2f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.float-button:hover {
+  background-color: #6b8e23;
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.back-to-top {
+  bottom: 100px;
+}
+
+.nav-hub {
+  bottom: 40px;
+}
+
+/* 便捷式导航仪样式 */
+.quick-nav {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  background-color: #556b2f;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  padding: 15px 5px;
+}
+
+.quick-nav:hover {
+  width: 180px;
+  padding: 15px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.quick-nav-title {
+  color: #ffd700;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+}
+
+.quick-nav:hover .quick-nav-title {
+  writing-mode: horizontal-tb;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #6b8e23;
+}
+
+.quick-nav-hint {
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  margin-top: 10px;
+}
+
+.quick-nav:hover .quick-nav-hint {
+  display: none;
+}
+
+.quick-nav-item {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 8px 12px;
+  margin: 5px 0;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.quick-nav-item:hover {
+  background-color: #6b8e23;
+  transform: translateX(5px);
+}
+
+.quick-nav-divider {
+  height: 2px;
+  background-color: #6b8e23;
+  margin: 10px 0;
+}
+
+.quick-nav-section {
+  color: #ffd700;
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+  padding: 5px 12px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.quick-nav-toc-item {
+  color: white;
+  display: block;
+  padding: 6px 12px 6px 20px;
+  margin: 3px 0;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.quick-nav-toc-item:hover {
+  background-color: #6b8e23;
+  transform: translateX(5px);
+}
+
+.quick-nav-content {
+  display: none;
+}
+
+.quick-nav:hover .quick-nav-content {
+  display: block;
+}
+
+.quick-nav:not(:hover) .quick-nav-content {
+  display: none;
+}
+
+/* 标语装饰线样式 */
+.slogan-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.slogan-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #556b2f 50%, transparent 100%);
+}
+
+.slogan-text {
+  color: #ffd700;
+  font-size: 16px;
+  padding: 0 15px;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
@@ -389,120 +531,255 @@ body {
     width: 100%;
     display: block;
   }
-}
-</style>
-<style id="ext-inline-css-import-3">* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-.c14767 {
-  font-size: 25px;
-}
-
-.c14787 {
-  font-size: 25px;
-}
-
-.c14868 {
-  background-image: unset;
-  background-repeat: unset;
-  background-position: unset;
-  background-attachment: unset;
-  background-size: unset;
-}
-
-.c15172 {
-  text-align: center;
-  font-size: 25px;
-  border: 5px solid black;
-  margin: 0px 0px 0px 0px;
-  padding: 20px 20px 20px 20px;
-  border-radius: 0px;
-  background-image: unset;
-  background-repeat: unset;
-  background-position: unset;
-  background-attachment: unset;
-  background-size: unset;
-}
-
-.c14843 {
-  position: static;
-}
-</style>
-<style id="htmlpage-inline-styles">* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
+  
+  .float-button {
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 11px;
+  }
+  
+  .quick-nav {
+    left: 0;
+    width: 30px;
+    padding: 10px 5px;
+    border-radius: 0 10px 10px 0;
+  }
+  
+  .quick-nav:hover {
+    width: 150px;
+    padding: 10px;
+  }
+  
+  .quick-nav-title {
+    font-size: 14px;
+  }
+  
+  .quick-nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  
+  .quick-nav-toc-item {
+    font-size: 11px;
+    padding: 5px 10px 5px 15px;
+  }
 }
 </style>
 </head>
 <body>
-<header>
-    <div class="container"><img src="https://cms-api.htmlpage.cn/uploads/14162_1768014137936_k25llh0esgo_35d57f19f7.svg" class="c3808 c2011">
-      <h1 class="c2019">牧羊人图书馆主页</h1>
-      <p>存放所有知识之地</p>
-    </div>
-  </header>
-  <div class="note">
-    图书馆尚在初期建设中，为保证稳定性以及更新方便，很多应当采用更多自定义内容的地方全都换成了兼容性更强的内容，比如可能使用emoji而不是logo，并且尚处Alpha开发阶段，实质性内容极少，主要处理结构性问题。
-  </div>
-  <div class="gjs-row c1022 c2085"></div>
-  <nav>
-    <div class="nav-title">目录</div>
-    <div class="container">
-      <ul>
-        <li><a href="#intro">前情提要</a></li>
-        <li><a href="#entrance">图书馆入口</a></li>
-        <li><a href="#news">新闻</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="gjs-row container">
-    <div class="gjs-row">
-      <div class="gjs-cell">
-        <section id="news" class="card">
-          <h2>新闻</h2>
-          <p>最新的图书馆动态和更新将在这里发布。</p>
-          <div class="c6783 c1893 c14787"><a href="updateLog/updateLog_alpha-2026.1.10-1">牧羊人图书馆alpha-26.1.10-1版本更新
-              2026.1.10</a><a href=""></a><a href="updateLog/updateLog_alpha-2026.1.10-1" __p="undefined"></a><a href=""></a><a href=""></a></div>
-          <div class="c4990 c1875 c14767">牧羊人图书馆开发进入Alpha阶段 2026.1.8</div>
-        </section>
+<div style="height:211px;" class="gjs-row main-container">
+    <div style="text-align:center;" class="gjs-cell logo-align"><img src="https://cms-api.htmlpage.cn/uploads/large_14162_1770113738697_kmtrzkb0rpg_946dc2122b.png" style="text-align:left;width:186px;height:186px;" class="logo-border logo-container"><img src="https://cms-api.htmlpage.cn/uploads/large_14162_1770113738660_g4019gaetnh_36009cfd3d.png" class="logo-size" style="width:336px;height:188px;">
+      <div class="section-padding" style="display:flex;align-items:center;justify-content:center;color:gold;font-size:16px;">
+        <hr style="width:50px;border-color:#6b7a3a;margin-right:10px;">
+        存放所有知识之地
+        <hr style="width:50px;border-color:#6b7a3a;margin-left:10px;">
       </div>
+      <div class="section-padding" style="text-align:center;color:white;font-size:25px;font-weight:bold;">牧羊人图书馆（主页）</div>
     </div>
   </div>
-  <main class="container c2069 c14843">
-    <section id="intro" class="card">
-      <h2>前情提要</h2>
-      <h3 class="c1955 c14868">图书馆入门</h3>
-      <p>这个页面是牧羊人图书馆的主页面。如果你不知道牧羊人图书馆是什么，并且想了解牧羊人图书馆的一些信息，请点击以下页面。</p>
-      <p><a href="library/intro.html"><span><span>牧羊人图片馆入门</span></span></a></p>
-      <p>总而言之，牧羊人图书馆（Shepherd’s Library）是我存放我的所有知识之地。亦被称为谢沷尔德图书馆（Shepherd’s Library），任何一个可以实现该行为的事物都可以称为牧羊人图书馆。</p>
-      <h3>图书馆规则</h3>
-      <p>作为我的创作，它应当从某种程度上无法摆脱，或者说服从于我的想法，比如图书馆里应该有什么，图书馆里绝对不能有什么，在进入图书馆时应该注意什么，这些被包含在被称为规则的地方。</p>
-      <p>我默认任何一个看到该页面的人，都是要了解我或者了解我的作品的人，为了避免潜在的误会和疑惑，此部分是必要的。</p>
-      <p><a href="library/rule.html">图书馆规则</a></p>
-      <h3>图书馆功能</h3>
-      <p>这个部分讲述了你现在所在的图书馆具备什么样的能力，我们称之为功能，并简单概括功能的内涵和本质。</p>
-      <p><a href="library/feature.html">图书馆功能</a></p>
-    </section>
-    <section id="entrance" class="card">
-      <h2>图书馆入口</h2>
-      <p>从这里进入牧羊人图书馆，祝你旅途愉快。</p><a href="library/library" class="c42001 c2369 c15172">牧羊人图书馆</a>
-    </section>
-  </main>
-  <footer>
-    <div class="container">
-      <p>© 2026 牧羊人图书馆 | 创建于2026.1.4</p>
+  <div class="gjs-row header-row" style="height:174px;">
+    <div style="text-align:center;" class="gjs-cell nav-center">
+      <div style="font-size:20px;" class="nav-padding title-color">导航栏</div>
+      <div class="content-padding" style="color:white;">目前所在位置<br><span id="current-path">加载中...</span></div>
     </div>
-  </footer>
-<script src="js/plugins.js"></script>
-<script src="js/theme.js"></script>
+  </div>
+  <div style="text-align:center;" class="gjs-row content-row content-bg-white">
+    <div style="background-color:lightgrey;" class="gjs-cell content-bg-yellow">
+      
+      <!-- 紧急注意事项 -->
+      <div style="background-color:olivedrab;margin:0 0px 5px 0px;" class="gjs-row notice-header">
+        <div class="gjs-cell">
+          <div class="center-align" style="background-color:yellowgreen;font-size:20px;" id="section-1">注意事项</div>
+          <div class="gjs-row" style="background-color:lightgrey;height:88px;">
+            <div class="gjs-cell">
+              <div class="center-align">图书馆状态说明<br></div>
+              <div class="notice-box-red">
+                <div style="text-align:left;">图书馆尚在初期建设中，为保证稳定性以及更新方便，很多应当采用更多自定义内容的地方全都换成了兼容性更强的内容，比如可能使用emoji而不是logo，并且尚处Alpha开发阶段，实质性内容极少，主要处理结构性问题。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 新闻更新 -->
+      <div style="background-image:unset;background-repeat:unset;background-position:unset;background-attachment:unset;background-size:unset;" class="gjs-row notice-header section-header-repeat">
+        <div class="gjs-cell">
+          <div class="center-align yellowgreen-bg" style="font-size:20px;" id="section-2">新闻更新</div>
+          <div class="gjs-row yellowgreen-bg" style="background-color:lightgrey;">
+            <div class="gjs-cell">
+              <div class="center-align">最新动态<br></div>
+              <div class="function-box-blue">
+                <div class="left-align">
+                  <p><a href="updateLog/updateLog_alpha-2026.1.10-1">牧羊人图书馆alpha-26.1.10-1版本更新</a> - 2026.1.10</p>
+                  <p><strong>牧羊人图书馆开发进入Alpha阶段</strong> - 2026.1.8</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 前情提要 -->
+      <div style="margin:0px 0px 0px 0px;" class="gjs-row notice-header section-header-repeat bg-reset">
+        <div class="gjs-cell">
+          <div class="center-align yellowgreen-bg" style="background-color:yellowgreen;font-size:20px;" id="section-3">前情提要</div>
+          <div class="gjs-row yellowgreen-bg" style="background-color:lightgrey;">
+            <div class="gjs-cell">
+              <div class="center-align">了解图书馆<br></div>
+              <div class="quote-box-grey">
+                <div class="left-align">
+                  <h3>图书馆入门</h3>
+                  <p>这个页面是牧羊人图书馆的主页面。如果你不知道牧羊人图书馆是什么，并且想了解牧羊人图书馆的一些信息，请点击以下页面。</p>
+                  <p><a href="library/intro.html">牧羊人图书馆入门</a></p>
+                  <p>总而言之，牧羊人图书馆（Shepherd's Library）是我存放我的所有知识之地。亦被称为谢沷尔德图书馆（Shepherd's Library），任何一个可以实现该行为的事物都可以称为牧羊人图书馆。</p>
+                  
+                  <h3>图书馆规则</h3>
+                  <p>作为我的创作，它应当从某种程度上无法摆脱，或者说服从于我的想法，比如图书馆里应该有什么，图书馆里绝对不能有什么，在进入图书馆时应该注意什么，这些被包含在被称为规则的地方。</p>
+                  <p>我默认任何一个看到该页面的人，都是要了解我或者了解我的作品的人，为了避免潜在的误会和疑惑，此部分是必要的。</p>
+                  <p><a href="library/rule.html">图书馆规则</a></p>
+                  
+                  <h3>图书馆功能</h3>
+                  <p>这个部分讲述了你现在所在的图书馆具备什么样的能力，我们称之为功能，并简单概括功能的内涵和本质。</p>
+                  <p><a href="library/feature.html">图书馆功能</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 图书馆入口 -->
+      <div style="margin:0px 0px 0px 0px;" class="gjs-row notice-header section-header-repeat bg-reset">
+        <div class="gjs-cell">
+          <div class="center-align yellowgreen-bg" style="background-color:yellowgreen;font-size:20px;" id="section-4">图书馆入口</div>
+          <div class="gjs-row yellowgreen-bg" style="background-color:lightgrey;">
+            <div class="gjs-cell">
+              <div class="center-align">从这里进入牧羊人图书馆，祝你旅途愉快<br></div>
+              <div style="text-align:center;padding:30px;">
+                <a href="library/library" style="display:inline-block;padding:15px 40px;background-color:#556b2f;color:white;text-decoration:none;border-radius:5px;font-weight:bold;font-size:18px;transition:all 0.3s ease;">牧羊人图书馆</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div style="height:88px;" class="gjs-row footer-row footer-row-alt footer-gradient">
+    <div style="text-align:center;" class="gjs-cell nav-center">
+      <div style="color:white;" class="padding-10 copyright-color">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
+        未经许可，不得擅自转载、修改或用于商业用途<br></div>
+    </div>
+  </div>
+
+<!-- 便捷式导航仪 -->
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  
+  <!-- 图书馆相关链接 -->
+  <div class="quick-nav-content">
+    <a href="https://irikana.github.io/" class="quick-nav-item">图书馆主页</a>
+    <a href="https://irikana.github.io/library/intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="https://irikana.github.io/library/rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="https://irikana.github.io/library/feature.html" class="quick-nav-item">图书馆功能</a>
+    
+    <!-- 分割线 -->
+    <div class="quick-nav-divider"></div>
+    
+    <!-- 当前页面信息 -->
+    <div class="quick-nav-section">当前页面</div>
+    <div id="quick-nav-page-title" style="color:white;padding:5px 12px;font-size:13px;margin:5px 0;text-align:center;cursor:pointer;" onclick="scrollToTop()">加载中...</div>
+    
+    <div class="quick-nav-section">页面目录</div>
+    <div id="quick-nav-toc-container">
+      <div class="quick-nav-toc-item" onclick="scrollToSection('section-1')">• 注意事项</div>
+      <div class="quick-nav-toc-item" onclick="scrollToSection('section-2')">• 新闻更新</div>
+      <div class="quick-nav-toc-item" onclick="scrollToSection('section-3')">• 前情提要</div>
+      <div class="quick-nav-toc-item" onclick="scrollToSection('section-4')">• 图书馆入口</div>
+    </div>
+  </div>
+</div>
+
+<!-- 回到顶部按钮 -->
+<button class="float-button back-to-top" onclick="scrollToTop()" title="回到顶部">
+  回到<br>顶部
+</button>
+
+<!-- 导航枢纽按钮 -->
+<button class="float-button nav-hub" onclick="openNavigator()" title="导航枢纽">
+  导航<br>枢纽
+</button>
+
+<script>
+// 回到顶部功能
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+// 打开导航枢纽
+function openNavigator() {
+  // 使用绝对路径，确保在任何页面都能访问
+  window.open('https://irikana.github.io/navigator.html', '_blank');
+}
+
+// 获取当前页面的路径并格式化（易读方式）
+function getCurrentPath() {
+  const path = window.location.pathname;
+  // 移除开头的斜杠和文件扩展名
+  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
+  
+  // 如果是根路径，显示"首页"
+  if (formattedPath === '' || formattedPath === 'index') {
+    return '首页';
+  }
+  
+  // 将路径分隔符替换为中文的" / "，并处理大小写
+  formattedPath = formattedPath
+    .split('/')
+    .map(segment => {
+      // 移除文件名（如果有）
+      const fileNameIndex = segment.lastIndexOf('.');
+      if (fileNameIndex > 0) {
+        segment = segment.substring(0, fileNameIndex);
+      }
+      // 首字母大写，其余小写
+      return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
+    })
+    .join(' / ');
+  
+  return formattedPath;
+}
+
+// 滚动到指定章节
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// 页面加载完成后初始化
+window.addEventListener('DOMContentLoaded', function() {
+  // 更新当前路径显示
+  const pathElement = document.getElementById('current-path');
+  if (pathElement) {
+    pathElement.textContent = getCurrentPath();
+  }
+  
+  // 更新便捷式导航仪中的当前页面标题
+  const pageTitle = document.querySelector('.section-padding[style*="font-size:25px"]');
+  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
+  if (pageTitle && quickNavTitleElement) {
+    quickNavTitleElement.textContent = pageTitle.textContent;
+  }
+});
+</script>
+
 <script src="js/plugins.js"></script>
 <script src="js/theme.js"></script>
 </body>
