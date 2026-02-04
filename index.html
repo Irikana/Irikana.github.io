@@ -3,24 +3,51 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>牧羊人图书馆 - 主页</title>
+<title>牧羊人图书馆 - 牧羊人图书馆主页</title>
 <meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
 <meta name="keywords" content="图书馆,知识,学习,牧羊人">
 <link rel="stylesheet" href="css/plugins.css">
 <link rel="stylesheet" href="css/style.css">
-<style id="htmlpage-inline-styles">* {
+<style id="ext-inline-css-import-0">* {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* Logo相关样式 */
 .logo-img {
   width: 336px;
-  height: 188px;
+  max-width: 100%;
+  height: auto;
 }
 
+.logo-container {
+  text-align: left;
+  width: 186px;
+  height: 186px;
+  max-width: 100%;
+  height: auto;
+}
+
+.logo-align {
+  text-align: center;
+}
+
+.logo-border {
+  color: black;
+}
+
+.logo-size {
+  width: 303px;
+  height: 170px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 文本通用样式 */
 .desc-font {
   font-size: 16px;
 }
@@ -31,14 +58,6 @@ body {
   font-size: 25px;
 }
 
-.nav-height {
-  height: 174px;
-}
-
-.nav-title {
-  font-size: 20px;
-}
-
 .white-text {
   color: white;
 }
@@ -47,70 +66,25 @@ body {
   text-align: center;
 }
 
-.content-bg {
-  background-color: lightgrey;
+.center-align {
+  text-align: center;
 }
 
-.section-header {
-  background-color: olivedrab;
-  margin: 0 0px 5px 0px;
-}
-
-.section-title {
-  background-color: yellowgreen;
-  font-size: 20px;
-}
-
-.content-box {
-  background-color: lightgrey;
-  height: 88px;
-}
-
-.notice-box {
-  padding: 0px 0px 0px 10px;
-  background-color: red;
-}
-
-.full-width {
-  width: 1151px;
-  background-color: lightcoral;
+.left-align {
+  text-align: left;
 }
 
 .left-text {
   text-align: left;
 }
 
-.bg-image-reset {
-  background-image: unset;
-  background-repeat: unset;
-  background-position: unset;
-  background-attachment: unset;
-  background-size: unset;
-}
-
-.nav-subtitle {
-  font-size: 20px;
-}
-
-.content-section {
+/* 背景颜色通用样式 */
+.content-bg {
   background-color: lightgrey;
 }
 
-.blue-bg {
-  background-color: blue;
-}
-
-.lightblue-bg {
-  background-color: lightblue;
-}
-
-.no-margin {
-  margin: 0px 0px 0px 0px;
-}
-
-.yellowgreen-title {
-  background-color: yellowgreen;
-  font-size: 20px;
+.content-box {
+  background-color: lightgrey;
 }
 
 .content-bg-alt {
@@ -125,131 +99,12 @@ body {
   background-color: darkgrey;
 }
 
-.footer-height {
-  height: 88px;
-}
-
-.gjs-row {
-  display: table;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  width: 100%;
-}
-
-.gjs-cell {
-  width: 8%;
-  display: table-cell;
-  height: 75px;
-}
-
-.logo-border {
-  color: black;
-}
-
-.logo-size {
-  width: 303px;
-  height: 170px;
-}
-
-.section-title-text {
-  font-size: 20px;
-  color: white;
-}
-
-.padding-10 {
-  padding: 10px;
-}
-
-.header-row {
-  height: 63px;
-  background-color: olivedrab;
-}
-
-.nav-padding {
-  padding: 10px;
-}
-
-.logo-container {
-  text-align: left;
-  width: 186px;
-  height: 186px;
-}
-
-.logo-align {
-  text-align: center;
-}
-
-.title-color {
-  color: white;
-}
-
-.nav-center {
-  text-align: center;
-}
-
-.copyright-color {
-  color: white;
-}
-
-.main-container {
-  height: 211px;
-  background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
-}
-
-.content-row {
-  background-color: yellowgreen;
-  height: 204px;
-}
-
-.footer-row {
-  background-color: darkolivegreen;
-  height: 69px;
-}
-
-.notice-header {
-  background-color: limegreen;
-  background-image: none;
-  background-repeat: repeat;
-  background-position: left top;
-  background-attachment: scroll;
-  background-size: auto;
-  margin-bottom: 15px;
-}
-
-.content-bg-yellow {
-  background-color: yellowgreen;
-}
-
-.content-bg-white {
-  background-color: white;
-  height: 299px;
-}
-
-.footer-row-alt {
-  height: 126px;
-}
-
-.center-align {
-  text-align: center;
-}
-
-.yellowgreen-bg {
-  background-color: yellowgreen;
-}
-
-.section-header-alt {
-  background-color: yellowgreen;
-}
-
-.section-header-repeat {
-  background-color: olivedrab;
-  margin: 0 0px 5px 0px;
-}
-
-.content-padding {
-  padding: 10px;
+.bg-image-reset {
+  background-image: unset;
+  background-repeat: unset;
+  background-position: unset;
+  background-attachment: unset;
+  background-size: unset;
 }
 
 .bg-reset {
@@ -260,26 +115,16 @@ body {
   background-size: unset;
 }
 
-.section-padding {
-  padding: 10px;
+.content-section {
+  background-color: lightgrey;
 }
 
-.content-padding-alt {
-  padding: 10px;
+.blue-bg {
+  background-color: blue;
 }
 
-.left-align {
-  text-align: left;
-}
-
-.notice-full-width {
-  width: 1151px;
-  background-color: indianred;
-}
-
-.notice-box-alt {
-  padding: 0px 0px 0px 10px;
-  background-color: red;
+.lightblue-bg {
+  background-color: lightblue;
 }
 
 .gold-bg {
@@ -290,104 +135,150 @@ body {
   background-color: yellow;
 }
 
-/* 注意事项和引用内容样式 */
-.notice-box-red {
-  background-color: rgba(255, 0, 0, 0.25);
+.content-bg-yellow {
+  background-color: yellowgreen;
+}
+
+.content-bg-white {
+  background-color: white;
+}
+
+/* 一级标题样式 - 绿色背景 + 粗体 + 左对齐 */
+.section-header {
+  background-color: #98d982;
+  margin: 0 0 5px 0;
+}
+
+.section-title {
+  background-color: #c1e1c1;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.yellowgreen-title {
+  background-color: #c1e1c1;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.yellowgreen-bg {
+  background-color: #c1e1c1;
+}
+
+.section-header-alt {
+  background-color: #c1e1c1;
+}
+
+.section-header-repeat {
+  background-color: #98d982;
+  margin: 0 0 5px 0;
+}
+
+.section-title-text {
+  font-size: 20px;
+  color: white;
+}
+
+/* 下级标题样式 - 仅粗体，无背景 */
+.subsection-header {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  background-color: transparent;
+  margin: 10px 0;
+  padding: 5px 0;
+}
+
+/* 三级标题样式 - 仅粗体，无背景 */
+.sub-subsection-header {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+  background-color: transparent;
+  margin: 8px 0 5px 0;
+  padding: 5px 0;
+}
+
+/* 下级标题内容区域 */
+.subsection-content {
+  background-color: white;
   padding: 15px;
-  margin: 10px;
-  position: relative;
-  overflow: hidden;
+  display: block;
 }
 
-.notice-box-red::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  background-color: #ff0000;
-  background: linear-gradient(180deg, #ff0000 0%, #cc0000 100%);
+/* 边距和间距 */
+.no-margin {
+  margin: 0;
 }
 
-.function-box-blue {
-  background-color: rgba(0, 0, 255, 0.25);
-  padding: 15px;
-  margin: 10px;
-  position: relative;
-  overflow: hidden;
+.padding-10 {
+  padding: 10px;
 }
 
-.function-box-blue::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  background-color: #0000ff;
-  background: linear-gradient(180deg, #0000ff 0%, #0000cc 100%);
+.section-padding {
+  padding: 10px;
 }
 
-.quote-box-grey {
-  background-color: rgba(128, 128, 128, 0.25);
-  padding: 15px;
-  margin: 10px;
-  position: relative;
-  overflow: hidden;
+.content-padding {
+  padding: 10px;
 }
 
-.quote-box-grey::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  background-color: #666666;
-  background: linear-gradient(180deg, #808080 0%, #606060 100%);
+.content-padding-alt {
+  padding: 10px;
 }
 
-/* 页脚渐变 */
+.nav-padding {
+  padding: 5px;
+}
+
+/* 导航栏相关 */
+.header-row {
+  background-color: olivedrab;
+}
+
+.nav-center {
+  text-align: center;
+}
+
+.nav-subtitle {
+  font-size: 20px;
+}
+
+.title-color {
+  color: white;
+}
+
+/* 主容器 */
+.main-container {
+  background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
+}
+
+.content-row {
+  background-color: lightgrey;
+}
+
+.footer-row {
+  background-color: darkolivegreen;
+}
+
+.footer-row-alt {
+}
+
 .footer-gradient {
   background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
 }
 
-/* 浮动按钮样式 */
-.float-button {
-  position: fixed;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: #556b2f;
+.copyright-color {
   color: white;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  font-size: 12px;
-  font-weight: bold;
-  z-index: 1000;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  line-height: 1.2;
 }
 
-.float-button:hover {
-  background-color: #6b8e23;
-  transform: scale(1.1);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-}
-
-.back-to-top {
-  bottom: 100px;
-}
-
-.nav-hub {
-  bottom: 40px;
+/* 内容区域宽度限制 */
+.content-width-limiter {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* 便捷式导航仪样式 */
@@ -404,6 +295,10 @@ body {
   transition: all 0.3s ease;
   overflow: hidden;
   padding: 15px 5px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .quick-nav:hover {
@@ -476,6 +371,25 @@ body {
   font-size: 16px;
 }
 
+.quick-nav-content {
+  display: none;
+}
+
+.quick-nav:hover .quick-nav-content {
+  display: block;
+}
+
+.quick-nav:not(:hover) .quick-nav-content {
+  display: none;
+}
+
+/* 可折叠目录样式 */
+.quick-nav-toc-parent {
+  position: relative;
+  margin: 5px 0;
+  padding-right: 0;
+}
+
 .quick-nav-toc-item {
   color: white;
   display: block;
@@ -492,16 +406,223 @@ body {
   transform: translateX(5px);
 }
 
-.quick-nav-content {
-  display: none;
+.quick-nav-toc-item-with-children {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 8px 40px 8px 12px;
+  margin: 5px 0;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.quick-nav:hover .quick-nav-content {
+.quick-nav-toc-item-with-children:hover {
+  background-color: #6b8e23;
+  transform: translateX(5px);
+}
+
+.quick-nav-toc-toggle {
+  position: absolute;
+  right: 5px;
+  top: 8px;
+  width: 20px;
+  height: 20px;
+  background-color: #6b8e23;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.quick-nav-toc-toggle:hover {
+  background-color: #7caa2d;
+  transform: scale(1.1);
+}
+
+.quick-nav-toc-toggle.collapsed::before {
+  content: '+';
+}
+
+.quick-nav-toc-toggle.expanded::before {
+  content: '−';
+}
+
+.quick-nav-toc-children {
+  display: none;
+  padding-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.quick-nav-toc-children.show {
   display: block;
 }
 
-.quick-nav:not(:hover) .quick-nav-content {
-  display: none;
+.quick-nav-toc-child-item {
+  color: white;
+  display: block;
+  padding: 6px 12px;
+  margin: 3px 0;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.quick-nav-toc-child-item:hover {
+  background-color: #6b8e23;
+  transform: translateX(5px);
+}
+
+/* 三级及更深层级目录项样式支持 */
+.quick-nav-toc-children .quick-nav-toc-child-item {
+  position: relative;
+}
+
+/* 支持任意深度的嵌套缩进 */
+.quick-nav-toc-children .quick-nav-toc-children {
+  padding-left: 20px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children {
+  padding-left: 20px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children {
+  padding-left: 20px;
+}
+
+/* 多级嵌套时的视觉层级递减 */
+.quick-nav-toc-children .quick-nav-toc-child-item {
+  font-size: 11px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-child-item {
+  font-size: 10px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-child-item {
+  font-size: 10px;
+}
+
+/* 注意事项和引用内容样式 */
+.notice-box {
+  padding: 0 0 0 10px;
+  background-color: red;
+}
+
+.notice-box-red {
+  background-color: #FFCCCC;
+  padding: 15px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.notice-box-red::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-color: #ff0000;
+  background: linear-gradient(180deg, #ff0000 0%, #cc0000 100%);
+}
+
+.notice-header {
+  background-color: #98d982;
+  margin-bottom: 15px;
+}
+
+.notice-box-alt {
+  padding: 0 0 0 10px;
+  background-color: red;
+}
+
+.function-box-blue {
+  background-color: #CCCCFF;
+  padding: 15px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.function-box-blue::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-color: #0000ff;
+  background: linear-gradient(180deg, #0000ff 0%, #0000cc 100%);
+}
+
+.quote-box-grey {
+  background-color: #E0E0E0;
+  padding: 15px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-box-grey::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-color: #666666;
+  background: linear-gradient(180deg, #808080 0%, #606060 100%);
+}
+
+/* 浮动按钮样式 */
+.float-button {
+  position: fixed;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #556b2f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.float-button:hover {
+  background-color: #6b8e23;
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.back-to-top {
+  bottom: 100px;
+}
+
+.nav-hub {
+  bottom: 40px;
 }
 
 /* 标语装饰线样式 */
@@ -511,12 +632,14 @@ body {
   align-items: center;
   justify-content: center;
   padding: 0 20px;
+  flex-wrap: wrap;
 }
 
 .slogan-line {
   flex: 1;
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, #556b2f 50%, transparent 100%);
+  min-width: 20px;
 }
 
 .slogan-text {
@@ -526,193 +649,748 @@ body {
   white-space: nowrap;
 }
 
+/* 响应式布局系统 */
+.gjs-row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: 100%;
+  gap: 10px;
+}
+
+.gjs-cell {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 移动端响应式设计 */
 @media (max-width: 768px) {
+  .gjs-row {
+    flex-direction: column;
+    padding: 10px 8px;
+    gap: 8px;
+  }
+
   .gjs-cell {
+    width: 100% !important;
+    flex: 0 0 100%;
+  }
+
+  /* 移动端下内容区域宽度恢复为 100% */
+  .content-width-limiter {
     width: 100%;
+  }
+
+  /* 头部容器适配 */
+  .main-container {
+    padding: 10px 8px;
+  }
+
+  .logo-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .logo-size {
+    max-width: 80px;
+    margin: 0 auto;
     display: block;
   }
-  
+
+  .logo-img {
+    max-width: 40px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .page-title-main {
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  .slogan-container-text {
+    font-size: 14px;
+  }
+
+  .slogan-line {
+    width: 30px;
+    max-width: 30px;
+  }
+
+  /* 导航栏适配 */
+  .header-row {
+    padding: 8px 10px;
+  }
+
+  .nav-padding {
+    padding: 5px;
+  }
+
+  .nav-title {
+    font-size: 16px;
+  }
+
+  .nav-location {
+    font-size: 12px;
+  }
+
+  /* 内容区域适配 */
+  .content-row {
+    padding: 10px 5px;
+  }
+
+  .content-bg-white {
+    padding: 10px 5px;
+  }
+
+  .section-title-text {
+    font-size: 16px;
+    padding: 12px 10px;
+  }
+
+  /* 注意事项盒子适配 */
+  .notice-box-red,
+  .function-box-blue,
+  .quote-box-grey {
+    padding: 10px 12px;
+    margin: 8px 5px;
+    font-size: 14px;
+  }
+
+  /* 浮动按钮适配 */
   .float-button {
-    right: 20px;
+    right: 15px;
     width: 45px;
     height: 45px;
     font-size: 11px;
   }
-  
+
+  .back-to-top {
+    bottom: 80px;
+  }
+
+  .nav-hub {
+    bottom: 30px;
+  }
+
+  /* 便携式导航仪适配 - 保持显示但优化尺寸 */
   .quick-nav {
     left: 0;
-    width: 30px;
-    padding: 10px 5px;
-    border-radius: 0 10px 10px 0;
+    width: 35px;
+    padding: 10px 3px;
+    border-radius: 0 8px 8px 0;
   }
-  
+
   .quick-nav:hover {
-    width: 150px;
-    padding: 10px;
+    width: 160px;
+    padding: 10px 8px;
   }
-  
+
+  .quick-nav-page-title {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  /* 页脚适配 */
+  .footer-row-alt {
+    padding: 15px 10px;
+  }
+
+  .copyright-color {
+    font-size: 12px;
+  }
+
+  /* 确保所有文本不溢出 */
+  .center-align,
+  .left-align {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* 优化内容区域的间距 */
+  .content-padding {
+    padding: 8px;
+  }
+
+  .content-padding-alt {
+    padding: 8px;
+  }
+
+  /* 优化表格和列表布局 */
+  .notice-header {
+    margin: 0 0 5px 0;
+  }
+
+  /* 确保图片和链接不超出容器 */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  a {
+    word-break: break-word;
+  }
+
+  /* 优化slogan容器在移动端的显示 */
+  .slogan-container {
+    padding: 0 10px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .slogan-text {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .slogan-line {
+    width: 100%;
+  }
+
+  /* 确保所有hr元素在移动端正确显示 */
+  .slogan-line {
+    width: 30px;
+    max-width: 30px;
+    margin: 0 auto;
+  }
+
+  /* 优化section-title文字大小 */
+  .section-title,
+  .section-title-text {
+    font-size: 18px;
+  }
+
+  /* 优化padding和margin */
+  .section-padding {
+    padding: 8px;
+  }
+
+  /* 确保notice-box等在移动端不溢出 */
+  .notice-box-red,
+  .function-box-blue,
+  .quote-box-grey {
+    margin: 8px 5px;
+    padding: 12px 10px;
+    border-radius: 8px;
+  }
+}
+
+/* 超小屏幕适配（小于 375px） */
+@media (max-width: 375px) {
+  .gjs-row {
+    padding: 8px 5px;
+  }
+
+  .main-container {
+    padding: 10px 5px;
+  }
+
+  .page-title-main {
+    font-size: 16px;
+  }
+
+  .nav-title {
+    font-size: 14px;
+  }
+
+  .nav-location {
+    font-size: 11px;
+  }
+
+  .notice-box-red,
+  .function-box-blue,
+  .quote-box-grey {
+    padding: 8px;
+    margin: 5px 3px;
+    font-size: 13px;
+  }
+
+  .float-button {
+    width: 40px;
+    height: 40px;
+    font-size: 10px;
+    right: 10px;
+  }
+
+  .back-to-top {
+    bottom: 70px;
+  }
+
+  .nav-hub {
+    bottom: 25px;
+  }
+}
+
+/* 平板适配（768px - 1024px） */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .gjs-row {
+    padding: 10px 15px;
+  }
+
+  .quick-nav {
+    width: 35px;
+    padding: 12px 4px;
+  }
+
+  .quick-nav:hover {
+    width: 160px;
+    padding: 12px 8px;
+  }
+
   .quick-nav-title {
     font-size: 14px;
   }
-  
+
+  .quick-nav-hint {
+    font-size: 11px;
+  }
+
   .quick-nav-item {
     font-size: 12px;
     padding: 6px 10px;
   }
-  
+
   .quick-nav-toc-item {
     font-size: 11px;
     padding: 5px 10px 5px 15px;
   }
 }
+
+/* 移动端底部导航样式 */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #556b2f;
+  padding: 10px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobile-nav-title {
+  color: #ffd700;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mobile-nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  background-color: #6b8e23;
+  border-radius: 20px;
+  font-size: 12px;
+  transition: background-color 0.3s;
+}
+
+.mobile-nav-link:hover {
+  background-color: #7caa2d;
+}
+</style>
+<style id="ext-inline-css-import-1">* {
+  box-sizing: border-box;
+}
+
+/* 标语线条样式 */
+.slogan-line-left {
+  width: 50px;
+  max-width: 100%;
+  border-color: #6b7a3a;
+  margin-right: 10px;
+}
+
+.slogan-line-right {
+  width: 50px;
+  max-width: 100%;
+  border-color: #6b7a3a;
+  margin-left: 10px;
+}
+
+/* Logo图片 */
+.logo-img-custom {
+  text-align: left;
+  max-width: 100%;
+  height: auto;
+}
+
+.logo-size-custom {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 标语容器文本 */
+.slogan-container-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gold;
+  font-size: 16px;
+  flex-wrap: wrap;
+}
+
+/* 页面主标题 */
+.page-title-main {
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* 导航栏文本 */
+.nav-title {
+  font-size: 20px;
+}
+
+.nav-location {
+  color: white;
+}
+
+.text-center-nav {
+  text-align: center;
+}
+
+/* 主要内容区域文本 */
+.content-main-text {
+  text-align: left;
+}
+
+/* 一级标题文本 - 绿色背景 + 粗体 + 左对齐 */
+.section-title-text-main {
+  background-color: #c1e1c1;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.content-bg-lightgrey {
+  background-color: lightgrey;
+}
+
+/* 二级标题文本 - 仅粗体，无背景 */
+.section-title-text-sub {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  background-color: transparent;
+}
+
+.content-bg-white-text {
+  background-color: lightgrey;
+}
+
+/* 三级标题文本 - 仅粗体，无背景 */
+.section-title-text-sub-sub {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  background-color: transparent;
+}
+
+.content-bg-white-sub {
+  background-color: lightgrey;
+}
+
+/* 页面头部区域 */
+.page-header-section {
+  background-color: #98d982;
+  margin: 0 0 5px 0;
+}
+
+.page-section-reset {
+  background-image: unset;
+  background-repeat: unset;
+  background-position: unset;
+  background-attachment: unset;
+  background-size: unset;
+}
+
+.content-section-no-margin {
+  margin: 0;
+}
+
+.content-bg-white-section {
+  background-color: lightgrey;
+}
+
+/* 版权信息 */
+.copyright-text {
+  color: white;
+}
+
+.copyright-center {
+  text-align: center;
+}
+
+/* 导航仪页面标题 */
+.quick-nav-page-title {
+  color: white;
+  padding: 5px 12px;
+  font-size: 13px;
+  margin: 5px 0;
+  text-align: center;
+  cursor: pointer;
+}
+</style>
+<style id="htmlpage-inline-styles">* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#content-box-main {
+  background-color: white;
+}
+
+#content-box-white {
+  background-color: white;
+}
+
+#section-1 {
+  background-color: #c1e1c1;
+}
+
+#content-section-white {
+  background-color: white;
+}
+
+#content-box-white-sub {
+  background-color: white;
+}
+
+#content-box-white-sub-sub {
+  background-color: white;
+}
+
+#section-2 {
+  background-color: #c1e1c1;
+}
+
+#content-box-white-section2 {
+  background-color: white;
+}
+
+#content-box-white-section3 {
+  background-color: white;
+}
+
+#content-box-white-section3-sub {
+  background-color: white;
+}
 </style>
 </head>
 <body>
-<div style="height:211px;" class="gjs-row main-container">
-    <div style="text-align:center;" class="gjs-cell logo-align"><img src="https://cms-api.htmlpage.cn/uploads/large_14162_1770113738697_kmtrzkb0rpg_946dc2122b.png" style="text-align:left;width:186px;height:186px;" class="logo-border logo-container"><img src="https://cms-api.htmlpage.cn/uploads/large_14162_1770113738660_g4019gaetnh_36009cfd3d.png" class="logo-size" style="width:336px;height:188px;">
-      <div class="section-padding" style="display:flex;align-items:center;justify-content:center;color:gold;font-size:16px;">
-        <hr style="width:50px;border-color:#6b7a3a;margin-right:10px;">
-        存放所有知识之地
-        <hr style="width:50px;border-color:#6b7a3a;margin-left:10px;">
-      </div>
-      <div class="section-padding" style="text-align:center;color:white;font-size:25px;font-weight:bold;">牧羊人图书馆（主页）</div>
+<!-- 主容器 - 头部Logo区域 -->
+<div class="gjs-row main-container">
+  <div class="gjs-cell logo-align">
+    <img src="https://cms-api.htmlpage.cn/uploads/large_14162_1770113738697_kmtrzkb0rpg_946dc2122b.png" class="logo-border logo-container logo-img-custom">
+    <img src="https://cms-api.htmlpage.cn/uploads/large_14162_1770113738660_g4019gaetnh_36009cfd3d.png" class="logo-size logo-size-custom">
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
     </div>
+    <div class="section-padding page-title-main">牧羊人图书馆主页</div>
   </div>
-  <div class="gjs-row header-row" style="height:174px;">
-    <div style="text-align:center;" class="gjs-cell nav-center">
-      <div style="font-size:20px;" class="nav-padding title-color">导航栏</div>
-      <div class="content-padding" style="color:white;">目前所在位置<br><span id="current-path">加载中...</span></div>
-    </div>
-  </div>
-  <div style="text-align:center;" class="gjs-row content-row content-bg-white">
-    <div style="background-color:lightgrey;" class="gjs-cell content-bg-yellow">
-      
-      <!-- 紧急注意事项 -->
-      <div style="background-color:olivedrab;margin:0 0px 5px 0px;" class="gjs-row notice-header">
-        <div class="gjs-cell">
-          <div class="center-align" style="background-color:yellowgreen;font-size:20px;" id="section-1">注意事项</div>
-          <div class="gjs-row" style="background-color:lightgrey;height:88px;">
-            <div class="gjs-cell">
-              <div class="center-align">图书馆状态说明<br></div>
-              <div class="notice-box-red">
-                <div style="text-align:left;">图书馆尚在初期建设中，为保证稳定性以及更新方便，很多应当采用更多自定义内容的地方全都换成了兼容性更强的内容，比如可能使用emoji而不是logo，并且尚处Alpha开发阶段，实质性内容极少，主要处理结构性问题。</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 新闻更新 -->
-      <div style="background-image:unset;background-repeat:unset;background-position:unset;background-attachment:unset;background-size:unset;" class="gjs-row notice-header section-header-repeat">
-        <div class="gjs-cell">
-          <div class="center-align yellowgreen-bg" style="font-size:20px;" id="section-2">新闻更新</div>
-          <div class="gjs-row yellowgreen-bg" style="background-color:lightgrey;">
-            <div class="gjs-cell">
-              <div class="center-align">最新动态<br></div>
-              <div class="function-box-blue">
-                <div class="left-align">
-                  <p><a href="updateLog/updateLog_alpha-2026.1.10-1">牧羊人图书馆alpha-26.1.10-1版本更新</a> - 2026.1.10</p>
-                  <p><strong>牧羊人图书馆开发进入Alpha阶段</strong> - 2026.1.8</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 前情提要 -->
-      <div style="margin:0px 0px 0px 0px;" class="gjs-row notice-header section-header-repeat bg-reset">
-        <div class="gjs-cell">
-          <div class="center-align yellowgreen-bg" style="background-color:yellowgreen;font-size:20px;" id="section-3">前情提要</div>
-          <div class="gjs-row yellowgreen-bg" style="background-color:lightgrey;">
-            <div class="gjs-cell">
-              <div class="center-align">了解图书馆<br></div>
-              <div class="quote-box-grey">
-                <div class="left-align">
-                  <h3>图书馆入门</h3>
-                  <p>这个页面是牧羊人图书馆的主页面。如果你不知道牧羊人图书馆是什么，并且想了解牧羊人图书馆的一些信息，请点击以下页面。</p>
-                  <p><a href="library/intro.html">牧羊人图书馆入门</a></p>
-                  <p>总而言之，牧羊人图书馆（Shepherd's Library）是我存放我的所有知识之地。亦被称为谢沷尔德图书馆（Shepherd's Library），任何一个可以实现该行为的事物都可以称为牧羊人图书馆。</p>
-                  
-                  <h3>图书馆规则</h3>
-                  <p>作为我的创作，它应当从某种程度上无法摆脱，或者说服从于我的想法，比如图书馆里应该有什么，图书馆里绝对不能有什么，在进入图书馆时应该注意什么，这些被包含在被称为规则的地方。</p>
-                  <p>我默认任何一个看到该页面的人，都是要了解我或者了解我的作品的人，为了避免潜在的误会和疑惑，此部分是必要的。</p>
-                  <p><a href="library/rule.html">图书馆规则</a></p>
-                  
-                  <h3>图书馆功能</h3>
-                  <p>这个部分讲述了你现在所在的图书馆具备什么样的能力，我们称之为功能，并简单概括功能的内涵和本质。</p>
-                  <p><a href="library/feature.html">图书馆功能</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 图书馆入口 -->
-      <div style="margin:0px 0px 0px 0px;" class="gjs-row notice-header section-header-repeat bg-reset">
-        <div class="gjs-cell">
-          <div class="center-align yellowgreen-bg" style="background-color:yellowgreen;font-size:20px;" id="section-4">图书馆入口</div>
-          <div class="gjs-row yellowgreen-bg" style="background-color:lightgrey;">
-            <div class="gjs-cell">
-              <div class="center-align">从这里进入牧羊人图书馆，祝你旅途愉快<br></div>
-              <div style="text-align:center;padding:30px;">
-                <a href="library/library" style="display:inline-block;padding:15px 40px;background-color:#556b2f;color:white;text-decoration:none;border-radius:5px;font-weight:bold;font-size:18px;transition:all 0.3s ease;">牧羊人图书馆</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  <div style="height:88px;" class="gjs-row footer-row footer-row-alt footer-gradient">
-    <div style="text-align:center;" class="gjs-cell nav-center">
-      <div style="color:white;" class="padding-10 copyright-color">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
-        未经许可，不得擅自转载、修改或用于商业用途<br></div>
-    </div>
-  </div>
+</div>
 
-<!-- 便捷式导航仪 -->
+<!-- 导航栏 - 位置信息 -->
+<div class="gjs-row header-row">
+  <div class="gjs-cell nav-center">
+    <div class="nav-padding title-color nav-title">位置</div>
+    <div class="content-padding nav-location">目前所在位置<br><span id="current-path">首页</span></div>
+  </div>
+</div>
+
+<!-- 主要内容区域 -->
+<div class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-bg-yellow" style="background-color:white;">
+
+      <!-- 一级标题区域 1 - 绿色背景 -->
+      <div class="gjs-row notice-header page-header-section" style="background-color:white;">
+        <div class="gjs-cell">
+          <div id="section-1" class="section-title-text-main" style="background-color:#c1e1c1;">前情提要</div>
+          <div class="gjs-row content-bg-lightgrey" style="background-color:white;">
+            <div class="gjs-cell">
+              <div class="center-align">
+
+                <!-- 注意事项盒子 -->
+                <div class="notice-box-red">
+                  <div class="content-main-text">创建于2026.1.4<br><br>图书馆尚在初期建设中，为保证稳定性以及更新方便，很多应当采用更多自定义内容的地方全都换成了兼容性更强的内容，比如可能使用emoji而不是logo，并且尚处Alpha开发阶段，实质性内容极少，主要处理结构性问题。</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 一级标题区域 2 - 绿色背景 -->
+      <div class="gjs-row notice-header section-header-repeat page-section-reset" style="background-color:white;">
+        <div class="gjs-cell">
+          <div id="section-2" class="section-title-text-sub" style="background-color:#c1e1c1;">图书馆入门</div>
+          <div class="gjs-row yellowgreen-bg content-bg-white-text" style="background-color:white;">
+            <div class="gjs-cell">
+              <div class="center-align">
+                <p>这个页面是牧羊人图书馆的主页面。</p>
+                <p>如果你不知道牧羊人图书馆是什么，并且想了解牧羊人图书馆的一些信息，请点击以下页面。</p>
+                <p>总而言之，牧羊人图书馆（Shepherd's Library）是我存放我的所有知识之地。亦被称为谢沷尔德图书馆（Shpherd's Library），任何一个可以实现该行为的事物都可以称为牧羊人图书馆。</p>
+                <p class="left-align">相关链接：<a href="library/intro.html">牧羊人图书馆入门</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 一级标题区域 3 - 绿色背景 -->
+      <div class="gjs-row notice-header section-header-repeat bg-reset" style="background-color:white;">
+        <div class="gjs-cell">
+          <div id="section-3" class="section-title-text-main" style="background-color:#c1e1c1;">图书馆规则</div>
+          <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
+            <div class="gjs-cell">
+              <div class="center-align">
+                <p>作为我的创作，它应当从某种程度上无法摆脱，或者说服从于我的想法，比如图书馆里应该有什么，图书馆里绝对不能有什么，在进入图书馆时应该注意什么，这些被包含在被称为规则的地方。我默认任何一个看到该页面的人，都是要了解我或者了解我的作品的人，为了避免潜在的误会和疑惑，此部分是必要的。</p>
+                <p class="left-align">相关链接：<a href="library/rule.html">图书馆规则</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 一级标题区域 4 - 绿色背景 -->
+      <div class="gjs-row notice-header section-header-repeat bg-reset" style="background-color:white;">
+        <div class="gjs-cell">
+          <div id="section-4" class="section-title-text-main" style="background-color:#c1e1c1;">图书馆功能</div>
+          <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
+            <div class="gjs-cell">
+              <div class="center-align">
+                <p>这个部分讲述了你</p>现在所在的图书馆具备什么样的能力，我们称之为功能，并简单概括功能的内涵和本质。
+                <p class="left-align">相关链接：<a href="library/feature.html">图书馆功能</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 一级标题区域 5 - 绿色背景 -->
+      <div class="gjs-row notice-header section-header-repeat bg-reset" style="background-color:white;">
+        <div class="gjs-cell">
+          <div id="section-5" class="section-title-text-main" style="background-color:#c1e1c1;">图书馆入口</div>
+          <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
+            <div class="gjs-cell">
+              <div class="center-align">
+                <p>从这里进入牧羊人图书馆，祝你旅途愉快。</p>
+                <p class="left-align">相关链接：<a href="library/library.html">牧羊人图书馆</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 一级标题区域 6 - 绿色背景 -->
+      <div class="gjs-row notice-header section-header-repeat bg-reset" style="background-color:white;">
+        <div class="gjs-cell">
+          <div id="section-6" class="section-title-text-main" style="background-color:#c1e1c1;">新闻</div>
+          <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
+            <div class="gjs-cell">
+              <div class="center-align">
+                <p>暂无新闻内容</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 页脚区域 -->
+<div class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
+      未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</div>
+
+<!-- 移动端底部导航 -->
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<!-- 便捷式导航仪（桌面端） -->
 <div class="quick-nav">
   <div class="quick-nav-title">便携式导航仪</div>
   <div class="quick-nav-hint">光标移到此处展开</div>
-  
   <!-- 图书馆相关链接 -->
   <div class="quick-nav-content">
-    <a href="https://irikana.github.io/" class="quick-nav-item">图书馆主页</a>
-    <a href="https://irikana.github.io/library/intro.html" class="quick-nav-item">图书馆入门</a>
-    <a href="https://irikana.github.io/library/rule.html" class="quick-nav-item">图书馆规则</a>
-    <a href="https://irikana.github.io/library/feature.html" class="quick-nav-item">图书馆功能</a>
-    
+    <a href="index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="library/intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="library/rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="library/feature.html" class="quick-nav-item">图书馆功能</a>
     <!-- 分割线 -->
     <div class="quick-nav-divider"></div>
-    
     <!-- 当前页面信息 -->
     <div class="quick-nav-section">当前页面</div>
-    <div id="quick-nav-page-title" style="color:white;padding:5px 12px;font-size:13px;margin:5px 0;text-align:center;cursor:pointer;" onclick="scrollToTop()">加载中...</div>
-    
+    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
     <div class="quick-nav-section">页面目录</div>
     <div id="quick-nav-toc-container">
-      <div class="quick-nav-toc-item" onclick="scrollToSection('section-1')">• 注意事项</div>
-      <div class="quick-nav-toc-item" onclick="scrollToSection('section-2')">• 新闻更新</div>
-      <div class="quick-nav-toc-item" onclick="scrollToSection('section-3')">• 前情提要</div>
-      <div class="quick-nav-toc-item" onclick="scrollToSection('section-4')">• 图书馆入口</div>
+      <!-- 一级标题1 -->
+      <div class="quick-nav-toc-item" data-target="section-1">• 前情提要</div>
+      <!-- 一级标题2 -->
+      <div class="quick-nav-toc-item" data-target="section-2">• 图书馆入门</div>
+      <!-- 一级标题3 -->
+      <div class="quick-nav-toc-item" data-target="section-3">• 图书馆规则</div>
+      <!-- 一级标题4 -->
+      <div class="quick-nav-toc-item" data-target="section-4">• 图书馆功能</div>
+      <!-- 一级标题5 -->
+      <div class="quick-nav-toc-item" data-target="section-5">• 图书馆入口</div>
+      <!-- 一级标题6 -->
+      <div class="quick-nav-toc-item" data-target="section-6">• 新闻</div>
     </div>
   </div>
 </div>
 
 <!-- 回到顶部按钮 -->
-<button class="float-button back-to-top" onclick="scrollToTop()" title="回到顶部">
+<button title="回到顶部" class="float-button back-to-top">
   回到<br>顶部
 </button>
 
 <!-- 导航枢纽按钮 -->
-<button class="float-button nav-hub" onclick="openNavigator()" title="导航枢纽">
+<button title="导航枢纽" class="float-button nav-hub">
   导航<br>枢纽
 </button>
 
-<script>
+<script src="js/plugins.js"></script>
+<script src="js/theme.js"></script>
+<script id="ext-inline-js-import-body-end-0">
 // 回到顶部功能
 function scrollToTop() {
   window.scrollTo({
@@ -723,35 +1401,29 @@ function scrollToTop() {
 
 // 打开导航枢纽
 function openNavigator() {
-  // 使用绝对路径，确保在任何页面都能访问
-  window.open('https://irikana.github.io/navigator.html', '_blank');
+  window.open('navigator.html', '_blank');
 }
 
 // 获取当前页面的路径并格式化（易读方式）
 function getCurrentPath() {
   const path = window.location.pathname;
-  // 移除开头的斜杠和文件扩展名
   let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
-  
-  // 如果是根路径，显示"首页"
+
   if (formattedPath === '' || formattedPath === 'index') {
     return '首页';
   }
-  
-  // 将路径分隔符替换为中文的" / "，并处理大小写
+
   formattedPath = formattedPath
     .split('/')
     .map(segment => {
-      // 移除文件名（如果有）
       const fileNameIndex = segment.lastIndexOf('.');
       if (fileNameIndex > 0) {
         segment = segment.substring(0, fileNameIndex);
       }
-      // 首字母大写，其余小写
       return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
     })
-    .join(' / ');
-  
+    .join(' → ');
+
   return formattedPath;
 }
 
@@ -763,6 +1435,24 @@ function scrollToSection(sectionId) {
   }
 }
 
+// 切换目录折叠状态
+function toggleTocToggle(toggleElement) {
+  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
+  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
+
+  if (childrenElement) {
+    if (childrenElement.classList.contains('show')) {
+      childrenElement.classList.remove('show');
+      toggleElement.classList.remove('expanded');
+      toggleElement.classList.add('collapsed');
+    } else {
+      childrenElement.classList.add('show');
+      toggleElement.classList.remove('collapsed');
+      toggleElement.classList.add('expanded');
+    }
+  }
+}
+
 // 页面加载完成后初始化
 window.addEventListener('DOMContentLoaded', function() {
   // 更新当前路径显示
@@ -770,17 +1460,73 @@ window.addEventListener('DOMContentLoaded', function() {
   if (pathElement) {
     pathElement.textContent = getCurrentPath();
   }
-  
+
   // 更新便捷式导航仪中的当前页面标题
-  const pageTitle = document.querySelector('.section-padding[style*="font-size:25px"]');
+  const pageTitle = document.querySelector('.page-title-main');
   const quickNavTitleElement = document.getElementById('quick-nav-page-title');
   if (pageTitle && quickNavTitleElement) {
     quickNavTitleElement.textContent = pageTitle.textContent;
   }
+
+  // 使用事件委托处理目录点击
+  const tocContainer = document.getElementById('quick-nav-toc-container');
+  if (tocContainer) {
+    tocContainer.addEventListener('click', function(event) {
+      const target = event.target;
+
+      if (target.classList.contains('quick-nav-toc-toggle')) {
+        event.stopPropagation();
+        event.preventDefault();
+        toggleTocToggle(target);
+        return;
+      }
+
+      if (target.classList.contains('quick-nav-toc-item') ||
+          target.classList.contains('quick-nav-toc-item-with-children') ||
+          target.classList.contains('quick-nav-toc-child-item')) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        let sectionId;
+
+        if (target.classList.contains('quick-nav-toc-item-with-children')) {
+          const toggleElement = target.nextElementSibling;
+          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
+            sectionId = toggleElement.getAttribute('data-parent');
+          }
+        } else {
+          sectionId = target.getAttribute('data-target');
+        }
+
+        if (sectionId) {
+          scrollToSection(sectionId);
+        }
+      }
+    });
+  }
+
+  // 为当前页面标题添加点击事件（回到页面顶部）
+  const quickNavPageTitle = document.getElementById('quick-nav-page-title');
+  if (quickNavPageTitle) {
+    quickNavPageTitle.addEventListener('click', function(event) {
+      event.stopPropagation();
+      scrollToTop();
+    });
+    quickNavPageTitle.style.cursor = 'pointer';
+  }
+
+  // 绑定回到顶部按钮事件
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', scrollToTop);
+  }
+
+  // 绑定导航枢纽按钮事件
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) {
+    navHubBtn.addEventListener('click', openNavigator);
+  }
 });
 </script>
-
-<script src="js/plugins.js"></script>
-<script src="js/theme.js"></script>
 </body>
 </html>
