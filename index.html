@@ -1000,6 +1000,82 @@ body {
 .mobile-nav-link:hover {
   background-color: #7caa2d;
 }
+
+/* 新闻卡片样式 */
+.news-card {
+  background-color: #f8f9fa;
+  border: 2px solid #c1e1c1;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.news-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  border-color: #98d982;
+}
+
+.news-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 10px 0;
+}
+
+.news-card-image {
+  flex: 0 0 auto;
+  max-width: 250px;
+  width: 100%;
+}
+
+.news-card-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.news-card-image img:hover {
+  transform: scale(1.05);
+}
+
+.news-card-info {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+}
+
+.news-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.news-card-date {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.news-card-hint {
+  font-size: 13px;
+  color: #556b2f;
+  font-style: italic;
+  margin: 5px 0 0 0;
+  padding: 5px 10px;
+  background-color: #e8f5e9;
+  border-radius: 4px;
+}
 </style>
 <style id="ext-inline-css-import-1">* {
   box-sizing: border-box;
@@ -1226,6 +1302,32 @@ body {
   <div class="content-width-limiter">
     <div class="gjs-cell content-bg-yellow" style="background-color:white;">
 
+      <!-- 新闻板块 - 置顶显示 -->
+      <div class="gjs-row notice-header section-header-repeat bg-reset" style="background-color:white;">
+        <div class="gjs-cell">
+          <div id="section-news" class="section-title-text-main" style="background-color:#c1e1c1;">新闻</div>
+          <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
+            <div class="gjs-cell">
+              <div class="center-align">
+                <!-- 新闻卡片容器 -->
+                <div class="news-card">
+                  <div class="news-card-content">
+                    <a href="https://irikana.github.io/updateLog/updateLog_alpha-0.0.1.html" target="_blank" class="news-card-image">
+                      <img src="https://irikana.github.io/image/poster/update/update_alpha_0.0.1.png" alt="更新海报">
+                    </a>
+                    <div class="news-card-info">
+                      <h3 class="news-card-title">图书馆Alpha 0.0.1更新</h3>
+                      <p class="news-card-date">2026年2月4日</p>
+                      <p class="news-card-hint">点击海报了解更多</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- 一级标题区域 1 - 绿色背景 -->
       <div class="gjs-row notice-header page-header-section" style="background-color:white;">
         <div class="gjs-cell">
@@ -1314,7 +1416,29 @@ body {
           <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
             <div class="gjs-cell">
               <div class="center-align">
-                <p>暂无新闻内容</p>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; padding: 10px;">
+                  <a href="https://irikana.github.io/updateLog/updateLog_alpha-0.0.1.html" target="_blank" style="text-decoration: none;">
+                    <img src="https://irikana.github.io/image/poster/update/update_alpha_0.0.1.png" alt="更新海报" style="max-width: 250px; width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                  </a>
+                  <div style="display: flex; flex-direction: column; gap: 5px; align-items: center;">
+                    <span style="font-size: 16px; font-weight: bold; color: #333;">图书馆Alpha 0.0.1更新</span>
+                    <span style="font-size: 14px; color: #666;">2026年2月4日</span>
+                  </div>
+                </div>
+                <script>
+                  // 添加图片悬停效果
+                  document.addEventListener('DOMContentLoaded', function() {
+                    const newsImage = document.querySelector('#section-6 img');
+                    if (newsImage) {
+                      newsImage.addEventListener('mouseenter', function() {
+                        this.style.transform = 'scale(1.05)';
+                      });
+                      newsImage.addEventListener('mouseleave', function() {
+                        this.style.transform = 'scale(1)';
+                      });
+                    }
+                  });
+                </script>
               </div>
             </div>
           </div>
@@ -1362,6 +1486,8 @@ body {
     <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
     <div class="quick-nav-section">页面目录</div>
     <div id="quick-nav-toc-container">
+      <!-- 新闻板块 -->
+      <div class="quick-nav-toc-item" data-target="section-news">• 新闻</div>
       <!-- 一级标题1 -->
       <div class="quick-nav-toc-item" data-target="section-1">• 前情提要</div>
       <!-- 一级标题2 -->
@@ -1372,8 +1498,6 @@ body {
       <div class="quick-nav-toc-item" data-target="section-4">• 图书馆功能</div>
       <!-- 一级标题5 -->
       <div class="quick-nav-toc-item" data-target="section-5">• 图书馆入口</div>
-      <!-- 一级标题6 -->
-      <div class="quick-nav-toc-item" data-target="section-6">• 新闻</div>
     </div>
   </div>
 </div>
