@@ -3,297 +3,1150 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>牧羊人图书馆入门</title>
-<meta name="description" content="">
-<meta name="keywords" content="">
-<link rel="stylesheet" href="css/plugins.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/plugins.css">
-<link rel="stylesheet" href="css/style.css">
-<style id="ext-inline-css-import-0">
-        /* 全局样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
-        }
-
-        /* 颜色定义 */
-        :root {
-            --primary-color: #333;
-            --secondary-color: #666;
-            --accent-color: #999;
-            --background-color: #f5f5f5;
-            --card-background: #fff;
-            --border-color: #ddd;
-            --title-background: #003366;
-        }
-
-        /* 容器 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* 头部 */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* 导航 */
-        nav {
-            background-color: var(--secondary-color);
-            padding: 10px 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-title {
-            color: white;
-            font-weight: 700;
-            font-size: 1.2rem;
-            writing-mode: vertical-rl;
-            text-orientation: upright;
-            margin: 0 20px;
-            padding: 10px 0;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            flex: 1;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* 主要内容 */
-        main {
-            padding: 40px 0;
-        }
-
-        /* 卡片样式 */
-        .card {
-            background-color: var(--card-background);
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .card h2 {
-            color: white;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            padding: 10px 15px;
-            background-color: var(--title-background);
-            display: block;
-            width: 100%;
-            border-radius: 5px;
-        }
-
-        .card h3 {
-            color: white;
-            font-size: 1.4rem;
-            margin: 25px 0 15px 0;
-            padding: 8px 12px;
-            border-radius: 5px;
-            background-color: var(--title-background);
-            display: inline-block;
-        }
-
-        .card p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: #555;
-        }
-
-        /* 标注样式 */
-        .note {
-            background-color: #ffebee;
-            border-left: 5px solid #c62828;
-            padding: 15px;
-            margin: 20px 0;
-            font-style: italic;
-            color: #c62828;
-            font-weight: 600;
-        }
-
-        /* 链接样式 */
-        .card a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .card a:hover {
-            color: var(--secondary-color);
-            text-decoration: underline;
-        }
-
-        /* 按钮样式 */
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .btn:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* 页脚 */
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-
-        footer p {
-            opacity: 0.9;
-        }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-
-            nav {
-                flex-direction: column;
-            }
-
-            .nav-title {
-                writing-mode: horizontal-tb;
-                margin: 10px 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                margin: 5px 0;
-            }
-
-            .card {
-                padding: 20px;
-            }
-        }
-
-        /* 动画效果 */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .card {
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        .card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .card:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-    </style>
-<style id="ext-inline-css-import-1">* {
+<title>牧羊人图书馆 - 牧羊人图书馆入门</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/plugins.css">
+<link rel="stylesheet" href="../css/style.css">
+<style id="ext-inline-css-import-0">* {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-#i4e3r {
-  width: 384px;
-  height: 216px;
+/* Logo相关样式 */
+.logo-img {
+  width: 336px;
+  max-width: 100%;
+  height: auto;
 }
 
-#iy9g {
-  color: #ffffff;
+.logo-container {
+  text-align: left;
+  width: 186px;
+  height: 186px;
+  max-width: 100%;
+  height: auto;
 }
 
-.gjs-row {
-  display: table;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  width: 100%;
+.logo-align {
+  text-align: center;
 }
 
-.c1022 {
-  color: grey;
-}
-
-.c3808 {
+.logo-border {
   color: black;
+}
+
+.logo-size {
+  width: 303px;
+  height: 170px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 文本通用样式 */
+.desc-font {
+  font-size: 16px;
+}
+
+.title-text {
+  text-align: center;
+  color: white;
+  font-size: 25px;
+}
+
+.white-text {
+  color: white;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.left-text {
+  text-align: left;
+}
+
+/* 背景颜色通用样式 */
+.content-bg {
+  background-color: lightgrey;
+}
+
+.content-box {
+  background-color: lightgrey;
+}
+
+.content-bg-alt {
+  background-color: lightgrey;
+}
+
+.grey-bg {
+  background-color: grey;
+}
+
+.darkgrey-bg {
+  background-color: darkgrey;
+}
+
+.bg-image-reset {
+  background-image: unset;
+  background-repeat: unset;
+  background-position: unset;
+  background-attachment: unset;
+  background-size: unset;
+}
+
+.bg-reset {
+  background-image: unset;
+  background-repeat: unset;
+  background-position: unset;
+  background-attachment: unset;
+  background-size: unset;
+}
+
+.content-section {
+  background-color: lightgrey;
+}
+
+.blue-bg {
+  background-color: blue;
+}
+
+.lightblue-bg {
+  background-color: lightblue;
+}
+
+.gold-bg {
+  background-color: gold;
+}
+
+.yellow-bg {
+  background-color: yellow;
+}
+
+.content-bg-yellow {
+  background-color: yellowgreen;
+}
+
+.content-bg-white {
+  background-color: white;
+}
+
+/* 一级标题样式 - 绿色背景 + 粗体 + 左对齐 */
+.section-header {
+  background-color: #98d982;
+  margin: 0 0 5px 0;
+}
+
+.section-title {
+  background-color: #c1e1c1;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.yellowgreen-title {
+  background-color: #c1e1c1;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.yellowgreen-bg {
+  background-color: #c1e1c1;
+}
+
+.section-header-alt {
+  background-color: #c1e1c1;
+}
+
+.section-header-repeat {
+  background-color: #98d982;
+  margin: 0 0 5px 0;
+}
+
+.section-title-text {
+  font-size: 20px;
+  color: white;
+}
+
+/* 下级标题样式 - 仅粗体，无背景 */
+.subsection-header {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  background-color: transparent;
+  margin: 10px 0;
+  padding: 5px 0;
+}
+
+/* 三级标题样式 - 仅粗体，无背景 */
+.sub-subsection-header {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+  background-color: transparent;
+  margin: 8px 0 5px 0;
+  padding: 5px 0;
+}
+
+/* 下级标题内容区域 */
+.subsection-content {
+  background-color: white;
+  padding: 15px;
+  display: block;
+}
+
+/* 边距和间距 */
+.no-margin {
+  margin: 0;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.section-padding {
+  padding: 10px;
+}
+
+.content-padding {
+  padding: 10px;
+}
+
+.content-padding-alt {
+  padding: 10px;
+}
+
+.nav-padding {
+  padding: 5px;
+}
+
+/* 导航栏相关 */
+.header-row {
+  background-color: olivedrab;
+}
+
+.nav-center {
+  text-align: center;
+}
+
+.nav-subtitle {
+  font-size: 20px;
+}
+
+.title-color {
+  color: white;
+}
+
+/* 主容器 */
+.main-container {
+  background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
+}
+
+.content-row {
+  background-color: lightgrey;
+}
+
+.footer-row {
+  background-color: darkolivegreen;
+}
+
+.footer-row-alt {
+}
+
+.footer-gradient {
+  background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
+}
+
+.copyright-color {
+  color: white;
+}
+
+/* 内容区域宽度限制 */
+.content-width-limiter {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 便捷式导航仪样式 */
+.quick-nav {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  background-color: #556b2f;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  padding: 15px 5px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.quick-nav:hover {
+  width: 180px;
+  padding: 15px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.quick-nav-title {
+  color: #ffd700;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+}
+
+.quick-nav:hover .quick-nav-title {
+  writing-mode: horizontal-tb;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #6b8e23;
+}
+
+.quick-nav-hint {
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  margin-top: 10px;
+}
+
+.quick-nav:hover .quick-nav-hint {
+  display: none;
+}
+
+.quick-nav-item {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 8px 12px;
+  margin: 5px 0;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.quick-nav-item:hover {
+  background-color: #6b8e23;
+  transform: translateX(5px);
+}
+
+.quick-nav-divider {
+  height: 2px;
+  background-color: #6b8e23;
+  margin: 10px 0;
+}
+
+.quick-nav-section {
+  color: #ffd700;
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+  padding: 5px 12px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.quick-nav-content {
+  display: none;
+}
+
+.quick-nav:hover .quick-nav-content {
+  display: block;
+}
+
+.quick-nav:not(:hover) .quick-nav-content {
+  display: none;
+}
+
+/* 可折叠目录样式 */
+.quick-nav-toc-parent {
+  position: relative;
+  margin: 5px 0;
+  padding-right: 0;
+}
+
+.quick-nav-toc-item {
+  color: white;
+  display: block;
+  padding: 6px 12px 6px 20px;
+  margin: 3px 0;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.quick-nav-toc-item:hover {
+  background-color: #6b8e23;
+  transform: translateX(5px);
+}
+
+.quick-nav-toc-item-with-children {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 8px 40px 8px 12px;
+  margin: 5px 0;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.quick-nav-toc-item-with-children:hover {
+  background-color: #6b8e23;
+  transform: translateX(5px);
+}
+
+.quick-nav-toc-toggle {
+  position: absolute;
+  right: 5px;
+  top: 8px;
+  width: 20px;
+  height: 20px;
+  background-color: #6b8e23;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.quick-nav-toc-toggle:hover {
+  background-color: #7caa2d;
+  transform: scale(1.1);
+}
+
+.quick-nav-toc-toggle.collapsed::before {
+  content: '+';
+}
+
+.quick-nav-toc-toggle.expanded::before {
+  content: '−';
+}
+
+.quick-nav-toc-children {
+  display: none;
+  padding-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.quick-nav-toc-children.show {
+  display: block;
+}
+
+.quick-nav-toc-child-item {
+  color: white;
+  display: block;
+  padding: 6px 12px;
+  margin: 3px 0;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.quick-nav-toc-child-item:hover {
+  background-color: #6b8e23;
+  transform: translateX(5px);
+}
+
+/* 三级及更深层级目录项样式支持 */
+.quick-nav-toc-children .quick-nav-toc-child-item {
+  position: relative;
+}
+
+/* 支持任意深度的嵌套缩进 */
+.quick-nav-toc-children .quick-nav-toc-children {
+  padding-left: 20px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children {
+  padding-left: 20px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children {
+  padding-left: 20px;
+}
+
+/* 多级嵌套时的视觉层级递减 */
+.quick-nav-toc-children .quick-nav-toc-child-item {
+  font-size: 11px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-child-item {
+  font-size: 10px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-child-item {
+  font-size: 10px;
+}
+
+/* 注意事项和引用内容样式 */
+.notice-box {
+  padding: 0 0 0 10px;
+  background-color: red;
+}
+
+.notice-box-red {
+  background-color: #FFCCCC;
+  padding: 15px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.notice-box-red::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-color: #ff0000;
+  background: linear-gradient(180deg, #ff0000 0%, #cc0000 100%);
+}
+
+.notice-header {
+  background-color: #98d982;
+  margin-bottom: 15px;
+}
+
+.notice-box-alt {
+  padding: 0 0 0 10px;
+  background-color: red;
+}
+
+.function-box-blue {
+  background-color: #CCCCFF;
+  padding: 15px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.function-box-blue::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-color: #0000ff;
+  background: linear-gradient(180deg, #0000ff 0%, #0000cc 100%);
+}
+
+.quote-box-grey {
+  background-color: #E0E0E0;
+  padding: 15px;
+  margin: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-box-grey::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-color: #666666;
+  background: linear-gradient(180deg, #808080 0%, #606060 100%);
+}
+
+/* 浮动按钮样式 */
+.float-button {
+  position: fixed;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #556b2f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.float-button:hover {
+  background-color: #6b8e23;
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.back-to-top {
+  bottom: 100px;
+}
+
+.nav-hub {
+  bottom: 40px;
+}
+
+/* 标语装饰线样式 */
+.slogan-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.slogan-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #556b2f 50%, transparent 100%);
+  min-width: 20px;
+}
+
+.slogan-text {
+  color: #ffd700;
+  font-size: 16px;
+  padding: 0 15px;
+  white-space: nowrap;
+}
+
+/* 响应式布局系统 */
+.gjs-row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: 100%;
+  gap: 10px;
+}
+
+.gjs-cell {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 移动端响应式设计 */
+@media (max-width: 768px) {
+  .gjs-row {
+    flex-direction: column;
+    padding: 10px 8px;
+    gap: 8px;
+  }
+
+  .gjs-cell {
+    width: 100% !important;
+    flex: 0 0 100%;
+  }
+
+  /* 移动端下内容区域宽度恢复为 100% */
+  .content-width-limiter {
+    width: 100%;
+  }
+
+  /* 头部容器适配 */
+  .main-container {
+    padding: 10px 8px;
+  }
+
+  .logo-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .logo-size {
+    max-width: 80px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .logo-img {
+    max-width: 40px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .page-title-main {
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  .slogan-container-text {
+    font-size: 14px;
+  }
+
+  .slogan-line {
+    width: 30px;
+    max-width: 30px;
+  }
+
+  /* 导航栏适配 */
+  .header-row {
+    padding: 8px 10px;
+  }
+
+  .nav-padding {
+    padding: 5px;
+  }
+
+  .nav-title {
+    font-size: 16px;
+  }
+
+  .nav-location {
+    font-size: 12px;
+  }
+
+  /* 内容区域适配 */
+  .content-row {
+    padding: 10px 5px;
+  }
+
+  .content-bg-white {
+    padding: 10px 5px;
+  }
+
+  .section-title-text {
+    font-size: 16px;
+    padding: 12px 10px;
+  }
+
+  /* 注意事项盒子适配 */
+  .notice-box-red,
+  .function-box-blue,
+  .quote-box-grey {
+    padding: 10px 12px;
+    margin: 8px 5px;
+    font-size: 14px;
+  }
+
+  /* 浮动按钮适配 */
+  .float-button {
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 11px;
+  }
+
+  .back-to-top {
+    bottom: 80px;
+  }
+
+  .nav-hub {
+    bottom: 30px;
+  }
+
+  /* 便携式导航仪适配 - 保持显示但优化尺寸 */
+  .quick-nav {
+    left: 0;
+    width: 35px;
+    padding: 10px 3px;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .quick-nav:hover {
+    width: 160px;
+    padding: 10px 8px;
+  }
+
+  .quick-nav-page-title {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  /* 页脚适配 */
+  .footer-row-alt {
+    padding: 15px 10px;
+  }
+
+  .copyright-color {
+    font-size: 12px;
+  }
+
+  /* 确保所有文本不溢出 */
+  .center-align,
+  .left-align {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* 优化内容区域的间距 */
+  .content-padding {
+    padding: 8px;
+  }
+
+  .content-padding-alt {
+    padding: 8px;
+  }
+
+  /* 优化表格和列表布局 */
+  .notice-header {
+    margin: 0 0 5px 0;
+  }
+
+  /* 确保图片和链接不超出容器 */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  a {
+    word-break: break-word;
+  }
+
+  /* 优化slogan容器在移动端的显示 */
+  .slogan-container {
+    padding: 0 10px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .slogan-text {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .slogan-line {
+    width: 100%;
+  }
+
+  /* 确保所有hr元素在移动端正确显示 */
+  .slogan-line {
+    width: 30px;
+    max-width: 30px;
+    margin: 0 auto;
+  }
+
+  /* 优化section-title文字大小 */
+  .section-title,
+  .section-title-text {
+    font-size: 18px;
+  }
+
+  /* 优化padding和margin */
+  .section-padding {
+    padding: 8px;
+  }
+
+  /* 确保notice-box等在移动端不溢出 */
+  .notice-box-red,
+  .function-box-blue,
+  .quote-box-grey {
+    margin: 8px 5px;
+    padding: 12px 10px;
+    border-radius: 8px;
+  }
+}
+
+/* 超小屏幕适配（小于 375px） */
+@media (max-width: 375px) {
+  .gjs-row {
+    padding: 8px 5px;
+  }
+
+  .main-container {
+    padding: 10px 5px;
+  }
+
+  .page-title-main {
+    font-size: 16px;
+  }
+
+  .nav-title {
+    font-size: 14px;
+  }
+
+  .nav-location {
+    font-size: 11px;
+  }
+
+  .notice-box-red,
+  .function-box-blue,
+  .quote-box-grey {
+    padding: 8px;
+    margin: 5px 3px;
+    font-size: 13px;
+  }
+
+  .float-button {
+    width: 40px;
+    height: 40px;
+    font-size: 10px;
+    right: 10px;
+  }
+
+  .back-to-top {
+    bottom: 70px;
+  }
+
+  .nav-hub {
+    bottom: 25px;
+  }
+}
+
+/* 平板适配（768px - 1024px） */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .gjs-row {
+    padding: 10px 15px;
+  }
+
+  .quick-nav {
+    width: 35px;
+    padding: 12px 4px;
+  }
+
+  .quick-nav:hover {
+    width: 160px;
+    padding: 12px 8px;
+  }
+
+  .quick-nav-title {
+    font-size: 14px;
+  }
+
+  .quick-nav-hint {
+    font-size: 11px;
+  }
+
+  .quick-nav-item {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .quick-nav-toc-item {
+    font-size: 11px;
+    padding: 5px 10px 5px 15px;
+  }
+}
+
+/* 移动端底部导航样式 */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #556b2f;
+  padding: 10px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobile-nav-title {
+  color: #ffd700;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mobile-nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 6px 12px;
+  background-color: #6b8e23;
+  border-radius: 20px;
+  font-size: 12px;
+  transition: background-color 0.3s;
+}
+
+.mobile-nav-link:hover {
+  background-color: #7caa2d;
+}
+</style>
+<style id="ext-inline-css-import-1">* {
+  box-sizing: border-box;
+}
+
+/* 标语线条样式 */
+.slogan-line-left {
+  width: 50px;
+  max-width: 100%;
+  border-color: #6b7a3a;
+  margin-right: 10px;
+}
+
+.slogan-line-right {
+  width: 50px;
+  max-width: 100%;
+  border-color: #6b7a3a;
+  margin-left: 10px;
+}
+
+/* Logo图片 */
+.logo-img-custom {
+  text-align: left;
+  max-width: 100%;
+  height: auto;
+}
+
+.logo-size-custom {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 标语容器文本 */
+.slogan-container-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gold;
+  font-size: 16px;
+  flex-wrap: wrap;
+}
+
+/* 页面主标题 */
+.page-title-main {
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* 导航栏文本 */
+.nav-title {
+  font-size: 20px;
+}
+
+.nav-location {
+  color: white;
+}
+
+.text-center-nav {
+  text-align: center;
+}
+
+/* 主要内容区域文本 */
+.content-main-text {
+  text-align: left;
+}
+
+/* 一级标题文本 - 绿色背景 + 粗体 + 左对齐 */
+.section-title-text-main {
+  background-color: #c1e1c1;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.content-bg-lightgrey {
+  background-color: lightgrey;
+}
+
+/* 二级标题文本 - 仅粗体，无背景 */
+.section-title-text-sub {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  background-color: transparent;
+}
+
+.content-bg-white-text {
+  background-color: lightgrey;
+}
+
+/* 三级标题文本 - 仅粗体，无背景 */
+.section-title-text-sub-sub {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  background-color: transparent;
+}
+
+.content-bg-white-sub {
+  background-color: lightgrey;
+}
+
+/* 页面头部区域 */
+.page-header-section {
+  background-color: #98d982;
+  margin: 0 0 5px 0;
+}
+
+.page-section-reset {
+  background-image: unset;
+  background-repeat: unset;
+  background-position: unset;
+  background-attachment: unset;
+  background-size: unset;
+}
+
+.content-section-no-margin {
+  margin: 0;
+}
+
+.content-bg-white-section {
+  background-color: lightgrey;
+}
+
+/* 版权信息 */
+.copyright-text {
+  color: white;
+}
+
+.copyright-center {
+  text-align: center;
+}
+
+/* 导航仪页面标题 */
+.quick-nav-page-title {
+  color: white;
+  padding: 5px 12px;
+  font-size: 13px;
+  margin: 5px 0;
+  text-align: center;
+  cursor: pointer;
 }
 </style>
 <style id="htmlpage-inline-styles">* {
@@ -304,103 +1157,401 @@ body {
   margin: 0;
 }
 
-.c5021 {
-  width: 384px;
-  height: 216px;
+#content-box-main {
+  background-color: white;
 }
 
-.c5029 {
-  color: #ffffff;
+#content-box-white {
+  background-color: white;
 }
 
-.c5095 {
-  color: grey;
+#section-1 {
+  background-color: #c1e1c1;
+}
+
+#content-section-white {
+  background-color: white;
+}
+
+#content-box-white-sub {
+  background-color: white;
+}
+
+#content-box-white-sub-sub {
+  background-color: white;
+}
+
+#section-2 {
+  background-color: #c1e1c1;
+}
+
+#content-box-white-section2 {
+  background-color: white;
+}
+
+#content-box-white-section3 {
+  background-color: white;
+}
+
+#content-box-white-section3-sub {
+  background-color: white;
 }
 </style>
 </head>
 <body>
-<header>
-    <div class="container"><img src="https://cms-api.htmlpage.cn/uploads/14162_1767961804449_g8hs7kechff_51a9c7720b.png" class="c3808 c5021">
-      <h1 class="c5029">牧羊人图书馆入门</h1>
-      <p>存放所有知识之地</p>
+<!-- 主容器 - 头部Logo区域 -->
+<div class="gjs-row main-container">
+  <div class="gjs-cell logo-align">
+    <img src="https://cms-api.htmlpage.cn/uploads/large_14162_1770113738697_kmtrzkb0rpg_946dc2122b.png" class="logo-border logo-container logo-img-custom">
+    <img src="https://cms-api.htmlpage.cn/uploads/large_14162_1770113738660_g4019gaetnh_36009cfd3d.png" class="logo-size logo-size-custom">
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
     </div>
-  </header>
-  <div class="note">
-    创建于2026.1.4
+    <div class="section-padding page-title-main">牧羊人图书馆入门</div>
   </div>
-  <div class="gjs-row c1022 c5095"></div>
-  <nav>
-    <div class="nav-title">目录</div>
-    <div class="container">
-      <ul>
-        <li><a href="#intro">牧羊人之图书馆</a></li>
-        <li><a href="#history">图书馆的历史</a></li>
-        <li><a href="#inspiration">灵感来源</a></li>
-      </ul>
+</div>
+
+<!-- 导航栏 - 位置信息 -->
+<div class="gjs-row header-row">
+  <div class="gjs-cell nav-center">
+    <div class="nav-padding title-color nav-title">位置</div>
+    <div class="content-padding nav-location">目前所在位置<br><span id="current-path">图书馆入门</span></div>
+  </div>
+</div>
+
+<!-- 主要内容区域 -->
+<div class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-bg-yellow" style="background-color:white;">
+
+      <!-- 一级标题区域 1 - 绿色背景 -->
+      <div class="gjs-row notice-header page-header-section" style="background-color:white;">
+        <div class="gjs-cell">
+          <div id="section-1" class="section-title-text-main" style="background-color:#c1e1c1;">牧羊人之图书馆</div>
+          <div class="gjs-row content-bg-lightgrey" style="background-color:white;">
+            <div class="gjs-cell">
+              <div class="center-align">
+                <p>牧羊人图书馆（Shepherd's Library）亦称为谢沷尔德图书馆（Shpherd's Library）是我虚构的一个概念，它是我存放我的想象和创造之物的地方，因此，它可以是广义的被认为是任何可能做到这些事情的东西，比如它可能是一本书，一部笔记本，甚至是一个文件夹。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 一级标题区域 2 - 绿色背景 -->
+      <div class="gjs-row notice-header section-header-repeat page-section-reset" style="background-color:white;">
+        <div class="gjs-cell">
+          <div id="section-2" class="section-title-text-sub" style="background-color:#c1e1c1;">图书馆的历史</div>
+          <div class="gjs-row yellowgreen-bg content-bg-white-text" style="background-color:white;">
+            <div class="gjs-cell">
+              <div class="center-align">
+
+                <!-- 下级标题2.1 - 仅粗体，无背景 -->
+                <div id="section-2-1" class="subsection-header">概念创作</div>
+                <div class="gjs-row content-bg-white-text" style="background-color:white;">
+                  <div class="gjs-cell">
+                    <div class="center-align">
+                      <p>牧羊人图书馆被认为在2022年12月31日首次被我创建于我的画作《Shpherd's Library》电子版本中，尽管画作中包含一些笔误（比如把Shepherd写成了Shpherd，非常值得一提的是，按照我的命名习惯，前者似乎过于普遍，为保留该图书馆的特殊性，后者也作为专有名词般的别称来增加独特感，避免与任何其他图书馆混淆），但该画作仍被认定为牧羊人图书馆的首次创建。然而，这仅仅只是代表完整的动机——比如我真正想在一个地方里保存我的思想的开始，我真正使用「牧羊人图书馆」词语的时间可能还要更早。</p>
+                      <p></p>
+                      <p>据我所知，最早一次对「牧羊人图书馆」一词有记录的使用是在2022年11月4日，是在我在高二年级时的画作《Shepherd's Library》中首次出现（彼时画作还尚未完成），尽管当时融入了大量来自灵感本身的内容，但我确认为当时要表达的意思确为此。</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 下级标题2.2 - 仅粗体，无背景 -->
+                <div id="section-2-2" class="subsection-header">灵感来源</div>
+                <div class="gjs-row yellowgreen-bg content-bg-white-text" style="background-color:white;">
+                  <div class="gjs-cell">
+                    <div class="center-align">
+                      <p>牧羊人图书馆是Shepherd's Library的译名，其中「Shepherd」一词灵感来源于2013年3月23日发售的电子游戏《生化奇兵：无限》（Bioshock Infinite）中的艺术概念「False Shepherd」（伪牧羊人），它出现在游戏中的海报以及角色台词中，贯穿游戏剧情始终。而「Library」一词则来源于SCP基金会（SCP Foundation）的姊妹网站被放逐者之图书馆（The Wanderers' Library）的名称。</p>
+                      <p></p>
+                      <p>在2017到2021年间，我非常容易被SCP基金会有关的内容所吸引，如果你不知道什么是SCP基金会，可以快速查看浏览各种浏览器的搜索引擎搜索出来的百科内容或者我的总结：</p>
+
+                      <!-- 三级标题2.2.1 - 仅粗体，无背景 -->
+                      <div id="section-2-2-1" class="sub-subsection-header">SCP基金会（夸克百科）</div>
+                      <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
+                        <div class="gjs-cell">
+                          <div class="left-align">
+                            <p>SCP基金会是一个以怪诞科幻为主题的网络共笔文学项目，起源于2007年美国4chan论坛上关于编号SCP-173的恐怖小说创作。该项目通过模拟科研报告、档案记录等形式，描述各类超自然现象、异常实体与物品（统称"SCP"），并构建了一个虚构组织——SCP基金会，负责收容、控制和研究这些异常，以维护人类社会的常态。基金会运作独立于各国政府，其核心理念为"控制，收容，保护"。随着创作扩展，SCP已衍生出多语言分部、漫画、游戏及视频等跨媒体作品。2021年，因部分内容被认定为对未成年人有害，"SCP系列"在中国被列为"儿童邪典"并全网下架。</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- 三级标题2.2.2 - 仅粗体，无背景 -->
+                      <div id="section-2-2-2" class="sub-subsection-header">SCP基金会的世界观（百度百科）</div>
+                      <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
+                        <div class="gjs-cell">
+                          <div class="left-align">
+                            <p>网络新怪谈《SCP基金会》系列内出现的世界观SCP世界观是网络新怪谈《SCP基金会》系列作品构建的虚构宇宙体系，包含异常收容物、同行组织及超自然概念等核心元素。其世界观由多个独立创作的分支体系交织而成，基金会作为主要机构与全球超自然联盟、破碎之神教会等敌对或合作组织共存，允许不同作品存在矛盾设定。</p>
+                            <p>该世界观包含奇术、模因、叙事层等超自然概念，并延伸出星际文明框架的AAPA设定、死亡终结事件等分支体系。同行组织如混沌分裂者通过异常物品交易对抗基金会，工厂具备量产异常物品能力，蛇之手则反对异常收容理念。</p>
+                            <p>多元设定中心涵盖未来科幻导向的第三定律、无基金会存在的"未建立"系列以及荒诞基调的欢乐基金会等平行宇宙框架。各分支体系通过作者协作形成松散关联的复合叙事网络。</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- 三级标题2.2.3 - 仅粗体，无背景 -->
+                      <div id="section-2-2-3" class="sub-subsection-header">SCP基金会（我的总结）</div>
+                      <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
+                        <div class="gjs-cell">
+                          <div class="left-align">
+                            <p>SCP基金会（SCP Foundation）是一个网络虚构架空文学创作的网站名称，一般指该网站所有内容，主题涵盖怪诞，科幻，架空历史创作。SCP基金会几乎从现代社会独立出一条独特的世界观和时间线，并允许超自然现象的存在，它讲述了一个黑暗组织在深不见底的深渊中收容（Secure）和控制（Contain）所有超自然的事物，并由此暗中保护（Protect）人类的故事，该组织由O5议会管理。</p>
+                            <p></p>
+                            <p>本质上，或者以现实生活的角度来看，SCP基金会由一群网络上活跃的作家进行共同写作甚至绘画创作。这些作家在此发挥他们无垠的想象力，一起构建了这个虚拟的宇宙，他们甚至会在创作时考虑其他作家的作品，并由此相互产生联系，很大程度上增加了基金会内容被认为是真实的程度。</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- 三级标题2.2.4 - 仅粗体，无背景 -->
+                      <div id="section-2-2-4" class="sub-subsection-header">被放逐者之图书馆（夸克百科）</div>
+                      <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
+                        <div class="gjs-cell">
+                          <div class="left-align">
+                            <p>被放逐者之图书馆（The Wanderers' Library）是网络新怪谈《SCP基金会》系列中的虚构地点，同时亦为创作平台SCP基金会的姊妹网站。该图书馆存在于超越常规时空的维度中，收藏了几乎所有宇宙与现实中已被书写或尚未被书写的知识文本，涵盖书籍、诗歌、音频、视频等多种形式。其核心主题为"渊妙感"——即通过碎片化叙事展现隐藏于现实边缘的奇异存在与现象，唤起对未知世界的敬畏与探索欲。自19世纪末以来，多个超自然组织，尤其是蛇之手，与图书馆建立了非正式联系，并将其作为知识共享与集会的场所。1967年，蛇之手重新发现通往图书馆的密径，标志着其在当代超自然社群中的再度活跃。</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- 三级标题2.2.5 - 仅粗体，无背景 -->
+                      <div id="section-2-2-5" class="sub-subsection-header">被放逐者之图书馆（百度百科）</div>
+                      <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
+                        <div class="gjs-cell">
+                          <div class="left-align">
+                            <p>被放逐者之图书馆（The Wanderers' Library）是网络新怪谈《SCP基金会》系列中的一处地点，同时也是创作网站SCP基金会的姊妹网站。</p>
+                            <p>被放逐者之图书馆是遍及每个宇宙和维度的所有知识的集中地。它那无尽的大厅里收藏着每一本来自过去或者未来的书籍（有些甚至永远都不会被写出）。来自未知世界的学者们潜入走廊，在垃圾箱中搜寻禁忌的知识。读遍图书馆里哪怕只是一个书架的内容，也需要花费数辈的寿命。</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- 三级标题2.2.6 - 仅粗体，无背景 -->
+                      <div id="section-2-2-6" class="sub-subsection-header">生化奇兵：无限</div>
+                      <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
+                        <div class="gjs-cell">
+                          <div class="left-align">
+                            <p>在同样的这段时期里，我偶尔会从SCP基金会当中进入被放逐者之图书馆进行阅读，尽管只是非常随意而且敷衍的阅读（这也是为什么对于它，我没有自己的总结），但不知为何，在我阅读过的文字中，仍然有印象非常深刻的诗一般的留在了我的记忆当中。</p>
+                            <p></p>
+                            <p>之所以把它放在最后，没有别的原因，仅仅只是因为我忘记在前面去讨论它，并且对于此类疑惑，实际上是没有很大的意义，因为无论我如何安排它们的前后顺序，总会有一个会是"最后一个"，也总有"为什么它在最后？"这样的问题。</p>
+                            <p>实际上，生化奇兵：无限</p>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </nav>
-  <main class="container">
-    <section id="intro" class="card">
-      <h2>牧羊人之图书馆</h2>
-      <p>牧羊人图书馆（Shepherd’s Library）亦称为谢沷尔德图书馆（Shpherd’s
-        Library）是我虚构的一个概念，它是我存放我的想象和创造之物的地方，因此，它可以是广义的被认为是任何可能做到这些事情的东西，比如它可能是一本书，一部笔记本，甚至是一个文件夹。</p>
-    </section>
-    <section id="history" class="card">
-      <h2>图书馆的历史</h2>
-      <h3>概念创作</h3>
-      <p>牧羊人图书馆被认为在2022年12月31日首次被我创建于我的画作《Shpherd’s
-        Library》电子版本中，尽管画作中包含一些笔误（比如把Shepherd写成了Shpherd，非常值得一提的是，按照我的命名习惯，前者似乎过于普遍，为保留该图书馆的特殊性，后者也作为专有名词般的别称来增加独特感，避免与任何其他图书馆混淆），但该画作仍被认定为牧羊人图书馆的首次创建。然而，这仅仅只是代表完整的动机——比如我真正想在一个地方里保存我的思想的开始，我真正使用「牧羊人图书馆」词语的时间可能还要更早。
-      </p>
-      <p>据我所知，最早一次对「牧羊人图书馆」一词有记录的使用是在2022年11月4日，是在我在高二年级时的画作《Shepherd’s
-        Library》中首次出现（彼时画作还尚未完成），尽管当时融入了大量来自灵感本身的内容，但我确认为当时要表达的意思确为此。</p>
-    </section>
-    <section id="inspiration" class="card">
-      <h2>灵感来源</h2>
-      <p>牧羊人图书馆是Shepherd’s Library的译名，其中「Shepherd」一词灵感来源于2013年3月23日发售的电子游戏《生化奇兵：无限》（Bioshock Infinite）中的艺术概念「False
-        Shepherd」（伪牧羊人），它出现在游戏中的海报以及角色台词中，贯穿游戏剧情始终。而「Library」一词则来源于SCP基金会（SCP Foundation）的姊妹网站被放逐者之图书馆（The Wanderers’
-        Library）的名称。</p>
-      <p>在2017到2021年间，我非常容易被SCP基金会有关的内容所吸引，如果你不知道什么是SCP基金会，可以快速查看浏览各种浏览器的搜索引擎搜索出来的百科内容或者我的总结：</p>
-      <h3>SCP基金会（夸克百科）</h3>
-      <p>
-        SCP基金会是一个以怪诞科幻为主题的网络共笔文学项目，起源于2007年美国4chan论坛上关于编号SCP-173的恐怖小说创作。该项目通过模拟科研报告、档案记录等形式，描述各类超自然现象、异常实体与物品（统称“SCP”），并构建了一个虚构组织——SCP基金会，负责收容、控制和研究这些异常，以维护人类社会的常态。基金会运作独立于各国政府，其核心理念为“控制，收容，保护”。随着创作扩展，SCP已衍生出多语言分部、漫画、游戏及视频等跨媒体作品。2021年，因部分内容被认定为对未成年人有害，“SCP系列”在中国被列为“儿童邪典”并全网下架。
-      </p>
-      <h3>SCP基金会的世界观（百度百科）</h3>
-      <p>
-        网络新怪谈《SCP基金会》系列内出现的世界观SCP世界观是网络新怪谈《SCP基金会》系列作品构建的虚构宇宙体系，包含异常收容物、同行组织及超自然概念等核心元素。其世界观由多个独立创作的分支体系交织而成，基金会作为主要机构与全球超自然联盟、破碎之神教会等敌对或合作组织共存，允许不同作品存在矛盾设定。
-      </p>
-      <p>该世界观包含奇术、模因、叙事层等超自然概念，并延伸出星际文明框架的AAPA设定、死亡终结事件等分支体系。同行组织如混沌分裂者通过异常物品交易对抗基金会，工厂具备量产异常物品能力，蛇之手则反对异常收容理念。</p>
-      <p>多元设定中心涵盖未来科幻导向的第三定律、无基金会存在的“未建立”系列以及荒诞基调的欢乐基金会等平行宇宙框架。各分支体系通过作者协作形成松散关联的复合叙事网络。</p>
-      <h3>SCP基金会（我的总结）</h3>
-      <p>SCP基金会（SCP
-        Foundation）是一个网络虚构架空文学创作的网站名称，一般指该网站所有内容，主题涵盖怪诞，科幻，架空历史创作。SCP基金会几乎从现代社会独立出一条独特的世界观和时间线，并允许超自然现象的存在，它讲述了一个黑暗组织在深不见底的深渊中收容（Secure）和控制（Contain）所有超自然的事物，并由此暗中保护（Protect）人类的故事，该组织由O5议会管理。
-      </p>
-      <p>
-        本质上，或者以现实生活的角度来看，SCP基金会由一群网络上活跃的作家进行共同写作甚至绘画创作。这些作家在此发挥他们无垠的想象力，一起构建了这个虚拟的宇宙，他们甚至会在创作时考虑其他作家的作品，并由此相互产生联系，很大程度上增加了基金会内容被认为是真实的程度。
-      </p>
-      <p>
-        在同样的这段时期里，我偶尔会从SCP基金会当中进入被放逐者之图书馆进行阅读，尽管只是非常随意而且敷衍的阅读（这也是为什么对于它，我没有自己的总结），但不知为何，在我阅读过的文字中，仍然有印象非常深刻的诗一般的留在了我的记忆当中。
-      </p>
-      <h3>被放逐者之图书馆（夸克百科）</h3>
-      <p>被放逐者之图书馆（The Wanderers'
-        Library）是网络新怪谈《SCP基金会》系列中的虚构地点，同时亦为创作平台SCP基金会的姊妹网站。该图书馆存在于超越常规时空的维度中，收藏了几乎所有宇宙与现实中已被书写或尚未被书写的知识文本，涵盖书籍、诗歌、音频、视频等多种形式。其核心主题为“渊妙感”——即通过碎片化叙事展现隐藏于现实边缘的奇异存在与现象，唤起对未知世界的敬畏与探索欲。自19世纪末以来，多个超自然组织，尤其是蛇之手，与图书馆建立了非正式联系，并将其作为知识共享与集会的场所。1967年，蛇之手重新发现通往图书馆的密径，标志着其在当代超自然社群中的再度活跃。
-      </p>
-      <h3>被放逐者之图书馆（百度百科）</h3>
-      <p>被放逐者之图书馆（The Wanderers' Library）是网络新怪谈《SCP基金会》系列中的一处地点，同时也是创作网站SCP基金会的姊妹网站。</p>
-      <p>
-        被放逐者之图书馆是遍及每个宇宙和维度的所有知识的集中地。它那无尽的大厅里收藏着每一本来自过去或者未来的书籍（有些甚至永远都不会被写出）。来自未知世界的学者们潜入走廊，在垃圾箱中搜寻禁忌的知识。读遍图书馆里哪怕只是一个书架的内容，也需要花费数辈的寿命。
-      </p>
-      <h3>生化奇兵：无限</h3>
-    </section>
-  </main>
-  <div class="gjs-row"></div>
-  <footer>
-    <div class="container">
-      <p>© 2026 Shepherd's Library 牧羊人图书馆 |该图书馆创建于2026.1.4</p>
+  </div>
+</div>
+
+<!-- 页脚区域 -->
+<div class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
+      未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</div>
+
+<!-- 移动端底部导航 -->
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<!-- 便捷式导航仪（桌面端） -->
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <!-- 图书馆相关链接 -->
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="feature.html" class="quick-nav-item">图书馆功能</a>
+    <!-- 分割线 -->
+    <div class="quick-nav-divider"></div>
+    <!-- 当前页面信息 -->
+    <div class="quick-nav-section">当前页面</div>
+    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
+    <div class="quick-nav-section">页面目录</div>
+    <div id="quick-nav-toc-container">
+      <!-- 一级标题1 -->
+      <div class="quick-nav-toc-item" data-target="section-1">• 牧羊人之图书馆</div>
+      <!-- 一级标题2 -->
+      <div class="quick-nav-toc-item-with-children">• 图书馆的历史</div>
+      <div class="quick-nav-toc-toggle collapsed" data-parent="section-2"></div>
+      <div class="quick-nav-toc-children">
+        <!-- 二级标题2.1 -->
+        <div class="quick-nav-toc-child-item" data-target="section-2-1">└ 概念创作</div>
+        <!-- 二级标题2.2 -->
+        <div class="quick-nav-toc-child-item" data-target="section-2-2">└ 灵感来源</div>
+      </div>
     </div>
-  </footer>
-<script src="js/plugins.js"></script>
-<script src="js/theme.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/theme.js"></script>
+  </div>
+</div>
+
+<!-- 回到顶部按钮 -->
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+
+<!-- 导航枢纽按钮 -->
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/plugins.js"></script>
+<script src="../js/theme.js"></script>
+<script id="ext-inline-js-import-body-end-0">
+// 回到顶部功能
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+// 打开导航枢纽
+function openNavigator() {
+  window.open('../navigator.html', '_blank');
+}
+
+// 获取当前页面的路径并格式化（易读方式）
+function getCurrentPath() {
+  const path = window.location.pathname;
+  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
+
+  if (formattedPath === '' || formattedPath === 'index') {
+    return '首页';
+  }
+
+  formattedPath = formattedPath
+    .split('/')
+    .map(segment => {
+      const fileNameIndex = segment.lastIndexOf('.');
+      if (fileNameIndex > 0) {
+        segment = segment.substring(0, fileNameIndex);
+      }
+      return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
+    })
+    .join(' → ');
+
+  return formattedPath;
+}
+
+// 滚动到指定章节
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// 切换目录折叠状态
+function toggleTocToggle(toggleElement) {
+  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
+  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
+
+  if (childrenElement) {
+    if (childrenElement.classList.contains('show')) {
+      childrenElement.classList.remove('show');
+      toggleElement.classList.remove('expanded');
+      toggleElement.classList.add('collapsed');
+    } else {
+      childrenElement.classList.add('show');
+      toggleElement.classList.remove('collapsed');
+      toggleElement.classList.add('expanded');
+    }
+  }
+}
+
+// 页面加载完成后初始化
+window.addEventListener('DOMContentLoaded', function() {
+  // 更新当前路径显示
+  const pathElement = document.getElementById('current-path');
+  if (pathElement) {
+    pathElement.textContent = getCurrentPath();
+  }
+
+  // 更新便捷式导航仪中的当前页面标题
+  const pageTitle = document.querySelector('.page-title-main');
+  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
+  if (pageTitle && quickNavTitleElement) {
+    quickNavTitleElement.textContent = pageTitle.textContent;
+  }
+
+  // 使用事件委托处理目录点击
+  const tocContainer = document.getElementById('quick-nav-toc-container');
+  if (tocContainer) {
+    tocContainer.addEventListener('click', function(event) {
+      const target = event.target;
+
+      if (target.classList.contains('quick-nav-toc-toggle')) {
+        event.stopPropagation();
+        event.preventDefault();
+        toggleTocToggle(target);
+        return;
+      }
+
+      if (target.classList.contains('quick-nav-toc-item') ||
+          target.classList.contains('quick-nav-toc-item-with-children') ||
+          target.classList.contains('quick-nav-toc-child-item')) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        let sectionId;
+
+        if (target.classList.contains('quick-nav-toc-item-with-children')) {
+          const toggleElement = target.nextElementSibling;
+          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
+            sectionId = toggleElement.getAttribute('data-parent');
+          }
+        } else {
+          sectionId = target.getAttribute('data-target');
+        }
+
+        if (sectionId) {
+          scrollToSection(sectionId);
+        }
+      }
+    });
+  }
+
+  // 为当前页面标题添加点击事件（回到页面顶部）
+  const quickNavPageTitle = document.getElementById('quick-nav-page-title');
+  if (quickNavPageTitle) {
+    quickNavPageTitle.addEventListener('click', function(event) {
+      event.stopPropagation();
+      scrollToTop();
+    });
+    quickNavPageTitle.style.cursor = 'pointer';
+  }
+
+  // 绑定回到顶部按钮事件
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', scrollToTop);
+  }
+
+  // 绑定导航枢纽按钮事件
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) {
+    navHubBtn.addEventListener('click', openNavigator);
+  }
+});
+</script>
 </body>
 </html>
