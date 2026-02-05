@@ -278,9 +278,10 @@ body {
 
 /* 内容区域宽度限制 */
 .content-width-limiter {
-  width: 50%;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
+  max-width: 1000px;
 }
 
 /* 便捷式导航仪样式 */
@@ -681,26 +682,36 @@ body {
   /* 移动端下内容区域宽度恢复为 100% */
   .content-width-limiter {
     width: 100%;
+    max-width: 100%;
   }
 
-  /* 头部容器适配 */
+  /* 确保内容板块保持合理的宽度，不要全宽 */
+  .content-width-limiter > .gjs-cell {
+    width: 100%;
+  }
+
+  /* 内容区域适配 */
   .main-container {
     padding: 10px 8px;
   }
 
   .logo-container {
-    width: 100%;
+    width: 80px;
+    height: 80px;
     text-align: center;
+    margin: 0 auto;
   }
 
   .logo-size {
-    max-width: 80px;
+    max-width: 60px;
+    height: auto;
     margin: 0 auto;
     display: block;
   }
 
   .logo-img {
     max-width: 40px;
+    height: auto;
     margin: 0 auto;
     display: block;
   }
@@ -738,16 +749,136 @@ body {
 
   /* 内容区域适配 */
   .content-row {
-    padding: 10px 5px;
+    padding: 10px 15px;
   }
 
   .content-bg-white {
-    padding: 10px 5px;
+    padding: 10px 15px;
   }
 
   .section-title-text {
     font-size: 16px;
     padding: 12px 10px;
+  }
+
+  /* 移动端新闻轮播适配 - 完全重写 */
+  .news-carousel-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow: visible !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+  .news-carousel-wrapper {
+    width: 100% !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  .news-carousel-track {
+    display: flex !important;
+    transition: transform 0.3s ease !important;
+    width: 100% !important;
+  }
+
+  .news-carousel-card {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    padding: 5px !important;
+    box-sizing: border-box !important;
+  }
+
+  .news-card {
+    padding: 8px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  .news-card-content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 5px !important;
+  }
+
+  .news-card-image {
+    max-width: 100px !important;
+    width: 100% !important;
+    flex: 0 0 auto !important;
+  }
+
+  .news-card-image img {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100px !important;
+  }
+
+  .news-card-info {
+    flex: 1 !important;
+    min-width: auto !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .news-card-title {
+    font-size: 13px !important;
+    margin: 0 0 4px 0 !important;
+  }
+
+  .news-card-date {
+    font-size: 11px !important;
+    margin: 0 0 4px 0 !important;
+  }
+
+  .news-card-hint {
+    font-size: 10px !important;
+    padding: 3px 6px !important;
+    margin: 0 !important;
+  }
+
+  .news-carousel-nav-btn {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 16px !important;
+    border-radius: 4px !important;
+    padding: 0 !important;
+    line-height: 32px !important;
+    z-index: 100 !important;
+    background-color: #556b2f !important;
+    color: white !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .news-carousel-nav-btn.prev {
+    left: 5px !important;
+  }
+
+  .news-carousel-nav-btn.next {
+    right: 5px !important;
+  }
+
+  .news-carousel-nav-btn.disabled {
+    opacity: 0.25 !important;
+    pointer-events: none !important;
+  }
+
+  .news-carousel-card.prev-preview,
+  .news-carousel-card.next-preview {
+    opacity: 0.3 !important;
+    transform: scale(0.9) !important;
   }
 
   /* 注意事项盒子适配 */
@@ -1003,7 +1134,7 @@ body {
   background-color: #7caa2d;
 }
 
-/* 新闻卡片样式 */
+/* 新闻卡片基础样式 */
 .news-card {
   background-color: #f8f9fa;
   border: 2px solid #c1e1c1;
@@ -1030,7 +1161,7 @@ body {
 
 .news-card-image {
   flex: 0 0 auto;
-  max-width: 250px;
+  max-width: 200px;
   width: 100%;
 }
 
@@ -1077,6 +1208,79 @@ body {
   padding: 5px 10px;
   background-color: #e8f5e9;
   border-radius: 4px;
+}
+
+/* 新闻轮播容器样式 */
+.news-carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px 70px;
+}
+
+.news-carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.news-carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.news-carousel-card {
+  flex: 0 0 100%;
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.news-carousel-card.prev-preview,
+.news-carousel-card.next-preview {
+  opacity: 0.3;
+  transform: scale(0.85);
+}
+
+.news-carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background-color: #556b2f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.news-carousel-nav-btn:hover:not(.disabled) {
+  background-color: #6b8e23;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.news-carousel-nav-btn.disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.news-carousel-nav-btn.prev {
+  left: 10px;
+}
+
+.news-carousel-nav-btn.next {
+  right: 10px;
 }
 </style>
 <style id="ext-inline-css-import-1">* {
@@ -1384,15 +1588,50 @@ body {
             <div id="section-news" class="section-title-text-main c4735">新闻</div>
             <div class="gjs-row yellowgreen-bg content-bg-white-sub c4753">
               <div class="gjs-cell">
-                <div class="center-align"><!-- 新闻卡片容器 -->
-                  <div class="news-card">
-                    <div class="news-card-content"><a href="https://irikana.github.io/updateLog/updateLog_alpha-0.0.1.html" target="_blank" class="news-card-image"><img src="https://irikana.github.io/image/poster/update/update_alpha_0.0.1.png" alt="更新海报"></a>
-                      <div class="news-card-info">
-                        <h3 class="news-card-title">图书馆Alpha 0.0.1更新</h3>
-                        <p class="news-card-date">2026年2月4日</p>
-                        <p class="news-card-hint">点击海报了解更多</p>
+                <div class="center-align">
+                  <!-- 新闻轮播容器 -->
+                  <div class="news-carousel-container" id="news-carousel">
+                    <!-- 向左切换按钮 -->
+                    <button class="news-carousel-nav-btn prev" id="carousel-prev" aria-label="上一篇">‹</button>
+                    
+                    <div class="news-carousel-wrapper">
+                      <div class="news-carousel-track" id="carousel-track">
+                        <!-- 新闻卡片 1 -->
+                        <div class="news-carousel-card" data-date="2026-02-04">
+                          <div class="news-card">
+                            <div class="news-card-content">
+                              <a href="https://irikana.github.io/updateLog/updateLog_alpha-0.0.1.html" target="_blank" class="news-card-image">
+                                <img src="https://irikana.github.io/image/poster/update/update_alpha_0.0.1.png" alt="更新海报">
+                              </a>
+                              <div class="news-card-info">
+                                <h3 class="news-card-title">图书馆Alpha 0.0.1更新</h3>
+                                <p class="news-card-date">2026年2月4日</p>
+                                <p class="news-card-hint">点击海报了解更多</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <!-- 新闻卡片 2 -->
+                        <div class="news-carousel-card" data-date="2026-02-03">
+                          <div class="news-card">
+                            <div class="news-card-content">
+                              <a href="https://irikana.github.io/library/paper/SOTM_I_2026后记.html" target="_blank" class="news-card-image">
+                                <img src="https://irikana.github.io/image/poster/SOTM/2026/SOTM-I-2026.png" alt="SOTM I 2026 海报">
+                              </a>
+                              <div class="news-card-info">
+                                <h3 class="news-card-title">SOTM I 2026后记</h3>
+                                <p class="news-card-date">2026年2月3日</p>
+                                <p class="news-card-hint">点击海报了解更多</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
+                    
+                    <!-- 向右切换按钮 -->
+                    <button class="news-carousel-nav-btn next" id="carousel-next" aria-label="下一篇">›</button>
                   </div>
                 </div>
               </div>
@@ -1400,20 +1639,6 @@ body {
           </div>
         </div>
       </div>
-    </div>
-  </div>
-<div class="news-card">
-  <div class="news-card-content">
-    <a href="https://irikana.github.io/library/paper/SOTM_I_2026后记.html" target="_blank" class="news-card-image">
-      <img src="https://irikana.github.io/image/poster/SOTM/2026/SOTM-I-2026.png" alt="SOTM I 2026 海报">
-    </a>
-    <div class="news-card-info">
-      <h3 class="news-card-title">SOTM I 2026后记</h3>
-      <p class="news-card-date">2026年2月3日</p>
-      <p class="news-card-hint">点击海报了解更多</p>
-    </div>
-  </div>
-</div>
                   <!-- 一级标题区域 1 - 绿色背景 -->
         <div class="gjs-row notice-header page-header-section c4936">
           <div class="gjs-cell">
@@ -1603,6 +1828,87 @@ function toggleTocToggle(toggleElement) {
     }
   }
 }
+
+// 新闻轮播功能
+(function initNewsCarousel() {
+  const track = document.getElementById('carousel-track');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  
+  if (!track || !prevBtn || !nextBtn) return;
+  
+  // 获取所有新闻卡片并按日期排序（最新在前）
+  const cards = Array.from(track.querySelectorAll('.news-carousel-card'));
+  cards.sort((a, b) => {
+    const dateA = new Date(a.dataset.date);
+    const dateB = new Date(b.dataset.date);
+    return dateB - dateA;
+  });
+  
+  // 重新排序DOM元素
+  cards.forEach(card => track.appendChild(card));
+  
+  let currentIndex = 0;
+  const totalCards = cards.length;
+  
+  // 更新轮播显示
+  function updateCarousel() {
+    // 移除所有预览类
+    cards.forEach(card => {
+      card.classList.remove('prev-preview', 'next-preview');
+    });
+    
+    // 计算当前位置
+    const offset = -currentIndex * 100;
+    track.style.transform = `translateX(${offset}%)`;
+    
+    // 更新按钮状态
+    prevBtn.classList.toggle('disabled', currentIndex === 0);
+    nextBtn.classList.toggle('disabled', currentIndex === totalCards - 1);
+    
+    // 添加预览效果
+    if (currentIndex > 0) {
+      cards[currentIndex - 1].classList.add('prev-preview');
+    }
+    if (currentIndex < totalCards - 1) {
+      cards[currentIndex + 1].classList.add('next-preview');
+    }
+  }
+  
+  // 上一张按钮事件
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
+  });
+  
+  // 下一张按钮事件
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < totalCards - 1) {
+      currentIndex++;
+      updateCarousel();
+    }
+  });
+  
+  // 键盘导航支持
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    } else if (e.key === 'ArrowRight') {
+      if (currentIndex < totalCards - 1) {
+        currentIndex++;
+        updateCarousel();
+      }
+    }
+  });
+  
+  // 初始化轮播
+  updateCarousel();
+})();
 
 // 页面加载完成后初始化
 window.addEventListener('DOMContentLoaded', function() {
