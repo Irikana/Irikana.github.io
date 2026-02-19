@@ -16,67 +16,129 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Logo样式 - 统一优化，移动端缩小50% */
-.logo-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin: 10px 0;
+.logo-img {
+  width: 336px;
+  max-width: 100%;
+  height: auto;
 }
 
-.logo-img {
+.logo-container {
+  text-align: left;
   width: 186px;
+  height: 186px;
+  max-width: 100%;
   height: auto;
+}
+
+.logo-align {
+  text-align: center;
+}
+
+.logo-border {
+  color: black;
 }
 
 .logo-size {
   width: 303px;
+  height: 170px;
+  max-width: 100%;
   height: auto;
 }
 
-@media (max-width: 768px) {
-  .logo-container {
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .logo-img {
-    width: 93px;
-  }
-
-  .logo-size {
-    width: 151.5px;
-  }
+.desc-font {
+  font-size: 16px;
 }
 
-/* 文本样式 */
+.title-text {
+  text-align: center;
+  color: white;
+  font-size: 25px;
+}
+
 .white-text {
   color: white;
 }
 
-.text-center {
+.center-text {
   text-align: center;
 }
 
-.text-left {
+.center-align {
+  text-align: center;
+}
+
+.left-align {
   text-align: left;
 }
 
-/* 背景样式 */
-.content-bg-white {
-  background-color: white;
+.left-text {
+  text-align: left;
+}
+
+.content-bg {
+  background-color: lightgrey;
+}
+
+.content-box {
+  background-color: lightgrey;
+}
+
+.content-bg-alt {
+  background-color: lightgrey;
+}
+
+.grey-bg {
+  background-color: grey;
+}
+
+.darkgrey-bg {
+  background-color: darkgrey;
+}
+
+.bg-image-reset {
+  background-image: unset;
+  background-repeat: unset;
+  background-position: unset;
+  background-attachment: unset;
+  background-size: unset;
+}
+
+.bg-reset {
+  background-image: unset;
+  background-repeat: unset;
+  background-position: unset;
+  background-attachment: unset;
+  background-size: unset;
+}
+
+.content-section {
+  background-color: lightgrey;
+}
+
+.blue-bg {
+  background-color: blue;
+}
+
+.lightblue-bg {
+  background-color: lightblue;
+}
+
+.gold-bg {
+  background-color: gold;
+}
+
+.yellow-bg {
+  background-color: yellow;
 }
 
 .content-bg-yellow {
   background-color: yellowgreen;
 }
 
-.content-bg-lightgrey {
-  background-color: lightgrey;
+.content-bg-white {
+  background-color: white;
 }
 
-/* 标题样式 */
 .section-header {
   background-color: #98d982;
   margin: 0 0 5px 0;
@@ -89,11 +151,31 @@ body {
   text-align: left;
 }
 
+.yellowgreen-title {
+  background-color: #c1e1c1;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
 .yellowgreen-bg {
   background-color: #c1e1c1;
 }
 
-/* 下级标题 */
+.section-header-alt {
+  background-color: #c1e1c1;
+}
+
+.section-header-repeat {
+  background-color: #98d982;
+  margin: 0 0 5px 0;
+}
+
+.section-title-text {
+  font-size: 20px;
+  color: white;
+}
+
 .subsection-header {
   font-size: 20px;
   font-weight: bold;
@@ -112,7 +194,12 @@ body {
   padding: 5px 0;
 }
 
-/* 间距 */
+.subsection-content {
+  background-color: white;
+  padding: 15px;
+  display: block;
+}
+
 .no-margin {
   margin: 0;
 }
@@ -121,7 +208,15 @@ body {
   padding: 10px;
 }
 
+.section-padding {
+  padding: 10px;
+}
+
 .content-padding {
+  padding: 10px;
+}
+
+.content-padding-alt {
   padding: 10px;
 }
 
@@ -129,7 +224,6 @@ body {
   padding: 5px;
 }
 
-/* 导航栏 */
 .header-row {
   background-color: olivedrab;
 }
@@ -138,16 +232,14 @@ body {
   text-align: center;
 }
 
-.nav-title {
+.nav-subtitle {
   font-size: 20px;
+}
+
+.title-color {
   color: white;
 }
 
-.nav-location {
-  color: white;
-}
-
-/* 主容器 */
 .main-container {
   background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
 }
@@ -160,6 +252,9 @@ body {
   background-color: darkolivegreen;
 }
 
+.footer-row-alt {
+}
+
 .footer-gradient {
   background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
 }
@@ -168,20 +263,12 @@ body {
   color: white;
 }
 
-/* 内容区域宽度限制 */
 .content-width-limiter {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
 }
 
-@media (max-width: 768px) {
-  .content-width-limiter {
-    width: 100%;
-  }
-}
-
-/* 便捷式导航仪 */
 .quick-nav {
   position: fixed;
   left: 0;
@@ -196,6 +283,9 @@ body {
   overflow: hidden;
   padding: 15px 5px;
   user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .quick-nav:hover {
@@ -211,6 +301,7 @@ body {
   text-align: center;
   margin-bottom: 5px;
   writing-mode: vertical-rl;
+  text-orientation: mixed;
   white-space: nowrap;
 }
 
@@ -226,6 +317,7 @@ body {
   font-size: 12px;
   text-align: center;
   writing-mode: vertical-rl;
+  text-orientation: mixed;
   white-space: nowrap;
   margin-top: 10px;
 }
@@ -274,10 +366,14 @@ body {
   display: block;
 }
 
-/* 可折叠目录 */
+.quick-nav:not(:hover) .quick-nav-content {
+  display: none;
+}
+
 .quick-nav-toc-parent {
   position: relative;
   margin: 5px 0;
+  padding-right: 0;
 }
 
 .quick-nav-toc-item {
@@ -306,6 +402,8 @@ body {
   transition: all 0.2s ease;
   cursor: pointer;
   white-space: nowrap;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .quick-nav-toc-item-with-children:hover {
@@ -328,6 +426,8 @@ body {
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+  z-index: 100;
+  flex-shrink: 0;
 }
 
 .quick-nav-toc-toggle:hover {
@@ -370,7 +470,39 @@ body {
   transform: translateX(5px);
 }
 
-/* 注意事项盒子 */
+.quick-nav-toc-children .quick-nav-toc-child-item {
+  position: relative;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children {
+  padding-left: 20px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children {
+  padding-left: 20px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children {
+  padding-left: 20px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-child-item {
+  font-size: 11px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-child-item {
+  font-size: 10px;
+}
+
+.quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-children .quick-nav-toc-child-item {
+  font-size: 10px;
+}
+
+.notice-box {
+  padding: 0 0 0 10px;
+  background-color: red;
+}
+
 .notice-box-red {
   background-color: #FFCCCC;
   padding: 15px;
@@ -386,12 +518,18 @@ body {
   top: 0;
   bottom: 0;
   width: 8px;
+  background-color: #ff0000;
   background: linear-gradient(180deg, #ff0000 0%, #cc0000 100%);
 }
 
 .notice-header {
   background-color: #98d982;
   margin-bottom: 15px;
+}
+
+.notice-box-alt {
+  padding: 0 0 0 10px;
+  background-color: red;
 }
 
 .function-box-blue {
@@ -409,6 +547,7 @@ body {
   top: 0;
   bottom: 0;
   width: 8px;
+  background-color: #0000ff;
   background: linear-gradient(180deg, #0000ff 0%, #0000cc 100%);
 }
 
@@ -427,10 +566,10 @@ body {
   top: 0;
   bottom: 0;
   width: 8px;
+  background-color: #666666;
   background: linear-gradient(180deg, #808080 0%, #606060 100%);
 }
 
-/* 浮动按钮 */
 .float-button {
   position: fixed;
   right: 30px;
@@ -467,12 +606,13 @@ body {
   bottom: 40px;
 }
 
-/* 标语装饰线 */
 .slogan-container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 20px;
+  flex-wrap: wrap;
 }
 
 .slogan-line {
@@ -489,22 +629,6 @@ body {
   white-space: nowrap;
 }
 
-/* 页面标题 */
-.page-title-main {
-  text-align: center;
-  color: white;
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.section-title-text-main {
-  background-color: #c1e1c1;
-  font-size: 20px;
-  font-weight: bold;
-  text-align: left;
-}
-
-/* 响应式布局 */
 .gjs-row {
   display: flex;
   flex-wrap: wrap;
@@ -518,7 +642,6 @@ body {
   min-width: 0;
 }
 
-/* 移动端适配 */
 @media (max-width: 768px) {
   .gjs-row {
     flex-direction: column;
@@ -531,8 +654,29 @@ body {
     flex: 0 0 100%;
   }
 
+  .content-width-limiter {
+    width: 100%;
+  }
+
   .main-container {
     padding: 10px 8px;
+  }
+
+  .logo-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .logo-size {
+    max-width: 80px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .logo-img {
+    max-width: 40px;
+    margin: 0 auto;
+    display: block;
   }
 
   .page-title-main {
@@ -540,7 +684,7 @@ body {
     padding: 10px;
   }
 
-  .slogan-text {
+  .slogan-container-text {
     font-size: 14px;
   }
 
@@ -553,8 +697,16 @@ body {
     padding: 8px 10px;
   }
 
+  .nav-padding {
+    padding: 5px;
+  }
+
   .nav-title {
     font-size: 16px;
+  }
+
+  .nav-location {
+    font-size: 12px;
   }
 
   .content-row {
@@ -565,8 +717,8 @@ body {
     padding: 10px 5px;
   }
 
-  .section-title {
-    font-size: 18px;
+  .section-title-text {
+    font-size: 16px;
     padding: 12px 10px;
   }
 
@@ -594,13 +746,20 @@ body {
   }
 
   .quick-nav {
+    left: 0;
     width: 35px;
     padding: 10px 3px;
+    border-radius: 0 8px 8px 0;
   }
 
   .quick-nav:hover {
     width: 160px;
     padding: 10px 8px;
+  }
+
+  .quick-nav-page-title {
+    font-size: 11px;
+    padding: 4px 8px;
   }
 
   .footer-row-alt {
@@ -611,8 +770,22 @@ body {
     font-size: 12px;
   }
 
+  .center-align,
+  .left-align {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
   .content-padding {
     padding: 8px;
+  }
+
+  .content-padding-alt {
+    padding: 8px;
+  }
+
+  .notice-header {
+    margin: 0 0 5px 0;
   }
 
   img {
@@ -631,12 +804,36 @@ body {
     gap: 8px;
   }
 
+  .slogan-text {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
   .slogan-line {
     width: 100%;
   }
 
+  .slogan-line {
+    width: 30px;
+    max-width: 30px;
+    margin: 0 auto;
+  }
+
+  .section-title,
+  .section-title-text {
+    font-size: 18px;
+  }
+
   .section-padding {
     padding: 8px;
+  }
+
+  .notice-box-red,
+  .function-box-blue,
+  .quote-box-grey {
+    margin: 8px 5px;
+    padding: 12px 10px;
+    border-radius: 8px;
   }
 }
 
@@ -655,6 +852,10 @@ body {
 
   .nav-title {
     font-size: 14px;
+  }
+
+  .nav-location {
+    font-size: 11px;
   }
 
   .notice-box-red,
@@ -715,7 +916,6 @@ body {
   }
 }
 
-/* 移动端底部导航 */
 .mobile-nav {
   display: none;
   position: fixed;
@@ -759,7 +959,129 @@ body {
   background-color: #7caa2d;
 }
 
-/* 便捷式导航仪页面标题 */
+.slogan-line-left {
+  width: 50px;
+  max-width: 100%;
+  border-color: #6b7a3a;
+  margin-right: 10px;
+}
+
+.slogan-line-right {
+  width: 50px;
+  max-width: 100%;
+  border-color: #6b7a3a;
+  margin-left: 10px;
+}
+
+.logo-img-custom {
+  text-align: left;
+  max-width: 100%;
+  height: auto;
+}
+
+.logo-size-custom {
+  max-width: 100%;
+  height: auto;
+}
+
+.slogan-container-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gold;
+  font-size: 16px;
+  flex-wrap: wrap;
+}
+
+.page-title-main {
+  text-align: center;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.nav-title {
+  font-size: 20px;
+}
+
+.nav-location {
+  color: white;
+}
+
+.text-center-nav {
+  text-align: center;
+}
+
+.content-main-text {
+  text-align: left;
+}
+
+.section-title-text-main {
+  background-color: #c1e1c1;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.content-bg-lightgrey {
+  background-color: lightgrey;
+}
+
+.section-title-text-sub {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  background-color: transparent;
+}
+
+.content-bg-white-text {
+  background-color: lightgrey;
+}
+
+.section-title-text-sub-sub {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  background-color: transparent;
+}
+
+.content-bg-white-sub {
+  background-color: lightgrey;
+}
+
+.page-header-section {
+  background-color: #98d982;
+  margin: 0 0 5px 0;
+}
+
+.page-section-reset {
+  background-image: unset;
+  background-repeat: unset;
+  background-position: unset;
+  background-attachment: unset;
+  background-size: unset;
+}
+
+.content-section-no-margin {
+  margin: 0;
+}
+
+.content-bg-white-section {
+  background-color: lightgrey;
+}
+
+.copyright-text {
+  color: white;
+}
+
+.copyright-center {
+  text-align: center;
+}
+
 .quick-nav-page-title {
   color: white;
   padding: 5px 12px;
@@ -769,7 +1091,46 @@ body {
   cursor: pointer;
 }
 
-/* 新闻卡片基础样式 */
+#content-box-main {
+  background-color: white;
+}
+
+#content-box-white {
+  background-color: white;
+}
+
+#section-1 {
+  background-color: #c1e1c1;
+}
+
+#content-section-white {
+  background-color: white;
+}
+
+#content-box-white-sub {
+  background-color: white;
+}
+
+#content-box-white-sub-sub {
+  background-color: white;
+}
+
+#section-2 {
+  background-color: #c1e1c1;
+}
+
+#content-box-white-section2 {
+  background-color: white;
+}
+
+#content-box-white-section3 {
+  background-color: white;
+}
+
+#content-box-white-section3-sub {
+  background-color: white;
+}
+
 .news-card {
   background-color: #f8f9fa;
   border: 2px solid #c1e1c1;
@@ -778,6 +1139,7 @@ body {
   margin: 15px 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .news-card:hover {
@@ -845,7 +1207,36 @@ body {
   border-radius: 4px;
 }
 
-/* 新闻轮播容器样式 */
+.news-card-text-only {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px 20px;
+  min-height: 150px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.news-card-text-only:hover {
+  background-color: #e8f5e9;
+}
+
+.news-card-text-only .news-card-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.news-card-text-only .news-card-date {
+  margin-bottom: 15px;
+}
+
+.news-card-text-only .news-card-hint {
+  font-style: normal;
+}
+
 .news-carousel-container {
   position: relative;
   width: 100%;
@@ -871,6 +1262,8 @@ body {
   flex: 0 0 100%;
   padding: 0 10px;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 .news-carousel-card.prev-preview,
@@ -914,7 +1307,6 @@ body {
   right: 20px;
 }
 
-/* 移动端新闻轮播适配 */
 @media (max-width: 768px) {
   .news-carousel-container {
     padding: 0 !important;
@@ -996,6 +1388,25 @@ body {
     margin: 0 !important;
   }
 
+  .news-card-text-only {
+    padding: 20px 15px !important;
+    min-height: 120px !important;
+  }
+
+  .news-card-text-only .news-card-title {
+    font-size: 16px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .news-card-text-only .news-card-date {
+    font-size: 12px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .news-card-text-only .news-card-hint {
+    font-size: 11px !important;
+  }
+
   .news-carousel-nav-btn {
     position: absolute !important;
     top: 50% !important;
@@ -1038,55 +1449,46 @@ body {
 </style>
 </head>
 <body>
-<!-- 主容器 - 头部Logo区域 -->
 <div class="gjs-row main-container">
-  <div class="gjs-cell text-center">
-    <div class="logo-container">
-      <img src="https://irikana.github.io/image/logo.png" class="logo-img">
-      <img src="https://irikana.github.io/image/logo_text.png" class="logo-size">
-    </div>
+  <div class="gjs-cell logo-align">
+    <img src="./image/logo.png" class="logo-border logo-container logo-img-custom">
+    <img src="./image/logo_text.png" class="logo-size logo-size-custom">
     <div class="slogan-container">
-      <hr class="slogan-line">
+      <hr class="slogan-line slogan-line-left">
       <span class="slogan-text">存放所有知识之地</span>
-      <hr class="slogan-line">
+      <hr class="slogan-line slogan-line-right">
     </div>
-    <div class="padding-10 page-title-main">牧羊人图书馆主页</div>
+    <div class="section-padding page-title-main">牧羊人图书馆主页</div>
   </div>
 </div>
 
-<!-- 导航栏 - 位置信息 -->
 <div class="gjs-row header-row">
   <div class="gjs-cell nav-center">
-    <div class="nav-padding nav-title">位置</div>
+    <div class="nav-padding title-color nav-title">位置</div>
     <div class="content-padding nav-location">目前所在位置<br><span id="current-path">首页</span></div>
   </div>
 </div>
 
-<!-- 主要内容区域 -->
 <div class="gjs-row content-row content-bg-white">
   <div class="content-width-limiter">
     <div class="gjs-cell content-bg-yellow" style="background-color:white;">
       
-      <!-- 一级标题区域 1 - 新闻 -->
-      <div class="gjs-row notice-header section-header" style="background-color:white;">
+      <div class="gjs-row notice-header page-header-section" style="background-color:white;">
         <div class="gjs-cell">
-          <div id="section-news" class="section-title-text-main">新闻</div>
+          <div id="section-news" class="section-title-text-main" style="background-color:#c1e1c1;">新闻</div>
           <div class="gjs-row content-bg-lightgrey" style="background-color:white;">
             <div class="gjs-cell">
-              <div class="text-center">
-                <!-- 新闻轮播容器 -->
+              <div class="center-align">
                 <div class="news-carousel-container" id="news-carousel">
-                  <!-- 向左切换按钮 -->
                   <button class="news-carousel-nav-btn prev" id="carousel-prev" aria-label="上一篇">‹</button>
                   
                   <div class="news-carousel-wrapper">
                     <div class="news-carousel-track" id="carousel-track">
-                      <!-- 新闻卡片 1 -->
                       <div class="news-carousel-card" data-date="2026-02-04">
                         <div class="news-card">
                           <div class="news-card-content">
-                            <a href="https://irikana.github.io/updateLog/updateLog_alpha-0.0.1.html" target="_blank" class="news-card-image">
-                              <img src="https://irikana.github.io/image/poster/update/update_alpha_0.0.1.png" alt="更新海报">
+                            <a href="./updateLog/updateLog_alpha-0.0.1.html" target="_blank" class="news-card-image">
+                              <img src="./image/poster/update/update_alpha_0.0.1.png" alt="更新海报">
                             </a>
                             <div class="news-card-info">
                               <h3 class="news-card-title">图书馆Alpha 0.0.1更新</h3>
@@ -1097,12 +1499,11 @@ body {
                         </div>
                       </div>
                       
-                      <!-- 新闻卡片 2 -->
                       <div class="news-carousel-card" data-date="2026-02-03">
                         <div class="news-card">
                           <div class="news-card-content">
-                            <a href="https://irikana.github.io/library/paper/SOTM_I_2026后记.html" target="_blank" class="news-card-image">
-                              <img src="https://irikana.github.io/image/poster/SOTM/2026/SOTM-I-2026.png" alt="SOTM I 2026 海报">
+                            <a href="./library/paper/SOTM_I_2026后记.html" target="_blank" class="news-card-image">
+                              <img src="./image/poster/SOTM/2026/SOTM-I-2026.png" alt="SOTM I 2026 海报">
                             </a>
                             <div class="news-card-info">
                               <h3 class="news-card-title">SOTM I 2026后记</h3>
@@ -1112,10 +1513,19 @@ body {
                           </div>
                         </div>
                       </div>
+                      
+                      <div class="news-carousel-card" data-date="2026-02-02">
+                        <div class="news-card">
+                          <a href="#" target="_blank" class="news-card-text-only">
+                            <h3 class="news-card-title">文字版新闻标题示例</h3>
+                            <p class="news-card-date">2026年2月2日</p>
+                            <p class="news-card-hint">点击此处了解更多</p>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   
-                  <!-- 向右切换按钮 -->
                   <button class="news-carousel-nav-btn next" id="carousel-next" aria-label="下一篇">›</button>
                 </div>
               </div>
@@ -1124,16 +1534,14 @@ body {
         </div>
       </div>
       
-      <!-- 一级标题区域 2 - 前情提要 -->
       <div class="gjs-row notice-header section-header" style="background-color:white;">
         <div class="gjs-cell">
-          <div id="section-1" class="section-title-text-main">前情提要</div>
+          <div id="section-1" class="section-title-text-main" style="background-color:#c1e1c1;">前情提要</div>
           <div class="gjs-row content-bg-lightgrey" style="background-color:white;">
             <div class="gjs-cell">
-              <div class="text-center">
-                <!-- 注意事项盒子 -->
+              <div class="center-align">
                 <div class="notice-box-red">
-                  <div class="text-left">创建于2026.1.4<br>图书馆尚在初期建设中，为保证稳定性以及更新方便，很多应当采用更多自定义内容的地方全都换成了兼容性更强的内容，比如可能使用emoji而不是logo，并且尚处Alpha开发阶段，实质性内容极少，主要处理结构性问题。</div>
+                  <div class="left-align">创建于2026.1.4<br>图书馆尚在初期建设中，为保证稳定性以及更新方便，很多应当采用更多自定义内容的地方全都换成了兼容性更强的内容，比如可能使用emoji而不是logo，并且尚处Alpha开发阶段，实质性内容极少，主要处理结构性问题。</div>
                 </div>
               </div>
             </div>
@@ -1141,49 +1549,45 @@ body {
         </div>
       </div>
       
-      <!-- 一级标题区域 3 - 图书馆入门 -->
       <div class="gjs-row notice-header section-header" style="background-color:white;">
         <div class="gjs-cell">
-          <div id="section-2" class="section-title-text-main">图书馆入门</div>
+          <div id="section-2" class="section-title-text-main" style="background-color:#c1e1c1;">图书馆入门</div>
           <div class="gjs-row yellowgreen-bg content-bg-lightgrey" style="background-color:white;">
             <div class="gjs-cell">
-              <div class="text-center">这个页面是牧羊人图书馆的主页面。<br>如果你不知道牧羊人图书馆是什么，并且想了解牧羊人图书馆的一些信息，请点击以下页面。<br>总而言之，牧羊人图书馆（Shepherd's Library）是我存放我的所有知识之地。亦被称为谢沷尔德图书馆（Shpherd's Library），任何一个可以实现该行为的事物都可以称为牧羊人图书馆。<br>相关链接：<a href="library/intro.html">牧羊人图书馆入门</a></div>
+              <div class="center-align">这个页面是牧羊人图书馆的主页面。<br>如果你不知道牧羊人图书馆是什么，并且想了解牧羊人图书馆的一些信息，请点击以下页面。<br>总而言之，牧羊人图书馆（Shepherd's Library）是我存放我的所有知识之地。亦被称为谢沷尔德图书馆（Shpherd's Library），任何一个可以实现该行为的事物都可以称为牧羊人图书馆。<br>相关链接：<a href="library/intro.html">牧羊人图书馆入门</a></div>
             </div>
           </div>
         </div>
       </div>
       
-      <!-- 一级标题区域 4 - 图书馆规则 -->
       <div class="gjs-row notice-header section-header" style="background-color:white;">
         <div class="gjs-cell">
-          <div id="section-3" class="section-title-text-main">图书馆规则</div>
+          <div id="section-3" class="section-title-text-main" style="background-color:#c1e1c1;">图书馆规则</div>
           <div class="gjs-row yellowgreen-bg content-bg-white" style="background-color:white;">
             <div class="gjs-cell">
-              <div class="text-center">作为我的创作，它应当从某种程度上无法摆脱，或者说服从于我的想法，比如图书馆里应该有什么，图书馆里绝对不能有什么，在进入图书馆时应该注意什么,这些被包含在被称为规则的地方。我默认任何一个看到该页面的人，都是要了解我或者了解我的作品的人，为了避免潜在的误会和疑惑，此部分是必要的。<br>相关链接：<a href="library/rule.html">图书馆规则</a></div>
+              <div class="center-align">作为我的创作，它应当从某种程度上无法摆脱，或者说服从于我的想法，比如图书馆里应该有什么，图书馆里绝对不能有什么，在进入图书馆时应该注意什么,这些被包含在被称为规则的地方。我默认任何一个看到该页面的人，都是要了解我或者了解我的作品的人，为了避免潜在的误会和疑惑，此部分是必要的。<br>相关链接：<a href="library/rule.html">图书馆规则</a></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 一级标题区域 5 - 图书馆功能 -->
       <div class="gjs-row notice-header section-header" style="background-color:white;">
         <div class="gjs-cell">
-          <div id="section-4" class="section-title-text-main">图书馆功能</div>
+          <div id="section-4" class="section-title-text-main" style="background-color:#c1e1c1;">图书馆功能</div>
           <div class="gjs-row yellowgreen-bg content-bg-white" style="background-color:white;">
             <div class="gjs-cell">
-              <div class="text-center">这个部分讲述了你现在所在的图书馆具备什么样的能力，我们称之为功能，并简单概括功能的内涵和本质。<br>相关链接：<a href="library/feature.html">图书馆功能</a></div>
+              <div class="center-align">这个部分讲述了你现在所在的图书馆具备什么样的能力，我们称之为功能，并简单概括功能的内涵和本质。<br>相关链接：<a href="library/feature.html">图书馆功能</a></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 一级标题区域 6 - 图书馆入口 -->
       <div class="gjs-row notice-header section-header" style="background-color:white;">
         <div class="gjs-cell">
-          <div id="section-5" class="section-title-text-main">图书馆入口</div>
+          <div id="section-5" class="section-title-text-main" style="background-color:#c1e1c1;">图书馆入口</div>
           <div class="gjs-row yellowgreen-bg content-bg-white" style="background-color:white;">
             <div class="gjs-cell">
-              <div class="text-center">从这里进入牧羊人图书馆，祝你旅途愉快。<br>相关链接：<a href="library/library.html">牧羊人图书馆</a></div>
+              <div class="center-align">从这里进入牧羊人图书馆，祝你旅途愉快。<br>相关链接：<a href="library/library.html">牧羊人图书馆</a></div>
             </div>
           </div>
         </div>
@@ -1193,7 +1597,6 @@ body {
   </div>
 </div>
 
-<!-- 页脚区域 -->
 <div class="gjs-row footer-row footer-row-alt footer-gradient">
   <div class="gjs-cell nav-center">
     <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
@@ -1201,63 +1604,49 @@ body {
   </div>
 </div>
 
-<!-- 移动端底部导航 -->
 <div class="mobile-nav">
   <div class="mobile-nav-title">便携式导航仪</div>
   <div class="mobile-nav-links">
-    <a href="https://irikana.github.io/" class="mobile-nav-link">图书馆主页</a>
-    <a href="https://irikana.github.io/library/intro.html" class="mobile-nav-link">图书馆入门</a>
-    <a href="https://irikana.github.io/library/rule.html" class="mobile-nav-link">图书馆规则</a>
-    <a href="https://irikana.github.io/library/feature.html" class="mobile-nav-link">图书馆功能</a>
-    <a href="https://irikana.github.io/navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+    <a href="./index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="./library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="./library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="./library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="./navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
   </div>
 </div>
 
-<!-- 便捷式导航仪（桌面端） -->
 <div class="quick-nav">
   <div class="quick-nav-title">便携式导航仪</div>
   <div class="quick-nav-hint">光标移到此处展开</div>
-  <!-- 图书馆相关链接 -->
   <div class="quick-nav-content">
-    <a href="https://irikana.github.io/" class="quick-nav-item">图书馆主页</a>
-    <a href="https://irikana.github.io/library/intro.html" class="quick-nav-item">图书馆入门</a>
-    <a href="https://irikana.github.io/library/rule.html" class="quick-nav-item">图书馆规则</a>
-    <a href="https://irikana.github.io/library/feature.html" class="quick-nav-item">图书馆功能</a>
-    <!-- 分割线 -->
+    <a href="./index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="./library/intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="./library/rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="./library/feature.html" class="quick-nav-item">图书馆功能</a>
     <div class="quick-nav-divider"></div>
-    <!-- 当前页面信息 -->
     <div class="quick-nav-section">当前页面</div>
     <div id="quick-nav-page-title" class="quick-nav-page-title">牧羊人图书馆主页</div>
     <div class="quick-nav-section">页面目录</div>
     <div id="quick-nav-toc-container">
-      <!-- 一级标题新闻 -->
       <div class="quick-nav-toc-item" data-target="section-news">• 新闻</div>
-      <!-- 一级标题前情提要 -->
       <div class="quick-nav-toc-item" data-target="section-1">• 前情提要</div>
-      <!-- 一级标题图书馆入门 -->
       <div class="quick-nav-toc-item" data-target="section-2">• 图书馆入门</div>
-      <!-- 一级标题图书馆规则 -->
       <div class="quick-nav-toc-item" data-target="section-3">• 图书馆规则</div>
-      <!-- 一级标题图书馆功能 -->
       <div class="quick-nav-toc-item" data-target="section-4">• 图书馆功能</div>
-      <!-- 一级标题图书馆入口 -->
       <div class="quick-nav-toc-item" data-target="section-5">• 图书馆入口</div>
     </div>
   </div>
 </div>
 
-<!-- 回到顶部按钮 -->
 <button title="回到顶部" class="float-button back-to-top">
   回到<br>顶部
 </button>
 
-<!-- 导航枢纽按钮 -->
 <button title="导航枢纽" class="float-button nav-hub">
   导航<br>枢纽
 </button>
 
 <script>
-// 回到顶部功能
 function scrollToTop() {
   window.scrollTo({
     top: 0,
@@ -1265,12 +1654,10 @@ function scrollToTop() {
   });
 }
 
-// 打开导航枢纽
 function openNavigator() {
-  window.open('https://irikana.github.io/navigator.html', '_blank');
+  window.open('./navigator.html', '_blank');
 }
 
-// 获取当前页面的路径并格式化
 function getCurrentPath() {
   const path = window.location.pathname;
   let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
@@ -1293,7 +1680,6 @@ function getCurrentPath() {
   return formattedPath;
 }
 
-// 滚动到指定章节
 function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId);
   if (section) {
@@ -1301,7 +1687,6 @@ function scrollToSection(sectionId) {
   }
 }
 
-// 切换目录折叠状态
 function toggleTocToggle(toggleElement) {
   const parentElement = toggleElement.closest('.quick-nav-toc-parent');
   const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
@@ -1319,7 +1704,6 @@ function toggleTocToggle(toggleElement) {
   }
 }
 
-// 新闻轮播功能
 (function initNewsCarousel() {
   const track = document.getElementById('carousel-track');
   const prevBtn = document.getElementById('carousel-prev');
@@ -1327,7 +1711,6 @@ function toggleTocToggle(toggleElement) {
   
   if (!track || !prevBtn || !nextBtn) return;
   
-  // 获取所有新闻卡片并按日期排序（最新在前）
   const cards = Array.from(track.querySelectorAll('.news-carousel-card'));
   cards.sort((a, b) => {
     const dateA = new Date(a.dataset.date);
@@ -1335,28 +1718,22 @@ function toggleTocToggle(toggleElement) {
     return dateB - dateA;
   });
   
-  // 重新排序DOM元素
   cards.forEach(card => track.appendChild(card));
   
   let currentIndex = 0;
   const totalCards = cards.length;
   
-  // 更新轮播显示
   function updateCarousel() {
-    // 移除所有预览类
     cards.forEach(card => {
       card.classList.remove('prev-preview', 'next-preview');
     });
     
-    // 计算当前位置
     const offset = -currentIndex * 100;
     track.style.transform = `translateX(${offset}%)`;
     
-    // 更新按钮状态
     prevBtn.classList.toggle('disabled', currentIndex === 0);
     nextBtn.classList.toggle('disabled', currentIndex === totalCards - 1);
     
-    // 添加预览效果
     if (currentIndex > 0) {
       cards[currentIndex - 1].classList.add('prev-preview');
     }
@@ -1365,7 +1742,6 @@ function toggleTocToggle(toggleElement) {
     }
   }
   
-  // 上一张按钮事件
   prevBtn.addEventListener('click', () => {
     if (currentIndex > 0) {
       currentIndex--;
@@ -1373,7 +1749,6 @@ function toggleTocToggle(toggleElement) {
     }
   });
   
-  // 下一张按钮事件
   nextBtn.addEventListener('click', () => {
     if (currentIndex < totalCards - 1) {
       currentIndex++;
@@ -1381,7 +1756,6 @@ function toggleTocToggle(toggleElement) {
     }
   });
   
-  // 键盘导航支持
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       if (currentIndex > 0) {
@@ -1396,26 +1770,21 @@ function toggleTocToggle(toggleElement) {
     }
   });
   
-  // 初始化轮播
   updateCarousel();
 })();
 
-// 页面加载完成后初始化
 window.addEventListener('DOMContentLoaded', function() {
-  // 更新当前路径显示
   const pathElement = document.getElementById('current-path');
   if (pathElement) {
     pathElement.textContent = getCurrentPath();
   }
 
-  // 更新便捷式导航仪中的当前页面标题
   const pageTitle = document.querySelector('.page-title-main');
   const quickNavTitleElement = document.getElementById('quick-nav-page-title');
   if (pageTitle && quickNavTitleElement) {
     quickNavTitleElement.textContent = pageTitle.textContent;
   }
 
-  // 使用事件委托处理目录点击
   const tocContainer = document.getElementById('quick-nav-toc-container');
   if (tocContainer) {
     tocContainer.addEventListener('click', function(event) {
@@ -1452,7 +1821,6 @@ window.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // 为当前页面标题添加点击事件
   const quickNavPageTitle = document.getElementById('quick-nav-page-title');
   if (quickNavPageTitle) {
     quickNavPageTitle.addEventListener('click', function(event) {
@@ -1462,13 +1830,11 @@ window.addEventListener('DOMContentLoaded', function() {
     quickNavPageTitle.style.cursor = 'pointer';
   }
 
-  // 绑定回到顶部按钮事件
   const backToTopBtn = document.querySelector('.back-to-top');
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', scrollToTop);
   }
 
-  // 绑定导航枢纽按钮事件
   const navHubBtn = document.querySelector('.nav-hub');
   if (navHubBtn) {
     navHubBtn.addEventListener('click', openNavigator);

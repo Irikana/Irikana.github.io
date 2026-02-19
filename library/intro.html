@@ -6,8 +6,6 @@
 <title>牧羊人图书馆 - 牧羊人图书馆入门</title>
 <meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
 <meta name="keywords" content="图书馆,知识,学习,牧羊人">
-<link rel="stylesheet" href="../css/plugins.css">
-<link rel="stylesheet" href="../css/style.css">
 <style id="ext-inline-css-import-0">* {
   box-sizing: border-box;
 }
@@ -17,7 +15,6 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Logo相关样式 */
 .logo-img {
   width: 336px;
   max-width: 100%;
@@ -47,7 +44,6 @@ body {
   height: auto;
 }
 
-/* 文本通用样式 */
 .desc-font {
   font-size: 16px;
 }
@@ -78,7 +74,6 @@ body {
   text-align: left;
 }
 
-/* 背景颜色通用样式 */
 .content-bg {
   background-color: lightgrey;
 }
@@ -143,7 +138,6 @@ body {
   background-color: white;
 }
 
-/* 一级标题样式 - 绿色背景 + 粗体 + 左对齐 */
 .section-header {
   background-color: #98d982;
   margin: 0 0 5px 0;
@@ -181,7 +175,6 @@ body {
   color: white;
 }
 
-/* 下级标题样式 - 仅粗体，无背景 */
 .subsection-header {
   font-size: 20px;
   font-weight: bold;
@@ -191,7 +184,6 @@ body {
   padding: 5px 0;
 }
 
-/* 三级标题样式 - 仅粗体，无背景 */
 .sub-subsection-header {
   font-size: 18px;
   font-weight: bold;
@@ -201,14 +193,12 @@ body {
   padding: 5px 0;
 }
 
-/* 下级标题内容区域 */
 .subsection-content {
   background-color: white;
   padding: 15px;
   display: block;
 }
 
-/* 边距和间距 */
 .no-margin {
   margin: 0;
 }
@@ -233,7 +223,6 @@ body {
   padding: 5px;
 }
 
-/* 导航栏相关 */
 .header-row {
   background-color: olivedrab;
 }
@@ -250,7 +239,6 @@ body {
   color: white;
 }
 
-/* 主容器 */
 .main-container {
   background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
 }
@@ -274,14 +262,12 @@ body {
   color: white;
 }
 
-/* 内容区域宽度限制 */
 .content-width-limiter {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* 便捷式导航仪样式 */
 .quick-nav {
   position: fixed;
   left: 0;
@@ -383,7 +369,6 @@ body {
   display: none;
 }
 
-/* 可折叠目录样式 */
 .quick-nav-toc-parent {
   position: relative;
   margin: 5px 0;
@@ -484,12 +469,10 @@ body {
   transform: translateX(5px);
 }
 
-/* 三级及更深层级目录项样式支持 */
 .quick-nav-toc-children .quick-nav-toc-child-item {
   position: relative;
 }
 
-/* 支持任意深度的嵌套缩进 */
 .quick-nav-toc-children .quick-nav-toc-children {
   padding-left: 20px;
 }
@@ -502,7 +485,6 @@ body {
   padding-left: 20px;
 }
 
-/* 多级嵌套时的视觉层级递减 */
 .quick-nav-toc-children .quick-nav-toc-child-item {
   font-size: 11px;
 }
@@ -515,7 +497,6 @@ body {
   font-size: 10px;
 }
 
-/* 注意事项和引用内容样式 */
 .notice-box {
   padding: 0 0 0 10px;
   background-color: red;
@@ -588,7 +569,6 @@ body {
   background: linear-gradient(180deg, #808080 0%, #606060 100%);
 }
 
-/* 浮动按钮样式 */
 .float-button {
   position: fixed;
   right: 30px;
@@ -625,7 +605,6 @@ body {
   bottom: 40px;
 }
 
-/* 标语装饰线样式 */
 .slogan-container {
   position: relative;
   display: flex;
@@ -649,7 +628,6 @@ body {
   white-space: nowrap;
 }
 
-/* 响应式布局系统 */
 .gjs-row {
   display: flex;
   flex-wrap: wrap;
@@ -663,7 +641,6 @@ body {
   min-width: 0;
 }
 
-/* 移动端响应式设计 */
 @media (max-width: 768px) {
   .gjs-row {
     flex-direction: column;
@@ -676,12 +653,10 @@ body {
     flex: 0 0 100%;
   }
 
-  /* 移动端下内容区域宽度恢复为 100% */
   .content-width-limiter {
     width: 100%;
   }
 
-  /* 头部容器适配 */
   .main-container {
     padding: 10px 8px;
   }
@@ -717,7 +692,6 @@ body {
     max-width: 30px;
   }
 
-  /* 导航栏适配 */
   .header-row {
     padding: 8px 10px;
   }
@@ -734,7 +708,6 @@ body {
     font-size: 12px;
   }
 
-  /* 内容区域适配 */
   .content-row {
     padding: 10px 5px;
   }
@@ -748,7 +721,6 @@ body {
     padding: 12px 10px;
   }
 
-  /* 注意事项盒子适配 */
   .notice-box-red,
   .function-box-blue,
   .quote-box-grey {
@@ -757,7 +729,6 @@ body {
     font-size: 14px;
   }
 
-  /* 浮动按钮适配 */
   .float-button {
     right: 15px;
     width: 45px;
@@ -773,7 +744,6 @@ body {
     bottom: 30px;
   }
 
-  /* 便携式导航仪适配 - 保持显示但优化尺寸 */
   .quick-nav {
     left: 0;
     width: 35px;
@@ -791,7 +761,6 @@ body {
     padding: 4px 8px;
   }
 
-  /* 页脚适配 */
   .footer-row-alt {
     padding: 15px 10px;
   }
@@ -800,14 +769,12 @@ body {
     font-size: 12px;
   }
 
-  /* 确保所有文本不溢出 */
   .center-align,
   .left-align {
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
 
-  /* 优化内容区域的间距 */
   .content-padding {
     padding: 8px;
   }
@@ -816,12 +783,10 @@ body {
     padding: 8px;
   }
 
-  /* 优化表格和列表布局 */
   .notice-header {
     margin: 0 0 5px 0;
   }
 
-  /* 确保图片和链接不超出容器 */
   img {
     max-width: 100%;
     height: auto;
@@ -832,7 +797,6 @@ body {
     word-break: break-word;
   }
 
-  /* 优化slogan容器在移动端的显示 */
   .slogan-container {
     padding: 0 10px;
     flex-direction: column;
@@ -848,25 +812,21 @@ body {
     width: 100%;
   }
 
-  /* 确保所有hr元素在移动端正确显示 */
   .slogan-line {
     width: 30px;
     max-width: 30px;
     margin: 0 auto;
   }
 
-  /* 优化section-title文字大小 */
   .section-title,
   .section-title-text {
     font-size: 18px;
   }
 
-  /* 优化padding和margin */
   .section-padding {
     padding: 8px;
   }
 
-  /* 确保notice-box等在移动端不溢出 */
   .notice-box-red,
   .function-box-blue,
   .quote-box-grey {
@@ -876,7 +836,6 @@ body {
   }
 }
 
-/* 超小屏幕适配（小于 375px） */
 @media (max-width: 375px) {
   .gjs-row {
     padding: 8px 5px;
@@ -922,7 +881,6 @@ body {
   }
 }
 
-/* 平板适配（768px - 1024px） */
 @media (min-width: 769px) and (max-width: 1024px) {
   .gjs-row {
     padding: 10px 15px;
@@ -957,7 +915,6 @@ body {
   }
 }
 
-/* 移动端底部导航样式 */
 .mobile-nav {
   display: none;
   position: fixed;
@@ -1005,7 +962,6 @@ body {
   box-sizing: border-box;
 }
 
-/* 标语线条样式 */
 .slogan-line-left {
   width: 50px;
   max-width: 100%;
@@ -1020,7 +976,6 @@ body {
   margin-left: 10px;
 }
 
-/* Logo图片 */
 .logo-img-custom {
   text-align: left;
   max-width: 100%;
@@ -1032,7 +987,6 @@ body {
   height: auto;
 }
 
-/* 标语容器文本 */
 .slogan-container-text {
   display: flex;
   align-items: center;
@@ -1042,7 +996,6 @@ body {
   flex-wrap: wrap;
 }
 
-/* 页面主标题 */
 .page-title-main {
   text-align: center;
   color: white;
@@ -1054,7 +1007,6 @@ body {
   text-align: center;
 }
 
-/* 导航栏文本 */
 .nav-title {
   font-size: 20px;
 }
@@ -1067,12 +1019,10 @@ body {
   text-align: center;
 }
 
-/* 主要内容区域文本 */
 .content-main-text {
   text-align: left;
 }
 
-/* 一级标题文本 - 绿色背景 + 粗体 + 左对齐 */
 .section-title-text-main {
   background-color: #c1e1c1;
   font-size: 20px;
@@ -1084,7 +1034,6 @@ body {
   background-color: lightgrey;
 }
 
-/* 二级标题文本 - 仅粗体，无背景 */
 .section-title-text-sub {
   font-size: 20px;
   font-weight: bold;
@@ -1096,7 +1045,6 @@ body {
   background-color: lightgrey;
 }
 
-/* 三级标题文本 - 仅粗体，无背景 */
 .section-title-text-sub-sub {
   font-size: 20px;
   font-weight: bold;
@@ -1108,7 +1056,6 @@ body {
   background-color: lightgrey;
 }
 
-/* 页面头部区域 */
 .page-header-section {
   background-color: #98d982;
   margin: 0 0 5px 0;
@@ -1130,7 +1077,6 @@ body {
   background-color: lightgrey;
 }
 
-/* 版权信息 */
 .copyright-text {
   color: white;
 }
@@ -1139,7 +1085,6 @@ body {
   text-align: center;
 }
 
-/* 导航仪页面标题 */
 .quick-nav-page-title {
   color: white;
   padding: 5px 12px;
@@ -1199,11 +1144,10 @@ body {
 </style>
 </head>
 <body>
-<!-- 主容器 - 头部Logo区域 -->
 <div class="gjs-row main-container">
   <div class="gjs-cell logo-align">
-    <img src="https://cms-api.htmlpage.cn/uploads/large_14162_1770113738697_kmtrzkb0rpg_946dc2122b.png" class="logo-border logo-container logo-img-custom">
-    <img src="https://cms-api.htmlpage.cn/uploads/large_14162_1770113738660_g4019gaetnh_36009cfd3d.png" class="logo-size logo-size-custom">
+    <img src="../image/logo.png" class="logo-border logo-container logo-img-custom">
+    <img src="../image/logo_text.png" class="logo-size logo-size-custom">
     <div class="slogan-container">
       <hr class="slogan-line slogan-line-left">
       <span class="slogan-text">存放所有知识之地</span>
@@ -1213,7 +1157,6 @@ body {
   </div>
 </div>
 
-<!-- 导航栏 - 位置信息 -->
 <div class="gjs-row header-row">
   <div class="gjs-cell nav-center">
     <div class="nav-padding title-color nav-title">位置</div>
@@ -1221,12 +1164,10 @@ body {
   </div>
 </div>
 
-<!-- 主要内容区域 -->
 <div class="gjs-row content-row content-bg-white">
   <div class="content-width-limiter">
     <div class="gjs-cell content-bg-yellow" style="background-color:white;">
 
-      <!-- 一级标题区域 1 - 绿色背景 -->
       <div class="gjs-row notice-header page-header-section" style="background-color:white;">
         <div class="gjs-cell">
           <div id="section-1" class="section-title-text-main" style="background-color:#c1e1c1;">牧羊人之图书馆</div>
@@ -1240,7 +1181,6 @@ body {
         </div>
       </div>
 
-      <!-- 一级标题区域 2 - 绿色背景 -->
       <div class="gjs-row notice-header section-header-repeat page-section-reset" style="background-color:white;">
         <div class="gjs-cell">
           <div id="section-2" class="section-title-text-sub" style="background-color:#c1e1c1;">图书馆的历史</div>
@@ -1248,7 +1188,6 @@ body {
             <div class="gjs-cell">
               <div class="center-align">
 
-                <!-- 下级标题2.1 - 仅粗体，无背景 -->
                 <div id="section-2-1" class="subsection-header">概念创作</div>
                 <div class="gjs-row content-bg-white-text" style="background-color:white;">
                   <div class="gjs-cell">
@@ -1260,7 +1199,6 @@ body {
                   </div>
                 </div>
 
-                <!-- 下级标题2.2 - 仅粗体，无背景 -->
                 <div id="section-2-2" class="subsection-header">灵感来源</div>
                 <div class="gjs-row yellowgreen-bg content-bg-white-text" style="background-color:white;">
                   <div class="gjs-cell">
@@ -1269,7 +1207,6 @@ body {
                       <p></p>
                       <p>在2017到2021年间，我非常容易被SCP基金会有关的内容所吸引，如果你不知道什么是SCP基金会，可以快速查看浏览各种浏览器的搜索引擎搜索出来的百科内容或者我的总结：</p>
 
-                      <!-- 三级标题2.2.1 - 仅粗体，无背景 -->
                       <div id="section-2-2-1" class="sub-subsection-header">SCP基金会（夸克百科）</div>
                       <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
                         <div class="gjs-cell">
@@ -1279,7 +1216,6 @@ body {
                         </div>
                       </div>
 
-                      <!-- 三级标题2.2.2 - 仅粗体，无背景 -->
                       <div id="section-2-2-2" class="sub-subsection-header">SCP基金会的世界观（百度百科）</div>
                       <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
                         <div class="gjs-cell">
@@ -1291,7 +1227,6 @@ body {
                         </div>
                       </div>
 
-                      <!-- 三级标题2.2.3 - 仅粗体，无背景 -->
                       <div id="section-2-2-3" class="sub-subsection-header">SCP基金会（我的总结）</div>
                       <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
                         <div class="gjs-cell">
@@ -1303,7 +1238,6 @@ body {
                         </div>
                       </div>
 
-                      <!-- 三级标题2.2.4 - 仅粗体，无背景 -->
                       <div id="section-2-2-4" class="sub-subsection-header">被放逐者之图书馆（夸克百科）</div>
                       <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
                         <div class="gjs-cell">
@@ -1313,7 +1247,6 @@ body {
                         </div>
                       </div>
 
-                      <!-- 三级标题2.2.5 - 仅粗体，无背景 -->
                       <div id="section-2-2-5" class="sub-subsection-header">被放逐者之图书馆（百度百科）</div>
                       <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
                         <div class="gjs-cell">
@@ -1324,7 +1257,6 @@ body {
                         </div>
                       </div>
 
-                      <!-- 三级标题2.2.6 - 仅粗体，无背景 -->
                       <div id="section-2-2-6" class="sub-subsection-header">生化奇兵：无限</div>
                       <div class="gjs-row yellowgreen-bg content-bg-white-sub" style="background-color:white;">
                         <div class="gjs-cell">
@@ -1351,7 +1283,6 @@ body {
   </div>
 </div>
 
-<!-- 页脚区域 -->
 <div class="gjs-row footer-row footer-row-alt footer-gradient">
   <div class="gjs-cell nav-center">
     <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
@@ -1359,7 +1290,6 @@ body {
   </div>
 </div>
 
-<!-- 移动端底部导航 -->
 <div class="mobile-nav">
   <div class="mobile-nav-title">便携式导航仪</div>
   <div class="mobile-nav-links">
@@ -1371,52 +1301,54 @@ body {
   </div>
 </div>
 
-<!-- 便捷式导航仪（桌面端） -->
 <div class="quick-nav">
   <div class="quick-nav-title">便携式导航仪</div>
   <div class="quick-nav-hint">光标移到此处展开</div>
-  <!-- 图书馆相关链接 -->
   <div class="quick-nav-content">
     <a href="../index.html" class="quick-nav-item">图书馆主页</a>
     <a href="intro.html" class="quick-nav-item">图书馆入门</a>
     <a href="rule.html" class="quick-nav-item">图书馆规则</a>
     <a href="feature.html" class="quick-nav-item">图书馆功能</a>
-    <!-- 分割线 -->
     <div class="quick-nav-divider"></div>
-    <!-- 当前页面信息 -->
     <div class="quick-nav-section">当前页面</div>
     <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
     <div class="quick-nav-section">页面目录</div>
     <div id="quick-nav-toc-container">
-      <!-- 一级标题1 -->
       <div class="quick-nav-toc-item" data-target="section-1">• 牧羊人之图书馆</div>
-      <!-- 一级标题2 -->
-      <div class="quick-nav-toc-item-with-children">• 图书馆的历史</div>
-      <div class="quick-nav-toc-toggle collapsed" data-parent="section-2"></div>
-      <div class="quick-nav-toc-children">
-        <!-- 二级标题2.1 -->
-        <div class="quick-nav-toc-child-item" data-target="section-2-1">└ 概念创作</div>
-        <!-- 二级标题2.2 -->
-        <div class="quick-nav-toc-child-item" data-target="section-2-2">└ 灵感来源</div>
+      <div class="quick-nav-toc-parent">
+        <div class="quick-nav-toc-item-with-children">• 图书馆的历史</div>
+        <div class="quick-nav-toc-toggle collapsed" data-parent="section-2"></div>
+        <div class="quick-nav-toc-children">
+          <div class="quick-nav-toc-child-item" data-target="section-2-1">└ 概念创作</div>
+          <div class="quick-nav-toc-parent">
+            <div class="quick-nav-toc-child-item quick-nav-toc-item-with-children" data-target="section-2-2">
+              └ 灵感来源
+            </div>
+            <div class="quick-nav-toc-toggle collapsed" data-parent="section-2-2"></div>
+            <div class="quick-nav-toc-children">
+              <div class="quick-nav-toc-child-item" data-target="section-2-2-1">    └ SCP基金会（夸克百科）</div>
+              <div class="quick-nav-toc-child-item" data-target="section-2-2-2">    └ SCP基金会的世界观</div>
+              <div class="quick-nav-toc-child-item" data-target="section-2-2-3">    └ SCP基金会（我的总结）</div>
+              <div class="quick-nav-toc-child-item" data-target="section-2-2-4">    └ 被放逐者之图书馆（夸克）</div>
+              <div class="quick-nav-toc-child-item" data-target="section-2-2-5">    └ 被放逐者之图书馆（百度）</div>
+              <div class="quick-nav-toc-child-item" data-target="section-2-2-6">    └ 生化奇兵：无限</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 回到顶部按钮 -->
 <button title="回到顶部" class="float-button back-to-top">
   回到<br>顶部
 </button>
 
-<!-- 导航枢纽按钮 -->
 <button title="导航枢纽" class="float-button nav-hub">
   导航<br>枢纽
 </button>
 
-<script src="../js/plugins.js"></script>
-<script src="../js/theme.js"></script>
 <script id="ext-inline-js-import-body-end-0">
-// 回到顶部功能
 function scrollToTop() {
   window.scrollTo({
     top: 0,
@@ -1424,12 +1356,10 @@ function scrollToTop() {
   });
 }
 
-// 打开导航枢纽
 function openNavigator() {
   window.open('../navigator.html', '_blank');
 }
 
-// 获取当前页面的路径并格式化（易读方式）
 function getCurrentPath() {
   const path = window.location.pathname;
   let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
@@ -1452,7 +1382,6 @@ function getCurrentPath() {
   return formattedPath;
 }
 
-// 滚动到指定章节
 function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId);
   if (section) {
@@ -1460,7 +1389,6 @@ function scrollToSection(sectionId) {
   }
 }
 
-// 切换目录折叠状态
 function toggleTocToggle(toggleElement) {
   const parentElement = toggleElement.closest('.quick-nav-toc-parent');
   const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
@@ -1478,22 +1406,18 @@ function toggleTocToggle(toggleElement) {
   }
 }
 
-// 页面加载完成后初始化
 window.addEventListener('DOMContentLoaded', function() {
-  // 更新当前路径显示
   const pathElement = document.getElementById('current-path');
   if (pathElement) {
     pathElement.textContent = getCurrentPath();
   }
 
-  // 更新便捷式导航仪中的当前页面标题
   const pageTitle = document.querySelector('.page-title-main');
   const quickNavTitleElement = document.getElementById('quick-nav-page-title');
   if (pageTitle && quickNavTitleElement) {
     quickNavTitleElement.textContent = pageTitle.textContent;
   }
 
-  // 使用事件委托处理目录点击
   const tocContainer = document.getElementById('quick-nav-toc-container');
   if (tocContainer) {
     tocContainer.addEventListener('click', function(event) {
@@ -1530,7 +1454,6 @@ window.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // 为当前页面标题添加点击事件（回到页面顶部）
   const quickNavPageTitle = document.getElementById('quick-nav-page-title');
   if (quickNavPageTitle) {
     quickNavPageTitle.addEventListener('click', function(event) {
@@ -1540,13 +1463,11 @@ window.addEventListener('DOMContentLoaded', function() {
     quickNavPageTitle.style.cursor = 'pointer';
   }
 
-  // 绑定回到顶部按钮事件
   const backToTopBtn = document.querySelector('.back-to-top');
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', scrollToTop);
   }
 
-  // 绑定导航枢纽按钮事件
   const navHubBtn = document.querySelector('.nav-hub');
   if (navHubBtn) {
     navHubBtn.addEventListener('click', openNavigator);
