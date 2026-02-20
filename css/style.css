@@ -695,7 +695,7 @@ body {
 }
 
 .section-title-text-main {
-  background-color: white;
+  background-color: white !important;
   font-size: 20px;
   font-weight: bold;
   text-align: left;
@@ -709,7 +709,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   text-align: left;
-  background-color: white;
+  background-color: white !important;
 }
 
 .content-bg-white-text {
@@ -720,7 +720,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   text-align: left;
-  background-color: white;
+  background-color: white !important;
 }
 
 .content-bg-white-sub {
@@ -1047,6 +1047,18 @@ body {
   .logo-container {
     width: 100%;
     text-align: center;
+  }
+
+  .logo-img-custom {
+    max-width: 30px !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .logo-size-custom {
+    max-width: 80px !important;
+    width: auto !important;
+    height: auto !important;
   }
 
   .logo-size {
