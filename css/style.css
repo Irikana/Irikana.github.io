@@ -204,15 +204,15 @@ body {
 }
 
 .content-padding {
-  padding: 10px;
+  padding: 5px;
 }
 
 .content-padding-alt {
-  padding: 10px;
+  padding: 5px;
 }
 
 .nav-padding {
-  padding: 5px;
+  padding: 2px;
 }
 
 .header-row {
@@ -709,7 +709,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   text-align: left;
-  background-color: transparent;
+  background-color: #c1e1c1;
 }
 
 .content-bg-white-text {
@@ -720,7 +720,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   text-align: left;
-  background-color: transparent;
+  background-color: #c1e1c1;
 }
 
 .content-bg-white-sub {
@@ -1041,7 +1041,7 @@ body {
   }
 
   .main-container {
-    padding: 10px 8px;
+    padding: 5px 4px;
   }
 
   .logo-container {
@@ -1050,20 +1050,20 @@ body {
   }
 
   .logo-size {
-    max-width: 50px;
+    max-width: 80px;
     margin: 0 auto;
     display: block;
   }
 
   .logo-img {
-    max-width: 25px;
+    max-width: 20px;
     margin: 0 auto;
     display: block;
   }
 
   .page-title-main {
     font-size: 18px;
-    padding: 10px;
+    padding: 5px;
   }
 
   .slogan-container-text {
@@ -1076,11 +1076,11 @@ body {
   }
 
   .header-row {
-    padding: 8px 10px;
+    padding: 4px 5px;
   }
 
   .nav-padding {
-    padding: 5px;
+    padding: 2px;
   }
 
   .nav-title {
@@ -1135,8 +1135,23 @@ body {
   }
 
   .quick-nav:hover {
-    width: 160px;
-    padding: 10px 8px;
+    width: 35px;
+    padding: 10px 3px;
+  }
+
+  .quick-nav:hover .quick-nav-content {
+    display: none;
+  }
+
+  .quick-nav:hover .quick-nav-title {
+    writing-mode: vertical-rl;
+    margin-bottom: 5px;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quick-nav:hover .quick-nav-hint {
+    display: block;
   }
 
   .quick-nav-page-title {
@@ -1144,6 +1159,13 @@ body {
     padding: 4px 8px;
     pointer-events: none;
     cursor: default;
+  }
+
+  .quick-nav-item,
+  .quick-nav-toc-item,
+  .quick-nav-toc-item-with-children,
+  .quick-nav-toc-child-item {
+    pointer-events: none;
   }
 
   .footer-row-alt {
