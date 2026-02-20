@@ -131,7 +131,7 @@ body {
 }
 
 .section-header {
-  background-color: #98d982;
+  background-color: white;
   margin: 0 0 5px 0;
 }
 
@@ -154,11 +154,11 @@ body {
 }
 
 .section-header-alt {
-  background-color: #c1e1c1;
+  background-color: white;
 }
 
 .section-header-repeat {
-  background-color: #98d982;
+  background-color: white;
   margin: 0 0 5px 0;
 }
 
@@ -695,7 +695,7 @@ body {
 }
 
 .section-title-text-main {
-  background-color: #c1e1c1;
+  background-color: white;
   font-size: 20px;
   font-weight: bold;
   text-align: left;
@@ -709,7 +709,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   text-align: left;
-  background-color: #c1e1c1;
+  background-color: white;
 }
 
 .content-bg-white-text {
@@ -720,7 +720,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   text-align: left;
-  background-color: #c1e1c1;
+  background-color: white;
 }
 
 .content-bg-white-sub {
@@ -728,7 +728,7 @@ body {
 }
 
 .page-header-section {
-  background-color: #98d982;
+  background-color: white;
   margin: 0 0 5px 0;
 }
 
@@ -1056,7 +1056,7 @@ body {
   }
 
   .logo-img {
-    max-width: 15px;
+    max-width: 20px;
     margin: 0 auto;
     display: block;
   }
@@ -1133,25 +1133,46 @@ body {
     padding: 10px 3px;
     border-radius: 0 8px 8px 0;
     pointer-events: auto;
+    cursor: pointer;
   }
 
   .quick-nav:hover {
+    width: 35px;
+    padding: 10px 3px;
+  }
+
+  .quick-nav:hover .quick-nav-content {
+    display: none;
+  }
+
+  .quick-nav:hover .quick-nav-title {
+    writing-mode: vertical-rl;
+    margin-bottom: 5px;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .quick-nav:hover .quick-nav-hint {
+    display: block;
+  }
+
+  .quick-nav.expanded {
     width: 160px;
     padding: 10px 8px;
   }
 
-  .quick-nav:hover .quick-nav-content {
-    display: block;
+  .quick-nav.expanded .quick-nav-content {
+    display: block !important;
   }
 
-  .quick-nav:hover .quick-nav-title {
+  .quick-nav.expanded .quick-nav-title {
     writing-mode: horizontal-tb;
     margin-bottom: 10px;
     padding-bottom: 8px;
     border-bottom: 2px solid #6b8e23;
   }
 
-  .quick-nav:hover .quick-nav-hint {
+  .quick-nav.expanded .quick-nav-hint {
     display: none;
   }
 

@@ -186,7 +186,46 @@ function toggleTocToggle(toggleElement) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+  
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '35px';
+        quickNav.style.padding = '10px 3px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '5px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded');
+        quickNav.style.width = '160px';
+        quickNav.style.padding = '10px 8px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'block';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'horizontal-tb';
+          title.style.marginBottom = '10px';
+          title.style.paddingBottom = '8px';
+          title.style.borderBottom = '2px solid #6b8e23';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
   const currentPathElement = document.getElementById('current-path');
   if (currentPathElement) {
     currentPathElement.textContent = getCurrentPath();
@@ -195,7 +234,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const quickNavPageTitleElement = document.getElementById('quick-nav-page-title');
   if (quickNavPageTitleElement) {
     quickNavPageTitleElement.textContent = document.title.replace('牧羊人图书馆 - ', '');
-    quickNavPageTitleElement.addEventListener('click', scrollToTop);
+    quickNavPageTitleElement.addEventListener('click', function(event) {
+      event.stopPropagation();
+      scrollToTop();
+    });
     quickNavPageTitleElement.style.cursor = 'pointer';
   }
 
@@ -205,6 +247,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const target = e.target;
       
       if (target.classList.contains('quick-nav-toc-toggle')) {
+        e.stopPropagation();
+        e.preventDefault();
         toggleTocToggle(target);
         return;
       }
@@ -212,17 +256,22 @@ document.addEventListener('DOMContentLoaded', function() {
       if (target.classList.contains('quick-nav-toc-item') || 
           target.classList.contains('quick-nav-toc-item-with-children') ||
           target.classList.contains('quick-nav-toc-child-item')) {
+        e.stopPropagation();
+        e.preventDefault();
         
-        const sectionId = target.getAttribute('data-target');
-        if (sectionId) {
-          scrollToSection(sectionId);
-        }
+        let sectionId;
         
         if (target.classList.contains('quick-nav-toc-item-with-children')) {
-          const toggleElement = target.parentElement.querySelector('.quick-nav-toc-toggle');
+          const toggleElement = target.nextElementSibling;
           if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
-            toggleTocToggle(toggleElement);
+            sectionId = toggleElement.getAttribute('data-parent');
           }
+        } else {
+          sectionId = target.getAttribute('data-target');
+        }
+        
+        if (sectionId) {
+          scrollToSection(sectionId);
         }
       }
     });
