@@ -1050,13 +1050,13 @@ body {
   }
 
   .logo-size {
-    max-width: 80px;
+    max-width: 100px;
     margin: 0 auto;
     display: block;
   }
 
   .logo-img {
-    max-width: 20px;
+    max-width: 15px;
     margin: 0 auto;
     display: block;
   }
@@ -1132,6 +1132,7 @@ body {
     width: 35px;
     padding: 10px 3px;
     border-radius: 0 8px 8px 0;
+    pointer-events: none;
   }
 
   .quick-nav:hover {
