@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - Minesia第一个公开测试</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<div class="gjs-row main-container">
+  <div class="gjs-cell logo-align">
+    <img src="../../image/logo.png" class="logo-border logo-container logo-img-custom">
+    <img src="../../image/logo_text.png" class="logo-size logo-size-custom">
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">Minesia第一个公开测试</div>
+  </div>
+</div>
+
+<div class="gjs-row header-row">
+  <div class="gjs-cell nav-center">
+    <div class="nav-padding title-color nav-title">位置</div>
+    <div class="content-padding nav-location">目前所在位置<br><span id="current-path">加载中...</span></div>
+  </div>
+</div>
+
+<div class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-bg-yellow" style="background-color:white;">
+      <div class="quote-box-grey">
+        <div class="left-align">2026.2.18</div>
+      </div>
+      
+      <div class="left-align">
+        <p>在2月初，我声明了图书馆进入了Alpha 0.0.1，彼时，我开始着手开发《Minesia Journey》，但由于建筑水平低下，以及各种原因叠加，导致进展缓慢，原计划在除夕发布一个公开的demo测试，然而，由于进展实在过于缓慢，而且在尝试使用AI IDE（Trae CN）之后，极大程度上推动了附加包本身的发展而不是地图，再考虑到地图的内容丰富程度有赖于附加包，并且该附加包是我从2021年年底开始有开发Minecraft的想法后，做过的最优质的内容，所以，我打算单独发布《Minesia Journey》所依赖的附加包，作为单独的Addon发布。而2月18日，正是我发布第一个公开的测试版本，Minesia 0.0.1-alpha-1的日子。</p>
+      </div>
+      
+      <div class="function-box-blue">
+        <div class="left-align">
+          <strong>相关内容请参阅</strong><br>
+          <a href="https://www.curseforge.com/minecraft-bedrock/addons/minesia" target="_blank">https://www.curseforge.com/minecraft-bedrock/addons/minesia</a>
+        </div>
+      </div>
+      
+      <div class="left-align">
+        <p><strong>如果你不知道什么是Minesia：</strong></p>
+        <p>创世（Minesia）是一个基岩版addon，主要的更新方向是冒险。该附加包中向游戏添加了一些新的游戏玩法系统，使得玩家能够以一种新的方式体验游戏。该附加包是一个vibe coding项目。</p>
+        <p>以下是一些游戏玩法系统的展示：</p>
+      </div>
+      
+      <div id="section-1-1" class="subsection-header">创世等级（Minesia Level）</div>
+      <div class="left-align">
+        <p>创世等级是独立于原版的一个等级系统，玩家可通过获取游戏原版的经验，自定义事件，计分板等方式获得创世经验，进而增加创世等级。</p>
+        <p>创世等级能够影响玩家和世界，玩家可在升级时获得奖励，处于不同等级时的世界也会稍有变化，进而激励玩家探索世界。在屏幕上方用actionbar来显示等级进度，玩家可实时查看自己的等级。</p>
+      </div>
+      
+      <div id="section-1-2" class="subsection-header">套装效果（Set Effect）</div>
+      <div class="left-align">
+        <p>套装效果是一个效果系统，能够检测玩家在指定槽位的物品，并判断是否满足规则，分为单物品规则和多物品规则，使玩家在装备特定物品的条件下向玩家添加药水效果，或自定义效果和执行自定义事件（与自定义事件系统配合）。</p>
+      </div>
+      
+      <div id="section-1-3" class="subsection-header">附加伤害（Bonus Damage）</div>
+      <div class="left-align">
+        <p>附加伤害是一个由于基岩版没有像Java版那样的攻击速度系统，为了区分武器，增加武器差异化而创造的系统。在造成伤害时，通过计算来将给定范围内的随机伤害应用到目标上达到附加伤害的目的。同时也达到了武器平衡，避免直接的数值堆叠。</p>
+      </div>
+      
+      <div id="section-1-4" class="subsection-header">体力值（Stamina）</div>
+      <div class="left-align">
+        <p>体力值系统为玩家添加了一个体力值状态，奔跑、跳跃、攻击、游泳等行为都会消耗体力值。当体力值耗尽时，玩家会获得缓慢和挖掘疲劳效果。体力值可以通过静止不动，走路或在疲劳状态下缓慢恢复。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</div>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../../index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="../intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="../rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="../feature.html" class="quick-nav-item">图书馆功能</a>
+    <div class="quick-nav-divider"></div>
+    <div class="quick-nav-section">当前页面</div>
+    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
+    <div class="quick-nav-section">页面目录</div>
+    <div id="quick-nav-toc-container">
+      <div class="quick-nav-toc-parent">
+        <div class="quick-nav-toc-item-with-children">• Minesia第一个公开测试</div>
+        <div class="quick-nav-toc-toggle collapsed" data-parent="section-1"></div>
+        <div class="quick-nav-toc-children">
+          <div class="quick-nav-toc-child-item" data-target="section-1-1">└ 创世等级</div>
+          <div class="quick-nav-toc-child-item" data-target="section-1-2">└ 套装效果</div>
+          <div class="quick-nav-toc-child-item" data-target="section-1-3">└ 附加伤害</div>
+          <div class="quick-nav-toc-child-item" data-target="section-1-4">└ 体力值</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top" onclick="scrollToTop()">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub" onclick="openNavigator()">
+  导航<br>枢纽
+</button>
+
+<script>
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function openNavigator() {
+  window.open('../../navigator.html', '_blank');
+}
+
+function getCurrentPath() {
+  const path = window.location.pathname;
+  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
+
+  if (formattedPath === '' || formattedPath === 'index') {
+    return '首页';
+  }
+
+  formattedPath = formattedPath
+    .split('/')
+    .map(segment => {
+      const fileNameIndex = segment.lastIndexOf('.');
+      if (fileNameIndex > 0) {
+        segment = segment.substring(0, fileNameIndex);
+      }
+      return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
+    })
+    .join(' → ');
+
+  return formattedPath;
+}
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function toggleTocToggle(toggleElement) {
+  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
+  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
+  if (childrenElement) {
+    if (childrenElement.classList.contains('show')) {
+      childrenElement.classList.remove('show');
+      toggleElement.classList.remove('expanded');
+      toggleElement.classList.add('collapsed');
+    } else {
+      childrenElement.classList.add('show');
+      toggleElement.classList.remove('collapsed');
+      toggleElement.classList.add('expanded');
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const currentPathElement = document.getElementById('current-path');
+  if (currentPathElement) {
+    currentPathElement.textContent = getCurrentPath();
+  }
+
+  const quickNavPageTitleElement = document.getElementById('quick-nav-page-title');
+  if (quickNavPageTitleElement) {
+    quickNavPageTitleElement.textContent = document.title.replace('牧羊人图书馆 - ', '');
+    quickNavPageTitleElement.addEventListener('click', scrollToTop);
+    quickNavPageTitleElement.style.cursor = 'pointer';
+  }
+
+  const tocContainer = document.getElementById('quick-nav-toc-container');
+  if (tocContainer) {
+    tocContainer.addEventListener('click', function(e) {
+      const target = e.target;
+      
+      if (target.classList.contains('quick-nav-toc-toggle')) {
+        toggleTocToggle(target);
+        return;
+      }
+      
+      if (target.classList.contains('quick-nav-toc-item') || 
+          target.classList.contains('quick-nav-toc-item-with-children') ||
+          target.classList.contains('quick-nav-toc-child-item')) {
+        
+        const sectionId = target.getAttribute('data-target');
+        if (sectionId) {
+          scrollToSection(sectionId);
+        }
+        
+        if (target.classList.contains('quick-nav-toc-item-with-children')) {
+          const toggleElement = target.parentElement.querySelector('.quick-nav-toc-toggle');
+          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
+            toggleTocToggle(toggleElement);
+          }
+        }
+      }
+    });
+  }
+
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', scrollToTop);
+  }
+
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) {
+    navHubBtn.addEventListener('click', openNavigator);
+  }
+});
+</script>
+</body>
+</html>
