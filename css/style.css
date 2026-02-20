@@ -8,15 +8,15 @@ body {
 }
 
 .logo-img {
-  width: 336px;
+  width: 168px;
   max-width: 100%;
   height: auto;
 }
 
 .logo-container {
   text-align: left;
-  width: 186px;
-  height: 186px;
+  width: 93px;
+  height: 93px;
   max-width: 100%;
   height: auto;
 }
@@ -30,8 +30,8 @@ body {
 }
 
 .logo-size {
-  width: 303px;
-  height: 170px;
+  width: 151px;
+  height: 85px;
   max-width: 100%;
   height: auto;
 }
@@ -200,7 +200,7 @@ body {
 }
 
 .section-padding {
-  padding: 10px;
+  padding: 5px;
 }
 
 .content-padding {
@@ -602,7 +602,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
+  padding: 0 10px;
   flex-wrap: wrap;
 }
 
@@ -610,13 +610,13 @@ body {
   flex: 1;
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, #556b2f 50%, transparent 100%);
-  min-width: 20px;
+  min-width: 10px;
 }
 
 .slogan-text {
   color: #ffd700;
-  font-size: 16px;
-  padding: 0 15px;
+  font-size: 12px;
+  padding: 0 8px;
   white-space: nowrap;
 }
 
@@ -634,17 +634,17 @@ body {
 }
 
 .slogan-line-left {
-  width: 50px;
+  width: 25px;
   max-width: 100%;
   border-color: #6b7a3a;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .slogan-line-right {
-  width: 50px;
+  width: 25px;
   max-width: 100%;
   border-color: #6b7a3a;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .logo-img-custom {
@@ -663,14 +663,14 @@ body {
   align-items: center;
   justify-content: center;
   color: gold;
-  font-size: 16px;
+  font-size: 12px;
   flex-wrap: wrap;
 }
 
 .page-title-main {
   text-align: center;
   color: white;
-  font-size: 25px;
+  font-size: 16px;
   font-weight: bold;
 }
 
@@ -1132,27 +1132,27 @@ body {
     width: 35px;
     padding: 10px 3px;
     border-radius: 0 8px 8px 0;
-    pointer-events: none;
+    pointer-events: auto;
   }
 
   .quick-nav:hover {
-    width: 35px;
-    padding: 10px 3px;
+    width: 160px;
+    padding: 10px 8px;
   }
 
   .quick-nav:hover .quick-nav-content {
-    display: none;
+    display: block;
   }
 
   .quick-nav:hover .quick-nav-title {
-    writing-mode: vertical-rl;
-    margin-bottom: 5px;
-    padding-bottom: 0;
-    border-bottom: none;
+    writing-mode: horizontal-tb;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #6b8e23;
   }
 
   .quick-nav:hover .quick-nav-hint {
-    display: block;
+    display: none;
   }
 
   .quick-nav-page-title {
@@ -1166,7 +1166,7 @@ body {
   .quick-nav-toc-item,
   .quick-nav-toc-item-with-children,
   .quick-nav-toc-child-item {
-    pointer-events: none;
+    pointer-events: auto;
   }
 
   .footer-row-alt {
