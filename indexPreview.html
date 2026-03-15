@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Shepherd's Library - 实验性预览页面</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Times New Roman', Georgia, serif;
+  background-color: #f5f0e6;
+  color: #3d3d3d;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: linear-gradient(180deg, #8b7355 0%, #a08060 100%);
+  padding: 30px 20px;
+  text-align: center;
+  border-bottom: 3px solid #5c4d3c;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.header-title {
+  font-family: 'Brush Script MT', 'Lucida Calligraphy', cursive;
+  font-size: 48px;
+  color: #f5f0e6;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  letter-spacing: 3px;
+  font-weight: normal;
+}
+
+.main-container {
+  display: flex;
+  flex: 1;
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.sidebar {
+  width: 25%;
+  background: linear-gradient(180deg, #e8dcc8 0%, #d4c5b0 100%);
+  border-right: 2px solid #8b7355;
+  padding: 25px 20px;
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+  box-shadow: inset -3px 0 8px rgba(0,0,0,0.1);
+}
+
+.sidebar-title {
+  font-family: 'Times New Roman', serif;
+  font-size: 22px;
+  color: #5c4d3c;
+  border-bottom: 2px solid #8b7355;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.nav-links {
+  list-style: none;
+}
+
+.nav-links li {
+  margin-bottom: 12px;
+}
+
+.nav-links a {
+  display: block;
+  font-family: 'Times New Roman', serif;
+  font-size: 16px;
+  color: #3d3d3d;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: rgba(139, 115, 85, 0.2);
+  border-left-color: #8b7355;
+  padding-left: 18px;
+}
+
+.nav-section {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px dashed #8b7355;
+}
+
+.nav-section-title {
+  font-size: 14px;
+  color: #5c4d3c;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.current-page-title {
+  font-weight: bold;
+  color: #8b7355;
+}
+
+.toc-list {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.toc-list li {
+  margin-bottom: 8px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.toc-list li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #8b7355;
+}
+
+.toc-list a {
+  font-size: 14px;
+  color: #3d3d3d;
+  text-decoration: none;
+}
+
+.toc-list a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  width: 50%;
+  padding: 40px 30px;
+  margin: 0 auto;
+}
+
+.content-card {
+  background: #fffef9;
+  border: 2px solid #d4c5b0;
+  border-radius: 8px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.content-card:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px dashed #d4c5b0;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.content-section {
+  margin-bottom: 35px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-title-1 {
+  font-family: 'Times New Roman', serif;
+  font-size: 32px;
+  color: #5c4d3c;
+  border-bottom: 2px solid #8b7355;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.section-title-2 {
+  font-family: 'Times New Roman', serif;
+  font-size: 24px;
+  color: #8b7355;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.section-title-3 {
+  font-family: 'Times New Roman', serif;
+  font-size: 18px;
+  color: #a08060;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.content-text {
+  font-size: 16px;
+  line-height: 1.8;
+  text-align: justify;
+  margin-bottom: 15px;
+}
+
+.content-text a {
+  color: #8b7355;
+  text-decoration: none;
+  border-bottom: 1px dotted #8b7355;
+}
+
+.content-text a:hover {
+  color: #5c4d3c;
+  border-bottom-style: solid;
+}
+
+.footer {
+  background: linear-gradient(180deg, #a08060 0%, #8b7355 100%);
+  padding: 25px 20px;
+  text-align: center;
+  border-top: 3px solid #5c4d3c;
+  margin-top: auto;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.3);
+}
+
+.footer-text {
+  font-family: 'Times New Roman', serif;
+  font-size: 14px;
+  color: #f5f0e6;
+  line-height: 1.8;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.footer-divider {
+  border: none;
+  border-top: 1px solid rgba(245, 240, 230, 0.3);
+  margin: 15px auto;
+  width: 60%;
+}
+
+.float-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(180deg, #8b7355 0%, #a08060 100%);
+  color: #f5f0e6;
+  border: 2px solid #5c4d3c;
+  padding: 12px 18px;
+  font-family: 'Times New Roman', serif;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.float-button:hover {
+  background: linear-gradient(180deg, #a08060 0%, #8b7355 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1 class="header-title">The Shepherd's Library</h1>
+</header>
+
+<div class="main-container">
+  <aside class="sidebar">
+    <div class="sidebar-title">导航仪</div>
+    <ul class="nav-links">
+      <li><a href="./index.html">图书馆主页</a></li>
+      <li><a href="./library/intro.html">图书馆入门</a></li>
+      <li><a href="./library/rule.html">图书馆规则</a></li>
+      <li><a href="./library/feature.html">图书馆功能</a></li>
+    </ul>
+    
+    <div class="nav-section">
+      <div class="nav-section-title">当前页面</div>
+      <a href="#" class="current-page-title" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">
+        The Shepherd's Library
+      </a>
+    </div>
+    
+    <div class="nav-section">
+      <div class="nav-section-title">页面目录</div>
+      <ul class="toc-list">
+        <li><a href="#section-intro" onclick="scrollToSection('section-intro')">前情提要</a></li>
+        <li><a href="#section-about" onclick="scrollToSection('section-about')">关于图书馆</a></li>
+        <li><a href="#section-features" onclick="scrollToSection('section-features')">功能特色</a></li>
+      </ul>
+    </div>
+  </aside>
+  
+  <main class="content">
+    <div class="content-card">
+      <section id="section-intro" class="content-section">
+        <h2 class="section-title-1">前情提要</h2>
+        <p class="content-text">
+          创建于 2026.1.4。图书馆尚在初期建设中，为保证稳定性以及更新方便，很多应当采用更多自定义内容的地方全都换成了兼容性更强的内容。这是实验性的预览页面，采用复古风格设计。
+        </p>
+      </section>
+      
+      <section id="section-about" class="content-section">
+        <h2 class="section-title-1">关于图书馆</h2>
+        <p class="content-text">
+          这个页面是牧羊人图书馆的主页面。如果你不知道牧羊人图书馆是什么，并且想了解牧羊人图书馆的一些信息，请点击以下页面。
+        </p>
+        <p class="content-text">
+          总而言之，牧羊人图书馆（Shepherd's Library）是我存放我的所有知识之地。亦被称为谢沷尔德图书馆（Shpherd's Library），任何一个可以实现该行为的事物都可以称为牧羊人图书馆。
+        </p>
+        <p class="content-text">
+          <a href="library/intro.html">牧羊人图书馆入门 →</a>
+        </p>
+      </section>
+      
+      <section id="section-features" class="content-section">
+        <h2 class="section-title-1">功能特色</h2>
+        <p class="content-text">
+          这个部分讲述了你现在所在的图书馆具备什么样的能力，我们称之为功能，并简单概括功能的内涵和本质。
+        </p>
+        <p class="content-text">
+          <a href="library/feature.html">图书馆功能 →</a>
+        </p>
+      </section>
+    </div>
+  </main>
+</div>
+
+<footer class="footer">
+  <p class="footer-text">
+    © 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>
+    保留所有权利
+  </p>
+  <hr class="footer-divider">
+  <p class="footer-text">
+    未经许可，不得擅自转载、修改或用于商业用途
+  </p>
+</footer>
+
+<button class="float-button" onclick="scrollToTop()" title="回到顶部">
+  回到<br>顶部
+</button>
+
+<script>
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+</script>
+
+</body>
+</html>
