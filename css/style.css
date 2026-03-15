@@ -226,7 +226,7 @@ body {
 }
 
 .header-row {
-  background-color: #5a4a3a;
+  background-color: olivedrab;
 }
 
 .nav-center {
@@ -242,7 +242,7 @@ body {
 }
 
 .main-container {
-  background: linear-gradient(180deg, #3d3d3d 0%, #5a4a3a 100%);
+  background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
 }
 
 .content-row {
@@ -250,14 +250,14 @@ body {
 }
 
 .footer-row {
-  background-color: #3d3d3d;
+  background-color: darkolivegreen;
 }
 
 .footer-row-alt {
 }
 
 .footer-gradient {
-  background: linear-gradient(180deg, #3d3d3d 0%, #5a4a3a 100%);
+  background: linear-gradient(180deg, #556b2f 0%, #556b2f 85%, #6b7a3a 100%);
 }
 
 .copyright-color {
