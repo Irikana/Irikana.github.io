@@ -11,8 +11,10 @@
 <body>
 <div class="gjs-row main-container">
   <div class="gjs-cell logo-align">
-    <img src="./image/logo.png" class="logo-border logo-container logo-img-custom">
-    <img src="./image/logo_text.png" class="logo-size logo-size-custom">
+    <div class="logo-header-row">
+      <img src="./image/logo.png" class="logo-border logo-container logo-img-custom">
+      <img src="./image/logo_text.png" class="logo-size logo-size-custom">
+    </div>
     <div class="slogan-container">
       <hr class="slogan-line slogan-line-left">
       <span class="slogan-text">存放所有知识之地</span>
@@ -44,6 +46,16 @@
                   
                   <div class="news-carousel-wrapper">
                     <div class="news-carousel-track" id="carousel-track">
+                      <div class="news-carousel-card" data-date="2026-04-03">
+                        <div class="news-card">
+                          <a href="./updateLog/updateLog_alpha-2026.4.2-1.html" target="_blank" class="news-card-text-only">
+                            <h3 class="news-card-title">开学后第一个更新</h3>
+                            <p class="news-card-date">2026年4月3日</p>
+                            <p class="news-card-hint">点击此处了解更多</p>
+                          </a>
+                        </div>
+                      </div>
+
                       <div class="news-carousel-card" data-date="2026-02-04">
                         <div class="news-card">
                           <div class="news-card-content">
@@ -341,14 +353,14 @@ window.addEventListener('DOMContentLoaded', function() {
     quickNav.addEventListener('click', function(event) {
       if (quickNav.classList.contains('expanded')) {
         quickNav.classList.remove('expanded');
-        quickNav.style.width = '35px';
-        quickNav.style.padding = '10px 3px';
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
         const content = quickNav.querySelector('.quick-nav-content');
         if (content) content.style.display = 'none';
         const title = quickNav.querySelector('.quick-nav-title');
         if (title) {
           title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '5px';
+          title.style.marginBottom = '4px';
           title.style.paddingBottom = '0';
           title.style.borderBottom = 'none';
         }
@@ -356,16 +368,16 @@ window.addEventListener('DOMContentLoaded', function() {
         if (hint) hint.style.display = 'block';
       } else {
         quickNav.classList.add('expanded');
-        quickNav.style.width = '160px';
-        quickNav.style.padding = '10px 8px';
+        quickNav.style.width = '180px';
+        quickNav.style.padding = '16px';
         const content = quickNav.querySelector('.quick-nav-content');
         if (content) content.style.display = 'block';
         const title = quickNav.querySelector('.quick-nav-title');
         if (title) {
           title.style.writingMode = 'horizontal-tb';
-          title.style.marginBottom = '10px';
+          title.style.marginBottom = '16px';
           title.style.paddingBottom = '8px';
-          title.style.borderBottom = '2px solid #6b8e23';
+          title.style.borderBottom = '1px solid #e0e0e0';
         }
         const hint = quickNav.querySelector('.quick-nav-hint');
         if (hint) hint.style.display = 'none';

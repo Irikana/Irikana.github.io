@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>牧羊人图书馆 - Alpha 0.0.1 更新日志</title>
+<title>牧羊人图书馆 - Alpha 2026.4.2-1 更新日志</title>
 <meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
 <meta name="keywords" content="图书馆,知识,学习,牧羊人">
 <link rel="stylesheet" href="../css/style.css">
@@ -16,7 +16,7 @@
       <span class="slogan-text">存放所有知识之地</span>
       <hr class="slogan-line slogan-line-right">
     </div>
-    <div class="section-padding page-title-main">Alpha 0.0.1 更新日志</div>
+    <div class="section-padding page-title-main">Alpha 2026.4.2-1 更新日志</div>
   </div>
 </div>
 
@@ -30,29 +30,60 @@
 <div class="gjs-row content-row content-bg-white">
   <div class="content-width-limiter">
     <div class="gjs-cell content-bg-yellow">
+      <div class="quote-box-grey">
+        <div class="left-align">2026.4.3</div>
+      </div>
+      
       <div class="gjs-row notice-header page-header-section">
         <div class="gjs-cell">
-          <div id="section-1" class="section-title-text-main">图书馆Alpha 0.0.1更新日志</div>
+          <div id="section-1" class="section-title-text-main">开学后第一个更新</div>
           <div class="gjs-row content-bg-lightgrey">
             <div class="gjs-cell">
               <div class="left-align">
-                <div id="section-1-1">
-                  <p><strong>结构页面更新</strong></p>
-                  <p>上传了新logo</p>
-                  <p>更新了全新的结构页面</p>
-                  <p>将结构页面应用到所有页面上</p>
-                  <p>对于结构页面：</p>
-                  <p>新增并更换了logo展示</p>
-                  <p>在左侧增加了「便携式导航仪」，使得读者可以轻松访问关键页面</p>
-                  <p>在右侧增加了「回到顶部」按钮和「导航枢纽」按钮，分别可单击回到页面顶部和前往导航枢纽</p>
-                  <p>便携式导航仪下新增当前页面信息，包括标题和目录</p>
-                </div>
+
+                <p>开学以来第一次更新，给网站来个大换装。之前那个橄榄绿加金色的风格虽然挺有复古味道的，但说实话看着有点厚重，所以这次决定全面改成简约线条风。</p>
+
+                <p><strong>视觉大改版</strong></p>
+                <p>CSS基本全部重写了，从配色到布局都换了套思路：</p>
                 
-                <div id="section-1-2">
-                  <p><strong>全页面统一更新</strong></p>
-                  <p>对于任何页面：</p>
-                  <p>按照结构页面更新</p>
-                </div>
+                <details open>
+                  <summary>配色和整体风格</summary>
+                  <div class="indented">
+                    <p>以前是橄榄绿(#556b2f)配金色(#ffd700)，背景还有各种渐变。现在换成了黑白灰为主、深墨蓝(#2c3e50)做强调色的方案，干净利落很多。</p>
+                    <p>边框从无边界+阴影卡片变成了统一的1px细线框，圆角也从8px缩到了2-4px，基本上就是直角了。内容宽度从50%固定改成了720px最大宽度，阅读起来舒服不少。</p>
+                    <p>字体也稍微调大了点，从15px提到16px。</p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary>暗色模式</summary>
+                  <div class="indented">
+                    <p>这个是之前一直缺的。现在加了完整的暗色模式支持，会自动跟随系统的明暗主题切换。暗色下背景变成#1a1a1a，文字#e8e6e3，强调色换成天蓝色(#5d9ccc)，在深色背景下看起来比较舒服。</p>
+                  </div>
+                </details>
+
+                <details>
+                  <summary>Logo布局调整</summary>
+                  <div class="indented">
+                    <p>以前顶部的logo图标和文字是上下堆着的，现在改成左右并排了——图标在左，文字在右。全站11个页面都统一改过来了。</p>
+                  </div>
+                </details>
+
+                <p><strong>统一了卡片的视觉效果</strong></p>
+                <p>之前有个很烦人的问题：主页的前情提要区域、新闻卡片、入门页的图书馆介绍、library页的前言这些地方，有的用浅灰底、有的用纯白底带边框，颜色参差不齐。现在把所有内容区块的背景统一成透明的了，视觉上终于一致了。</p>
+
+                <p><strong>修好了功能页面的排版问题</strong></p>
+                <p>feature.html（图书馆功能页面）之前的排版简直灾难——大量裸div脱离了页面结构，还有内联样式硬编码尺寸。直接整个重写了，恢复了标准的gjs-row/gjs-cell结构。</p>
+
+                <p><strong>从Notion导出里捞了点新东西</strong></p>
+                <p>翻了一下notionExport目录下的原始导出文件，发现feature.html在Notion那边其实有不少实际内容（图标说明、按钮、嵌套、折叠、结构页面等），但网站这边一直是空的占位页。就把那些内容搬过来了，顺便标注了哪些功能因为网站化改造已经弃用了。</p>
+
+                <p><strong>新增了一些CSS组件</strong></p>
+                <p>为了配合Notion导出内容的展示，给CSS补了几个组件样式：原生的details/summary折叠块、callout提示框、link-to-page页面链接按钮。暗色模式下也都适配好了。</p>
+
+                <p><strong>同步更新了所有JS里的内联样式值</strong></p>
+                <p>每个页面都有移动端导航展开的逻辑，里面硬编码了一堆旧的样式值（比如旧的颜色代码#6b8e23、旧的尺寸35px/160px之类的）。一共11个HTML文件全部统一替换成了新的参数。</p>
+
               </div>
             </div>
           </div>
@@ -92,14 +123,7 @@
     <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
     <div class="quick-nav-section">页面目录</div>
     <div id="quick-nav-toc-container">
-      <div class="quick-nav-toc-parent">
-        <div class="quick-nav-toc-item-with-children">• 图书馆Alpha 0.0.1更新日志</div>
-        <div class="quick-nav-toc-toggle collapsed" data-parent="section-1"></div>
-        <div class="quick-nav-toc-children">
-          <div class="quick-nav-toc-child-item" data-target="section-1-1">└ 结构页面更新</div>
-          <div class="quick-nav-toc-child-item" data-target="section-1-2">└ 全页面统一更新</div>
-        </div>
-      </div>
+      <div data-target="section-1" class="quick-nav-toc-item">• 开学后第一个更新</div>
     </div>
   </div>
 </div>
@@ -178,14 +202,14 @@ window.addEventListener('DOMContentLoaded', function() {
     quickNav.addEventListener('click', function(event) {
       if (quickNav.classList.contains('expanded')) {
         quickNav.classList.remove('expanded');
-        quickNav.style.width = '35px';
-        quickNav.style.padding = '10px 3px';
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
         const content = quickNav.querySelector('.quick-nav-content');
         if (content) content.style.display = 'none';
         const title = quickNav.querySelector('.quick-nav-title');
         if (title) {
           title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '5px';
+          title.style.marginBottom = '4px';
           title.style.paddingBottom = '0';
           title.style.borderBottom = 'none';
         }
@@ -193,14 +217,14 @@ window.addEventListener('DOMContentLoaded', function() {
         if (hint) hint.style.display = 'block';
       } else {
         quickNav.classList.add('expanded');
-        quickNav.style.width = '160px';
-        quickNav.style.padding = '10px 8px';
+        quickNav.style.width = '180px';
+        quickNav.style.padding = '16px';
         const content = quickNav.querySelector('.quick-nav-content');
         if (content) content.style.display = 'block';
         const title = quickNav.querySelector('.quick-nav-title');
         if (title) {
           title.style.writingMode = 'horizontal-tb';
-          title.style.marginBottom = '10px';
+          title.style.marginBottom = '16px';
           title.style.paddingBottom = '8px';
           title.style.borderBottom = '1px solid #e0e0e0';
         }
@@ -225,22 +249,22 @@ window.addEventListener('DOMContentLoaded', function() {
   if (tocContainer) {
     tocContainer.addEventListener('click', function(event) {
       const target = event.target;
-      
+
       if (target.classList.contains('quick-nav-toc-toggle')) {
         event.stopPropagation();
         event.preventDefault();
         toggleTocToggle(target);
         return;
       }
-      
-      if (target.classList.contains('quick-nav-toc-item') || 
+
+      if (target.classList.contains('quick-nav-toc-item') ||
           target.classList.contains('quick-nav-toc-item-with-children') ||
           target.classList.contains('quick-nav-toc-child-item')) {
         event.stopPropagation();
         event.preventDefault();
-        
+
         let sectionId;
-        
+
         if (target.classList.contains('quick-nav-toc-item-with-children')) {
           const toggleElement = target.nextElementSibling;
           if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
@@ -249,7 +273,7 @@ window.addEventListener('DOMContentLoaded', function() {
         } else {
           sectionId = target.getAttribute('data-target');
         }
-        
+
         if (sectionId) {
           scrollToSection(sectionId);
         }

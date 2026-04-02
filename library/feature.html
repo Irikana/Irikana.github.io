@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="gjs-row main-container">
-    <div class="gjs-cell logo-align"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../image/logo_text.png" class="logo-size logo-size-custom">
+    <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../image/logo_text.png" class="logo-size logo-size-custom"></div>
       <div class="slogan-container">
         <hr class="slogan-line slogan-line-left"><span class="slogan-text">存放所有知识之地</span>
         <hr class="slogan-line slogan-line-right">
@@ -26,16 +26,20 @@
   </div>
   <div class="gjs-row content-row content-bg-white">
     <div class="content-width-limiter">
-      <div class="gjs-cell content-bg-yellow c9796">
-        <div class="gjs-row notice-header page-header-section c9808">
-          <div class="gjs-row notice-box-red" style="height:45px;">
-            <div class="gjs-cell" style="width:530px;">
-              <div>此页面由于Notion到网站的差异可能被弃用</div>
+      <div class="gjs-cell content-bg-yellow">
+
+        <div class="gjs-row notice-header page-header-section">
+          <div class="gjs-cell">
+            <div class="notice-box-red">
+              <div class="left-align">由于图书馆最终以网站形式呈现，故该页面可能仅在Notion内部可用，自2026年3月30日起，图书馆功能正在逐步重构，内容可能不具备时效性</div>
             </div>
           </div>
+        </div>
+
+        <div class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-1" class="section-title-text-main c9814">基本功能</div>
-            <div class="gjs-row content-bg-lightgrey c9832">
+            <div id="section-1" class="section-title-text-main">基本功能</div>
+            <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="center-align">
                   <p>图书馆的基本功能是任何图书馆都应具备的功能，牧羊人图书馆也不例外。</p>
@@ -44,34 +48,74 @@
             </div>
           </div>
         </div>
-        <div>
-          <div class="center-align">
-            <p><strong>按钮</strong></p>
-            <p>在图书馆中，有非常多的按钮。按钮可以帮助你在图书馆中进行某些操作，或者跳转到指定的位置。</p>
-          </div>
-        </div>
-        <div class="gjs-row notice-header section-header-repeat page-section-reset c9989">
+
+        <div class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-2" class="section-title-text-sub c9995">进阶功能</div>
-            <div class="gjs-row yellowgreen-bg content-bg-white-text c10013">
+            <div id="section-1-1" class="subsection-header">图标</div>
+            <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
-                <div class="center-align">
-                  <p>在图书馆中，还支持更多进阶的功能，这些功能可能涉及复杂的内容或逻辑。以下列出的是在图书馆中支持的进阶功能：</p>
+                <div class="left-align">
+                  <p>在图书馆中，每个页面都有一个图标。图标可以帮助你快速识别页面的类型或主题。</p>
+                  <details open>
+                    <summary>注意</summary>
+                    <div class="indented">
+                      <p>如果你在一些页面的最顶端，或者在被引用时，看到金色的图标时，这意味着它们是除去所有内容之后，那些起到结构性作用的页面。</p>
+                    </div>
+                  </details>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div>
-          <div class="center-align">
-            <p><strong>嵌套</strong></p>
-            <p>支持在一个页面中包含多个内容，比如在一个页面中可以有多个一级标题、多个二级标题等。</p>
+
+        <div class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <div id="section-1-2" class="subsection-header">按钮（此功能已弃用）</div>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <div class="center-align">
+                  <p>在图书馆中，有非常多的按钮。按钮可以帮助你在图书馆中进行某些操作，或者跳转到指定的位置。由于网站化改造，此功能已被弃用。</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="gjs-row notice-header section-header-repeat page-section-reset c10170">
+
+        <div class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-3" class="section-title-text-sub-sub c10176">网站功能</div>
-            <div class="gjs-row yellowgreen-bg content-bg-white-sub c10195">
+            <div id="section-2" class="section-title-text-sub">进阶功能（此功能已弃用）</div>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <div class="center-align">
+                  <p>进阶功能是在基本功能的基础上，通过一些安排，使得它们以相对而言稍微复杂一些的情况出现。以下列出的是在Notion中支持的进阶功能：</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <div id="section-2-1" class="subsection-header">嵌套（此功能已弃用）</div>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <div class="left-align">
+                  <p>支持在一个页面中包含多个内容，比如在一个页面中可以有多个一级标题、多个二级标题等。</p>
+                  <figure class="callout block-color-gray_background">
+                    <span class="icon">💡</span>
+                    <div><p>这是一个标注示例</p></div>
+                  </figure>
+                  <p>在网站中，嵌套通过页面层级结构来实现。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <div id="section-3" class="section-title-text-sub-sub">网站功能</div>
+            <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="center-align">
                   <p>除了在图书馆中的功能外，本网站本身也提供一些功能，这些功能可以在任何地方访问，不受图书馆内容的限制。</p>
@@ -80,28 +124,57 @@
             </div>
           </div>
         </div>
-        <div>
-          <div class="center-align">
-            <p><strong>折叠</strong></p>
-            <p>允许用户折叠或展开某些内容，以提升阅读体验。此功能在网站中有广泛的应用。</p>
+
+        <div class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <div id="section-3-1" class="subsection-header">折叠</div>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <div class="left-align">
+                  <p>允许用户折叠或展开某些内容，以提升阅读体验。此功能在网站中有广泛的应用。你当前看到的这个区块就是一个折叠块的示例。</p>
+                  <details>
+                    <summary>点击展开查看示例内容</summary>
+                    <div class="indented">
+                      <p>这是被折叠的内容。在牧羊人图书馆的入门页面中，SCP基金会和被放逐者之图书馆的百科介绍就使用了这种折叠形式来组织信息。</p>
+                    </div>
+                  </details>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <div class="center-align">
-            <p><strong>折叠</strong></p>
-            <p>允许用户折叠或展开某些内容，以提升阅读体验。此功能在网站中有广泛的应用。</p>
+
+        <div class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <div id="section-3-2" class="subsection-header">便携式导航仪</div>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <div class="left-align">
+                  <p>页面左侧悬浮的导航栏，鼠标悬停时可展开显示当前页面的目录结构和快捷链接。在移动端设备上变为点击展开模式。</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <div class="center-align">
-            <p>此功能在网站中无用</p>
+
+        <div class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <div id="section-4" class="section-title-text-sub">结构页面</div>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <div class="left-align">
+                  <p>以下展示的是目前所有起到结构性作用的金色图标页面：</p>
+                  <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+                    <a href="../index.html" class="link-to-page"><span class="icon">📒</span> 牧羊人图书馆主页</a>
+                    <a href="library.html" class="link-to-page"><span class="icon">📒</span> 牧羊人图书馆</a>
+                    <a href="../navigator.html" target="_blank" class="link-to-page"><span class="icon">🧭</span> 牧羊人图书馆导航枢纽</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          <div class="center-align">
-            <p>此功能在网站中无用</p>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -128,6 +201,7 @@
         <div data-target="section-1" class="quick-nav-toc-item">• 基本功能</div>
         <div data-target="section-2" class="quick-nav-toc-item">• 进阶功能</div>
         <div data-target="section-3" class="quick-nav-toc-item">• 网站功能</div>
+        <div data-target="section-4" class="quick-nav-toc-item">• 结构页面</div>
       </div>
     </div>
   </div><button title="回到顶部" class="float-button back-to-top">
@@ -201,14 +275,14 @@ window.addEventListener('DOMContentLoaded', function() {
     quickNav.addEventListener('click', function(event) {
       if (quickNav.classList.contains('expanded')) {
         quickNav.classList.remove('expanded');
-        quickNav.style.width = '35px';
-        quickNav.style.padding = '10px 3px';
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
         const content = quickNav.querySelector('.quick-nav-content');
         if (content) content.style.display = 'none';
         const title = quickNav.querySelector('.quick-nav-title');
         if (title) {
           title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '5px';
+          title.style.marginBottom = '4px';
           title.style.paddingBottom = '0';
           title.style.borderBottom = 'none';
         }
@@ -216,16 +290,16 @@ window.addEventListener('DOMContentLoaded', function() {
         if (hint) hint.style.display = 'block';
       } else {
         quickNav.classList.add('expanded');
-        quickNav.style.width = '160px';
-        quickNav.style.padding = '10px 8px';
+        quickNav.style.width = '180px';
+        quickNav.style.padding = '16px';
         const content = quickNav.querySelector('.quick-nav-content');
         if (content) content.style.display = 'block';
         const title = quickNav.querySelector('.quick-nav-title');
         if (title) {
           title.style.writingMode = 'horizontal-tb';
-          title.style.marginBottom = '10px';
+          title.style.marginBottom = '16px';
           title.style.paddingBottom = '8px';
-          title.style.borderBottom = '2px solid #6b8e23';
+          title.style.borderBottom = '1px solid #e0e0e0';
         }
         const hint = quickNav.querySelector('.quick-nav-hint');
         if (hint) hint.style.display = 'none';
