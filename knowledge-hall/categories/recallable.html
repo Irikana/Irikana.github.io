@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>知识馆 - 可回忆知识</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    .kh-body { display: flex; min-height: 100vh; }
+    .kh-sidebar {
+      position: fixed; left: 0; top: 0; bottom: 0;
+      width: 220px; background: #fafafa;
+      border-right: 1px solid #e0e0e0;
+      padding: 24px 16px;
+      display: flex; flex-direction: column;
+      z-index: 100;
+    }
+    .kh-main { margin-left: 220px; flex: 1; padding: 40px 48px; max-width: 900px; }
+    .kh-logo-area { text-align: center; margin-bottom: 32px; }
+    .kh-logo-area img { max-width: 80px; display: block; margin: 0 auto; }
+    .kh-site-title { font-size: 14px; font-weight: 700; color: #2c3e50; letter-spacing: 1px; text-align: center; margin-top: 8px; }
+    .kh-equality { font-size: 10px; color: #999; text-align: center; margin-top: 6px; letter-spacing: 0.5px; }
+    .kh-nav-item {
+      display: block; padding: 10px 12px; color: #555;
+      text-decoration: none; border-radius: 4px; margin: 2px 0;
+      font-size: 14px; transition: all 0.15s;
+    }
+    .kh-nav-item:hover { background: #f0f0f0; color: #2c3e50; }
+    .kh-nav-divider { height: 1px; background: #e0e0e0; margin: 12px 0; }
+    .kh-nav-section { font-size: 10px; color: #aaa; font-weight: 600; letter-spacing: 1px; margin: 16px 0 8px; padding: 0 12px; }
+    .kh-content h2 { font-size: 24px; font-weight: 700; color: #1a1a1a; margin: 48px 0 24px; padding-bottom: 12px; border-bottom: 2px solid #2c3e50; }
+    .kh-content h2:first-child { margin-top: 0; }
+    .kh-content h3 { font-size: 18px; font-weight: 600; color: #333; margin: 32px 0 16px; }
+    .kh-content p { font-size: 17px; line-height: 1.9; color: #444; margin: 16px 0; }
+    .kh-card { background: transparent; border: 1px solid #e0e0e0; border-radius: 4px; padding: 24px; margin: 20px 0; }
+    .kh-card-title-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .kh-card-title-link h3 {
+      margin: 0 0 12px 0;
+      font-size: 18px;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+    .kh-card-title-link:hover h3 {
+      color: #2c3e50;
+    }
+    .kh-footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid #e0e0e0;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      line-height: 1.9;
+    }
+    .kh-footer p { margin: 4px 0; }
+
+    @media (max-width: 768px) {
+      .kh-sidebar { position: static; width: 100%; border-right: none; border-bottom: 1px solid #e0e0e0; padding: 16px; }
+      .kh-body { flex-direction: column; }
+      .kh-main { margin-left: 0; padding: 24px 16px; }
+      .kh-content h2 { font-size: 20px; margin-top: 32px; }
+      .kh-content p { font-size: 16px; }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body.kh-body { background: #1a1a1a; color: #e8e6e3; }
+      .kh-sidebar { background: #222; border-right-color: #333; }
+      .kh-site-title { color: #e8e6e3; }
+      .kh-equality { color: #888; }
+      .kh-nav-item { color: #c0bdb8; }
+      .kh-nav-item:hover { background: #333; color: #e8e6e3; }
+      .kh-nav-divider { background: #333; }
+      .kh-nav-section { color: #666; }
+      .kh-content h2 { color: #e8e6e3; border-bottom-color: #444; }
+      .kh-content h3 { color: #c0bdb8; }
+      .kh-content p { color: #a0a0a0; }
+      .kh-card { background: transparent; border-color: #333; }
+      .kh-card-title-link:hover h3 {
+        color: #5d9ccc;
+      }
+      .notice-box-red { background: #2a1a1a; border-left-color: #5c3030; color: #e0a0a0; }
+      .function-box-blue { background: #1a1e24; border-left-color: #2a3544; color: #7ab8e0; }
+      .link-to-page { background: #2c3e50; color: #fff; }
+      .link-to-page:hover { background: #3d526b; }
+      .kh-footer { border-top-color: #333; color: #666; }
+    }
+  </style>
+</head>
+<body class="kh-body">
+
+<aside class="kh-sidebar">
+  <div class="kh-logo-area">
+    <img src="../../image/logo.png" alt="牧羊人图书馆 Logo">
+    <div class="kh-site-title">知识馆</div>
+    <div class="kh-equality">所有知识都是平等的</div>
+  </div>
+
+  <div class="kh-nav-divider"></div>
+
+  <a href="../index.html" class="kh-nav-item">知识馆主页</a>
+  <a href="phenomenon.html" class="kh-nav-item">现象</a>
+  <a href="recallable.html" class="kh-nav-item">可回忆知识</a>
+  <a href="traceable.html" class="kh-nav-item">可追溯知识</a>
+
+  <div class="kh-nav-divider"></div>
+
+  <a href="../../index.html" class="kh-nav-item">图书馆主页</a>
+  <a href="../../library/library.html" class="kh-nav-item">图书馆入口</a>
+
+  <div class="kh-nav-divider"></div>
+
+  <a href="javascript:void(0)" class="translate-btn" onclick="translateToEnglish()">EN</a>
+</aside>
+
+<main class="kh-main kh-content">
+
+  <section id="section-recallable">
+    <h2>可回忆知识</h2>
+    <p>可回忆知识是建筑最稳定的知识。它们能随时随地被提出或用于想象和创造。这类知识已经被内化，无需借助外部工具即可调用。</p>
+  </section>
+
+  <div class="function-box-blue">
+    此分类下暂无条目，后续将逐步添加。
+  </div>
+
+  <footer class="kh-footer">
+    <p>&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library &middot; 知识馆</p>
+    <p>保留所有权利 &middot; 未经许可，不得擅自转载、修改或用于商业用途</p>
+  </footer>
+
+</main>
+
+<button title="回到顶部" class="float-button back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  回到<br>顶部
+</button>
+
+<script>
+function translateToEnglish() {
+  window.location.href = 'https://translate.google.com/translate?sl=zh-CN&tl=en&u=' + encodeURIComponent(window.location.href);
+}
+</script>
+
+</body>
+</html>

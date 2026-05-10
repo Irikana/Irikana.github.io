@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>牧羊人图书馆 - 牧羊人图书馆主页</title>
-<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
-<meta name="keywords" content="图书馆,知识,学习,牧羊人">
-<link rel="stylesheet" href="./css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>牧羊人图书馆 - 牧羊人图书馆主页</title>
+  <meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+  <meta name="keywords" content="图书馆,知识,学习,牧羊人">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-<div class="gjs-row main-container">
+
+<header class="gjs-row main-container">
   <div class="gjs-cell logo-align">
     <div class="logo-header-row">
-      <img src="./image/logo.png" class="logo-border logo-container logo-img-custom">
-      <img src="./image/logo_text.png" class="logo-size logo-size-custom">
+      <img src="./image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo">
+      <img src="./image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆">
     </div>
     <div class="slogan-container">
       <hr class="slogan-line slogan-line-left">
@@ -22,30 +23,40 @@
     </div>
     <div class="section-padding page-title-main">牧羊人图书馆主页</div>
   </div>
-</div>
+</header>
 
-<div class="gjs-row header-row">
+<nav class="gjs-row header-row">
   <div class="gjs-cell nav-center">
     <div class="nav-padding title-color nav-title">位置</div>
     <div class="content-padding nav-location">目前所在位置<br><span id="current-path">首页</span></div>
+    <a href="javascript:void(0)" class="translate-btn" onclick="translateToEnglish()">EN</a>
   </div>
-</div>
+</nav>
 
-<div class="gjs-row content-row content-bg-white">
+<main class="gjs-row content-row content-bg-white">
   <div class="content-width-limiter">
     <div class="gjs-cell content-bg-yellow">
-      
-      <div class="gjs-row notice-header page-header-section">
+
+      <!-- 大板块 1：新闻 -->
+      <section class="gjs-row notice-header page-header-section">
         <div class="gjs-cell">
-          <div id="section-news" class="section-title-text-main">新闻</div>
+          <h2 id="section-news" class="section-title-text-main">新闻</h2>
           <div class="gjs-row content-bg-lightgrey">
             <div class="gjs-cell">
               <div class="center-align">
                 <div class="news-carousel-container" id="news-carousel">
-                  <button class="news-carousel-nav-btn prev" id="carousel-prev" aria-label="上一篇">‹</button>
-                  
+                  <button class="news-carousel-nav-btn prev" id="carousel-prev" aria-label="上一篇">&#8249;</button>
                   <div class="news-carousel-wrapper">
                     <div class="news-carousel-track" id="carousel-track">
+                      <div class="news-carousel-card" data-date="2026-05-10">
+                        <div class="news-card">
+                          <a href="./knowledge-hall/index.html" target="_blank" class="news-card-text-only">
+                            <h3 class="news-card-title">知识馆正式启用</h3>
+                            <p class="news-card-date">2026年5月10日</p>
+                            <p class="news-card-hint">点击此处了解更多</p>
+                          </a>
+                        </div>
+                      </div>
                       <div class="news-carousel-card" data-date="2026-04-03">
                         <div class="news-card">
                           <a href="./updateLog/updateLog_alpha-2026.4.2-1.html" target="_blank" class="news-card-text-only">
@@ -55,7 +66,6 @@
                           </a>
                         </div>
                       </div>
-
                       <div class="news-carousel-card" data-date="2026-02-04">
                         <div class="news-card">
                           <div class="news-card-content">
@@ -70,7 +80,6 @@
                           </div>
                         </div>
                       </div>
-                      
                       <div class="news-carousel-card" data-date="2026-02-03">
                         <div class="news-card">
                           <div class="news-card-content">
@@ -85,7 +94,6 @@
                           </div>
                         </div>
                       </div>
-                      
                       <div class="news-carousel-card" data-date="2026-02-18">
                         <div class="news-card">
                           <a href="./library/paper/Minesia第一个公开测试.html" target="_blank" class="news-card-text-only">
@@ -97,84 +105,74 @@
                       </div>
                     </div>
                   </div>
-                  
-                  <button class="news-carousel-nav-btn next" id="carousel-next" aria-label="下一篇">›</button>
+                  <button class="news-carousel-nav-btn next" id="carousel-next" aria-label="下一篇">&#8250;</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      
-      <div class="gjs-row notice-header section-header">
+      </section>
+
+      <!-- 大板块 2：前情提要（含3个子板块） -->
+      <section class="gjs-row notice-header section-header">
         <div class="gjs-cell">
-          <div id="section-1" class="section-title-text-main">前情提要</div>
+          <h2 id="section-background" class="section-title-text-main">前情提要</h2>
           <div class="gjs-row content-bg-lightgrey">
             <div class="gjs-cell">
               <div class="center-align">
+
+                <!-- Alpha建设状态红框 -->
                 <div class="notice-box-red">
                   <div class="left-align">创建于2026.1.4<br>图书馆尚在初期建设中，为保证稳定性以及更新方便，很多应当采用更多自定义内容的地方全都换成了兼容性更强的内容，比如可能使用emoji而不是logo，并且尚处Alpha开发阶段，实质性内容极少，主要处理结构性问题。</div>
                 </div>
+
+                <!-- 子板块：图书馆入门 -->
+                <div class="content-bg-white-sub">
+                  <h3 class="section-title-text-sub">图书馆入门</h3>
+                  <p>这个页面是牧羊人图书馆的主页面。<br>如果你不知道牧羊人图书馆是什么，并且想了解牧羊人图书馆的一些信息，请点击以下页面。<br>总而言之，牧羊人图书馆（Shepherd's Library）是我存放我的所有知识之地。亦被称为谢沷尔德图书馆（Shpherd's Library），任何一个可以实现该行为的事物都可以称为牧羊人图书馆。<br><a href="library/intro.html">牧羊人图书馆入门</a></p>
+                </div>
+
+                <!-- 子板块：图书馆规则 -->
+                <div class="content-bg-white-sub">
+                  <h3 class="section-title-text-sub">图书馆规则</h3>
+                  <p>作为我的创作，它应当从某种程度上无法摆脱，或者说服从于我的想法，比如图书馆里应该有什么，图书馆里绝对不能有什么，在进入图书馆时应该注意什么,这些被包含在被称为规则的地方。我默认任何一个看到该页面的人，都是要了解我或者了解我的作品的人，为了避免潜在的误会和疑惑，此部分是必要的。<br><a href="library/rule.html">图书馆规则</a></p>
+                </div>
+
+                <!-- 子板块：图书馆功能 -->
+                <div class="content-bg-white-sub">
+                  <h3 class="section-title-text-sub">图书馆功能</h3>
+                  <p>这个部分讲述了你现在所在的图书馆具备什么样的能力，我们称之为功能，并简单概括功能的内涵和本质。<br><a href="library/feature.html">图书馆功能</a></p>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
-      </div>
-      
-      <div class="gjs-row notice-header section-header">
-        <div class="gjs-cell">
-          <div id="section-2" class="section-title-text-main">图书馆入门</div>
-          <div class="gjs-row yellowgreen-bg content-bg-lightgrey">
-            <div class="gjs-cell">
-              <div class="center-align">这个页面是牧羊人图书馆的主页面。<br>如果你不知道牧羊人图书馆是什么，并且想了解牧羊人图书馆的一些信息，请点击以下页面。<br>总而言之，牧羊人图书馆（Shepherd's Library）是我存放我的所有知识之地。亦被称为谢沷尔德图书馆（Shpherd's Library），任何一个可以实现该行为的事物都可以称为牧羊人图书馆。<br><a href="library/intro.html">牧羊人图书馆入门</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="gjs-row notice-header section-header">
-        <div class="gjs-cell">
-          <div id="section-3" class="section-title-text-main">图书馆规则</div>
-          <div class="gjs-row yellowgreen-bg content-bg-white">
-            <div class="gjs-cell">
-              <div class="center-align">作为我的创作，它应当从某种程度上无法摆脱，或者说服从于我的想法，比如图书馆里应该有什么，图书馆里绝对不能有什么，在进入图书馆时应该注意什么,这些被包含在被称为规则的地方。我默认任何一个看到该页面的人，都是要了解我或者了解我的作品的人，为了避免潜在的误会和疑惑，此部分是必要的。<br><a href="library/rule.html">图书馆规则</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
 
-      <div class="gjs-row notice-header section-header">
+      <!-- 大板块 3：图书馆入口 -->
+      <section class="gjs-row notice-header section-header">
         <div class="gjs-cell">
-          <div id="section-4" class="section-title-text-main">图书馆功能</div>
+          <h2 id="section-entrance" class="section-title-text-main">图书馆入口</h2>
           <div class="gjs-row yellowgreen-bg content-bg-white">
             <div class="gjs-cell">
-              <div class="center-align">这个部分讲述了你现在所在的图书馆具备什么样的能力，我们称之为功能，并简单概括功能的内涵和本质。<br><a href="library/feature.html">图书馆功能</a></div>
+              <div class="center-align">
+                <p>从这里进入牧羊人图书馆，祝你旅途愉快。<br><a href="library/library.html">牧羊人图书馆</a></p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="gjs-row notice-header section-header">
-        <div class="gjs-cell">
-          <div id="section-5" class="section-title-text-main">图书馆入口</div>
-          <div class="gjs-row yellowgreen-bg content-bg-white">
-            <div class="gjs-cell">
-              <div class="center-align">从这里进入牧羊人图书馆，祝你旅途愉快。<br><a href="library/library.html">牧羊人图书馆</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
     </div>
   </div>
-</div>
+</main>
 
-<div class="gjs-row footer-row footer-row-alt footer-gradient">
+<footer class="gjs-row footer-row footer-gradient">
   <div class="gjs-cell nav-center">
-    <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
-      未经许可，不得擅自转载、修改或用于商业用途<br></div>
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利<br>未经许可，不得擅自转载、修改或用于商业用途</div>
   </div>
-</div>
+</footer>
 
 <div class="mobile-nav">
   <div class="mobile-nav-title">便携式导航仪</div>
@@ -194,18 +192,15 @@
     <a href="./index.html" class="quick-nav-item">图书馆主页</a>
     <a href="./library/intro.html" class="quick-nav-item">图书馆入门</a>
     <a href="./library/rule.html" class="quick-nav-item">图书馆规则</a>
-    <a href="./library/feature.html" class="quick-nav-item">图书馆功能</a>
+    <a href="library/feature.html" class="quick-nav-item">图书馆功能</a>
     <div class="quick-nav-divider"></div>
     <div class="quick-nav-section">当前页面</div>
     <div id="quick-nav-page-title" class="quick-nav-page-title">牧羊人图书馆主页</div>
     <div class="quick-nav-section">页面目录</div>
     <div id="quick-nav-toc-container">
-      <div class="quick-nav-toc-item" data-target="section-news">• 新闻</div>
-      <div class="quick-nav-toc-item" data-target="section-1">• 前情提要</div>
-      <div class="quick-nav-toc-item" data-target="section-2">• 图书馆入门</div>
-      <div class="quick-nav-toc-item" data-target="section-3">• 图书馆规则</div>
-      <div class="quick-nav-toc-item" data-target="section-4">• 图书馆功能</div>
-      <div class="quick-nav-toc-item" data-target="section-5">• 图书馆入口</div>
+      <div class="quick-nav-toc-item" data-target="section-news">&bull; 新闻</div>
+      <div class="quick-nav-toc-item" data-target="section-background">&bull; 前情提要</div>
+      <div class="quick-nav-toc-item" data-target="section-entrance">&bull; 图书馆入口</div>
     </div>
   </div>
 </div>
@@ -214,11 +209,26 @@
   回到<br>顶部
 </button>
 
+<div class="knowledge-hall-float" id="knowledge-hall-float">
+  <div class="kh-float-header">
+    <span class="kh-float-title">知识馆</span>
+    <button class="kh-float-close" title="关闭" aria-label="关闭">&times;</button>
+  </div>
+  <div class="kh-float-body">
+    <p class="kh-float-desc">牧羊人图书馆的分馆，用于存放和查阅知识</p>
+    <a href="./knowledge-hall/index.html" target="_blank" class="kh-float-link">前往知识馆 ↗</a>
+  </div>
+</div>
+
 <button title="导航枢纽" class="float-button nav-hub">
   导航<br>枢纽
 </button>
 
 <script>
+function translateToEnglish() {
+  window.location.href = 'https://translate.google.com/translate?sl=zh-CN&tl=en&u=' + encodeURIComponent(window.location.href);
+}
+
 function scrollToTop() {
   window.scrollTo({
     top: 0,
@@ -247,7 +257,7 @@ function getCurrentPath() {
       }
       return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
     })
-    .join(' → ');
+    .join(' &rarr; ');
 
   return formattedPath;
 }
@@ -262,7 +272,7 @@ function scrollToSection(sectionId) {
 function toggleTocToggle(toggleElement) {
   const parentElement = toggleElement.closest('.quick-nav-toc-parent');
   const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
-  
+
   if (childrenElement) {
     if (childrenElement.classList.contains('show')) {
       childrenElement.classList.remove('show');
@@ -280,32 +290,32 @@ function toggleTocToggle(toggleElement) {
   const track = document.getElementById('carousel-track');
   const prevBtn = document.getElementById('carousel-prev');
   const nextBtn = document.getElementById('carousel-next');
-  
+
   if (!track || !prevBtn || !nextBtn) return;
-  
+
   const cards = Array.from(track.querySelectorAll('.news-carousel-card'));
   cards.sort((a, b) => {
     const dateA = new Date(a.dataset.date);
     const dateB = new Date(b.dataset.date);
     return dateB - dateA;
   });
-  
+
   cards.forEach(card => track.appendChild(card));
-  
+
   let currentIndex = 0;
   const totalCards = cards.length;
-  
+
   function updateCarousel() {
     cards.forEach(card => {
       card.classList.remove('prev-preview', 'next-preview');
     });
-    
+
     const offset = -currentIndex * 100;
     track.style.transform = `translateX(${offset}%)`;
-    
+
     prevBtn.classList.toggle('disabled', currentIndex === 0);
     nextBtn.classList.toggle('disabled', currentIndex === totalCards - 1);
-    
+
     if (currentIndex > 0) {
       cards[currentIndex - 1].classList.add('prev-preview');
     }
@@ -313,21 +323,21 @@ function toggleTocToggle(toggleElement) {
       cards[currentIndex + 1].classList.add('next-preview');
     }
   }
-  
+
   prevBtn.addEventListener('click', () => {
     if (currentIndex > 0) {
       currentIndex--;
       updateCarousel();
     }
   });
-  
+
   nextBtn.addEventListener('click', () => {
     if (currentIndex < totalCards - 1) {
       currentIndex++;
       updateCarousel();
     }
   });
-  
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       if (currentIndex > 0) {
@@ -341,14 +351,14 @@ function toggleTocToggle(toggleElement) {
       }
     }
   });
-  
+
   updateCarousel();
 })();
 
 window.addEventListener('DOMContentLoaded', function() {
   const quickNav = document.querySelector('.quick-nav');
   const isMobile = window.innerWidth <= 768;
-  
+
   if (quickNav && isMobile) {
     quickNav.addEventListener('click', function(event) {
       if (quickNav.classList.contains('expanded')) {
@@ -400,22 +410,22 @@ window.addEventListener('DOMContentLoaded', function() {
   if (tocContainer) {
     tocContainer.addEventListener('click', function(event) {
       const target = event.target;
-      
+
       if (target.classList.contains('quick-nav-toc-toggle')) {
         event.stopPropagation();
         event.preventDefault();
         toggleTocToggle(target);
         return;
       }
-      
-      if (target.classList.contains('quick-nav-toc-item') || 
+
+      if (target.classList.contains('quick-nav-toc-item') ||
           target.classList.contains('quick-nav-toc-item-with-children') ||
           target.classList.contains('quick-nav-toc-child-item')) {
         event.stopPropagation();
         event.preventDefault();
-        
+
         let sectionId;
-        
+
         if (target.classList.contains('quick-nav-toc-item-with-children')) {
           const toggleElement = target.nextElementSibling;
           if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
@@ -424,7 +434,7 @@ window.addEventListener('DOMContentLoaded', function() {
         } else {
           sectionId = target.getAttribute('data-target');
         }
-        
+
         if (sectionId) {
           scrollToSection(sectionId);
         }
@@ -449,6 +459,16 @@ window.addEventListener('DOMContentLoaded', function() {
   const navHubBtn = document.querySelector('.nav-hub');
   if (navHubBtn) {
     navHubBtn.addEventListener('click', openNavigator);
+  }
+
+  const khFloatClose = document.querySelector('.kh-float-close');
+  if (khFloatClose) {
+    khFloatClose.addEventListener('click', function() {
+      const khFloat = document.getElementById('knowledge-hall-float');
+      if (khFloat) {
+        khFloat.classList.add('hidden');
+      }
+    });
   }
 });
 </script>

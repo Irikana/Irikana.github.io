@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>牧羊人图书馆 - Alpha 2026.4.2-1 更新日志</title>
+<title>牧羊人图书馆 - Alpha 004 更新日志</title>
 <meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
 <meta name="keywords" content="图书馆,知识,学习,牧羊人">
 <link rel="stylesheet" href="../css/style.css">
@@ -16,7 +16,7 @@
       <span class="slogan-text">存放所有知识之地</span>
       <hr class="slogan-line slogan-line-right">
     </div>
-    <div class="section-padding page-title-main">Alpha 2026.4.2-1 更新日志</div>
+    <div class="section-padding page-title-main">Alpha 004 更新日志</div>
   </div>
 </div>
 
@@ -32,64 +32,73 @@
   <div class="content-width-limiter">
     <div class="gjs-cell content-bg-yellow">
       <div class="quote-box-grey">
-        <div class="left-align">2026.4.3</div>
+        <div class="left-align">Alpha 004</div>
       </div>
-      
+
       <div class="gjs-row notice-header page-header-section">
         <div class="gjs-cell">
-          <div id="section-1" class="section-title-text-main">开学后第一个更新</div>
+          <div id="section-1" class="section-title-text-main">主馆变更</div>
           <div class="gjs-row content-bg-lightgrey">
             <div class="gjs-cell">
               <div class="left-align">
 
-                <p>开学以来第一次更新，给网站来个大换装。之前那个橄榄绿加金色的风格虽然挺有复古味道的，但说实话看着有点厚重，所以这次决定全面改成简约线条风。</p>
+                <p><strong>主页（index.html）重构</strong></p>
+                <p>- 板块结构重组：新闻、前情提要、入口为三大板块</p>
+                <p>- 图书馆入门、图书馆规则、图书馆功能归入「前情提要」板块的子级内容</p>
+                <p>- 知识馆从独立大板块改为浮窗形式出现</p>
 
-                <p><strong>视觉大改版</strong></p>
-                <p>CSS基本全部重写了，从配色到布局都换了套思路：</p>
-                
-                <details open>
-                  <summary>配色和整体风格</summary>
-                  <div class="indented">
-                    <p>以前是橄榄绿(#556b2f)配金色(#ffd700)，背景还有各种渐变。现在换成了黑白灰为主、深墨蓝(#2c3e50)做强调色的方案，干净利落很多。</p>
-                    <p>边框从无边界+阴影卡片变成了统一的1px细线框，圆角也从8px缩到了2-4px，基本上就是直角了。内容宽度从50%固定改成了720px最大宽度，阅读起来舒服不少。</p>
-                    <p>字体也稍微调大了点，从15px提到16px。</p>
-                  </div>
-                </details>
+                <p><strong>CSS 样式（css/style.css）优化</strong></p>
+                <p>- 章节间距加大（notice-header margin-bottom 从 24px 增至 48px）</p>
+                <p>- 段落间距增大（p 标签 margin 从 8px 增至 16px）</p>
+                <p>- 行高提升至 1.8</p>
+                <p>- 红色警告框样式优化（左侧加粗边线 4px，去掉三角图标）</p>
+                <p>- 新闻卡片无海报时缩小内边距和字号，减少与相邻标题的间距</p>
+                <p>- 新增 .deprecated-badge 已弃用标签样式</p>
+                <p>- 新增 .article-list 文章列表样式</p>
+                <p>- 字体栈优化（添加 PingFang SC / Microsoft YaHei 中文回退）</p>
 
-                <details>
-                  <summary>暗色模式</summary>
-                  <div class="indented">
-                    <p>这个是之前一直缺的。现在加了完整的暗色模式支持，会自动跟随系统的明暗主题切换。暗色下背景变成#1a1a1a，文字#e8e6e3，强调色换成天蓝色(#5d9ccc)，在深色背景下看起来比较舒服。</p>
-                  </div>
-                </details>
+                <p><strong>导航枢纽（navigator.html）更新</strong></p>
+                <p>- 新增知识馆入口链接</p>
+                <p>- 新增知识馆独立板块（含三个分类链接）</p>
 
-                <details>
-                  <summary>Logo布局调整</summary>
-                  <div class="indented">
-                    <p>以前顶部的logo图标和文字是上下堆着的，现在改成左右并排了——图标在左，文字在右。全站11个页面都统一改过来了。</p>
-                  </div>
-                </details>
-
-                <p><strong>统一了卡片的视觉效果</strong></p>
-                <p>之前有个很烦人的问题：主页的前情提要区域、新闻卡片、入门页的图书馆介绍、library页的前言这些地方，有的用浅灰底、有的用纯白底带边框，颜色参差不齐。现在把所有内容区块的背景统一成透明的了，视觉上终于一致了。</p>
-
-                <p><strong>修好了功能页面的排版问题</strong></p>
-                <p>feature.html（图书馆功能页面）之前的排版简直灾难——大量裸div脱离了页面结构，还有内联样式硬编码尺寸。直接整个重写了，恢复了标准的gjs-row/gjs-cell结构。</p>
-
-                <p><strong>从Notion导出里捞了点新东西</strong></p>
-                <p>翻了一下notionExport目录下的原始导出文件，发现feature.html在Notion那边其实有不少实际内容（图标说明、按钮、嵌套、折叠、结构页面等），但网站这边一直是空的占位页。就把那些内容搬过来了，顺便标注了哪些功能因为网站化改造已经弃用了。</p>
-
-                <p><strong>新增了一些CSS组件</strong></p>
-                <p>为了配合Notion导出内容的展示，给CSS补了几个组件样式：原生的details/summary折叠块、callout提示框、link-to-page页面链接按钮。暗色模式下也都适配好了。</p>
-
-                <p><strong>同步更新了所有JS里的内联样式值</strong></p>
-                <p>每个页面都有移动端导航展开的逻辑，里面硬编码了一堆旧的样式值（比如旧的颜色代码#6b8e23、旧的尺寸35px/160px之类的）。一共11个HTML文件全部统一替换成了新的参数。</p>
+                <p><strong>开发规范建立</strong></p>
+                <p>- 创建 .trae/rules/project_rules.md 开发规范文件</p>
+                <p>- 定义版本控制规则（方案B：alpha-{编号}）</p>
+                <p>- 定义更新日志规则（净变更记录）</p>
 
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-2" class="section-title-text-main">知识馆变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>新建知识馆子网站（knowledge-hall/）</strong></p>
+                <p>- knowledge-hall/index.html — 知识馆主页</p>
+                <p>- knowledge-hall/categories/phenomenon.html — 现象分类页</p>
+                <p>- knowledge-hall/categories/recallable.html — 可回忆知识分类页</p>
+                <p>- knowledge-hall/categories/traceable.html — 可追溯知识分类页</p>
+
+                <p><strong>知识馆核心内容</strong></p>
+                <p>- 知识馆是牧羊人图书馆的分馆，用于存放和查阅知识</p>
+                <p>- 所有知识都是平等的</p>
+                <p>- 知识可分成三类：现象、可回忆知识、可追溯知识</p>
+                <p>- 现象是最原始最纯粹的知识</p>
+                <p>- 可回忆知识是建筑最稳定的知识，能随时随地被提出或用于想象和创造</p>
+                <p>- 可追溯知识需通过考察转为可回忆知识，一般通过记录来保存</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -124,7 +133,8 @@
     <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
     <div class="quick-nav-section">页面目录</div>
     <div id="quick-nav-toc-container">
-      <div data-target="section-1" class="quick-nav-toc-item">• 开学后第一个更新</div>
+      <div data-target="section-1" class="quick-nav-toc-item">• 主馆变更</div>
+      <div data-target="section-2" class="quick-nav-toc-item">• 知识馆变更</div>
     </div>
   </div>
 </div>

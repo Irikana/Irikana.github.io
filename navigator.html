@@ -1,16 +1,17 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>牧羊人图书馆 - 导航枢纽</title>
-<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
-<meta name="keywords" content="图书馆,知识,学习,牧羊人">
-<link rel="stylesheet" href="./css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>牧羊人图书馆 - 导航枢纽</title>
+  <meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+  <meta name="keywords" content="图书馆,知识,学习,牧羊人">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-<div class="gjs-row main-container">
-  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="./image/logo.png" class="logo-border logo-container logo-img-custom"><img src="./image/logo_text.png" class="logo-size logo-size-custom"></div>
+
+<header class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="./image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="./image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
     <div class="slogan-container">
       <hr class="slogan-line slogan-line-left">
       <span class="slogan-text">存放所有知识之地</span>
@@ -18,22 +19,23 @@
     </div>
     <div class="section-padding page-title-main">牧羊人图书馆导航枢纽</div>
   </div>
-</div>
+</header>
 
-<div class="gjs-row header-row">
+<nav class="gjs-row header-row">
   <div class="gjs-cell nav-center">
     <div class="nav-padding title-color nav-title">位置</div>
     <div class="content-padding nav-location">目前所在位置<br><span id="current-path">导航枢纽</span></div>
+    <a href="javascript:void(0)" class="translate-btn" onclick="translateToEnglish()">EN</a>
   </div>
-</div>
+</nav>
 
-<div class="gjs-row content-row content-bg-white">
+<main class="gjs-row content-row content-bg-white">
   <div class="content-width-limiter">
     <div class="gjs-cell content-bg-yellow">
 
-      <div class="gjs-row notice-header page-header-section">
+      <section class="gjs-row notice-header page-header-section">
         <div class="gjs-cell">
-          <div id="section-1" class="section-title-text-main">介绍</div>
+          <h2 id="section-1" class="section-title-text-main">介绍</h2>
           <div class="gjs-row content-bg-lightgrey">
             <div class="gjs-cell">
               <div class="center-align">
@@ -42,11 +44,11 @@
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="gjs-row notice-header section-header-repeat page-section-reset">
+      <section class="gjs-row notice-header section-header-repeat page-section-reset">
         <div class="gjs-cell">
-          <div id="section-2" class="section-title-text-sub">建议访问</div>
+          <h2 id="section-2" class="section-title-text-sub">建议访问</h2>
           <div class="gjs-row yellowgreen-bg content-bg-white-text">
             <div class="gjs-cell">
               <div class="center-align">
@@ -55,15 +57,35 @@
                 <p class="left-align">要了解图书馆的入门内容，请访问 <a href="./library/intro.html">牧羊人图书馆入门</a> 页面。</p>
                 <p class="left-align">要了解图书馆的规则，请访问 <a href="./library/rule.html">图书馆规则</a> 页面。</p>
                 <p class="left-align">要了解图书馆能够做到哪些功能性内容，请访问 <a href="./library/feature.html">图书馆功能</a> 页面。</p>
+                <p class="left-align">要访问知识馆（图书馆分馆），请访问 <a href="./knowledge-hall/index.html">知识馆</a> 页面。</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="gjs-row notice-header section-header-repeat bg-reset">
+      <section class="gjs-row notice-header section-header-repeat bg-reset">
         <div class="gjs-cell">
-          <div id="section-3" class="section-title-text-main">文章</div>
+          <h2 id="section-4" class="section-title-text-sub">知识馆</h2>
+          <div class="gjs-row yellowgreen-bg content-bg-white-text">
+            <div class="gjs-cell">
+              <div class="center-align">
+                <p>知识馆是牧羊人图书馆的分馆，用于存放和查阅知识。</p>
+                <p><strong>现象</strong></p>
+                <p class="left-align">最原始、最纯粹的知识：<a href="./knowledge-hall/categories/phenomenon.html">现象</a></p>
+                <p><strong>可回忆知识</strong></p>
+                <p class="left-align">可随时提出或用于想象创造的知识：<a href="./knowledge-hall/categories/recallable.html">可回忆知识</a></p>
+                <p><strong>可追溯知识</strong></p>
+                <p class="left-align">需通过考察转为可回忆的知识：<a href="./knowledge-hall/categories/traceable.html">可追溯知识</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gjs-row notice-header section-header-repeat bg-reset">
+        <div class="gjs-cell">
+          <h2 id="section-5" class="section-title-text-main">文章</h2>
           <div class="gjs-row yellowgreen-bg content-bg-white-sub">
             <div class="gjs-cell">
               <div class="center-align">
@@ -78,18 +100,18 @@
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
     </div>
   </div>
-</div>
+</main>
 
-<div class="gjs-row footer-row footer-row-alt footer-gradient">
+<footer class="gjs-row footer-row footer-row-alt footer-gradient">
   <div class="gjs-cell nav-center">
-    <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
-      未经许可，不得擅自转载、修改或用于商业用途<br></div>
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
+      未经许可，不得擅自转载、修改或用于商业用途</div>
   </div>
-</div>
+</footer>
 
 <div class="mobile-nav">
   <div class="mobile-nav-title">便携式导航仪</div>
@@ -115,9 +137,10 @@
     <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
     <div class="quick-nav-section">页面目录</div>
     <div id="quick-nav-toc-container">
-      <div class="quick-nav-toc-item" data-target="section-1">• 介绍</div>
-      <div class="quick-nav-toc-item" data-target="section-2">• 建议访问</div>
-      <div class="quick-nav-toc-item" data-target="section-3">• 文章</div>
+      <div class="quick-nav-toc-item" data-target="section-1">&bull; 介绍</div>
+      <div class="quick-nav-toc-item" data-target="section-2">&bull; 建议访问</div>
+      <div class="quick-nav-toc-item" data-target="section-4">&bull; 知识馆</div>
+      <div class="quick-nav-toc-item" data-target="section-5">&bull; 文章</div>
     </div>
   </div>
 </div>
@@ -131,6 +154,10 @@
 </button>
 
 <script id="ext-inline-js-import-body-end-0">
+function translateToEnglish() {
+  window.location.href = 'https://translate.google.com/translate?sl=zh-CN&tl=en&u=' + encodeURIComponent(window.location.href);
+}
+
 function scrollToTop() {
   window.scrollTo({
     top: 0,
@@ -159,7 +186,7 @@ function getCurrentPath() {
       }
       return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
     })
-    .join(' → ');
+    .join(' &#8250; ');
 
   return formattedPath;
 }

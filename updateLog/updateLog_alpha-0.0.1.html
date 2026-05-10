@@ -24,6 +24,7 @@
   <div class="gjs-cell nav-center">
     <div class="nav-padding title-color nav-title">位置</div>
     <div class="content-padding nav-location">目前所在位置<br><span id="current-path">加载中...</span></div>
+    <a href="javascript:void(0)" class="translate-btn" onclick="translateToEnglish()">EN</a>
   </div>
 </div>
 
@@ -113,6 +114,10 @@
 </button>
 
 <script>
+function translateToEnglish() {
+  window.location.href = 'https://translate.google.com/translate?sl=zh-CN&tl=en&u=' + encodeURIComponent(window.location.href);
+}
+
 function scrollToTop() {
   window.scrollTo({
     top: 0,

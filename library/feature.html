@@ -1,44 +1,52 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>牧羊人图书馆 - 图书馆功能</title>
-<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
-<meta name="keywords" content="图书馆,知识,学习,牧羊人">
-<link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>牧羊人图书馆 - 图书馆功能</title>
+  <meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+  <meta name="keywords" content="图书馆,知识,学习,牧羊人">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<div class="gjs-row main-container">
-    <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../image/logo_text.png" class="logo-size logo-size-custom"></div>
+
+  <header class="gjs-row main-container">
+    <div class="gjs-cell logo-align">
+      <div class="logo-header-row">
+        <img src="../image/logo.png" alt="牧羊人图书馆 Logo" class="logo-border logo-container logo-img-custom">
+        <img src="../image/logo_text.png" alt="牧羊人图书馆" class="logo-size logo-size-custom">
+      </div>
       <div class="slogan-container">
         <hr class="slogan-line slogan-line-left"><span class="slogan-text">存放所有知识之地</span>
         <hr class="slogan-line slogan-line-right">
       </div>
-      <div class="section-padding page-title-main">图书馆功能</div>
+      <h1 class="section-padding page-title-main">图书馆功能</h1>
     </div>
-  </div>
-  <div class="gjs-row header-row">
+  </header>
+
+  <nav class="gjs-row header-row">
     <div class="gjs-cell nav-center">
       <div class="nav-padding title-color nav-title">位置</div>
       <div class="content-padding nav-location">目前所在位置<br><span id="current-path">图书馆功能</span></div>
+      <a href="javascript:void(0)" class="translate-btn" onclick="translateToEnglish()">EN</a>
     </div>
-  </div>
-  <div class="gjs-row content-row content-bg-white">
+  </nav>
+
+  <main class="gjs-row content-row content-bg-white">
     <div class="content-width-limiter">
       <div class="gjs-cell content-bg-yellow">
 
-        <div class="gjs-row notice-header page-header-section">
+        <section class="gjs-row notice-header page-header-section">
           <div class="gjs-cell">
             <div class="notice-box-red">
               <div class="left-align">由于图书馆最终以网站形式呈现，故该页面可能仅在Notion内部可用，自2026年3月30日起，图书馆功能正在逐步重构，内容可能不具备时效性</div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="gjs-row notice-header section-header">
+        <section class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-1" class="section-title-text-main">基本功能</div>
+            <h2 id="section-1" class="section-title-text-main">基本功能</h2>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="center-align">
@@ -47,30 +55,41 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="gjs-row notice-header section-header">
+        <section class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-1-1" class="subsection-header">图标</div>
+            <h3 id="section-1-1" class="subsection-header">图标</h3>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="left-align">
                   <p>在图书馆中，每个页面都有一个图标。图标可以帮助你快速识别页面的类型或主题。</p>
+                  <p>图标是Notion中页面的一种属性，在页面被引用时会显示在链接按钮的左侧，起到快速识别的作用。图标可以是emoji，也可以是自定义上传的图片。</p>
                   <details open>
                     <summary>注意</summary>
                     <div class="indented">
                       <p>如果你在一些页面的最顶端，或者在被引用时，看到金色的图标时，这意味着它们是除去所有内容之后，那些起到结构性作用的页面。</p>
                     </div>
                   </details>
+                  <details>
+                    <summary>金色图标页面</summary>
+                    <div class="indented">
+                      <p>如果你在一些页面的最顶端，或者在被引用时，看到金色的图标时，这意味着它们是除去所有内容之后，那些起到结构性作用的页面，这里展示了目前所有的这些页面。</p>
+                      <div class="function-box-blue">
+                        <p>📒 牧羊人图书馆 — 主页面</p>
+                        <p>🧭 牧羊人图书馆导航枢纽 — 导航中心</p>
+                      </div>
+                    </div>
+                  </details>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="gjs-row notice-header section-header">
+        <section class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-1-2" class="subsection-header">按钮（此功能已弃用）</div>
+            <h3 id="section-1-2" class="subsection-header">按钮<span class="deprecated-badge">已弃用</span>（此功能已弃用）</h3>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="center-align">
@@ -79,11 +98,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="gjs-row notice-header section-header">
+        <section class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-2" class="section-title-text-sub">进阶功能（此功能已弃用）</div>
+            <h2 id="section-2" class="section-title-text-sub">进阶功能<span class="deprecated-badge">已弃用</span>（此功能已弃用）</h2>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="center-align">
@@ -92,15 +111,17 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="gjs-row notice-header section-header">
+        <section class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-2-1" class="subsection-header">嵌套（此功能已弃用）</div>
+            <h3 id="section-2-1" class="subsection-header">嵌套<span class="deprecated-badge">已弃用</span>（此功能已弃用）</h3>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="left-align">
                   <p>支持在一个页面中包含多个内容，比如在一个页面中可以有多个一级标题、多个二级标题等。</p>
+                  <p>嵌套是指在一个折叠块内部再放置另一个折叠块，形成层级结构。这种方式适合展示有层次关系的内容，比如目录、分类说明等。</p>
+                  <p>标注（Callout）是一种带有图标和背景色的信息框，用于突出显示重要内容或提示信息。标注可以包含标题和正文，图标可以是emoji或自定义图片。</p>
                   <figure class="callout block-color-gray_background">
                     <span class="icon">💡</span>
                     <div><p>这是一个标注示例</p></div>
@@ -110,11 +131,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="gjs-row notice-header section-header">
+        <section class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-3" class="section-title-text-sub-sub">网站功能</div>
+            <h2 id="section-3" class="section-title-text-sub-sub">网站功能</h2>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="center-align">
@@ -123,11 +144,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="gjs-row notice-header section-header">
+        <section class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-3-1" class="subsection-header">折叠</div>
+            <h3 id="section-3-1" class="subsection-header">折叠</h3>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="left-align">
@@ -142,11 +163,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="gjs-row notice-header section-header">
+        <section class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-3-2" class="subsection-header">便携式导航仪</div>
+            <h3 id="section-3-2" class="subsection-header">便携式导航仪</h3>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="left-align">
@@ -155,11 +176,11 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="gjs-row notice-header section-header">
+        <section class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <div id="section-4" class="section-title-text-sub">结构页面</div>
+            <h2 id="section-4" class="section-title-text-sub">结构页面</h2>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="left-align">
@@ -173,22 +194,25 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
       </div>
     </div>
-  </div>
-  <div class="gjs-row footer-row footer-row-alt footer-gradient">
+  </main>
+
+  <footer class="gjs-row footer-row footer-row-alt footer-gradient">
     <div class="gjs-cell nav-center">
       <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
         未经许可，不得擅自转载、修改或用于商业用途<br></div>
     </div>
-  </div>
+  </footer>
+
   <div class="mobile-nav">
     <div class="mobile-nav-title">便携式导航仪</div>
     <div class="mobile-nav-links"><a href="../index.html" class="mobile-nav-link">图书馆主页</a><a href="intro.html" class="mobile-nav-link">图书馆入门</a><a href="rule.html" class="mobile-nav-link">图书馆规则</a><a href="feature.html" class="mobile-nav-link">图书馆功能</a><a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
     </div>
   </div>
+
   <div class="quick-nav">
     <div class="quick-nav-title">便携式导航仪</div>
     <div class="quick-nav-hint">光标移到此处展开</div>
@@ -204,12 +228,20 @@
         <div data-target="section-4" class="quick-nav-toc-item">• 结构页面</div>
       </div>
     </div>
-  </div><button title="回到顶部" class="float-button back-to-top">
+  </div>
+
+  <button title="回到顶部" class="float-button back-to-top">
     回到<br>顶部
-  </button><button title="导航枢纽" class="float-button nav-hub">
+  </button>
+  <button title="导航枢纽" class="float-button nav-hub">
     导航<br>枢纽
   </button>
+
 <script id="ext-inline-js-import-body-end-2">
+function translateToEnglish() {
+  window.location.href = 'https://translate.google.com/translate?sl=zh-CN&tl=en&u=' + encodeURIComponent(window.location.href);
+}
+
 function scrollToTop() {
   window.scrollTo({
     top: 0,
@@ -270,7 +302,7 @@ function toggleTocToggle(toggleElement) {
 window.addEventListener('DOMContentLoaded', function() {
   const quickNav = document.querySelector('.quick-nav');
   const isMobile = window.innerWidth <= 768;
-  
+
   if (quickNav && isMobile) {
     quickNav.addEventListener('click', function(event) {
       if (quickNav.classList.contains('expanded')) {
