@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 知识馆正式启用</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<div class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../../image/logo_text.png" class="logo-size logo-size-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">知识馆正式启用</div>
+  </div>
+</div>
+
+<div class="gjs-row header-row">
+  <div class="gjs-cell nav-center">
+    <div class="nav-padding title-color nav-title">位置</div>
+    <div class="content-padding nav-location">目前所在位置<br><span id="current-path">加载中...</span></div>
+  </div>
+</div>
+
+<div class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-bg-yellow">
+      <div class="quote-box-grey">
+        <div class="left-align">2026.5.10</div>
+      </div>
+
+      <div class="left-align">
+        <p>今天，图书馆分馆（子馆），知识馆正式启用，未来将会在知识馆当中源源不断的加入词条，自2026年3月2日起，知识馆的雏形就已完成，它出现在草稿纸上。目前，知识馆将知识分为三类，分别是现象，可追溯知识和可回忆知识，你可以通过刷新或重新进入主页后右下角出现的浮窗提示处进入知识馆。</p>
+      </div>
+
+      <div class="function-box-blue">
+        <div class="left-align">
+          <strong>进入知识馆</strong><br>
+          <a href="../../knowledge-hall/index.html">知识馆主页</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</div>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../../index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="../intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="../rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="../feature.html" class="quick-nav-item">图书馆功能</a>
+    <div class="quick-nav-divider"></div>
+    <div class="quick-nav-section">当前页面</div>
+    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
+    <div class="quick-nav-section">页面目录</div>
+    <div id="quick-nav-toc-container">
+      <div data-target="section-1" class="quick-nav-toc-item">&bull; 知识馆正式启用</div>
+    </div>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top" onclick="scrollToTop()">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub" onclick="openNavigator()">
+  导航<br>枢纽
+</button>
+
+<script>
+const PAGE_DISPLAY_NAME = '知识馆正式启用';
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openNavigator() {
+  window.open('../../navigator.html', '_blank');
+}
+
+function getCurrentPath() {
+  const path = window.location.pathname;
+  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
+
+  if (formattedPath === '' || formattedPath === 'index') {
+    return '首页';
+  }
+
+  const segments = formattedPath.split('/');
+  formattedPath = segments.map((segment, index) => {
+    const fileNameIndex = segment.lastIndexOf('.');
+    if (fileNameIndex > 0) {
+      segment = segment.substring(0, fileNameIndex);
+    }
+    if (index === segments.length - 1 && PAGE_DISPLAY_NAME) {
+      return PAGE_DISPLAY_NAME;
+    }
+    return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
+  }).join(' → ');
+
+  return formattedPath;
+}
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) { section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
+
+function toggleTocToggle(toggleElement) {
+  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
+  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
+  if (childrenElement) {
+    if (childrenElement.classList.contains('show')) {
+      childrenElement.classList.remove('show'); toggleElement.classList.remove('expanded'); toggleElement.classList.add('collapsed');
+    } else {
+      childrenElement.classList.add('show'); toggleElement.classList.remove('collapsed'); toggleElement.classList.add('expanded');
+    }
+  }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded'); quickNav.style.width = '32px'; quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content'); if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title'); if (title) { title.style.writingMode = 'vertical-rl'; title.style.marginBottom = '4px'; title.style.paddingBottom = '0'; title.style.borderBottom = 'none'; }
+        const hint = quickNav.querySelector('.quick-nav-hint'); if (hint) hint.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded'); quickNav.style.width = '180px'; quickNav.style.padding = '16px';
+        const content = quickNav.querySelector('.quick-nav-content'); if (content) content.style.display = 'block';
+        const title = quickNav.querySelector('.quick-nav-title'); if (title) { title.style.writingMode = 'horizontal-tb'; title.style.marginBottom = '16px'; title.style.paddingBottom = '8px'; title.style.borderBottom = '1px solid #e0e0e0'; }
+        const hint = quickNav.querySelector('.quick-nav-hint'); if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  const currentPathElement = document.getElementById('current-path');
+  if (currentPathElement) { currentPathElement.textContent = getCurrentPath(); }
+
+  const quickNavPageTitleElement = document.getElementById('quick-nav-page-title');
+  if (quickNavPageTitleElement) {
+    quickNavPageTitleElement.textContent = document.title.replace('牧羊人图书馆 - ', '');
+    quickNavPageTitleElement.addEventListener('click', function(event) { event.stopPropagation(); scrollToTop(); });
+    quickNavPageTitleElement.style.cursor = 'pointer';
+  }
+
+  const tocContainer = document.getElementById('quick-nav-toc-container');
+  if (tocContainer) {
+    tocContainer.addEventListener('click', function(e) {
+      const target = e.target;
+      if (target.classList.contains('quick-nav-toc-toggle')) { e.stopPropagation(); e.preventDefault(); toggleTocToggle(target); return; }
+      if (target.classList.contains('quick-nav-toc-item') || target.classList.contains('quick-nav-toc-item-with-children') || target.classList.contains('quick-nav-toc-child-item')) {
+        e.stopPropagation(); e.preventDefault();
+        let sectionId;
+        if (target.classList.contains('quick-nav-toc-item-with-children')) { const te = target.nextElementSibling; if (te && te.classList.contains('quick-nav-toc-toggle')) sectionId = te.getAttribute('data-parent'); }
+        else { sectionId = target.getAttribute('data-target'); }
+        if (sectionId) { scrollToSection(sectionId); }
+      }
+    });
+  }
+
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) { backToTopBtn.addEventListener('click', scrollToTop); }
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) { navHubBtn.addEventListener('click', openNavigator); }
+});
+</script>
+</body>
+</html>

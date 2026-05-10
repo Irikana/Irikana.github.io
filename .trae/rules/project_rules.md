@@ -46,12 +46,15 @@
 ### 版本号规则
 - 采用 **方案B**：`alpha-{自定义编号}`（如 `alpha-001`、`alpha-004`）
 - 编号完全由作者自主控制，不绑定日期
-- 当前版本：**alpha-005**
+- 当前版本：**alpha-007**
 
 ### 更新日志规则
 - **每次开发的净变更保存于更新日志当中**
-- 日志文件存放在 `updateLog/` 目录，命名格式 `updateLog_alpha-{编号}.html`
-- 分店分行列出变更（主馆 / 知识馆 各自独立列出）
+- 日志文件存放在 `updateLog/` 目录
+- **命名格式：`updateLog_{YYYY-MM-DD}.html`**（按日期命名，而非按 alpha 编号）
+- **禁止为同一天内的每次小修改都新建独立的日志文件**
+- 同一天内的所有变更应合并到同一个日期命名的日志文件中
+- 分店分行列出变更（主馆 / 知识馆 / 规范 各自独立列出）
 - **净变更定义**：对比上一次版本所做的最终更改
 - 同一版本开发过程中，如果加入的内容有错误修正，修正部分**不写入日志**——因为修正包含在该内容的加入过程中
 - 日志只记录最终新增/变更的内容，不记录中间过程的修修补补
@@ -59,11 +62,10 @@
 ### 更新日志结构
 ```
 updateLog/
-├── updateLog_alpha-001.html   # 首次创建
-├── updateLog_alpha-002.html   # 网站化改造
-├── updateLog_alpha-003.html   # 排版规范化
-├── updateLog_alpha-004.html   # 知识馆分馆 + 主页重构 + ...
-└── updateLog_alpha-005.html   # 英文翻译支持
+├── updateLog_alpha-001.html   # 早期日志（历史遗留）
+├── updateLog_alpha-002.html   # 早期日志（历史遗留）
+├── updateLog_alpha-003.html   # 早期日志（历史遗留）
+└── updateLog_2026-05-10.html  # 按日期命名的新格式
 ```
 
 每个日志文件中按以下分区记录：
@@ -101,7 +103,7 @@ Irikana.github.io/
 │   ├── index.html          # 知识馆主页
 │   └── categories/         # 知识分类
 ├── updateLog/              # 更新日志
-│   └── updateLog_alpha-{编号}.html
+│   └── updateLog_{YYYY-MM-DD}.html
 └── .trae/rules/            # 开发规范
     └── project_rules.md    # 本文件
 ```
@@ -124,3 +126,72 @@ Irikana.github.io/
 - 文字醒目，适当增大字体
 - 取消顶部导航栏（nav），改用侧边栏导航
 - 侧边栏包含：三种知识分类入口、回到图书馆主页、进入图书馆入口
+
+### 新闻卡片创建规范
+
+当用户提供时间、标题和内容要求创建新闻时，遵循以下标准：
+
+**新闻卡片两种类型：**
+
+1. **文字新闻（无海报）** — 使用 `news-card-text-only` 类：
+```html
+<div class="news-carousel-card" data-date="YYYY-MM-DD">
+  <div class="news-card">
+    <a href="{链接}" target="_blank" class="news-card-text-only">
+      <h3 class="news-card-title">{标题}</h3>
+      <p class="news-card-date">{YYYY年M月D日}</p>
+      <p class="news-card-hint">点击此处了解更多</p>
+    </a>
+  </div>
+</div>
+```
+
+2. **海报新闻（有海报图片）** — 使用 `news-card-content` 类：
+```html
+<div class="news-carousel-card" data-date="YYYY-MM-DD">
+  <div class="news-card">
+    <div class="news-card-content">
+      <a href="{链接}" target="_blank" class="news-card-image">
+        <img src="./image/poster/{路径}/{文件名}.png" alt="{描述}">
+      </a>
+      <div class="news-card-info">
+        <h3 class="news-card-title">{标题}</h3>
+        <p class="news-card-date">{YYYY年M月D日}</p>
+        <p class="news-card-hint">点击海报了解更多</p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+**关键规则：**
+- `data-date` 属性格式为 `YYYY-MM-DD`，用于轮播排序（按日期降序）
+- `news-card-hint` 固定为短引导语："点击此处了解更多"（文字新闻）或"点击海报了解更多"（海报新闻），**不得将正文内容放入 hint**
+- 新闻正文内容应放在链接指向的目标页面中，而非卡片内
+- 中英文主页的新闻卡片需同步添加，内容对应翻译
+- 新新闻卡片插入到 `#carousel-track` 内的最前面（轮播会自动按 date 排序）
+
+### 跳转链接图标规范
+
+当需要为外部链接、跨页面链接或导航项添加跳转指示图标时，遵循以下标准：
+
+**图标实现方式：**
+- 使用 CSS `::after` 伪元素自动添加 SVG 箭头图标
+- 适用类名：`.ext-link` `.quick-nav-item` `.kh-nav-item` `.mobile-nav-link`
+- **禁止**在 HTML 文本中手动添加 `↗` 或其他箭头符号
+
+**文字与图标间距规范：**
+- 链接文本末尾必须保留**一个空格**，作为文字与图标的视觉分隔
+- 正确示例：`<a href="..." class="kh-nav-item">知识馆主页 </a>`
+- 错误示例：`<a href="..." class="kh-nav-item">知识馆主页↗</a>` （双重图标）
+- 错误示例：`<a href="..." class="kh-nav-item">知识馆主页</a>` （无空格）
+
+**适用场景：**
+- 侧边栏导航项（`.kh-nav-item`）
+- 快速导航项（`.quick-nav-item`）
+- 外部链接（`.ext-link`）
+- 移动端导航链接（`.mobile-nav-link`）
+- 所有需要明确标识为"跳转/离开当前页面"的链接
+
+**特殊例外：**
+- `.link-to-page` 类已有内置图标样式，其 `::after` 设为 `content: none`，不重复添加

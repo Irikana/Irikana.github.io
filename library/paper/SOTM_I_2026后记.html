@@ -24,7 +24,6 @@
   <div class="gjs-cell nav-center">
     <div class="nav-padding title-color nav-title">位置</div>
     <div class="content-padding nav-location">目前所在位置<br><span id="current-path">加载中...</span></div>
-    <a href="javascript:void(0)" class="translate-btn" onclick="translateToEnglish()">EN</a>
   </div>
 </div>
 
@@ -105,10 +104,6 @@
 </button>
 
 <script>
-function translateToEnglish() {
-  window.location.href = 'https://translate.google.com/translate?sl=zh-CN&tl=en&u=' + encodeURIComponent(window.location.href);
-}
-
 function scrollToTop() {
   window.scrollTo({
     top: 0,
@@ -120,6 +115,8 @@ function openNavigator() {
   window.open('../../navigator.html', '_blank');
 }
 
+const PAGE_DISPLAY_NAME = 'SOTM I 2026后记';
+
 function getCurrentPath() {
   const path = window.location.pathname;
   let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
@@ -128,16 +125,17 @@ function getCurrentPath() {
     return '首页';
   }
 
-  formattedPath = formattedPath
-    .split('/')
-    .map(segment => {
-      const fileNameIndex = segment.lastIndexOf('.');
-      if (fileNameIndex > 0) {
-        segment = segment.substring(0, fileNameIndex);
-      }
-      return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
-    })
-    .join(' → ');
+  const segments = formattedPath.split('/');
+  formattedPath = segments.map((segment, index) => {
+    const fileNameIndex = segment.lastIndexOf('.');
+    if (fileNameIndex > 0) {
+      segment = segment.substring(0, fileNameIndex);
+    }
+    if (index === segments.length - 1 && PAGE_DISPLAY_NAME) {
+      return PAGE_DISPLAY_NAME;
+    }
+    return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
+  }).join(' → ');
 
   return formattedPath;
 }

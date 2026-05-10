@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>牧羊人图书馆 - 牧羊人图书馆主页</title>
-  <meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
-  <meta name="keywords" content="图书馆,知识,学习,牧羊人">
-  <link rel="stylesheet" href="./css/style.css">
+  <title>Shepherd's Library - Home</title>
+  <meta name="description" content="Shepherd's Library - A Place for All Knowledge">
+  <meta name="keywords" content="library,knowledge,learning,shepherd">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
 <header class="gjs-row main-container">
   <div class="gjs-cell logo-align">
     <div class="logo-header-row">
-      <img src="./image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo">
-      <img src="./image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆">
+      <img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="Shepherd's Library Logo">
+      <img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="Shepherd's Library">
     </div>
     <div class="slogan-container">
       <hr class="slogan-line slogan-line-left">
-      <span class="slogan-text">存放所有知识之地</span>
+      <span class="slogan-text">A Place for All Knowledge</span>
       <hr class="slogan-line slogan-line-right">
     </div>
-    <div class="section-padding page-title-main">牧羊人图书馆主页</div>
+    <div class="section-padding page-title-main">Shepherd's Library</div>
   </div>
 </header>
 
 <nav class="gjs-row header-row">
   <div class="gjs-cell nav-center">
-    <div class="nav-padding title-color nav-title">位置</div>
-    <div class="content-padding nav-location">目前所在位置<br><span id="current-path">首页</span></div>
+    <div class="nav-padding title-color nav-title">Location</div>
+    <div class="content-padding nav-location">You are here<br><span id="current-path">Home</span></div>
+    <a href="../index.html" class="translate-btn" title="中文版">中文</a>
   </div>
 </nav>
 
@@ -36,50 +37,50 @@
   <div class="content-width-limiter">
     <div class="gjs-cell content-bg-yellow">
 
-      <!-- Alpha建设状态提醒 -->
+      <!-- Alpha Stage Notice -->
       <div class="notice-box-red">
-        <div class="left-align">创建于2026.1.4<br>图书馆尚在初期建设中，为保证稳定性以及更新方便，很多应当采用更多自定义内容的地方全都换成了兼容性更强的内容，比如可能使用emoji而不是logo，并且尚处Alpha开发阶段，实质性内容极少，主要处理结构性问题。</div>
+        <div class="left-align">Created on January 4, 2026<br>The library is still in early development. To ensure stability and ease of updates, many areas use simpler placeholder content instead of fully custom designs. The site is currently in Alpha stage with minimal substantive content, focusing mainly on structural foundations.</div>
       </div>
 
-      <!-- 大板块 1：新闻 -->
+      <!-- Section 1: News -->
       <section class="gjs-row notice-header page-header-section">
         <div class="gjs-cell">
-          <h2 id="section-news" class="section-title-text-main">新闻</h2>
+          <h2 id="section-news" class="section-title-text-main">News</h2>
           <div class="gjs-row content-bg-lightgrey">
             <div class="gjs-cell">
               <div class="center-align">
                 <div class="news-carousel-container" id="news-carousel">
-                  <button class="news-carousel-nav-btn prev" id="carousel-prev" aria-label="上一篇">&#8249;</button>
+                  <button class="news-carousel-nav-btn prev" id="carousel-prev" aria-label="Previous">&#8249;</button>
                   <div class="news-carousel-wrapper">
                     <div class="news-carousel-track" id="carousel-track">
                       <div class="news-carousel-card" data-date="2026-05-10">
                         <div class="news-card">
                           <a href="./library/paper/knowledge-hall-launch.html" target="_blank" class="news-card-text-only">
-                            <h3 class="news-card-title">知识馆正式启用</h3>
-                            <p class="news-card-date">2026年5月10日</p>
-                            <p class="news-card-hint">点击此处了解更多</p>
+                            <h3 class="news-card-title">Knowledge Hall Officially Launched</h3>
+                            <p class="news-card-date">May 10, 2026</p>
+                            <p class="news-card-hint">Click here to learn more</p>
                           </a>
                         </div>
                       </div>
                       <div class="news-carousel-card" data-date="2026-04-03">
                         <div class="news-card">
-                          <a href="./updateLog/updateLog_alpha-2026.4.2-1.html" target="_blank" class="news-card-text-only">
-                            <h3 class="news-card-title">开学后第一个更新</h3>
-                            <p class="news-card-date">2026年4月3日</p>
-                            <p class="news-card-hint">点击此处了解更多</p>
+                          <a href="../updateLog/updateLog_alpha-2026.4.2-1.html" target="_blank" class="news-card-text-only">
+                            <h3 class="news-card-title">First Update After School Started</h3>
+                            <p class="news-card-date">April 3, 2026</p>
+                            <p class="news-card-hint">Click here to learn more</p>
                           </a>
                         </div>
                       </div>
                       <div class="news-carousel-card" data-date="2026-02-04">
                         <div class="news-card">
                           <div class="news-card-content">
-                            <a href="./updateLog/updateLog_alpha-0.0.1.html" target="_blank" class="news-card-image">
-                              <img src="./image/poster/update/update_alpha_0.0.1.png" alt="更新海报">
+                            <a href="../updateLog/updateLog_alpha-0.0.1.html" target="_blank" class="news-card-image">
+                              <img src="../image/poster/update/update_alpha_0.0.1.png" alt="Update Poster">
                             </a>
                             <div class="news-card-info">
-                              <h3 class="news-card-title">图书馆Alpha 0.0.1更新</h3>
-                              <p class="news-card-date">2026年2月4日</p>
-                              <p class="news-card-hint">点击海报了解更多</p>
+                              <h3 class="news-card-title">Library Alpha 0.0.1 Update</h3>
+                              <p class="news-card-date">February 4, 2026</p>
+                              <p class="news-card-hint">Click poster to learn more</p>
                             </div>
                           </div>
                         </div>
@@ -87,29 +88,29 @@
                       <div class="news-carousel-card" data-date="2026-02-03">
                         <div class="news-card">
                           <div class="news-card-content">
-                            <a href="./library/paper/SOTM_I_2026后记.html" target="_blank" class="news-card-image">
-                              <img src="./image/poster/SOTM/2026/SOTM-I-2026.png" alt="SOTM I 2026 海报">
+                            <a href="../library/paper/SOTM_I_2026后记.html" target="_blank" class="news-card-image">
+                              <img src="../image/poster/SOTM/2026/SOTM-I-2026.png" alt="SOTM I 2026 Poster">
                             </a>
                             <div class="news-card-info">
-                              <h3 class="news-card-title">SOTM I 2026后记</h3>
-                              <p class="news-card-date">2026年2月3日</p>
-                              <p class="news-card-hint">点击海报了解更多</p>
+                              <h3 class="news-card-title">SOTM I 2026 Postscript</h3>
+                              <p class="news-card-date">February 3, 2026</p>
+                              <p class="news-card-hint">Click poster to learn more</p>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="news-carousel-card" data-date="2026-02-18">
                         <div class="news-card">
-                          <a href="./library/paper/Minesia第一个公开测试.html" target="_blank" class="news-card-text-only">
-                            <h3 class="news-card-title">Minesia第一个公开测试</h3>
-                            <p class="news-card-date">2026年2月18日</p>
-                            <p class="news-card-hint">点击此处了解更多</p>
+                          <a href="../library/paper/Minesia第一个公开测试.html" target="_blank" class="news-card-text-only">
+                            <h3 class="news-card-title">Minesia First Public Test</h3>
+                            <p class="news-card-date">February 18, 2026</p>
+                            <p class="news-card-hint">Click here to learn more</p>
                           </a>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <button class="news-carousel-nav-btn next" id="carousel-next" aria-label="下一篇">&#8250;</button>
+                  <button class="news-carousel-nav-btn next" id="carousel-next" aria-label="Next">&#8250;</button>
                 </div>
               </div>
             </div>
@@ -117,30 +118,27 @@
         </div>
       </section>
 
-      <!-- 大板块 2：前情提要（含3个子板块） -->
+      <!-- Section 2: About -->
       <section class="gjs-row notice-header section-header">
         <div class="gjs-cell">
-          <h2 id="section-background" class="section-title-text-main">前情提要</h2>
+          <h2 id="section-background" class="section-title-text-main">About</h2>
           <div class="gjs-row content-bg-lightgrey">
             <div class="gjs-cell">
               <div class="center-align">
 
-                <!-- 子板块：图书馆入门 -->
                 <div class="content-bg-white-sub">
-                  <h3 class="section-title-text-sub">图书馆入门</h3>
-                  <p>这个页面是牧羊人图书馆的主页面。<br>如果你不知道牧羊人图书馆是什么，并且想了解牧羊人图书馆的一些信息，请点击以下页面。<br>总而言之，牧羊人图书馆（Shepherd's Library）是我存放我的所有知识之地。亦被称为谢沷尔德图书馆（Shpherd's Library），任何一个可以实现该行为的事物都可以称为牧羊人图书馆。<br><a href="library/intro.html">牧羊人图书馆入门</a></p>
+                  <h3 class="section-title-text-sub">Introduction</h3>
+                  <p>This is the homepage of Shepherd's Library.<br>If you don't know what Shepherd's Library is and would like to learn about it, please visit the page below.<br>In short, Shepherd's Library is where I store all my knowledge. It is also known as Shpherd's Library &mdash; anything capable of fulfilling this purpose can be called Shepherd's Library.<br><a href="library/intro.html">Library Introduction</a></p>
                 </div>
 
-                <!-- 子板块：图书馆规则 -->
                 <div class="content-bg-white-sub">
-                  <h3 class="section-title-text-sub">图书馆规则</h3>
-                  <p>作为我的创作，它应当从某种程度上无法摆脱，或者说服从于我的想法，比如图书馆里应该有什么，图书馆里绝对不能有什么，在进入图书馆时应该注意什么,这些被包含在被称为规则的地方。我默认任何一个看到该页面的人，都是要了解我或者了解我的作品的人，为了避免潜在的误会和疑惑，此部分是必要的。<br><a href="library/rule.html">图书馆规则</a></p>
+                  <h3 class="section-title-text-sub">Rules</h3>
+                  <p>As my creation, this library inevitably reflects my ideas &mdash; what belongs in a library, what absolutely does not, and what visitors should keep in mind when entering. These are documented in the Rules section. I assume anyone viewing this page wants to understand me or my work, so this section exists to prevent potential misunderstandings.<br><a href="library/rule.html">Library Rules</a></p>
                 </div>
 
-                <!-- 子板块：图书馆功能 -->
                 <div class="content-bg-white-sub">
-                  <h3 class="section-title-text-sub">图书馆功能</h3>
-                  <p>这个部分讲述了你现在所在的图书馆具备什么样的能力，我们称之为功能，并简单概括功能的内涵和本质。<br><a href="library/feature.html">图书馆功能</a></p>
+                  <h3 class="section-title-text-sub">Features</h3>
+                  <p>This section describes the capabilities of this library &mdash; what we call Features &mdash; briefly summarizing their essence and nature.<br><a href="library/feature.html">Library Features</a></p>
                 </div>
 
               </div>
@@ -149,14 +147,14 @@
         </div>
       </section>
 
-      <!-- 大板块 3：图书馆入口 -->
+      <!-- Section 3: Entrance -->
       <section class="gjs-row notice-header section-header">
         <div class="gjs-cell">
-          <h2 id="section-entrance" class="section-title-text-main">图书馆入口</h2>
+          <h2 id="section-entrance" class="section-title-text-main">Entrance</h2>
           <div class="gjs-row yellowgreen-bg content-bg-white">
             <div class="gjs-cell">
               <div class="center-align">
-                <p>从这里进入牧羊人图书馆，祝你旅途愉快。<br><a href="library/library.html">牧羊人图书馆</a></p>
+                <p>Enter Shepherd's Library from here. Have a pleasant journey.<br><a href="library/library.html">Shepherd's Library</a></p>
               </div>
             </div>
           </div>
@@ -169,68 +167,68 @@
 
 <footer class="gjs-row footer-row footer-gradient">
   <div class="gjs-cell nav-center">
-    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利<br>未经许可，不得擅自转载、修改或用于商业用途</div>
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>All Rights Reserved<br>Unauthorized reproduction, modification, or commercial use is prohibited</div>
   </div>
 </footer>
 
 <div class="mobile-nav">
-  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-title">Navigator</div>
   <div class="mobile-nav-links">
-    <a href="./index.html" class="mobile-nav-link">图书馆主页</a>
-    <a href="./library/intro.html" class="mobile-nav-link">图书馆入门</a>
-    <a href="./library/rule.html" class="mobile-nav-link">图书馆规则</a>
-    <a href="./library/feature.html" class="mobile-nav-link">图书馆功能</a>
-    <a href="./navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+    <a href="./index.html" class="mobile-nav-link">Home</a>
+    <a href="./library/intro.html" class="mobile-nav-link">Introduction</a>
+    <a href="./library/rule.html" class="mobile-nav-link">Rules</a>
+    <a href="./library/feature.html" class="mobile-nav-link">Features</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">Navigator Hub</a>
   </div>
 </div>
 
 <div class="quick-nav">
-  <div class="quick-nav-title">便携式导航仪</div>
-  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-title">Navigator</div>
+  <div class="quick-nav-hint">Hover to expand</div>
   <div class="quick-nav-content">
-    <a href="./index.html" class="quick-nav-item">图书馆主页</a>
-    <a href="./library/intro.html" class="quick-nav-item">图书馆入门</a>
-    <a href="./library/rule.html" class="quick-nav-item">图书馆规则</a>
-    <a href="library/feature.html" class="quick-nav-item">图书馆功能</a>
+    <a href="./index.html" class="quick-nav-item">Home</a>
+    <a href="./library/intro.html" class="quick-nav-item">Introduction</a>
+    <a href="./library/rule.html" class="quick-nav-item">Rules</a>
+    <a href="./library/feature.html" class="quick-nav-item">Features</a>
     <div class="quick-nav-divider"></div>
-    <div class="quick-nav-section">当前页面</div>
-    <div id="quick-nav-page-title" class="quick-nav-page-title">牧羊人图书馆主页</div>
-    <div class="quick-nav-section">页面目录</div>
+    <div class="quick-nav-section">Current Page</div>
+    <div id="quick-nav-page-title" class="quick-nav-page-title">Shepherd's Library</div>
+    <div class="quick-nav-section">Table of Contents</div>
     <div id="quick-nav-toc-container">
-      <div class="quick-nav-toc-item" data-target="section-news">&bull; 新闻</div>
-      <div class="quick-nav-toc-item" data-target="section-background">&bull; 前情提要</div>
-      <div class="quick-nav-toc-item" data-target="section-entrance">&bull; 图书馆入口</div>
+      <div class="quick-nav-toc-item" data-target="section-news">&bull; News</div>
+      <div class="quick-nav-toc-item" data-target="section-background">&bull; About</div>
+      <div class="quick-nav-toc-item" data-target="section-entrance">&bull; Entrance</div>
     </div>
   </div>
 </div>
 
-<button title="回到顶部" class="float-button back-to-top">
-  回到<br>顶部
+<button title="Back to top" class="float-button back-to-top">
+  Back<br>to top
 </button>
 
 <div class="knowledge-hall-float" id="knowledge-hall-float">
   <div class="kh-float-header">
-    <span class="kh-float-title">知识馆</span>
-    <button class="kh-float-close" title="关闭" aria-label="关闭">&times;</button>
+    <span class="kh-float-title">Knowledge Hall</span>
+    <button class="kh-float-close" title="Close" aria-label="Close">&times;</button>
   </div>
   <div class="kh-float-body">
-    <p class="kh-float-desc">牧羊人图书馆的分馆，用于存放和查阅知识</p>
-    <a href="./knowledge-hall/index.html" target="_blank" class="kh-float-link">前往知识馆</a>
+    <p class="kh-float-desc">A branch of Shepherd's Library for storing and browsing knowledge</p>
+    <a href="../knowledge-hall/index.html" target="_blank" class="kh-float-link">Go to Knowledge Hall</a>
   </div>
 </div>
 
-<button title="导航枢纽" class="float-button nav-hub">
-  导航<br>枢纽
+<button title="Navigator Hub" class="float-button nav-hub">
+  Navigator<br>Hub
 </button>
 
 <div class="lang-switch-float" id="lang-switch-float">
   <div class="lang-float-header">
-    <span class="lang-float-title">English</span>
-    <button class="lang-float-close" title="关闭" aria-label="关闭">&times;</button>
+    <span class="lang-float-title">中文版</span>
+    <button class="lang-float-close" title="Close" aria-label="Close">&times;</button>
   </div>
   <div class="lang-float-body">
-    <p class="lang-float-desc">Looking for the English version?</p>
-    <a href="./en/index.html" class="lang-float-link">前往英文版 Go to EN →</a>
+    <p class="lang-float-desc">Looking for the Chinese version?</p>
+    <a href="../index.html" class="lang-float-link">前往中文版 Go to 中文 →</a>
   </div>
 </div>
 
@@ -243,15 +241,15 @@ function scrollToTop() {
 }
 
 function openNavigator() {
-  window.open('./navigator.html', '_blank');
+  window.open('../navigator.html', '_blank');
 }
 
 function getCurrentPath() {
   const path = window.location.pathname;
   let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
 
-  if (formattedPath === '' || formattedPath === 'index') {
-    return '首页';
+  if (formattedPath === '' || formattedPath === 'index' || formattedPath === 'en') {
+    return 'Home';
   }
 
   formattedPath = formattedPath

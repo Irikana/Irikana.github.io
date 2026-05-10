@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>牧羊人图书馆 - Alpha 004 更新日志</title>
+<title>牧羊人图书馆 - 2026年5月10日 更新日志</title>
 <meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
 <meta name="keywords" content="图书馆,知识,学习,牧羊人">
 <link rel="stylesheet" href="../css/style.css">
@@ -16,7 +16,7 @@
       <span class="slogan-text">存放所有知识之地</span>
       <hr class="slogan-line slogan-line-right">
     </div>
-    <div class="section-padding page-title-main">Alpha 004 更新日志</div>
+    <div class="section-padding page-title-main">2026年5月10日 更新日志</div>
   </div>
 </div>
 
@@ -24,7 +24,6 @@
   <div class="gjs-cell nav-center">
     <div class="nav-padding title-color nav-title">位置</div>
     <div class="content-padding nav-location">目前所在位置<br><span id="current-path">加载中...</span></div>
-    <a href="javascript:void(0)" class="translate-btn" onclick="translateToEnglish()">EN</a>
   </div>
 </div>
 
@@ -32,39 +31,42 @@
   <div class="content-width-limiter">
     <div class="gjs-cell content-bg-yellow">
       <div class="quote-box-grey">
-        <div class="left-align">Alpha 004</div>
+        <div class="left-align">2026-05-10</div>
       </div>
 
+      <!-- Alpha 004: 主页重构 + 知识馆建立 -->
       <div class="gjs-row notice-header page-header-section">
         <div class="gjs-cell">
-          <div id="section-1" class="section-title-text-main">主馆变更</div>
+          <div id="section-1" class="section-title-text-main">主馆变更（Alpha 004-007 合并）</div>
           <div class="gjs-row content-bg-lightgrey">
             <div class="gjs-cell">
               <div class="left-align">
 
-                <p><strong>主页（index.html）重构</strong></p>
+                <p><strong>主页（index.html）重构 [Alpha 004]</strong></p>
                 <p>- 板块结构重组：新闻、前情提要、入口为三大板块</p>
                 <p>- 图书馆入门、图书馆规则、图书馆功能归入「前情提要」板块的子级内容</p>
                 <p>- 知识馆从独立大板块改为浮窗形式出现</p>
 
-                <p><strong>CSS 样式（css/style.css）优化</strong></p>
-                <p>- 章节间距加大（notice-header margin-bottom 从 24px 增至 48px）</p>
-                <p>- 段落间距增大（p 标签 margin 从 8px 增至 16px）</p>
-                <p>- 行高提升至 1.8</p>
-                <p>- 红色警告框样式优化（左侧加粗边线 4px，去掉三角图标）</p>
-                <p>- 新闻卡片无海报时缩小内边距和字号，减少与相邻标题的间距</p>
-                <p>- 新增 .deprecated-badge 已弃用标签样式</p>
-                <p>- 新增 .article-list 文章列表样式</p>
-                <p>- 字体栈优化（添加 PingFang SC / Microsoft YaHei 中文回退）</p>
+                <p><strong>英文版支持 [Alpha 005]</strong></p>
+                <p>- 新增 en/ 目录，作为英文版根目录</p>
+                <p>- 创建5个英文版页面：en/index.html, en/library/intro.html, en/library/rule.html, en/library/feature.html, en/library/library.html</p>
 
-                <p><strong>导航枢纽（navigator.html）更新</strong></p>
-                <p>- 新增知识馆入口链接</p>
-                <p>- 新增知识馆独立板块（含三个分类链接）</p>
+                <p><strong>浮动按钮与排版优化 [Alpha 006]</strong></p>
+                <p>- 修复回到顶部按钮与导航枢纽按钮重叠的问题</p>
+                <p>- 新增语言切换浮窗（中英文互跳）</p>
+                <p>- 移除 .content-bg-yellow / .content-bg-white 的边框和圆角</p>
 
-                <p><strong>开发规范建立</strong></p>
-                <p>- 创建 .trae/rules/project_rules.md 开发规范文件</p>
-                <p>- 定义版本控制规则（方案B：alpha-{编号}）</p>
-                <p>- 定义更新日志规则（净变更记录）</p>
+                <p><strong>新闻板块间距大幅优化 [Alpha 007]</strong></p>
+                <p>- .section-title-text-main 的 margin-bottom 缩减至 var(--space-xs) (4px)</p>
+                <p>- .news-card-text-only 样式重构：padding 增大至 var(--space-lg)，min-height 设为 180px</p>
+                <p>- 文字新闻卡片标题字号增大至 18px，内部间距优化</p>
+
+                <p><strong>CSS 样式变更汇总（css/style.css）</strong></p>
+                <p>- .section-title-text-main: margin-bottom 多次调整</p>
+                <p>- .news-card-text-only: padding、min-height、内部元素样式全面优化</p>
+                <p>- .float-button .back-to-top: bottom 值调整</p>
+                <p>- .content-bg-yellow / .content-bg-white / .content-bg-white-sub: 移除 border 和 border-radius</p>
+                <p>- 新增 .lang-switch-float 及相关子类样式组</p>
 
               </div>
             </div>
@@ -72,6 +74,7 @@
         </div>
       </div>
 
+      <!-- 知识馆变更 -->
       <div class="gjs-row notice-header page-header-section">
         <div class="gjs-cell">
           <div id="section-2" class="section-title-text-main">知识馆变更</div>
@@ -79,19 +82,65 @@
             <div class="gjs-cell">
               <div class="left-align">
 
-                <p><strong>新建知识馆子网站（knowledge-hall/）</strong></p>
+                <p><strong>新建知识馆子网站 [Alpha 004]</strong></p>
                 <p>- knowledge-hall/index.html — 知识馆主页</p>
                 <p>- knowledge-hall/categories/phenomenon.html — 现象分类页</p>
                 <p>- knowledge-hall/categories/recallable.html — 可回忆知识分类页</p>
                 <p>- knowledge-hall/categories/traceable.html — 可追溯知识分类页</p>
 
-                <p><strong>知识馆核心内容</strong></p>
-                <p>- 知识馆是牧羊人图书馆的分馆，用于存放和查阅知识</p>
-                <p>- 所有知识都是平等的</p>
-                <p>- 知识可分成三类：现象、可回忆知识、可追溯知识</p>
-                <p>- 现象是最原始最纯粹的知识</p>
-                <p>- 可回忆知识是建筑最稳定的知识，能随时随地被提出或用于想象和创造</p>
-                <p>- 可追溯知识需通过考察转为可回忆知识，一般通过记录来保存</p>
+                <p><strong>侧边栏导航项样式修正 [Alpha 007]</strong></p>
+                <p>- .kh-nav-item 字号从 14px 增大至 16px，字重增加至 500</p>
+                <p>- 颜色从 #555（灰色）改为 #1a1a1a（深黑/白色），与主站风格统一</p>
+                <p>- 删除手动添加的 ↗ 符号和文本末尾空格，完全依赖 CSS ::after 自动生成箭头</p>
+                <p>- 暗色模式下 hover 颜色改为 #fff（纯白），提升对比度</p>
+
+                <p><strong>中英文页面箭头统一修复 [Alpha 007]</strong></p>
+                <p>- 批量删除所有页面中手动添加的 ↗ 符号（共删除约50+处）</p>
+                <p>- 涉及文件：en/index.html, en/library/paper/knowledge-hall-launch.html, navigator.html</p>
+                <p>- 涉及文件：library/intro.html, library/rule.html, library/feature.html, library/library.html</p>
+                <p>- 涉及文件：library/paper/知识馆启动.html, library/paper/记录的冲动.html, library/paper/SOTM_I_2026后记.html, library/paper/Minesia第一个公开测试.html</p>
+                <p>- 涉及类名：.mobile-nav-link, .quick-nav-item, .content-bg-white a, .content-bg-white-sub a, .kh-float-link</p>
+                <p>- 统一实现方式：所有跳转链接图标均通过 CSS ::after 伪元素自动生成，禁止在HTML中手动添加</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 规范变更 -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-3" class="section-title-text-main">规范变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>开发规范建立 [Alpha 004]</strong></p>
+                <p>- 创建 .trae/rules/project_rules.md 开发规范文件</p>
+                <p>- 定义版本控制规则（方案B：alpha-{编号}）</p>
+                <p>- 定义更新日志规则（净变更记录）</p>
+
+                <p><strong>新增：跳转链接图标使用规范 [Alpha 007]</strong></p>
+                <p>- 在 project_rules.md 中新增「跳转链接图标规范」章节</p>
+                <p>- 明确规定使用 CSS ::after 伪元素自动添加 SVG 箭头</p>
+                <p>- 规范文字与图标的间距：链接文本末尾必须保留一个空格</p>
+                <p>- 禁止在 HTML 文本中手动添加箭头符号（避免双重图标问题）</p>
+
+                <p><strong>新增：更新日志管理规范 [Alpha 007]</strong></p>
+                <p>- 同一天内的多次更新应合并到同一个日期命名的日志文件中</p>
+                <p>- 日志命名格式：updateLog_{YYYY-MM-DD}.html</p>
+                <p>- 禁止为同一天的每次小修改都新建独立的 alpha 编号日志</p>
+
+                <p><strong>箭头样式全面统一为SVG实现 [Alpha 007]</strong></p>
+                <p>- 将 .article-list a::after 从文本符号 '↗' 改为 SVG data URI（与知识馆一致）</p>
+                <p>- 新增内容区域通用链接箭头样式，自动应用于以下容器内的所有链接：</p>
+                <p>&nbsp;&nbsp;• .content-bg-white（主页入口板块等）</p>
+                <p>&nbsp;&nbsp;• .content-bg-white-sub（主页前情提要子板块）</p>
+                <p>&nbsp;&nbsp;• .yellowgreen-bg（导航枢纽、文章页面等）</p>
+                <p>- 排除特殊类名避免冲突：.news-card-text-only, .news-card-image, .link-to-page, nav相关类, float相关类</p>
+                <p>- 箭头效果：SVG矢量图标 + hover时向右平移3px + 透明度变化</p>
+                <p>- 影响范围：导航枢纽所有链接、主页内容区链接、所有library页面内容链接自动获得统一箭头样式</p>
 
               </div>
             </div>
@@ -105,7 +154,7 @@
 
 <div class="gjs-row footer-row footer-row-alt footer-gradient">
   <div class="gjs-cell nav-center">
-    <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
   </div>
 </div>
 
@@ -135,6 +184,7 @@
     <div id="quick-nav-toc-container">
       <div data-target="section-1" class="quick-nav-toc-item">• 主馆变更</div>
       <div data-target="section-2" class="quick-nav-toc-item">• 知识馆变更</div>
+      <div data-target="section-3" class="quick-nav-toc-item">• 规范变更</div>
     </div>
   </div>
 </div>
@@ -148,10 +198,6 @@
 </button>
 
 <script>
-function translateToEnglish() {
-  window.location.href = 'https://translate.google.com/translate?sl=zh-CN&tl=en&u=' + encodeURIComponent(window.location.href);
-}
-
 function scrollToTop() {
   window.scrollTo({
     top: 0,
@@ -195,7 +241,7 @@ function scrollToSection(sectionId) {
 function toggleTocToggle(toggleElement) {
   const parentElement = toggleElement.closest('.quick-nav-toc-parent');
   const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
-  
+
   if (childrenElement) {
     if (childrenElement.classList.contains('show')) {
       childrenElement.classList.remove('show');
@@ -212,7 +258,7 @@ function toggleTocToggle(toggleElement) {
 window.addEventListener('DOMContentLoaded', function() {
   const quickNav = document.querySelector('.quick-nav');
   const isMobile = window.innerWidth <= 768;
-  
+
   if (quickNav && isMobile) {
     quickNav.addEventListener('click', function(event) {
       if (quickNav.classList.contains('expanded')) {

@@ -23,9 +23,9 @@
     .kh-site-title { font-size: 14px; font-weight: 700; color: #2c3e50; letter-spacing: 1px; text-align: center; margin-top: 8px; }
     .kh-equality { font-size: 10px; color: #999; text-align: center; margin-top: 6px; letter-spacing: 0.5px; }
     .kh-nav-item {
-      display: block; padding: 10px 12px; color: #555;
-      text-decoration: none; border-radius: 4px; margin: 2px 0;
-      font-size: 14px; transition: all 0.15s;
+      display: block; padding: var(--space-sm) var(--space-md); color: #1a1a1a;
+      text-decoration: none; border-radius: var(--radius-sm); margin: 2px 0;
+      font-size: 16px; font-weight: 500; transition: all 0.15s;
     }
     .kh-nav-item:hover { background: #f0f0f0; color: #2c3e50; }
     .kh-nav-divider { height: 1px; background: #e0e0e0; margin: 12px 0; }
@@ -107,8 +107,8 @@
       .kh-sidebar { background: #222; border-right-color: #333; }
       .kh-site-title { color: #e8e6e3; }
       .kh-equality { color: #888; }
-      .kh-nav-item { color: #c0bdb8; }
-      .kh-nav-item:hover { background: #333; color: #e8e6e3; }
+      .kh-nav-item { color: #e8e6e3; }
+      .kh-nav-item:hover { background: #333; color: #fff; }
       .kh-nav-divider { background: #333; }
       .kh-nav-section { color: #666; }
       .kh-content h2 { color: #e8e6e3; border-bottom-color: #444; }
@@ -146,10 +146,6 @@
 
   <a href="../index.html" class="kh-nav-item">图书馆主页</a>
   <a href="../library/library.html" class="kh-nav-item">图书馆入口</a>
-
-  <div class="kh-nav-divider"></div>
-
-  <a href="javascript:void(0)" class="translate-btn" onclick="translateToEnglish()">EN</a>
 </aside>
 
 <main class="kh-main kh-content">
@@ -165,21 +161,21 @@
 
     <div class="kh-card">
       <a href="categories/phenomenon.html" class="kh-card-title-link">
-        <h3>现象 ↗</h3>
+        <h3>现象</h3>
       </a>
       <p>现象是最原始、最纯粹的知识，经过被发现或被观察后可转化为可回忆和可追溯知识的其中一个</p>
     </div>
 
     <div class="kh-card">
       <a href="categories/recallable.html" class="kh-card-title-link">
-        <h3>可回忆知识 ↗</h3>
+        <h3>可回忆知识</h3>
       </a>
       <p>可回忆知识是建筑最稳定的知识，它们能随时随地被提出或用于想象和创造</p>
     </div>
 
     <div class="kh-card">
       <a href="categories/traceable.html" class="kh-card-title-link">
-        <h3>可追溯知识 ↗</h3>
+        <h3>可追溯知识</h3>
       </a>
       <p>可追溯知识是所有知识当中，不能随时被回忆和用于想象和创造的，然而，唯一能够使它们出现的办法是通过考察将它们转为可回忆知识。一般通过记录来保存它们</p>
     </div>
@@ -195,12 +191,6 @@
 <button title="回到顶部" class="float-button back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   回到<br>顶部
 </button>
-
-<script>
-function translateToEnglish() {
-  window.location.href = 'https://translate.google.com/translate?sl=zh-CN&tl=en&u=' + encodeURIComponent(window.location.href);
-}
-</script>
 
 </body>
 </html>
