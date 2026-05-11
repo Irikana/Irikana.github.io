@@ -24,13 +24,6 @@
   </div>
 </header>
 
-<nav class="gjs-row header-row">
-  <div class="gjs-cell nav-center">
-    <div class="nav-padding title-color nav-title">Location</div>
-    <div class="content-padding nav-location">You are here<br><span id="current-path">Features</span></div>
-    <a href="../index.html" class="translate-btn" title="中文版">中文</a>
-  </div>
-</nav>
 
 <main class="gjs-row content-row content-bg-white">
   <div class="content-width-limiter">
@@ -186,9 +179,9 @@
               <div class="left-align">
                 <p>Below are all current structural pages marked with golden icons:</p>
                 <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
-                  <a href="../index.html" class="link-to-page"><span class="icon">&#128214;</span> Shepherd's Library Home</a>
-                  <a href="library.html" class="link-to-page"><span class="icon">&#128214;</span> Shepherd's Library</a>
-                  <a href="../../navigator.html" target="_blank" class="link-to-page"><span class="icon">&#129520;</span> Shepherd's Library Navigator Hub</a>
+                  <a href="../index.html" class="link-to-page">Shepherd's Library Home </a>
+                  <a href="library.html" class="link-to-page">Shepherd's Library </a>
+                  <a href="../../navigator.html" target="_blank" class="link-to-page">Shepherd's Library Navigator Hub </a>
                 </div>
               </div>
             </div>
@@ -329,6 +322,27 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         const hint = quickNav.querySelector('.quick-nav-hint');
         if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
       }
     });
   }

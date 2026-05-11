@@ -18,21 +18,16 @@
       <div class="section-padding page-title-main">记录的冲动</div>
     </div>
   </div>
-  <div class="gjs-row header-row">
-    <div class="gjs-cell nav-center">
-      <div class="nav-padding title-color nav-title">位置</div>
-      <div class="content-padding nav-location">目前所在位置<br><span id="current-path">记录的冲动</span></div>
-    </div>
-  </div>
+
   <div class="gjs-row content-row content-bg-white">
     <div class="content-width-limiter">
       <div class="gjs-cell content-bg-yellow c33289">
-        <div>
-          <div class="center-align">
-            <p>2025.12.04<br>录音时长11:15</p>
+        <div class="article-meta">
+          <div class="article-meta-item">
+            <span class="article-meta-label">创建于</span>
+            <span class="article-meta-value">2025.12.04 · 录音时长11:15</span>
           </div>
         </div>
-        <hr class="c33364">
         <div class="gjs-row yellowgreen-bg content-bg-white-text c33382">
           <div class="gjs-cell">
             <div class="center-align">
@@ -193,6 +188,27 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         const hint = quickNav.querySelector('.quick-nav-hint');
         if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
       }
     });
   }

@@ -24,12 +24,6 @@
     </div>
   </header>
 
-  <nav class="gjs-row header-row">
-    <div class="gjs-cell nav-center">
-      <div class="nav-padding title-color nav-title">位置</div>
-      <div class="content-padding nav-location">目前所在位置<br><span id="current-path">图书馆功能</span></div>
-    </div>
-  </nav>
 
   <main class="gjs-row content-row content-bg-white">
     <div class="content-width-limiter">
@@ -88,7 +82,7 @@
 
         <section class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <h3 id="section-1-2" class="subsection-header">按钮<span class="deprecated-badge">已弃用</span>（此功能已弃用）</h3>
+            <h3 id="section-1-2" class="subsection-header">按钮<span class="deprecated-badge">已弃用</span></h3>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="center-align">
@@ -114,7 +108,7 @@
 
         <section class="gjs-row notice-header section-header">
           <div class="gjs-cell">
-            <h3 id="section-2-1" class="subsection-header">嵌套<span class="deprecated-badge">已弃用</span>（此功能已弃用）</h3>
+            <h3 id="section-2-1" class="subsection-header">嵌套<span class="deprecated-badge">已弃用</span></h3>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <div class="left-align">
@@ -185,9 +179,9 @@
                 <div class="left-align">
                   <p>以下展示的是目前所有起到结构性作用的金色图标页面：</p>
                   <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
-                    <a href="../index.html" class="link-to-page"><span class="icon">📒</span> 牧羊人图书馆主页</a>
-                    <a href="library.html" class="link-to-page"><span class="icon">📒</span> 牧羊人图书馆</a>
-                    <a href="../navigator.html" target="_blank" class="link-to-page"><span class="icon">🧭</span> 牧羊人图书馆导航枢纽</a>
+                    <a href="../index.html" class="link-to-page">牧羊人图书馆主页 </a>
+                    <a href="library.html" class="link-to-page">牧羊人图书馆 </a>
+                    <a href="../navigator.html" target="_blank" class="link-to-page">牧羊人图书馆导航枢纽 </a>
                   </div>
                 </div>
               </div>
@@ -330,6 +324,27 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         const hint = quickNav.querySelector('.quick-nav-hint');
         if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
       }
     });
   }

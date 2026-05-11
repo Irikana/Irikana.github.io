@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>牧羊人图书馆 - 视觉组件标准</title>
+  <meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+  <meta name="keywords" content="图书馆,知识,学习,牧羊人">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <header class="gjs-row main-container">
+    <div class="gjs-cell logo-align">
+      <div class="logo-header-row">
+        <img src="../image/logo.png" alt="牧羊人图书馆 Logo" class="logo-border logo-container logo-img-custom">
+        <img src="../image/logo_text.png" alt="牧羊人图书馆" class="logo-size logo-size-custom">
+      </div>
+      <div class="slogan-container">
+        <hr class="slogan-line slogan-line-left"><span class="slogan-text">存放所有知识之地</span>
+        <hr class="slogan-line slogan-line-right">
+      </div>
+      <h1 class="section-padding page-title-main">视觉组件标准</h1>
+    </div>
+  </header>
+
+
+  <main class="gjs-row content-row content-bg-white">
+    <div class="content-width-limiter">
+      <div class="gjs-cell content-bg-yellow">
+
+        <section class="gjs-row notice-header page-header-section">
+          <div class="gjs-cell">
+            <div class="function-box-blue">
+              <p>本文档定义了项目中所有 UI 组件的标准样式。开发新页面或修改现有页面时，应直接复制对应组件的样式代码，以确保全站视觉一致性。</p>
+              <p>每个组件下方展示「实际渲染效果」和「对应代码」，方便直观对比参考。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 1: 信息提示框 ========== -->
+        <section class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <h2 id="section-1" class="section-title-text-main">1. 信息提示框（Callout Boxes）</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+
+                <!-- 蓝色信息框 -->
+                <h3 id="section-1-1" class="subsection-header">蓝色信息框 — .function-box-blue</h3>
+                <p>用途：一般性信息提示、功能说明、补充说明、"暂无条目"等中性通知。默认首选的信息框类型。</p>
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <div class="function-box-blue">
+                  此处填写信息内容。
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="function-box-blue"&gt;
+  此处填写信息内容。
+&lt;/div&gt;</code></pre>
+
+                <!-- 灰色引用框 -->
+                <h3 id="section-1-2" class="subsection-header" style="margin-top:32px;">灰色引用框 — .quote-box-grey</h3>
+                <p>用途：引用性说明、参考来源说明、补充背景资料。</p>
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <div class="quote-box-grey">
+                  此处为引用或参考性文字内容。
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="quote-box-grey"&gt;
+  此处为引用或参考性文字内容。
+&lt;/div&gt;</code></pre>
+
+                <!-- 红色警告框 -->
+                <h3 id="section-1-3" class="subsection-header" style="margin-top:32px;">红色警告框 — .notice-box-red</h3>
+                <p>用途：仅用于真正需要警示的内容（Alpha/Beta 阶段重要建设状态提醒、内容时效性警示、需要读者特别注意的约束条件）。<strong>未经作者明确许可不得使用。</strong></p>
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <div class="notice-box-red">
+                  此处为警告/警示内容。
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="notice-box-red"&gt;
+  此处为警告/警示内容。
+&lt;/div&gt;</code></pre>
+
+                <!-- 通用 Callout -->
+                <h3 id="section-1-4" class="subsection-header" style="margin-top:32px;">通用 Callout — .callout</h3>
+                <p>用途：带图标的灵活提示框（Notion 风格），支持图标+文本并排布局。</p>
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <figure class="callout block-color-gray_background">
+                  <span class="icon">ℹ️</span>
+                  <div><p>此处为 callout 提示内容。</p></div>
+                </figure>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;figure class="callout block-color-gray_background"&gt;
+  &lt;span class="icon"&gt;ℹ️&lt;/span&gt;
+  &lt;div&gt;&lt;p&gt;此处为 callout 提示内容。&lt;/p&gt;&lt;/div&gt;
+&lt;/figure&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 2: 折叠块 ========== -->
+        <section class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <h2 id="section-2" class="section-title-text-main">2. 折叠块 — &lt;details&gt;</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：可展开/收起的长内容区域，如详细说明、扩展阅读等。
+
+                <p style="font-weight:600;margin-bottom:8px;">基本折叠块（默认折叠）— 实际效果：</p>
+                <details>
+                  <summary>点击展开的标题</summary>
+                  <div>
+                    <p>折叠内容的正文放在这里。</p>
+                  </div>
+                </details>
+
+                <p style="font-weight:600;margin-top:20px;margin-bottom:8px;">已展开的折叠块 — 实际效果：</p>
+                <details open>
+                  <summary>默认展开的标题</summary>
+                  <div>
+                    <p>这段内容默认就是展开状态，用户可以直接阅读。</p>
+                  </div>
+                </details>
+
+                <p style="font-weight:600;margin-top:20px;margin-bottom:8px;">嵌套折叠块 — 实际效果：</p>
+                <details>
+                  <summary>外层标题</summary>
+                  <div>
+                    <p>外层内容。</p>
+                    <details>
+                      <summary>内层标题</summary>
+                      <div><p>内层内容。</p></div>
+                    </details>
+                  </div>
+                </details>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码（基本折叠块）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;details&gt;
+  &lt;summary&gt;点击展开的标题&lt;/summary&gt;
+  &lt;div&gt;
+    &lt;p&gt;折叠内容的正文放在这里。&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
+
+&lt;!-- 已展开 --&gt;
+&lt;details open&gt;
+  &lt;summary&gt;默认展开的标题&lt;/summary&gt;
+  ...
+&lt;/details&gt;
+
+&lt;!-- 嵌套 --&gt;
+&lt;details&gt;
+  &lt;summary&gt;外层标题&lt;/summary&gt;
+  &lt;div&gt;
+    &lt;p&gt;外层内容。&lt;/p&gt;
+    &lt;details&gt;
+      &lt;summary&gt;内层标题&lt;/summary&gt;
+      &lt;div&gt;&lt;p&gt;内层内容。&lt;/p&gt;&lt;/div&gt;
+    &lt;/details&gt;
+  &lt;/div&gt;
+&lt;/details&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 3: 文章元数据区 ========== -->
+        <section class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <h2 id="section-3" class="section-title-text-main">3. 文章元数据区 — .article-meta</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：文章页顶部的元信息展示（作者、日期、分类等）。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <div class="article-meta">
+                  <span class="article-meta-item">
+                    <span class="article-meta-label">作者：</span>
+                    <span class="article-meta-value">薛柯道</span>
+                  </span>
+                  <span class="article-meta-item">
+                    <span class="article-meta-label">创建日期：</span>
+                    <span class="article-meta-value">2026年5月10日</span>
+                  </span>
+                  <span class="article-meta-item">
+                    <span class="article-meta-label">最后更新：</span>
+                    <span class="article-meta-value">2026年5月11日</span>
+                  </span>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="article-meta"&gt;
+  &lt;span class="article-meta-item"&gt;
+    &lt;span class="article-meta-label"&gt;作者：&lt;/span&gt;
+    &lt;span class="article-meta-value"&gt;薛柯道&lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span class="article-meta-item"&gt;
+    &lt;span class="article-meta-label"&gt;创建日期：&lt;/span&gt;
+    &lt;span class="article-meta-value"&gt;2026年5月10日&lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span class="article-meta-item"&gt;
+    &lt;span class="article-meta-label"&gt;最后更新：&lt;/span&gt;
+    &lt;span class="article-meta-value"&gt;2026年5月11日&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 4: 新闻卡片 ========== -->
+        <section class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <h2 id="section-4" class="section-title-text-main">4. 新闻卡片</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+
+                <h3 id="section-4-1" class="subsection-header">类型一：文字新闻（无海报）</h3>
+                <p>类名：<code>.news-card-text-only</code>，用于没有海报图片的文字类新闻。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <div class="news-carousel-card" data-date="2026-05-10">
+                  <div class="news-card">
+                    <a href="#" target="_blank" class="news-card-text-only">
+                      <h3 class="news-card-title">知识馆正式启用</h3>
+                      <p class="news-card-date">2026年5月10日</p>
+                      <p class="news-card-hint">点击此处了解更多</p>
+                    </a>
+                  </div>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="news-carousel-card" data-date="YYYY-MM-DD"&gt;
+  &lt;div class="news-card"&gt;
+    &lt;a href="{链接}" target="_blank" class="news-card-text-only"&gt;
+      &lt;h3 class="news-card-title"&gt;{标题}&lt;/h3&gt;
+      &lt;p class="news-card-date"&gt;{YYYY年M月D日}&lt;/p&gt;
+      &lt;p class="news-card-hint"&gt;点击此处了解更多&lt;/p&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3 id="section-4-2" class="subsection-header" style="margin-top:32px;">类型二：海报新闻（有海报图片）</h3>
+                <p>类名：<code>.news-card-content</code>，用于带有海报图片的新闻。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <div class="news-carousel-card" data-date="2026-02-03">
+                  <div class="news-card">
+                    <div class="news-card-content">
+                      <a href="#" target="_blank" class="news-card-image">
+                        <img src="./image/poster/SOTM_I_2026后记/SOTM_I_2026后记.png" alt="SOTM I 2026后记 海报" onerror="this.style.display='none';this.parentElement.innerHTML='&lt;div style=&quot;width:200px;height:120px;background:#e0e0e0;display:flex;align-items:center;justify-content:center;color:#888;font-size:14px;&quot;&gt;海报占位图&lt;/div&gt;'">
+                      </a>
+                      <div class="news-card-info">
+                        <h3 class="news-card-title">SOTM I 2026后记</h3>
+                        <p class="news-card-date">2026年2月3日</p>
+                        <p class="news-card-hint">点击海报了解更多</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="news-carousel-card" data-date="YYYY-MM-DD"&gt;
+  &lt;div class="news-card"&gt;
+    &lt;div class="news-card-content"&gt;
+      &lt;a href="{链接}" target="_blank" class="news-card-image"&gt;
+        &lt;img src="./image/poster/{路径}/{文件名}.png" alt="{描述}"&gt;
+      &lt;/a&gt;
+      &lt;div class="news-card-info"&gt;
+        &lt;h3 class="news-card-title"&gt;{标题}&lt;/h3&gt;
+        &lt;p class="news-card-date"&gt;{YYYY年M月D日}&lt;/p&gt;
+        &lt;p class="news-card-hint"&gt;点击海报了解更多&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 5: 浮窗 ========== -->
+        <section class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <h2 id="section-5" class="section-title-text-main">5. 浮窗</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>浮窗在正式页面中使用 <code>position: fixed</code> 定位。以下用相对定位模拟其外观效果。
+
+                <h3 id="section-5-1" class="subsection-header">知识馆浮窗 — .knowledge-hall-float</h3>
+                <p>用途：主页右侧悬浮的知识馆入口浮窗。
+
+                <p style="font-weight:600;margin-bottom:8px;">外观模拟（relative 定位）：</p>
+                <div style="position:relative;display:inline-block;">
+                  <div class="knowledge-hall-float" style="position:relative;right:auto;top:auto;">
+                    <div class="kh-float-header">
+                      <span class="kh-float-title">知识馆</span>
+                      <button class="kh-float-close">&times;</button>
+                    </div>
+                    <div class="kh-float-body">
+                      <p class="kh-float-desc">牧羊人图书馆分馆，存放和查阅知识之地</p>
+                      <a href="#" class="kh-float-link">进入知识馆</a>
+                    </div>
+                  </div>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 结构：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="knowledge-hall-float" id="kh-float"&gt;
+  &lt;div class="kh-float-header"&gt;
+    &lt;span class="kh-float-title"&gt;知识馆&lt;/span&gt;
+    &lt;button class="kh-float-close"
+      onclick="document.getElementById('kh-float').classList.add('hidden')"&gt;
+      &amp;times;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="kh-float-body"&gt;
+    &lt;p class="kh-float-desc"&gt;牧羊人图书馆分馆，存放和查阅知识之地&lt;/p&gt;
+    &lt;a href="./knowledge-hall/index.html" class="kh-float-link"&gt;进入知识馆&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3 id="section-5-2" class="subsection-header" style="margin-top:32px;">语言切换浮窗 — .lang-switch-float</h3>
+                <p>结构与知识馆浮窗类似，位置在知识馆浮窗下方 140px 处。
+
+                <p style="font-weight:600;margin-bottom:8px;">外观模拟（relative 定位）：</p>
+                <div style="position:relative;display:inline-block;">
+                  <div class="lang-switch-float" style="position:relative;right:auto;top:auto;">
+                    <div class="lang-float-header">
+                      <span class="lang-float-title">语言 / Language</span>
+                      <button class="lang-float-close">&times;</button>
+                    </div>
+                    <div class="lang-float-body">
+                      <p class="lang-float-desc">切换网站显示语言</p>
+                      <div style="display:flex;flex-direction:column;gap:8px;">
+                        <a href="#" class="lang-float-link">中文版</a>
+                        <a href="#" class="lang-float-link">English</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 结构：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="lang-switch-float" id="lang-float"&gt;
+  &lt;div class="lang-float-header"&gt;
+    &lt;span class="lang-float-title"&gt;语言 / Language&lt;/span&gt;
+    &lt;button class="lang-float-close"&gt;&amp;times;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="lang-float-body"&gt;
+    &lt;p class="lang-float-desc"&gt;切换网站显示语言&lt;/p&gt;
+    &lt;a href="../index.html" class="lang-float-link"&gt;中文版&lt;/a&gt;
+    &lt;a href="../en/index.html" class="lang-float-link"&gt;English&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 6: 导航组件 ========== -->
+        <section class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <h2 id="section-6" class="section-title-text-main">6. 导航组件</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+
+                <h3 id="section-6-1" class="subsection-header">快速导航项 — .quick-nav-item</h3>
+                <p>便携式导航仪中的导航项，悬停时高亮并右移。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <div style="border:1px solid var(--color-border);padding:12px;background:var(--color-bg-subtle);display:inline-block;min-width:200px;">
+                  <a href="#" class="quick-nav-item">图书馆主页 </a>
+                  <a href="#" class="quick-nav-item">图书馆入门 </a>
+                  <a href="#" class="quick-nav-item">导航枢纽 </a>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;a href="{路径}" class="quick-nav-item"&gt;导航项文字 &lt;/a&gt;</code></pre>
+
+                <h3 id="section-6-2" class="subsection-header" style="margin-top:32px;">页面跳转按钮 — .link-to-page</h3>
+                <p>Notion 风格的内联跳转按钮。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <a href="#" class="link-to-page">牧羊人图书馆主页 </a>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;a href="{路径}" class="link-to-page"&gt;页面名称 &lt;/a&gt;</code></pre>
+
+                <h3 id="section-6-3" class="subsection-header" style="margin-top:32px;">外部/跨页链接 — .ext-link</h3>
+                <p>标识"离开当前页面"的外部链接或跨页面链接，自动添加箭头图标。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <a href="#" class="ext-link">外部链接示例 </a>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;a href="{URL}" class="ext-link"&gt;链接文本 &lt;/a&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 7: 按钮 & 链接 ========== -->
+        <section class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <h2 id="section-7" class="section-title-text-main">7. 按钮 & 链接</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+
+                <h3 id="section-7-1" class="subsection-header">浮动按钮 — .float-button</h3>
+                <p>回到顶部、导航枢纽等固定位置的圆形按钮。正式页面中为 <code>position: fixed</code>，此处用相对定位模拟。
+
+                <p style="font-weight:600;margin-bottom:8px;">外观模拟：</p>
+                <div style="display:flex;gap:16px;align-items:center;">
+                  <button title="回到顶部" class="float-button back-to-top" style="position:relative;bottom:auto;right:auto;">
+                    回到<br>顶部
+                  </button>
+                  <button title="导航枢纽" class="float-button nav-hub" style="position:relative;bottom:auto;right:auto;">
+                    导航<br>枢纽
+                  </button>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;button title="回到顶部" class="float-button back-to-top"
+  onclick="window.scrollTo({top: 0, behavior: 'smooth'})"&gt;
+  回到&lt;br&gt;顶部
+&lt;/button&gt;
+
+&lt;button title="导航枢纽" class="float-button nav-hub"
+  onclick="openNavigator()"&gt;
+  导航&lt;br&gt;枢纽
+&lt;/button&gt;</code></pre>
+
+                <h3 id="section-7-2" class="subsection-header" style="margin-top:32px;">已废弃标记 — .deprecated-badge</h3>
+                <p>标记已废弃的内容。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <p>此功能<span class="deprecated-badge">已废弃</span></p>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;span class="deprecated-badge"&gt;已废弃&lt;/span&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 8: 文章列表 ========== -->
+        <section class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <h2 id="section-8" class="section-title-text-main">8. 文章列表 — .article-list</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：文章目录列表。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <ul class="article-list">
+                  <li><a href="#">SOTM I 2026后记</a></li>
+                  <li><a href="#">Minesia第一个公开测试</a></li>
+                  <li><a href="#">记录的冲动</a></li>
+                  <li><a href="#">知识馆正式启用</a></li>
+                </ul>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;ul class="article-list"&gt;
+  &lt;li&gt;&lt;a href="path/to/article.html"&gt;文章标题一&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="path/to/article.html"&gt;文章标题二&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="path/to/article.html"&gt;文章标题三&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="path/to/article.html"&gt;文章标题四&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 9: 设计令牌速查表 ========== -->
+        <section class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <h2 id="section-9" class="section-title-text-main">9. 设计令牌速查表（CSS 变量）</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>以下表格列出了项目中所有 CSS 变量的亮色/暗色值及用途说明。
+
+                <table style="width:100%;border-collapse:collapse;margin-top:16px;font-size:14px;line-height:1.7;">
+                  <thead>
+                    <tr style="background:var(--color-accent);color:#fff;">
+                      <th style="padding:10px 12px;text-align:left;border:1px solid var(--color-border);">变量名</th>
+                      <th style="padding:10px 12px;text-align:center;border:1px solid var(--color-border);">亮色值</th>
+                      <th style="padding:10px 12px;text-align:center;border:1px solid var(--color-border);">暗色值</th>
+                      <th style="padding:10px 12px;text-align:left;border:1px solid var(--color-border);">用途</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--color-text</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#1a1a1a</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#e8e6e3</td><td style="padding:8px 12px;border:1px solid var(--color-border);">主文本色</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--color-text-secondary</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#555555</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#a0a0a0</td><td style="padding:8px 12px;border:1px solid var(--color-border);">次要文本色</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--color-text-light</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#888888</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#707070</td><td style="padding:8px 12px;border:1px solid var(--color-border);">辅助文本色</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--color-border</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#e0e0e0</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#333333</td><td style="padding:8px 12px;border:1px solid var(--color-border);">边框色</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--color-border-dark</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#cccccc</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#444444</td><td style="padding:8px 12px;border:1px solid var(--color-border);">深边框色</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--color-bg</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#ffffff</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#1a1a1a</td><td style="padding:8px 12px;border:1px solid var(--color-border);">背景色</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--color-bg-subtle</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#fafafa</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#222222</td><td style="padding:8px 12px;border:1px solid var(--color-border);">浅背景色</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--color-bg-muted</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#f5f5f5</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#2a2a2a</td><td style="padding:8px 12px;border:1px solid var(--color-border);">弱化背景色</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--color-accent</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#2c3e50</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#5d9ccc</td><td style="padding:8px 12px;border:1px solid var(--color-border);">强调色</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--color-accent-hover</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#1a252f</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">#8ecfff</td><td style="padding:8px 12px;border:1px solid var(--color-border);">强调悬停色</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--space-xs</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">4px</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">—</td><td style="padding:8px 12px;border:1px solid var(--color-border);">超小间距</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--space-sm</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">8px</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">—</td><td style="padding:8px 12px;border:1px solid var(--color-border);">小间距</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--space-md</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">16px</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">—</td><td style="padding:8px 12px;border:1px solid var(--color-border);">中间距</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--space-lg</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">24px</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">—</td><td style="padding:8px 12px;border:1px solid var(--color-border);">大间距</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--space-xl</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">32px</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">—</td><td style="padding:8px 12px;border:1px solid var(--color-border);">超大间距</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--space-xxl</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">48px</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">—</td><td style="padding:8px 12px;border:1px solid var(--color-border);">特大间距</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--line-width</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">1px</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">—</td><td style="padding:8px 12px;border:1px solid var(--color-border);">线宽</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--radius-sm</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">0px</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">—</td><td style="padding:8px 12px;border:1px solid var(--color-border);">小圆角</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">--radius-md</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">0px</td><td style="padding:8px 12px;border:1px solid var(--color-border);text-align:center;font-family:monospace;font-size:13px;color:var(--color-text-secondary);">—</td><td style="padding:8px 12px;border:1px solid var(--color-border);">中圆角</td></tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== 附录：响应式断点汇总 ========== -->
+        <section class="gjs-row notice-header section-header">
+          <div class="gjs-cell">
+            <h2 id="section-10" class="section-title-text-main">附录：响应式断点汇总</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+
+                <table style="width:100%;border-collapse:collapse;margin-top:16px;font-size:14px;line-height:1.7;">
+                  <thead>
+                    <tr style="background:var(--color-accent);color:#fff;">
+                      <th style="padding:10px 12px;text-align:left;border:1px solid var(--color-border);">断点</th>
+                      <th style="padding:10px 12px;text-align:left;border:1px solid var(--color-border);">适用场景</th>
+                      <th style="padding:10px 12px;text-align:left;border:1px solid var(--color-border);">关键变化</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">≤375px</td><td style="padding:8px 12px;border:1px solid var(--color-border);">小屏手机</td><td style="padding:8px 12px;border:1px solid var(--color-border);">字体进一步缩小，间距收紧</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">≤768px</td><td style="padding:8px 12px;border:1px solid var(--color-border);">手机/平板竖屏</td><td style="padding:8px 12px;border:1px solid var(--color-border);">单列布局，侧边栏变顶部，浮动按钮缩小</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">769px–1024px</td><td style="padding:8px 12px;border:1px solid var(--color-border);">平板横屏</td><td style="padding:8px 12px;border:1px solid var(--color-border);">导航仪宽度收窄</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">≥1024px</td><td style="padding:8px 12px;border:1px solid var(--color-border);">桌面端</td><td style="padding:8px 12px;border:1px solid var(--color-border);">标准布局</td></tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="gjs-row footer-row footer-row-alt footer-gradient">
+    <div class="gjs-cell nav-center">
+      <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
+        未经许可，不得擅自转载、修改或用于商业用途<br></div>
+    </div>
+  </footer>
+
+  <div class="mobile-nav">
+    <div class="mobile-nav-title">便携式导航仪</div>
+    <div class="mobile-nav-links"><a href="../index.html" class="mobile-nav-link">图书馆主页</a><a href="intro.html" class="mobile-nav-link">图书馆入门</a><a href="rule.html" class="mobile-nav-link">图书馆规则</a><a href="feature.html" class="mobile-nav-link">图书馆功能</a><a href="visual-components.html" class="mobile-nav-link">视觉组件标准</a><a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+    </div>
+  </div>
+
+  <div class="quick-nav">
+    <div class="quick-nav-title">便携式导航仪</div>
+    <div class="quick-nav-hint">光标移到此处展开</div>
+    <div class="quick-nav-content"><a href="../index.html" class="quick-nav-item">图书馆主页</a><a href="intro.html" class="quick-nav-item">图书馆入门</a><a href="rule.html" class="quick-nav-item">图书馆规则</a><a href="feature.html" class="quick-nav-item">图书馆功能</a>
+      <div class="quick-nav-divider"></div>
+      <div class="quick-nav-section">当前页面</div>
+      <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
+      <div class="quick-nav-section">页面目录</div>
+      <div id="quick-nav-toc-container">
+        <div data-target="section-1" class="quick-nav-toc-item">• 信息提示框</div>
+        <div data-target="section-2" class="quick-nav-toc-item">• 折叠块</div>
+        <div data-target="section-3" class="quick-nav-toc-item">• 文章元数据区</div>
+        <div data-target="section-4" class="quick-nav-toc-item">• 新闻卡片</div>
+        <div data-target="section-5" class="quick-nav-toc-item">• 浮窗</div>
+        <div data-target="section-6" class="quick-nav-toc-item">• 导航组件</div>
+        <div data-target="section-7" class="quick-nav-toc-item">• 按钮与链接</div>
+        <div data-target="section-8" class="quick-nav-toc-item">• 文章列表</div>
+        <div data-target="section-9" class="quick-nav-toc-item">• 设计令牌速查表</div>
+        <div data-target="section-10" class="quick-nav-toc-item">• 响应式断点</div>
+      </div>
+    </div>
+  </div>
+
+  <button title="回到顶部" class="float-button back-to-top">
+    回到<br>顶部
+  </button>
+  <button title="导航枢纽" class="float-button nav-hub">
+    导航<br>枢纽
+  </button>
+
+<script id="ext-inline-js-import-body-end-2">
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function openNavigator() {
+  window.open('../navigator.html', '_blank');
+}
+
+function getCurrentPath() {
+  const path = window.location.pathname;
+  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
+
+  if (formattedPath === '' || formattedPath === 'index') {
+    return '首页';
+  }
+
+  formattedPath = formattedPath
+    .split('/')
+    .map(segment => {
+      const fileNameIndex = segment.lastIndexOf('.');
+      if (fileNameIndex > 0) {
+        segment = segment.substring(0, fileNameIndex);
+      }
+      return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
+    })
+    .join(' → ');
+
+  return formattedPath;
+}
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function toggleTocToggle(toggleElement) {
+  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
+  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
+
+  if (childrenElement) {
+    if (childrenElement.classList.contains('show')) {
+      childrenElement.classList.remove('show');
+      toggleElement.classList.remove('expanded');
+      toggleElement.classList.add('collapsed');
+    } else {
+      childrenElement.classList.add('show');
+      toggleElement.classList.remove('collapsed');
+      toggleElement.classList.add('expanded');
+    }
+  }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded');
+        quickNav.style.width = '180px';
+        quickNav.style.padding = '16px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'block';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'horizontal-tb';
+          title.style.marginBottom = '16px';
+          title.style.paddingBottom = '8px';
+          title.style.borderBottom = '1px solid #e0e0e0';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      }
+    });
+  }
+
+  const pathElement = document.getElementById('current-path');
+  if (pathElement) {
+    pathElement.textContent = getCurrentPath();
+  }
+
+  const pageTitle = document.querySelector('.page-title-main');
+  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
+  if (pageTitle && quickNavTitleElement) {
+    quickNavTitleElement.textContent = pageTitle.textContent;
+  }
+
+  const tocContainer = document.getElementById('quick-nav-toc-container');
+  if (tocContainer) {
+    tocContainer.addEventListener('click', function(event) {
+      const target = event.target;
+
+      if (target.classList.contains('quick-nav-toc-toggle')) {
+        event.stopPropagation();
+        event.preventDefault();
+        toggleTocToggle(target);
+        return;
+      }
+
+      if (target.classList.contains('quick-nav-toc-item') ||
+          target.classList.contains('quick-nav-toc-item-with-children') ||
+          target.classList.contains('quick-nav-toc-child-item')) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        let sectionId;
+
+        if (target.classList.contains('quick-nav-toc-item-with-children')) {
+          const toggleElement = target.nextElementSibling;
+          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
+            sectionId = toggleElement.getAttribute('data-parent');
+          }
+        } else {
+          sectionId = target.getAttribute('data-target');
+        }
+
+        if (sectionId) {
+          scrollToSection(sectionId);
+        }
+      }
+    });
+  }
+
+  const quickNavPageTitle = document.getElementById('quick-nav-page-title');
+  if (quickNavPageTitle) {
+    quickNavPageTitle.addEventListener('click', function(event) {
+      event.stopPropagation();
+      scrollToTop();
+    });
+    quickNavPageTitle.style.cursor = 'pointer';
+  }
+
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', scrollToTop);
+  }
+
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) {
+    navHubBtn.addEventListener('click', openNavigator);
+  }
+});
+</script>
+</body>
+</html>

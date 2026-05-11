@@ -68,6 +68,12 @@
                 <p>- .content-bg-yellow / .content-bg-white / .content-bg-white-sub: 移除 border 和 border-radius</p>
                 <p>- 新增 .lang-switch-float 及相关子类样式组</p>
 
+                <p><strong>便携式导航仪移动端交互优化</strong></p>
+                <p>- 为所有包含 quick-nav 的页面（共16个文件）新增「点击空白处关闭展开导航」功能</p>
+                <p>- 实现方式：在 DOMContentLoaded 中的 quickNav click 监听器之后，新增 document 级别的 click 事件监听</p>
+                <p>- 逻辑：当 quickNav 处于 expanded 状态且点击目标不在 quickNav 内部时，自动收起导航</p>
+                <p>- 涉及文件：index.html, library/intro.html, library/rule.html, library/feature.html, library/library.html, navigator.html, library/paper/*（4个）, en/index.html, en/library/*（4个）, updateLog/updateLog_2026-05-10.html</p>
+
               </div>
             </div>
           </div>
@@ -291,6 +297,27 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         const hint = quickNav.querySelector('.quick-nav-hint');
         if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
       }
     });
   }

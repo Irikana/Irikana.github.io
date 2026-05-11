@@ -25,13 +25,6 @@
   </div>
 </header>
 
-<nav class="gjs-row header-row">
-  <div class="gjs-cell nav-center">
-    <div class="nav-padding title-color nav-title">Location</div>
-    <div class="content-padding nav-location">You are here<br><span id="current-path">Home</span></div>
-    <a href="../index.html" class="translate-btn" title="中文版">中文</a>
-  </div>
-</nav>
 
 <main class="gjs-row content-row content-bg-white">
   <div class="content-width-limiter">
@@ -49,69 +42,44 @@
           <div class="gjs-row content-bg-lightgrey">
             <div class="gjs-cell">
               <div class="center-align">
-                <div class="news-carousel-container" id="news-carousel">
-                  <button class="news-carousel-nav-btn prev" id="carousel-prev" aria-label="Previous">&#8249;</button>
-                  <div class="news-carousel-wrapper">
-                    <div class="news-carousel-track" id="carousel-track">
-                      <div class="news-carousel-card" data-date="2026-05-10">
-                        <div class="news-card">
-                          <a href="./library/paper/knowledge-hall-launch.html" target="_blank" class="news-card-text-only">
-                            <h3 class="news-card-title">Knowledge Hall Officially Launched</h3>
-                            <p class="news-card-date">May 10, 2026</p>
-                            <p class="news-card-hint">Click here to learn more</p>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="news-carousel-card" data-date="2026-04-03">
-                        <div class="news-card">
-                          <a href="../updateLog/updateLog_alpha-2026.4.2-1.html" target="_blank" class="news-card-text-only">
-                            <h3 class="news-card-title">First Update After School Started</h3>
-                            <p class="news-card-date">April 3, 2026</p>
-                            <p class="news-card-hint">Click here to learn more</p>
-                          </a>
-                        </div>
-                      </div>
-                      <div class="news-carousel-card" data-date="2026-02-04">
-                        <div class="news-card">
-                          <div class="news-card-content">
-                            <a href="../updateLog/updateLog_alpha-0.0.1.html" target="_blank" class="news-card-image">
-                              <img src="../image/poster/update/update_alpha_0.0.1.png" alt="Update Poster">
-                            </a>
-                            <div class="news-card-info">
-                              <h3 class="news-card-title">Library Alpha 0.0.1 Update</h3>
-                              <p class="news-card-date">February 4, 2026</p>
-                              <p class="news-card-hint">Click poster to learn more</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="news-carousel-card" data-date="2026-02-03">
-                        <div class="news-card">
-                          <div class="news-card-content">
-                            <a href="../library/paper/SOTM_I_2026后记.html" target="_blank" class="news-card-image">
-                              <img src="../image/poster/SOTM/2026/SOTM-I-2026.png" alt="SOTM I 2026 Poster">
-                            </a>
-                            <div class="news-card-info">
-                              <h3 class="news-card-title">SOTM I 2026 Postscript</h3>
-                              <p class="news-card-date">February 3, 2026</p>
-                              <p class="news-card-hint">Click poster to learn more</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="news-carousel-card" data-date="2026-02-18">
-                        <div class="news-card">
-                          <a href="../library/paper/Minesia第一个公开测试.html" target="_blank" class="news-card-text-only">
-                            <h3 class="news-card-title">Minesia First Public Test</h3>
-                            <p class="news-card-date">February 18, 2026</p>
-                            <p class="news-card-hint">Click here to learn more</p>
-                          </a>
-                        </div>
-                      </div>
+                <div class="news-featured">
+                  <div class="news-featured-poster">
+                    <a href="../library/paper/SOTM_I_2026后记.html" target="_blank" class="news-featured-image">
+                      <img src="../image/poster/SOTM/2026/SOTM-I-2026.png" alt="SOTM I 2026 Postscript">
+                    </a>
+                    <div class="news-featured-info">
+                      <h3 class="news-featured-title">SOTM I 2026 Postscript</h3>
+                      <p class="news-featured-date">February 3, 2026</p>
                     </div>
                   </div>
-                  <button class="news-carousel-nav-btn next" id="carousel-next" aria-label="Next">&#8250;</button>
+                  <div class="news-featured-text-list">
+                    <a href="../library/paper/视觉组件标准已创建.html" target="_blank" class="news-featured-text-card">
+                      <span class="card-title">Visual Component Standards Created</span>
+                      <span class="card-date">May 11, 2026</span>
+                    </a>
+                    <a href="../library/paper/图书馆可能进入活跃开发阶段.html" target="_blank" class="news-featured-text-card">
+                      <span class="card-title">Library May Enter Active Development Phase</span>
+                      <span class="card-date">May 11, 2026</span>
+                    </a>
+                    <a href="./library/paper/knowledge-hall-launch.html" target="_blank" class="news-featured-text-card">
+                      <span class="card-title">Knowledge Hall Officially Launched</span>
+                      <span class="card-date">May 10, 2026</span>
+                    </a>
+                    <a href="../library/paper/Minesia 0.0.16更新.html" target="_blank" class="news-featured-text-card">
+                      <span class="card-title">Minesia 0.0.16 Update</span>
+                      <span class="card-date">May 8, 2026</span>
+                    </a>
+                    <a href="../updateLog/updateLog_alpha-2026.4.2-1.html" target="_blank" class="news-featured-text-card">
+                      <span class="card-title">First Update After Semester Begins</span>
+                      <span class="card-date">April 3, 2026</span>
+                    </a>
+                    <a href="../library/paper/Minesia第一个公开测试.html" target="_blank" class="news-featured-text-card">
+                      <span class="card-title">Minesia First Public Test</span>
+                      <span class="card-date">February 18, 2026</span>
+                    </a>
+                  </div>
                 </div>
+                <a href="./news.html" class="news-view-all-btn">View All News</a>
               </div>
             </div>
           </div>
@@ -290,75 +258,6 @@ function toggleTocToggle(toggleElement) {
   }
 }
 
-(function initNewsCarousel() {
-  const track = document.getElementById('carousel-track');
-  const prevBtn = document.getElementById('carousel-prev');
-  const nextBtn = document.getElementById('carousel-next');
-
-  if (!track || !prevBtn || !nextBtn) return;
-
-  const cards = Array.from(track.querySelectorAll('.news-carousel-card'));
-  cards.sort((a, b) => {
-    const dateA = new Date(a.dataset.date);
-    const dateB = new Date(b.dataset.date);
-    return dateB - dateA;
-  });
-
-  cards.forEach(card => track.appendChild(card));
-
-  let currentIndex = 0;
-  const totalCards = cards.length;
-
-  function updateCarousel() {
-    cards.forEach(card => {
-      card.classList.remove('prev-preview', 'next-preview');
-    });
-
-    const offset = -currentIndex * 100;
-    track.style.transform = `translateX(${offset}%)`;
-
-    prevBtn.classList.toggle('disabled', currentIndex === 0);
-    nextBtn.classList.toggle('disabled', currentIndex === totalCards - 1);
-
-    if (currentIndex > 0) {
-      cards[currentIndex - 1].classList.add('prev-preview');
-    }
-    if (currentIndex < totalCards - 1) {
-      cards[currentIndex + 1].classList.add('next-preview');
-    }
-  }
-
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateCarousel();
-    }
-  });
-
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex < totalCards - 1) {
-      currentIndex++;
-      updateCarousel();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateCarousel();
-      }
-    } else if (e.key === 'ArrowRight') {
-      if (currentIndex < totalCards - 1) {
-        currentIndex++;
-        updateCarousel();
-      }
-    }
-  });
-
-  updateCarousel();
-})();
-
 window.addEventListener('DOMContentLoaded', function() {
   const quickNav = document.querySelector('.quick-nav');
   const isMobile = window.innerWidth <= 768;
@@ -395,6 +294,27 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         const hint = quickNav.querySelector('.quick-nav-hint');
         if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
       }
     });
   }
@@ -484,6 +404,51 @@ window.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+
+  function makeDraggable(floatElement, headerSelector) {
+    if (!floatElement) return;
+    const header = floatElement.querySelector(headerSelector);
+    if (!header) return;
+
+    let isDragging = false;
+    let startX, startY, initialX, initialY;
+
+    header.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      const rect = floatElement.getBoundingClientRect();
+      initialX = rect.left;
+      initialY = rect.top;
+      floatElement.style.transition = 'none';
+      floatElement.style.right = 'auto';
+      floatElement.style.bottom = 'auto';
+      floatElement.style.left = initialX + 'px';
+      floatElement.style.top = initialY + 'px';
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      floatElement.style.left = (initialX + dx) + 'px';
+      floatElement.style.top = (initialY + dy) + 'px';
+    });
+
+    document.addEventListener('mouseup', function() {
+      if (isDragging) {
+        isDragging = false;
+        floatElement.style.transition = '';
+      }
+    });
+  }
+
+  const khFloat = document.getElementById('knowledge-hall-float');
+  if (khFloat) makeDraggable(khFloat, '.kh-float-header');
+
+  const langFloat = document.getElementById('lang-switch-float');
+  if (langFloat) makeDraggable(langFloat, '.lang-float-header');
 });
 </script>
 

@@ -22,15 +22,6 @@
   </div>
 </header>
 
-<nav>
-  <div class="gjs-row header-row">
-    <div class="gjs-cell nav-center">
-      <div class="nav-padding title-color nav-title">Location</div>
-      <div class="content-padding nav-location">You are here<br><span id="current-path">Introduction</span></div>
-      <a href="../index.html" class="translate-btn" title="中文版">中文</a>
-    </div>
-  </div>
-</nav>
 
 <main>
   <div class="gjs-row content-row content-bg-white">
@@ -327,6 +318,27 @@ window.addEventListener('DOMContentLoaded', function() {
         }
         const hint = quickNav.querySelector('.quick-nav-hint');
         if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
       }
     });
   }

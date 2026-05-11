@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年5月11日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">2026年5月11日 更新日志</div>
+  </div>
+</div>
+
+<div class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-bg-yellow">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-05-11</div>
+      </div>
+
+      <!-- 主馆变更 -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-1" class="section-title-text-main">主馆变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>移动端导航仪：点击空白处关闭 [Alpha 008]</strong></p>
+                <p>- 为所有包含便携式导航仪（quick-nav）的页面添加了点击空白区域关闭展开导航的功能</p>
+                <p>- 实现方式：在 DOMContentLoaded 中 quickNav 移动端 click 监听器之后，新增 document 级别的 click 事件监听</p>
+                <p>- 判断逻辑：当 quickNav 具有 expanded 类且点击目标不在 quickNav 内部时，自动收起导航</p>
+                <p>- 涉及文件（共16个）：</p>
+                <p>&nbsp;&nbsp;• index.html, library/intro.html, library/rule.html, library/feature.html, library/library.html</p>
+                <p>&nbsp;&nbsp;• navigator.html, library/paper/ 下的4个文章页面</p>
+                <p>&nbsp;&nbsp;• en/index.html, en/library/ 下的4个英文页面</p>
+                <p>&nbsp;&nbsp;• updateLog/updateLog_2026-05-10.html</p>
+
+                <p><strong>浮窗可拖动 + 位置改为右上角 [Alpha 008]</strong></p>
+                <p>- 知识馆浮窗（.knowledge-hall-float）和语言切换浮窗（.lang-switch-float）位置从右下角移至右上角</p>
+                <p>- .knowledge-hall-float: bottom → top: var(--space-lg)</p>
+                <p>- .lang-switch-float: left+bottom → right+top: calc(var(--space-lg) + 60px)（与知识馆浮窗错开）</p>
+                <p>- 新增 .draggable 通用类和 cursor: move/grab/grabbing 拖拽光标样式</p>
+                <p>- 在 index.html 和 en/index.html 中添加 makeDraggable() JS 函数实现拖拽功能</p>
+                <p>- 拖拽通过 header 区域触发（mousedown → mousemove → mousemove），拖拽时切换为 left/top 绝对定位</p>
+                <p>- CSS 变更汇总：</p>
+                <p>&nbsp;&nbsp;• .knowledge-hall-float: bottom→top, 新增 cursor:move</p>
+                <p>&nbsp;&nbsp;• .lang-switch-float: left→right, bottom→top(错开60px), 新增 cursor:move</p>
+                <p>&nbsp;&nbsp;• 新增 .draggable 通用类</p>
+                <p>&nbsp;&nbsp;• .kh-float-header / .lang-float-header: cursor: grab/:active grabbing</p>
+                <p>&nbsp;&nbsp;• @media (max-width:768px) 浮窗响应式适配</p>
+
+                <p><strong>图书馆入门页（library/intro.html）— 灵感来源区块折叠化 [Alpha 008]</strong></p>
+                <p>- 将「灵感来源」小节中的5个百科引用内容从 h4+div 展开格式改为 &lt;details&gt; 折叠块格式</p>
+                <p>- 涉及条目：</p>
+                <p>&nbsp;&nbsp;• SCP基金会（夸克百科）（id: section-2-2-1）</p>
+                <p>&nbsp;&nbsp;• SCP基金会的世界观（百度百科）（id: section-2-2-2）</p>
+                <p>&nbsp;&nbsp;• SCP基金会（我的总结）（id: section-2-2-3）</p>
+                <p>&nbsp;&nbsp;• 被放逐者之图书馆（夸克百科）（id: section-2-2-4）</p>
+                <p>&nbsp;&nbsp;• 被放逐者之图书馆（百度百科）（id: section-2-2-5）</p>
+                <p>- 折叠块默认关闭（不加 open 属性），与已有「生化奇兵：无限（百度百科）」折叠块格式统一</p>
+
+                <p><strong>删除「目前所在位置」导航栏功能 [Alpha 008]</strong></p>
+                <p>- 从主馆全部10个页面中删除 &lt;nav&gt; 区块（包含"位置"标题和"目前所在路径"显示）</p>
+                <p>- 涉及文件：index.html, navigator.html, library/intro.html, library/rule.html, library/feature.html, library/library.html, library/paper/ 下4个文章页面</p>
+                <p>- JS 中 getCurrentPath() 和 #current-path 引用保留（if 判断会因元素不存在而跳过，不报错）</p>
+
+                <p><strong>图书馆功能页（library/feature.html）— 清理弃用文字 [Alpha 008]</strong></p>
+                <p>- 删除3处「（此功能已弃用）」纯文字（&lt;span class="deprecated-badge"&gt;已弃用&lt;/span&gt; 标签保留不变）</p>
+                <p>- 涉及位置：按钮、进阶功能、嵌套 三个标题行</p>
+
+                <p><strong>CSS 三大重构：字体统一 / 扁平化圆角 / 浮窗间距 + 新增文章元数据样式 [Alpha 008]</strong></p>
+                <p>- <strong>字体统一（以知识馆为参考）</strong>：</p>
+                <p>&nbsp;&nbsp;• body: font-size 16px→17px, line-height 1.8→1.9</p>
+                <p>&nbsp;&nbsp;• .subsection-header: 14px→18px</p>
+                <p>&nbsp;&nbsp;• .sub-subsection-header: 13px→15px</p>
+                <p>&nbsp;&nbsp;• .section-title-text-sub: 15px→17px</p>
+                <p>&nbsp;&nbsp;• .section-title-text-sub-sub: 14px→15px</p>
+                <p>&nbsp;&nbsp;• .quick-nav-item: 13px→14px</p>
+                <p>&nbsp;&nbsp;• .news-card-title: 16px→18px</p>
+                <p>&nbsp;&nbsp;• .news-card-date: 12px→13px</p>
+                <p>&nbsp;&nbsp;• .news-card-hint: 11px→12px</p>
+                <p>&nbsp;&nbsp;• .notice-box-red / .function-box-blue / .quote-box-grey: 14px→15px</p>
+                <p>&nbsp;&nbsp;• details summary: 14px→15px</p>
+                <p>&nbsp;&nbsp;• details &gt; div / .indented: 14px→15px</p>
+                <p>&nbsp;&nbsp;• .callout p / .callout h1-h3: 14px→15px</p>
+                <p>&nbsp;&nbsp;• .link-to-page: 14px→15px</p>
+                <p>&nbsp;&nbsp;• .kh-float-desc / .kh-float-link / .lang-float-desc / .lang-float-link: 13px→14px</p>
+                <p>&nbsp;&nbsp;• .kh-float-title / .lang-float-title: 13px→14px</p>
+                <p>- <strong>取消所有圆角（扁平化）</strong>：</p>
+                <p>&nbsp;&nbsp;• :root 变量 --radius-sm: 3px→0px, --radius-md: 6px→0px</p>
+                <p>&nbsp;&nbsp;• 清除所有元素的 border-radius 声明（.content-box, .notice-box-red, .function-box-blue, .quote-box-grey, .callout, .news-card, .news-card-image img, .float-button, .news-carousel-nav-btn, .mobile-nav-link, .quick-nav 系列元素, .link-to-page, .knowledge-hall-float, .lang-switch-float, details, .deprecated-badge, .kh-float-link 等，含移动端 @media 和暗色模式中的对应规则）</p>
+                <p>- <strong>浮窗上下排列、右对齐统一间距</strong>：</p>
+                <p>&nbsp;&nbsp;• .knowledge-hall-float: top 保持 var(--space-lg)</p>
+                <p>&nbsp;&nbsp;• .lang-switch-float: top 从 calc(var(--space-lg) + 60px) 改为 calc(var(--space-lg) + 120px)</p>
+                <p>&nbsp;&nbsp;• 移动端 .lang-switch-float: top 从 calc(var(--space-sm) + 48px) 改为 calc(var(--space-sm) + 100px)</p>
+                <p>- <strong>新增 .article-meta 文章元数据区样式</strong>：</p>
+                <p>&nbsp;&nbsp;• 新增 .article-meta / .article-meta-item / .article-meta-label / .article-meta-value 四个类</p>
+                <p>&nbsp;&nbsp;• flex 布局 + 底部分隔线，用于文章页面的结构化元数据展示</p>
+                <p>&nbsp;&nbsp;• 同步添加暗色模式颜色覆盖</p>
+                <p>- 涉及文件：css/style.css</p>
+
+                <p><strong>新闻板块海报完整展示优化 [Alpha 011]</strong></p>
+                <p>- 左侧海报列宽度从 300px 缩窄至 180px，移除 max-height: 160px 和 object-fit: cover 限制</p>
+                <p>- 海报图片改为 width:100%; height:auto 按原始比例完整展示竖式海报</p>
+                <p>- 整体容器 max-width 从 680px 缩至 560px，按钮同步等宽</p>
+                <p>- 右侧文字卡片保持 flex:1 均分海报高度（6个卡片时每个自动缩小适应）</p>
+                <p>- 移动端同步：删除 max-height/object-fit 限制，max-width 改为 100%</p>
+                <p>- 涉及文件：css/style.css</p>
+
+                <p><strong>link-to-page 图标彻底清除 [Alpha 011]</strong></p>
+                <p>- CSS 中从 SVG 箭头分组规则中移除 .link-to-page::after 和 .link-to-page:hover::after</p>
+                <p>- 仅保留独立的 .link-to-page::after { content: none; } 声明，代码意图更清晰</p>
+                <p>- visual-components.md 同步更新：从适用类名列表和代码示例中移除 link-to-page 的图标相关条目</p>
+                <p>- 涉及文件：css/style.css, .trae/rules/visual-components.md</p>
+
+                <p><strong>新增新闻创建完整流程规范 [Alpha 011]</strong></p>
+                <p>- 在 project_rules.md「新闻卡片创建规范」章节末尾新增「新闻创建完整流程」小节</p>
+                <p>&nbsp;&nbsp;• 步骤1：创建独立文章页（library/paper/ 目录，标准模板）</p>
+                <p>&nbsp;&nbsp;• 步骤2：添加新闻卡片到主页+英文主页（标题+日期+hint，不含正文）</p>
+                <p>&nbsp;&nbsp;• 步骤3：同步 news.html 新闻列表页</p>
+                <p>&nbsp;&nbsp;• 步骤4：记录更新日志</p>
+                <p>- 涉及文件：.trae/rules/project_rules.md</p>
+
+                <p><strong>新增 3 条新闻 [Alpha 011]</strong></p>
+                <p>- 创建了 3 个新文章页面：</p>
+                <p>&nbsp;&nbsp;• library/paper/视觉组件标准已创建.html（2026年5月11日）— 含引导语 + link-to-page 跳转至 visual-components.html</p>
+                <p>&nbsp;&nbsp;• library/paper/Minesia 0.0.16更新.html（2026年5月8日）— 含 ext-link 外链至 CurseForge</p>
+                <p>&nbsp;&nbsp;• library/paper/图书馆可能进入活跃开发阶段.html（2026年5月11日）— 三段正文</p>
+                <p>- index.html 右侧文字卡片从 3 个增至 6 个（时间倒序，新卡片插入最前）</p>
+                <p>- news.html 新增 3 条文字新闻（插入最前）</p>
+                <p>- en/index.html 英文版同步添加 3 条翻译卡片</p>
+                <p>- 涉及文件：library/paper/ 下3个新文件, index.html, en/index.html, news.html</p>
+
+                <p><strong>新闻板块重构：轮播改为两列静态布局 + 新增新闻列表页 [Alpha 008]</strong></p>
+                <p>- <strong>index.html 新闻区域重构</strong>：</p>
+                <p>&nbsp;&nbsp;• 删除原有轮播结构（news-carousel-container / carousel-wrapper / carousel-track / carousel-nav-btn 等）</p>
+                <p>&nbsp;&nbsp;• 删除 initNewsCarousel() IIFE 函数及其调用（含键盘左右箭头控制逻辑）</p>
+                <p>&nbsp;&nbsp;• 替换为两列静态 flex 布局（.news-featured）：</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;- 左列：最新海报新闻（SOTM I 2026后记，2026-02-03）</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;- 右列：最新文字新闻（知识馆正式启用，2026-05-10）</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;- 底部：「查阅所有新闻 →」按钮，跳转至 news.html</p>
+                <p>- <strong>新建 news.html 新闻专属页面</strong>：</p>
+                <p>&nbsp;&nbsp;• 标准页面结构（header + main + footer + mobile-nav + quick-nav + float buttons）</p>
+                <p>&nbsp;&nbsp;• 按时间倒序列出全部5条新闻：</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;1. 知识馆正式启用（2026-05-10，文字新闻）</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;2. 开学后第一个更新（2026-04-03，文字新闻）</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;3. Minesia第一个公开测试（2026-02-18，文字新闻）</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;4. SOTM I 2026后记（2026-02-03，海报新闻）</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;5. 图书馆Alpha 0.0.1更新（2026-02-04，海报新闻）</p>
+                <p>&nbsp;&nbsp;• 海报新闻使用 .news-list-item（左缩略图+右信息），文字新闻使用 .news-list-item-text-only（居中纯文字）</p>
+                <p>- <strong>CSS 新增样式</strong>（css/style.css）：</p>
+                <p>&nbsp;&nbsp;• .news-featured 两列布局容器及子元素（poster/text/image/info/title/date/hint/text-link/view-all-btn）</p>
+                <p>&nbsp;&nbsp;• .news-list-item 新闻列表卡片及子元素（thumb/content/title/date/hint/text-only）</p>
+                <p>&nbsp;&nbsp;• 同步添加暗色模式 @media (prefers-color-scheme: dark) 颜色覆盖</p>
+                <p>&nbsp;&nbsp;• 同步添加移动端 @media (max-width: 768px) 响应式适配（.news-featured 纵向排列、.news-list-item 纵向排列、缩略图宽度调整）</p>
+                <p>- 涉及文件：index.html, news.html（新建）, css/style.css</p>
+
+                <p><strong>文章格式统一：引用框日期改为结构化元数据区 [Alpha 009]</strong></p>
+                <p>- 将所有文章页面中「创建于xxx」从 .quote-box-grey 引用框改为 .article-meta 结构化元数据区</p>
+                <p>- 新格式包含 .article-meta-label（标签如"创建于"）和 .article-meta-value（值如日期文本）</p>
+                <p>- 涉及文件（共5个）：</p>
+                <p>&nbsp;&nbsp;• library/paper/SOTM_I_2026后记.html — "2026.2.4，有删减"</p>
+                <p>&nbsp;&nbsp;• library/paper/Minesia第一个公开测试.html — "2026.2.18"</p>
+                <p>&nbsp;&nbsp;• library/paper/记录的冲动.html — "2025.12.04 · 录音时长11:15"（原格式为普通div，一并统一）</p>
+                <p>&nbsp;&nbsp;• library/paper/knowledge-hall-launch.html — "2026.5.10"</p>
+                <p>&nbsp;&nbsp;• en/library/paper/knowledge-hall-launch.html — "May 10, 2026"（标签用英文 Created）</p>
+
+                <p><strong>补全「目前所在位置」全局删除 [Alpha 009]</strong></p>
+                <p>- 上一轮遗漏了 en/ 目录下的6个页面，本次补全删除</p>
+                <p>- 涉及文件：en/index.html, en/library/intro.html, en/library/rule.html, en/library/feature.html, en/library/library.html, en/library/paper/knowledge-hall-launch.html</p>
+
+                <p><strong>知识馆内联样式圆角清除 [Alpha 009]</strong></p>
+                <p>- knowledge-hall/index.html 内联 &lt;style&gt; 中残留的 5 处 border-radius 全部移除</p>
+                <p>&nbsp;&nbsp;• .kh-nav-item: border-radius: var(--radius-sm)</p>
+                <p>&nbsp;&nbsp;• .kh-card: border-radius: 4px</p>
+                <p>&nbsp;&nbsp;• .notice-box-red: border-radius: 2px</p>
+                <p>&nbsp;&nbsp;• .function-box-blue: border-radius: 2px</p>
+                <p>&nbsp;&nbsp;• .link-to-page: border-radius: 2px</p>
+
+                <p><strong>新闻板块综合优化：缩小布局+多卡片+浮窗等宽 [Alpha 009]</strong></p>
+                <p>- <strong>CSS 样式重构（css/style.css）</strong>：</p>
+                <p>&nbsp;&nbsp;• .news-featured: 新增 max-width: 680px（约内容区一半），margin-bottom 改为 space-sm</p>
+                <p>&nbsp;&nbsp;• .news-featured-poster: flex 从 1 改为 flex: 0 0 300px（固定宽度）</p>
+                <p>&nbsp;&nbsp;• 新增 .news-featured-text-list 容器（flex: 1, 纵向排列，gap: space-sm）</p>
+                <p>&nbsp;&nbsp;• 新增 .news-featured-text-card 横向小卡片样式（带边框、hover 高亮、14px标题/12px日期）</p>
+                <p>&nbsp;&nbsp;• .news-view-all-btn: 新增 max-width: 680px 与新闻区等宽</p>
+                <p>&nbsp;&nbsp;• .news-list-item-text-only: 新增 border 边框线 + hover 时 border-color 变 accent</p>
+                <p>&nbsp;&nbsp;• .knowledge-hall-float: width 260px→200px，z-index 999→1000，属性顺序整理</p>
+                <p>&nbsp;&nbsp;• .lang-switch-float: width 240px→200px，top 间距从 120px 增至 140px 避免重叠，z-index 998→999</p>
+                <p>&nbsp;&nbsp;• 移动端响应式：两个浮窗 max-width 统一改为 200px，lang-switch top 间距增至 120px</p>
+                <p>&nbsp;&nbsp;• 移动端新增 .news-featured-poster 和 .news-featured-text-list 适配（宽度100%、gap收紧）</p>
+                <p>&nbsp;&nbsp;• 暗色模式：新增 .news-featured-text-card 全套颜色覆盖（border/color/hover/card-title/card-date）</p>
+                <p>&nbsp;&nbsp;• 暗色模式：.news-list-item-text-only 补充 border-color 覆盖</p>
+                <p>- <strong>index.html 新闻区域重构</strong>：</p>
+                <p>&nbsp;&nbsp;• 右列从单条 .news-featured-text-link 改为 .news-featured-text-list 包含3个横向小卡片</p>
+                <p>&nbsp;&nbsp;• 新增卡片：开学后第一个更新（2026-04-03）、Minesia第一个公开测试（2026-02-18）</p>
+                <p>&nbsp;&nbsp;• 移除海报区的 hint 文字（点击海报了解更多）</p>
+                <p>- <strong>en/index.html 英文版同步修改</strong>：</p>
+                <p>&nbsp;&nbsp;• 删除整个轮播结构（news-carousel-container / track / nav-btn 等）</p>
+                <p>&nbsp;&nbsp;• 删除 initNewsCarousel() IIFE 函数（含键盘左右箭头控制逻辑）</p>
+                <p>&nbsp;&nbsp;• 替换为与中文版一致的两列静态布局（.news-featured + .news-featured-text-list + view-all-btn）</p>
+                <p>&nbsp;&nbsp;• 英文翻译：知识馆正式启用→Knowledge Hall Officially Launched / 开学后第一个更新→First Update After Semester Begins / Minesia第一个公开测试→Minesia First Public Test / SOTM I 2026后记→SOTM I 2026 Postscript / 查阅所有新闻→View All News</p>
+                <p>- 涉及文件：css/style.css, index.html, en/index.html</p>
+
+                <p><strong>新闻板块终极修复 [Alpha 012]</strong></p>
+                <p>- <strong>海报区加框线</strong>：.news-featured-poster 新增 border + padding，整个海报区（图片+标题+日期）有清晰的外框线</p>
+                <p>- <strong>右侧卡片严格等高</strong>：.news-featured-text-list 新增 overflow:hidden；gap 从 space-sm 缩小到 space-xs；卡片 padding 同步缩小；6个卡片自动均分左侧海报高度</p>
+                <p>- <strong>语言浮窗再次下调</strong>：桌面端 top 增至 calc(var(--space-lg) + 200px)；移动端增至 calc(var(--space-sm) + 180px)</p>
+                <p>- 涉及文件：css/style.css</p>
+
+                <p><strong>视觉组件文章链接路径修复 [Alpha 012]</strong></p>
+                <p>- library/paper/视觉组件标准已创建.html 中 link-to-page 的 href 从 ./visual-components.html 修正为 ../visual-components.html</p>
+                <p>- 涉及文件：library/paper/视觉组件标准已创建.html</p>
+
+                <p><strong>link-to-page icon 全局清除 [Alpha 012]</strong></p>
+                <p>- 删除 library/feature.html 中3处 link-to-page 内的 &lt;span class="icon"&gt;📒/🧭&lt;/span&gt;</p>
+                <p>- 删除 en/library/feature.html 中3处对应的 icon span</p>
+                <p>- 删除 library/visual-components.html 渲染示例和代码示例中的 icon span</p>
+                <p>- 规范更新：project_rules.md 新增 link-to-page 禁止内联图标元素的规定</p>
+                <p>- 涉及文件：library/feature.html, en/library/feature.html, library/visual-components.html, .trae/rules/project_rules.md</p>
+
+                <p><strong>intro.html 灵感来源内容重排 [Alpha 009]</strong></p>
+                <p>- 将「在同样的这段时期里...」段落从生化奇兵：无限区块内移动到被放逐者之图书馆折叠块之后</p>
+                <p>- 原位置错误：该段文字描述的是被放逐者之图书馆的阅读经历，却放在了生化奇兵：无限区块中</p>
+                <p>- 修正后顺序：被放逐者之图书馆（夸克/百度）→ 阅读经历段落 → 生化奇兵：无限（介绍+百科）</p>
+                <p>- 所有文字内容原样保留（文字保护原则），仅改变位置</p>
+                <p>- 涉及文件：library/intro.html</p>
+
+                <p><strong>知识馆 callout 字体统一 [Alpha 009]</strong></p>
+                <p>- recallable.html 的 .function-box-blue 缺少亮色模式定义（仅有 dark 覆盖），新增完整规则 font-size:15px; line-height:1.7</p>
+                <p>- phenomenon.html / traceable.html / knowledge-hall/index.html 的 .function-box-blue line-height 从 1.8 统一为 1.7</p>
+                <p>- 涉及文件（共4个）：knowledge-hall/categories/recallable.html, phenomenon.html, traceable.html, knowledge-hall/index.html</p>
+
+                <p><strong>新增视觉组件展示页面 [Alpha 010]</strong></p>
+                <p>- 新建 library/visual-components.html，将 visual-components.md 转换为可交互的 HTML 展示页</p>
+                <p>- 按组件章节顺序展示 10 大类 UI 组件，每个组件包含：用途说明、实际渲染效果、对应 HTML 代码</p>
+                <p>- 涵盖组件：信息提示框（蓝/灰/红/callout）、折叠块、文章元数据区、新闻卡片、浮窗、导航组件、按钮链接、文章列表、设计令牌速查表、响应式断点</p>
+                <p>- fixed 定位组件（浮窗/浮动按钮）使用 relative 定位模拟外观</p>
+                <p>- 标准主馆页面结构：header + main + footer + mobile-nav + quick-nav + float buttons + JS</p>
+                <p>- 导航仪目录包含所有 10 个 section 锚点</p>
+                <p>- 涉及文件：library/visual-components.html（新建）</p>
+
+                <p><strong>CSS 三大调整：新闻板块高度减半 + 标题字号翻倍 + 移动端同步 [Alpha 010]</strong></p>
+                <p>- <strong>新闻板块高度减半 + 右侧卡片均分海报高度</strong>：</p>
+                <p>&nbsp;&nbsp;• .news-featured-image img: 新增 max-height: 160px; object-fit: cover;（限制海报最大高度）</p>
+                <p>&nbsp;&nbsp;• .news-featured-text-card: 从 display: block 改为 display: flex; flex-direction: column; justify-content: center; flex: 1; min-height: 0;</p>
+                <p>&nbsp;&nbsp;• 实现效果：右侧文字卡片自动均分左侧海报高度（3个卡片各占1/3，1个占满，5个各占1/5，完全自适应）</p>
+                <p>- <strong>主馆所有标题字号增大到约2倍</strong>：</p>
+                <p>&nbsp;&nbsp;• .page-title-main: 14px → 26px</p>
+                <p>&nbsp;&nbsp;• .section-title-text-main: 14px → 28px</p>
+                <p>&nbsp;&nbsp;• .section-title-text-sub: 17px → 26px</p>
+                <p>&nbsp;&nbsp;• .section-title-text-sub-sub: 15px → 22px</p>
+                <p>&nbsp;&nbsp;• .subsection-header: 18px → 28px</p>
+                <p>&nbsp;&nbsp;• .sub-subsection-header: 15px → 22px</p>
+                <p>- <strong>移动端同步更新（@media max-width: 768px）</strong>：</p>
+                <p>&nbsp;&nbsp;• .page-title-main: 13px → 20px</p>
+                <p>&nbsp;&nbsp;• .news-featured-image img: 新增 max-height: 120px; object-fit: cover;</p>
+                <p>&nbsp;&nbsp;• .news-featured-text-card: 新增 flex: 1; min-height: 0;</p>
+                <p>&nbsp;&nbsp;• .section-title-text-main: 新增 22px</p>
+                <p>&nbsp;&nbsp;• .section-title-text-sub: 新增 20px</p>
+                <p>&nbsp;&nbsp;• .section-title-text-sub-sub: 新增 18px</p>
+                <p>&nbsp;&nbsp;• .subsection-header: 新增 22px</p>
+                <p>&nbsp;&nbsp;• .sub-subsection-header: 新增 18px</p>
+                <p>- <strong>小屏移动端同步（@media max-width: 375px）</strong>：</p>
+                <p>&nbsp;&nbsp;• .page-title-main: 12px → 18px</p>
+                <p>- <strong>暗色模式</strong>：无需修改（标题选择器仅有颜色变量覆盖，无 font-size 硬编码）</p>
+                <p>- 涉及文件：css/style.css</p>
+
+                <p><strong>新闻板块5项精确修复 [Alpha 011]</strong></p>
+                <p>- <strong>海报压缩修复</strong>：.news-featured-poster 宽度从 180px 增至 240px；.news-featured-image img 彻底删除残留的 max-height:160px 和 object-fit:cover，海报按原始比例完整展示</p>
+                <p>- <strong>"查阅所有新闻"箭头移除</strong>：index.html 中「查阅所有新闻 →」改为「查阅所有新闻」；en/index.html 中「View All News →」改为「View All News」</p>
+                <p>- <strong>新闻时间排序修正</strong>：交换「知识馆正式启用」（5.10）和「Minesia 0.0.16更新」（5.8）两个卡片的位置，确保严格按时间倒序排列（5.11→5.11→5.10→5.8→4.3→2.18）；中英文版同步修改</p>
+                <p>- <strong>按钮与新闻区等宽</strong>：.news-view-all-btn 的 max-width 从 560px 恢复为 680px，与 .news-featured 容器等宽</p>
+                <p>- <strong>语言切换浮窗下移</strong>：桌面端 .lang-switch-float 的 top 从 calc(var(--space-lg) + 140px) 增至 calc(var(--space-lg) + 170px)；移动端从 calc(var(--space-sm) + 120px) 增至 calc(var(--space-sm) + 150px)</p>
+                <p>- 涉及文件：css/style.css, index.html, en/index.html</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 规范变更 -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-2" class="section-title-text-main">规范变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>新增「全局变更原则」[Alpha 009]</strong></p>
+                <p>- 在 project_rules.md 的「核心原则」章节中新增「全局变更原则」小节</p>
+                <p>- 明确规定：当修改全局性/结构性功能时（导航、浮窗、页面骨架、全局样式等），必须将变更应用到所有包含此功能的页面</p>
+                <p>- 定义操作流程：Grep 搜索全项目 → 逐一修改匹配文件 → 覆盖主馆/知识馆/英文版/文章页/日志页</p>
+                <p>- 除非用户特别强调仅修改特定文件，否则默认全局应用</p>
+                <p>- 涉及文件：.trae/rules/project_rules.md</p>
+
+                <p><strong>新增视觉组件标准文档 [Alpha 009]</strong></p>
+                <p>- 创建 .trae/rules/visual-components.md，统一管理全站所有 UI 组件的标准样式</p>
+                <p>- 涵盖 10 大组件类别：信息提示框（蓝/灰/红）、折叠块、文章元数据区、新闻卡片、浮窗、导航组件、按钮链接、文章列表、已废弃标记、设计令牌速查表</p>
+                <p>- 每个组件包含：用途说明、标准 CSS 代码（主馆+知识馆双版本）、HTML 模板示例、注意事项</p>
+                <p>- 目的：开发时复制使用即可避免主馆/知识馆之间的样式不一致</p>
+                <p>- 涉及文件：.trae/rules/visual-components.md（新建）</p>
+
+                <p><strong>新增标准文档同步原则 + link-to-page icon 禁令 [Alpha 012]</strong></p>
+                <p>- 在 project_rules.md「跳转链接图标规范」中新增两条规则：</p>
+                <p>&nbsp;&nbsp;• .link-to-page 内禁止使用 &lt;span class="icon"&gt; 或任何内联图标元素，仅保留纯文字</p>
+                <p>&nbsp;&nbsp;• 新增「标准文档同步原则」：当在 visual-components.md 中修改组件定义时，必须同步到全局所有使用该组件的页面</p>
+                <p>- 涉及文件：.trae/rules/project_rules.md</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</div>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能</a>
+    <div class="quick-nav-divider"></div>
+    <div class="quick-nav-section">当前页面</div>
+    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
+    <div class="quick-nav-section">页面目录</div>
+    <div id="quick-nav-toc-container">
+      <div data-target="section-1" class="quick-nav-toc-item">• 主馆变更</div>
+      <div data-target="section-2" class="quick-nav-toc-item">• 规范变更</div>
+    </div>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script>
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function openNavigator() {
+  window.open('../navigator.html', '_blank');
+}
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function toggleTocToggle(toggleElement) {
+  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
+  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
+
+  if (childrenElement) {
+    if (childrenElement.classList.contains('show')) {
+      childrenElement.classList.remove('show');
+      toggleElement.classList.remove('expanded');
+      toggleElement.classList.add('collapsed');
+    } else {
+      childrenElement.classList.add('show');
+      toggleElement.classList.remove('collapsed');
+      toggleElement.classList.add('expanded');
+    }
+  }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded');
+        quickNav.style.width = '180px';
+        quickNav.style.padding = '16px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'block';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'horizontal-tb';
+          title.style.marginBottom = '16px';
+          title.style.paddingBottom = '8px';
+          title.style.borderBottom = '1px solid #e0e0e0';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      }
+    });
+  }
+
+  const pageTitle = document.querySelector('.page-title-main');
+  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
+  if (pageTitle && quickNavTitleElement) {
+    quickNavTitleElement.textContent = pageTitle.textContent;
+  }
+
+  const tocContainer = document.getElementById('quick-nav-toc-container');
+  if (tocContainer) {
+    tocContainer.addEventListener('click', function(event) {
+      const target = event.target;
+
+      if (target.classList.contains('quick-nav-toc-toggle')) {
+        event.stopPropagation();
+        event.preventDefault();
+        toggleTocToggle(target);
+        return;
+      }
+
+      if (target.classList.contains('quick-nav-toc-item') ||
+          target.classList.contains('quick-nav-toc-item-with-children') ||
+          target.classList.contains('quick-nav-toc-child-item')) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        let sectionId;
+
+        if (target.classList.contains('quick-nav-toc-item-with-children')) {
+          const toggleElement = target.nextElementSibling;
+          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
+            sectionId = toggleElement.getAttribute('data-parent');
+          }
+        } else {
+          sectionId = target.getAttribute('data-target');
+        }
+
+        if (sectionId) {
+          scrollToSection(sectionId);
+        }
+      }
+    });
+  }
+
+  const quickNavPageTitle = document.getElementById('quick-nav-page-title');
+  if (quickNavPageTitle) {
+    quickNavPageTitle.addEventListener('click', function(event) {
+      event.stopPropagation();
+      scrollToTop();
+    });
+    quickNavPageTitle.style.cursor = 'pointer';
+  }
+
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', scrollToTop);
+  }
+
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) {
+    navHubBtn.addEventListener('click', openNavigator);
+  }
+});
+</script>
+</body>
+</html>
