@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年5月12日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">2026年5月12日 更新日志</div>
+  </div>
+</header>
+
+<main class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-bg-yellow">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-05-12</div>
+      </div>
+
+      <!-- 主馆变更 -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-1" class="section-title-text-main">主馆变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>新增新闻：周三狂热及难以进行的复习 [Alpha 013]</strong></p>
+                <p>- 创建文章页 library/paper/周三狂热及难以进行的复习.html（含 article-meta 元数据 + details 折叠补充说明）</p>
+                <p>- index.html 右侧文字卡片新增1条（插入最前，时间倒序）</p>
+                <p>- en/index.html 英文版同步添加翻译卡片（Wednesday Frenzy and Difficult Review）</p>
+                <p>- news.html 新增1条文字新闻（插入最前）</p>
+                <p>- en/news.html 新增1条英文文字新闻（插入最前）</p>
+
+                <p><strong>CSS 标题竖线装饰统一加粗 + 颜色统一 [Alpha 013]</strong></p>
+                <p>- .section-title-text-main: border-left 3px → 4px，颜色保持 accent</p>
+                <p>- .section-title-text-sub: border-left 2px → 4px，颜色从 --color-border-dark 改为 --color-accent</p>
+                <p>- .subsection-header: border-left 2px → 4px，颜色保持 accent</p>
+                <p>- .function-box-blue: border-left 3px → 4px，::before width 3px → 4px</p>
+                <p>- .notice-box: border-left 3px → 4px</p>
+                <p>- 暗色模式 .section-title-text-sub border-left-color 从 --color-border-dark 改为 --color-accent</p>
+                <p>- 涉及文件：css/style.css, .trae/rules/visual-components.md</p>
+
+                <p><strong>一级标题区域细框线 [Alpha 013]</strong></p>
+                <p>- .page-header-section 新增 border: var(--line-width) solid var(--color-border) + padding: var(--space-md)</p>
+                <p>- 所有使用 .page-header-section 的一级标题区块（含标题+内容整体）现在带有细边框</p>
+                <p>- 涉及文件：css/style.css</p>
+
+                <p><strong>新闻列表页增加历史新闻分区 + 折叠块修复 + 路径修复 [Alpha 013]</strong></p>
+                <p>- news.html：文字新闻限制为5条，第6、7条（开学后第一个更新、Minesia第一个公开测试）移入新增的"历史新闻"区域</p>
+                <p>- en/news.html：英文版同步添加"Historical News"历史新闻分区</p>
+                <p>- 6个文件的 &lt;details open&gt; / &lt;details open=""&gt; 修改为 &lt;details&gt;（删除自动展开属性）</p>
+                <p>&nbsp;&nbsp;涉及文件：library/visual-components.html, library/feature.html, library/intro.html,</p>
+                <p>&nbsp;&nbsp;en/library/feature.html, en/library/intro.html, updateLog/updateLog_alpha-2026.4.2-1.html</p>
+                <p>- en/library/library.html：链接到中文 paper 页面的相对路径 ../library/paper/ → ../../library/paper/（2处）</p>
+
+                <p><strong>文章页 article-meta 元数据扩展 [Alpha 013]</strong></p>
+                <p>- 为全部8个文章页（library/paper/）的 article-meta 区域新增文章类型字段和标签字段</p>
+                <p>- 记录的冲动.html：添加「录音文章」类型 + 录音时长（约3分钟）</p>
+                <p>- SOTM_I_2026后记.html：添加「录音文章」类型 + 标签（包含AI、有删减）</p>
+                <p>- 周三狂热及难以进行的复习.html：添加「信息文章」类型 + 新闻标签 + 页脚元数据(article-footer-meta 补充说明)</p>
+                <p>- 视觉组件标准已创建.html、图书馆可能进入活跃开发阶段.html、Minesia 0.0.16更新.html、knowledge-hall-launch.html、Minesia第一个公开测试.html：均添加「信息文章」类型 + 新闻标签</p>
+                <p>- 涉及文件：library/paper/ 下全部8个 .html 文件</p>
+
+                <p><strong>新增页脚元数据组件 + 页面日期组件 + 标签样式 [Alpha 013]</strong></p>
+                <p>- CSS 新增 .article-footer-meta（文章页脚元数据，上边框分隔，用于展示补充说明注释）</p>
+                <p>- CSS 新增 .page-date（页面标题下方日期显示，居中、小字、浅色）</p>
+                <p>- CSS 新增 .article-type-badge（文章类型标签：蓝色背景）、.article-tag（通用灰色标签）</p>
+                <p>- CSS 新增 .tag-ai（包含AI标签：金色背景）、.tag-edited（有删减标签：红色背景）</p>
+                <p>- CSS 新增 .news-list-history / .news-list-history-title（新闻历史区域样式）</p>
+                <p>- library/library.html：删除顶部蓝色 callout，日期移至标题下方使用 .page-date 组件</p>
+                <p>- index.html：标题下方新增 .page-date「创建于 2026年1月4日」</p>
+                <p>- 涉及文件：css/style.css, library/library.html, index.html</p>
+
+                <p><strong>一级标题框线全面补齐 [Alpha 013]</strong></p>
+                <p>- 以下页面的一级标题 section 容器追加 page-header-section 类名（共17处）：</p>
+                <p>&nbsp;&nbsp;index.html：前情提要、图书馆入口（2处）</p>
+                <p>&nbsp;&nbsp;en/index.html：About、Entrance（2处）</p>
+                <p>&nbsp;&nbsp;library/feature.html：基本功能（1处）</p>
+                <p>&nbsp;&nbsp;en/library/feature.html：Basic Features（1处）</p>
+                <p>&nbsp;&nbsp;library/visual-components.html：全部10个章节（10处）</p>
+                <p>&nbsp;&nbsp;navigator.html：文章（1处）</p>
+
+                <p><strong>全站页面标准格式重排版 [Alpha 013]</strong></p>
+                <p>- library/paper/ 全部8个文章页：添加语义标签 &lt;header&gt;/&lt;main&gt;/&lt;footer&gt;</p>
+                <p>- article-meta 统一为标准四字段格式（作者→创建日期→文章类型→标签）</p>
+                <p>- 7个旧格式页：「创建于」字段名改为「创建日期」，新增「作者：薛柯道」</p>
+                <p>- 日期格式统一为 YYYY年M月D日（如 2026.5.10 → 2026年5月10日）</p>
+                <p>- en/library/paper/knowledge-hall-launch.html：meta 升级为四字段标准格式</p>
+                <p>- updateLog/ 全部6个日志页：添加语义标签 + 删除残留的「位置」导航栏</p>
+                <p>- 涉及文件：library/paper/* (8), en/library/paper/knowledge-hall-launch.html, updateLog/* (6)</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 英文版变更 -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-2" class="section-title-text-main">英文版变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>新建 en/news.html 英文新闻列表页 [Alpha 013]</strong></p>
+                <p>- 创建英文版新闻列表页，结构与中文 news.html 一致</p>
+                <p>- 包含全部8条新闻的英文翻译（标题+日期+hint）</p>
+                <p>- 海报新闻链接指向中文原页面（无英文独立文章页）</p>
+                <p>- 涉及文件：en/news.html（新建）</p>
+
+                <p><strong>en/library/rule.html 占位页面增加中文跳转链接 [Alpha 013]</strong></p>
+                <p>- 在"This page has not yet been developed"提示下方新增中文版跳转链接</p>
+                <p>- 使用 .ext-link 类自动添加跳转箭头图标</p>
+                <p>- 涉及文件：en/library/rule.html</p>
+
+                <p><strong>英文版页面同步变更 [Alpha 013]</strong></p>
+                <p>- en/library/library.html：删除蓝色callout，添加 .page-date 组件</p>
+                <p>- en/index.html：标题下方添加 .page-date 组件</p>
+                <p>- en/library/paper/knowledge-hall-launch.html：article-meta 升级为四字段标准格式</p>
+                <p>- en/library/library.html：修复2处相对路径跳转错误</p>
+                <p>- 中英文主页新闻板块均限制最多展示5条</p>
+                <p>- 中英文 news.html 均新增历史新闻分区</p>
+
+                <p><strong>新增新闻：语义化视觉组件更新 [Alpha 013]</strong></p>
+                <p>- 创建文章页 library/paper/语义化视觉组件更新.html</p>
+                <p>- 中英文主页各添加1条文字卡片（插入最前）</p>
+                <p>- 中英文 news.html 各同步添加</p>
+                <p>- 包含Alpha-012版本标签创建说明</p>
+
+                <p><strong>README.md 版本号标注 [Alpha 013]</strong></p>
+                <p>- 在开发状态区域醒目标注当前版本号 alpha-013</p>
+                <p>- 涉及文件：README.md</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 规范变更 -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-3" class="section-title-text-main">规范变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>视觉组件标准文档同步更新 [Alpha 013]</strong></p>
+                <p>- visual-components.md 中 .function-box-blue 的 border-left 和 ::before width 从 3px 更新为 4px</p>
+                <p>- 与 css/style.css 实际值保持一致</p>
+                <p>- 涉及文件：.trae/rules/visual-components.md</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能</a>
+    <div class="quick-nav-divider"></div>
+    <div class="quick-nav-section">当前页面</div>
+    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
+    <div class="quick-nav-section">页面目录</div>
+    <div id="quick-nav-toc-container">
+      <div data-target="section-1" class="quick-nav-toc-item">• 主馆变更</div>
+      <div data-target="section-2" class="quick-nav-toc-item">• 英文版变更</div>
+      <div data-target="section-3" class="quick-nav-toc-item">• 规范变更</div>
+    </div>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script>
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function openNavigator() {
+  window.open('../navigator.html', '_blank');
+}
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function toggleTocToggle(toggleElement) {
+  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
+  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
+
+  if (childrenElement) {
+    if (childrenElement.classList.contains('show')) {
+      childrenElement.classList.remove('show');
+      toggleElement.classList.remove('expanded');
+      toggleElement.classList.add('collapsed');
+    } else {
+      childrenElement.classList.add('show');
+      toggleElement.classList.remove('collapsed');
+      toggleElement.classList.add('expanded');
+    }
+  }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded');
+        quickNav.style.width = '180px';
+        quickNav.style.padding = '16px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'block';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'horizontal-tb';
+          title.style.marginBottom = '16px';
+          title.style.paddingBottom = '8px';
+          title.style.borderBottom = '1px solid #e0e0e0';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      }
+    });
+  }
+
+  const pageTitle = document.querySelector('.page-title-main');
+  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
+  if (pageTitle && quickNavTitleElement) {
+    quickNavTitleElement.textContent = pageTitle.textContent;
+  }
+
+  const tocContainer = document.getElementById('quick-nav-toc-container');
+  if (tocContainer) {
+    tocContainer.addEventListener('click', function(event) {
+      const target = event.target;
+
+      if (target.classList.contains('quick-nav-toc-toggle')) {
+        event.stopPropagation();
+        event.preventDefault();
+        toggleTocToggle(target);
+        return;
+      }
+
+      if (target.classList.contains('quick-nav-toc-item') ||
+          target.classList.contains('quick-nav-toc-item-with-children') ||
+          target.classList.contains('quick-nav-toc-child-item')) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        let sectionId;
+
+        if (target.classList.contains('quick-nav-toc-item-with-children')) {
+          const toggleElement = target.nextElementSibling;
+          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
+            sectionId = toggleElement.getAttribute('data-parent');
+          }
+        } else {
+          sectionId = target.getAttribute('data-target');
+        }
+
+        if (sectionId) {
+          scrollToSection(sectionId);
+        }
+      }
+    });
+  }
+
+  const quickNavPageTitle = document.getElementById('quick-nav-page-title');
+  if (quickNavPageTitle) {
+    quickNavPageTitle.addEventListener('click', function(event) {
+      event.stopPropagation();
+      scrollToTop();
+    });
+    quickNavPageTitle.style.cursor = 'pointer';
+  }
+
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', scrollToTop);
+  }
+
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) {
+    navHubBtn.addEventListener('click', openNavigator);
+  }
+});
+</script>
+</body>
+</html>

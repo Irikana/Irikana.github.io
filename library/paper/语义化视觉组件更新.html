@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 语义化视觉组件更新</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<header>
+<div class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../../image/logo_text.png" class="logo-size logo-size-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">语义化视觉组件更新</div>
+  </div>
+</div>
+</header>
+
+<main>
+<div class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-bg-yellow">
+      <div class="article-meta">
+        <div class="article-meta-item">
+          <span class="article-meta-label">作者：</span>
+          <span class="article-meta-value">薛柯道</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">创建日期：</span>
+          <span class="article-meta-value">2026年5月12日</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">文章类型：</span>
+          <span class="article-meta-value"><span class="article-type-badge">信息文章</span></span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">标签：</span>
+          <span class="article-meta-value"><span class="article-tag">新闻</span> <span class="article-tag tag-ai">包含AI</span></span>
+        </div>
+      </div>
+
+      <div class="left-align">
+        <p>本次更新对全站的视觉组件进行了系统性的语义化和统一化改造，涵盖CSS样式、HTML结构、页面排版和英文版同步等多个方面。</p>
+
+        <p><strong>标题竖线装饰统一加粗</strong></p>
+        <p>所有标题的左侧竖线装饰（border-left）统一从2-3px加粗至4px，颜色统一为accent色，消除了此前不同标题层级竖线粗细和颜色不一致的问题。同时，蓝色信息框（.function-box-blue）和通知框（.notice-box）的左侧装饰线也同步加粗至4px，保持视觉一致性。</p>
+
+        <p><strong>一级标题区域细框线</strong></p>
+        <p>为所有一级标题及其内容区域整体添加了细边框（.page-header-section），使页面的大板块结构更加清晰。经过全站检查，共为17处缺少框线的一级标题区域补齐了该样式类名。</p>
+
+        <p><strong>文章元数据系统扩展</strong></p>
+        <p>文章元数据区（.article-meta）新增了两个字段：文章类型（录音文章/手写文章/信息文章）和标签（新闻/包含AI/有删减）。文章类型以蓝色标签展示，标签系统包含三种样式——通用灰色标签、金色"包含AI"标签和红色"有删减"标签。此外，录音文章新增了独立的录音时长字段。</p>
+
+        <p><strong>新增视觉组件</strong></p>
+        <p>创建了页面日期显示组件（.page-date），用于在页面标题下方展示创建日期，替代了此前在蓝色信息框中标注日期的做法。创建了文章页脚元数据组件（.article-footer-meta），用于在文章末尾展示补充说明和注释信息。</p>
+
+        <p><strong>全站页面标准格式重排版</strong></p>
+        <p>对全站所有文章页（8个）和更新日志页（6个）进行了标准格式重排版：统一添加了语义化HTML标签（&lt;header&gt;/&lt;main&gt;/&lt;footer&gt;），article-meta统一为标准四字段格式（作者→创建日期→文章类型→标签），日期格式统一为YYYY年M月D日。同时删除了3个更新日志页面中残留的旧版「位置」导航栏。</p>
+
+        <p><strong>英文版同步</strong></p>
+        <p>英文版页面同步了所有结构性变更：创建英文新闻列表页（en/news.html），图书馆入口页删除蓝色callout并改用page-date组件，占位页面添加中文版跳转链接，修复了相对路径跳转错误。</p>
+
+        <p><strong>其他改进</strong></p>
+        <p>修复了6个页面中折叠块自动展开的问题。新闻列表页新增历史新闻分区，主页新闻板块限制最多展示5条。README.md中新增了当前版本号（alpha-013）的醒目标注。</p>
+
+        <p><strong>Alpha-012版本标签创建</strong></p>
+        <p>由于昨日的更新具有价值和纪念意义，所以我在GitHub上创建了对应的标签。</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+<div class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../../index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="../intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="../rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="../feature.html" class="quick-nav-item">图书馆功能</a>
+    <div class="quick-nav-divider"></div>
+    <div class="quick-nav-section">当前页面</div>
+    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub" onclick="window.open('../../navigator.html','_blank')">
+  导航<br>枢纽
+</button>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+  var pageTitle = document.querySelector('.page-title-main');
+  var quickNavTitle = document.getElementById('quick-nav-page-title');
+  if (pageTitle && quickNavTitle) {
+    quickNavTitle.textContent = pageTitle.textContent;
+    quickNavTitle.addEventListener('click', function(e) { e.stopPropagation(); window.scrollTo({top:0,behavior:'smooth'}); });
+    quickNavTitle.style.cursor = 'pointer';
+  }
+  var backBtn = document.querySelector('.back-to-top');
+  if (backBtn) backBtn.addEventListener('click', function() { window.scrollTo({top:0,behavior:'smooth'}); });
+  var navBtn = document.querySelector('.nav-hub');
+  if (navBtn) navBtn.addEventListener('click', function() { window.open('../../navigator.html','_blank'); });
+});
+</script>
+</body>
+</html>

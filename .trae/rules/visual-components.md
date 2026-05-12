@@ -22,14 +22,14 @@
   position: relative;
   overflow: hidden;
   border: var(--line-width) solid #d0dce8;
-  border-left: 3px solid var(--color-accent);
+  border-left: 4px solid var(--color-accent);
 }
 
 .function-box-blue::before {
   content: '';
   position: absolute;
   left: 0; top: 0; bottom: 0;
-  width: 3px;
+  width: 4px;
   background-color: var(--color-accent);
 }
 ```
@@ -383,6 +383,157 @@ details details {
     <span class="article-meta-value">2026年5月11日</span>
   </span>
 </div>
+```
+
+---
+
+## 3.5 页面日期显示 — `.page-date`
+
+**用途**：页面标题下方展示创建日期，用于标注创建时间的页面。
+
+**标准样式（style.css）**：
+
+```css
+.page-date {
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-light);
+  margin-top: calc(var(--space-xs) * -1);
+  margin-bottom: var(--space-md);
+}
+```
+
+**HTML 模板**：
+
+```html
+<div class="page-date">创建于 2026年1月7日</div>
+```
+
+---
+
+## 3.6 文章页脚元数据 — `.article-footer-meta`
+
+**用途**：文章页底部元信息区域（上边框分隔），用于展示补充说明、注释等内容。
+
+**标准样式（style.css）**：
+
+```css
+.article-footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  margin-top: var(--space-xl);
+  border-top: var(--line-width) solid var(--color-border);
+  font-size: 13px;
+  color: var(--color-text-light);
+}
+
+.article-footer-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.article-footer-label {
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.article-footer-value {
+  color: var(--color-text-light);
+  font-style: italic;
+}
+```
+
+**HTML 模板**：
+
+```html
+<div class="article-footer-meta">
+  <div class="article-footer-meta-item">
+    <span class="article-footer-label">补充说明：</span>
+    <span class="article-footer-value">此处为补充说明或注释内容。</span>
+  </div>
+</div>
+```
+
+---
+
+## 3.7 文章类型标签 & 标签 — `.article-type-badge` / `.article-tag`
+
+**用途**：在文章元数据中标注文章类型和属性标签。
+
+**类型标签（`.article-type-badge`）**：
+
+| 类型 | 含义 |
+|------|------|
+| 录音文章 | 录音转文字创作 |
+| 手写文章 | 手写转文字创作 |
+| 信息文章 | 打字直接创作 |
+
+**属性标签（`.article-tag`）**：
+
+| 标签类名 | 含义 | 视觉 |
+|----------|------|------|
+| `.article-tag` | 通用标签（如"新闻"） | 灰色背景 |
+| `.tag-ai` | 包含AI生成/辅助内容 | 金色背景 |
+| `.tag-edited` | 有删减/修改 | 红色背景 |
+
+**标准样式（style.css）**：
+
+```css
+.article-type-badge,
+.article-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+}
+
+.article-type-badge {
+  background-color: #e8f4fd;
+  color: #2980b9;
+  border: 1px solid #b3d9f2;
+}
+
+.article-tag {
+  background-color: #f5f5f5;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+.article-tag.tag-ai {
+  background-color: #fff8e6;
+  color: #b8860b;
+  border: 1px solid #f0d68c;
+}
+
+.article-tag.tag-edited {
+  background-color: #fce4ec;
+  color: #c62828;
+  border: 1px solid #f8bbd0;
+}
+```
+
+**HTML 模板**（嵌入 article-meta 中）：
+
+```html
+<span class="article-meta-item">
+  <span class="article-meta-label">文章类型：</span>
+  <span class="article-meta-value"><span class="article-type-badge">录音文章</span></span>
+</span>
+<span class="article-meta-item">
+  <span class="article-meta-label">标签：</span>
+  <span class="article-meta-value">
+    <span class="article-tag">新闻</span>
+    <span class="article-tag tag-ai">包含AI</span>
+    <span class="article-tag tag-edited">有删减</span>
+  </span>
+</span>
 ```
 
 ---
