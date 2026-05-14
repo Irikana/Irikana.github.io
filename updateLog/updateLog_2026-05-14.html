@@ -62,6 +62,86 @@
         </div>
       </div>
 
+      <!-- 主馆变更（下午补充） -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-2" class="section-title-text-main">主馆变更（下午补充）</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>新增新闻文章与材料对话页面</strong></p>
+                <p>- 新增新闻文章页：<a href="../library/paper/坐立不安.html" target="_blank" class="ext-link">坐立不安 </a>（手写文章，2026年5月14日）</p>
+                <p>- 新增材料对话独立页面：<a href="../library/paper/坐立不安的材料对话.html" target="_blank" class="ext-link">坐立不安的材料对话 </a>（信息文章，带AI标签，包含9个热力学问答）</p>
+                <p>- 在"坐立不安"文章中添加脚注[1]，链接到材料对话页面</p>
+                <p>- 在主页（index.html）新闻列表中添加"坐立不安"新闻卡片</p>
+                <p>- 在英文主页（en/index.html）新闻列表中同步添加"Restless"新闻卡片</p>
+
+                <p><strong>Bug修复</strong></p>
+                <p>- 修复"语义化视觉组件更新"页面在移动端无法点击展开便携式导航仪的问题</p>
+                <p>- 原因：该页面JavaScript缺少移动端quick-nav点击事件监听代码</p>
+                <p>- 解决方案：补全移动端导航仪的完整交互逻辑（点击展开/收起、点击外部区域关闭）</p>
+
+                <p><strong>涉及文件：</strong></p>
+                <p>&nbsp;&nbsp;新增文件：library/paper/restless.html, library/paper/restless-material-dialog.html</p>
+                <p>&nbsp;&nbsp;修改文件：index.html, en/index.html, library/paper/semantic-visual-component-update.html</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 主馆变更（晚间补充） -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-3" class="section-title-text-main">主馆变更（晚间补充）</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>文章类型修正与功能增强</strong></p>
+                <p>- 修正"坐立不安"文章类型：从"手写文章"改为"<a href="../library/paper/restless.html" target="_blank" class="ext-link">信息文章 </a>"</p>
+
+                <p><strong>新闻板块自动化升级</strong></p>
+                <p>- 实现新闻列表自动按时间排序功能（JavaScript动态排序）</p>
+                <p>- 为每个新闻卡片添加 data-date 属性（格式：YYYY-MM-DD）</p>
+                <p>- 页面加载时自动按日期降序排列，无需手动调整顺序</p>
+                <p>- 同步应用于中文主页和英文主页</p>
+                <p><strong>使用方法</strong>：添加新新闻时只需在卡片上添加 data-date 属性，系统会自动排序</p>
+
+                <p><strong>数学公式渲染支持</strong></p>
+                <p>- 为材料对话页面添加 MathJax 3 数学公式渲染引擎</p>
+                <p>- 支持行内公式（$...$）和块级公式（$$...$$）</p>
+                <p>- 将所有热力学公式转换为 LaTeX 格式，提升可读性和专业性</p>
+                <p>- 涵盖内容：热力学系数、化学势、吉布斯自由能、麦克斯韦关系等</p>
+
+                <p><strong>文件名国际化重构</strong></p>
+                <p>- 将10个包含中文字符的HTML文件重命名为英文名，解决URL编码问题</p>
+                <p><strong>文件名映射表</strong>：</p>
+                <p>&nbsp;&nbsp;• 坐立不安.html → <a href="../library/paper/restless.html" target="_blank" class="ext-link">restless.html </a></p>
+                <p>&nbsp;&nbsp;• 坐立不安的材料对话.html → <a href="../library/paper/restless-material-dialog.html" target="_blank" class="ext-link">restless-material-dialog.html </a></p>
+                <p>&nbsp;&nbsp;• 语义化视觉组件更新.html → semantic-visual-component-update.html</p>
+                <p>&nbsp;&nbsp;• SOTM_I_2026后记.html → SOTM-I-2026-postscript.html</p>
+                <p>&nbsp;&nbsp;• 周三狂热及难以进行的复习.html → wednesday-frenzy-and-difficult-review.html</p>
+                <p>&nbsp;&nbsp;• Minesia第一个公开测试.html → minesia-first-public-test.html</p>
+                <p>&nbsp;&nbsp;• 图书馆可能进入活跃开发阶段.html → library-may-enter-active-development.html</p>
+                <p>&nbsp;&nbsp;• 视觉组件标准已创建.html → visual-component-standards-created.html</p>
+                <p>&nbsp;&nbsp;• Minesia 0.0.16更新.html → minesia-0.0.16-update.html</p>
+                <p>&nbsp;&nbsp;• 记录的冲动.html → impulse-to-record.html</p>
+                <p>- 已更新主页（index.html、en/index.html）和 restless.html 中的链接引用</p>
+                <p><strong>注意</strong>：news.html、en/news.html、navigator.html 等页面中的链接待后续同步更新</p>
+
+                <p><strong>涉及文件：</strong></p>
+                <p>&nbsp;&nbsp;重命名文件：library/paper/ 下10个HTML文件</p>
+                <p>&nbsp;&nbsp;修改文件：index.html, en/index.html, library/paper/restless.html, library/paper/restless-material-dialog.html</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </main>
@@ -97,6 +177,8 @@
     <div class="quick-nav-section">页面目录</div>
     <div id="quick-nav-toc-container">
       <div data-target="section-1" class="quick-nav-toc-item">• 主馆变更</div>
+      <div data-target="section-2" class="quick-nav-toc-item">• 主馆变更（下午补充）</div>
+      <div data-target="section-3" class="quick-nav-toc-item">• 主馆变更（晚间补充）</div>
     </div>
   </div>
 </div>

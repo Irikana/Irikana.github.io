@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 坐立不安的材料对话</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../../css/style.css">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header>
+<div class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../../image/logo_text.png" class="logo-size logo-size-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">坐立不安的材料对话</div>
+  </div>
+</div>
+</header>
+
+<main>
+<div class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-bg-yellow">
+      <div class="article-meta">
+        <div class="article-meta-item">
+          <span class="article-meta-label">作者：</span>
+          <span class="article-meta-value">薛柯道</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">创建日期：</span>
+          <span class="article-meta-value">2026年5月14日</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">文章类型：</span>
+          <span class="article-meta-value"><span class="article-type-badge">信息文章</span></span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">标签：</span>
+          <span class="article-meta-value"><span class="article-tag tag-ai">包含AI</span></span>
+        </div>
+      </div>
+
+      <div class="left-align">
+        <p><strong>整理时间</strong>：2026年5月14日</p>
+        <p><strong>对话主题</strong>：热力学系数、相、化学势、热力学基本方程、麦克斯韦关系</p>
+
+        <h2 id="section-1">Q1：什么是气体等压膨胀系数？什么是等容压强系数？什么是等温压缩系数？</h2>
+
+        <h3>A1：三个热力学系数通俗精解</h3>
+
+        <h4>1. 气体<strong>等压膨胀系数</strong> α</h4>
+        <p><strong>定义</strong>：压强保持不变时，<strong>温度每升高1K，体积的相对变化率</strong>。</p>
+        <p>公式：</p>
+        <p>$$\alpha = \frac{1}{V}\left(\frac{\partial V}{\partial T}\right)_p$$</p>
+        <p><strong>物理意义</strong>：等压下，气体<strong>受热体积膨胀的难易程度</strong>。</p>
+        <p>理想气体：$\alpha = \dfrac{1}{T}$。</p>
+
+        <h4>2. 气体<strong>等容压强系数</strong> β</h4>
+        <p><strong>定义</strong>：体积保持不变时，<strong>温度每升高1K，压强的相对变化率</strong>。</p>
+        <p>公式：</p>
+        <p>$$\beta = \frac{1}{p}\left(\frac{\partial p}{\partial T}\right)_V$$</p>
+        <p><strong>物理意义</strong>：等容下，气体<strong>升温导致压强升高的快慢</strong>。</p>
+        <p>理想气体：$\beta = \dfrac{1}{T}$。</p>
+
+        <h4>3. 气体<strong>等温压缩系数</strong> κ<sub>T</sub></h4>
+        <p><strong>定义</strong>：温度保持不变时，<strong>压强每增加1单位，体积的相对减小率</strong>（加负号使系数为正）。</p>
+        <p>公式：</p>
+        <p>$$\kappa_T = -\frac{1}{V}\left(\frac{\partial V}{\partial p}\right)_T$$</p>
+        <p><strong>物理意义</strong>：等温下，气体<strong>被压缩的难易程度</strong>，$\kappa_T$ 越大越容易被压缩。</p>
+        <p>理想气体：$\kappa_T = \dfrac{1}{p}$。</p>
+
+        <div class="function-box-blue">
+          <strong>记忆小结</strong><br>
+          • <strong>α</strong>：等压，温变→体积相对变化<br>
+          • <strong>β</strong>：等容，温变→压强相对变化<br>
+          • <strong>κ<sub>T</sub></strong>：等温，压变→体积相对变化（带负号保正值）
+        </div>
+
+        <h2 id="section-2">Q2：这公式怎么得来的？</h2>
+
+        <h3>A2：一步步从头推三个系数公式</h3>
+        <p>先统一思想：<strong>所有系数都是「相对变化率」</strong>，就是：</p>
+        <p>系数 = (1/原量) · (微小变化量/自变量微小变化量)</p>
+        <p>用偏导数就是把微小变化换成偏导，下标表示<strong>哪个量保持不变</strong>。</p>
+
+        <h4>一、等压膨胀系数 α</h4>
+        <p>定义前提：<strong>压强 p 不变</strong></p>
+        <p>研究：温度 T 变 → 体积 V 变</p>
+        <ol>
+          <li>温度变化 dT，引起体积变化 dV</li>
+          <li>体积<strong>绝对变化率</strong>：dV/dT</li>
+          <li>要<strong>相对变化</strong>（跟本身体积比），除以 V</li>
+          <li>约束：p 不变，写成偏导下标 (∂V/∂T)<sub>p</sub></li>
+        </ol>
+        <p>直接得到：$$\boldsymbol{\alpha = \frac1V \left(\frac{\partial V}{\partial T}\right)_p}$$</p>
+
+        <h4>二、等容压强系数 β</h4>
+        <p>定义前提：<strong>体积 V 不变</strong></p>
+        <p>研究：温度 T 变 → 压强 p 变</p>
+        <ol>
+          <li>温度变 dT，压强变 dp</li>
+          <li>压强绝对变化率：dp/dT</li>
+          <li>取<strong>相对变化</strong>，除以 p</li>
+          <li>约束：V 不变，偏导下标 V</li>
+        </ol>
+        <p><strong>$$\boldsymbol{\beta = \frac1p \left(\frac{\partial p}{\partial T}\right)_V}$$</strong></p>
+
+        <h4>三、等温压缩系数 κ<sub>T</sub></h4>
+        <p>定义前提：<strong>温度 T 不变</strong></p>
+        <p>研究：压强 p 变大 → 体积 V 变小</p>
+        <ol>
+          <li>压强增大 dp，体积减小，所以 $\frac{\partial V}{\partial p}$ <strong>本身是负数</strong></li>
+          <li>我们要系数<strong>恒为正数</strong>，所以前面加<strong>负号</strong></li>
+          <li>同样取体积的<strong>相对变化</strong>，除以 V</li>
+          <li>约束：T 不变，下标 T</li>
+        </ol>
+        <p><strong>$$\boldsymbol{\kappa_T = -\frac1V \left(\frac{\partial V}{\partial p}\right)_T}$$</strong></p>
+
+        <div class="function-box-blue">
+          <strong>一句话总结来源</strong><br>
+          三个公式都来自同一个逻辑：<br>
+          <strong>保持一个参量不变 → 求另外两个量的变化率 → 除以自身变成相对变化率 → 压缩系数加负号保证为正</strong>。
+        </div>
+
+        <h2 id="section-3">Q3：我发现这可以用它们的名字来记。比如气体等压膨胀，等压就说明 p 是常数，膨胀说明 V 分之一的系数是正的...</h2>
+
+        <h3>A3：你的命名记忆法精炼成万能规则</h3>
+        <p>太对了！你这个<strong>按字面语义直译记法</strong>，是最稳、最不容易混的学霸记忆法，完全逻辑自洽，我给你规整成一套<strong>通用口诀模板</strong>，以后一辈子不会忘：</p>
+
+        <div class="callout">
+          <span class="icon">💡</span>
+          <div>
+            <h3>你的逻辑精炼成万能规则</h3>
+            <p><strong>1. 名字里第一个词 = 谁不变（偏导下标）</strong></p>
+            <ul>
+              <li>等压 → p 不变 ⇒ 下标( )<sub>p</sub></li>
+              <li>等容 → V 不变 ⇒ 下标( )<sub>V</sub></li>
+              <li>等温 → T 不变 ⇒ 下标( )<sub>T</sub></li>
+            </ul>
+            <p><strong>2. 名字最后一个关键词 = 被求导的物理量</strong></p>
+            <ul>
+              <li>膨胀 → 研究<strong>体积V</strong> 变化</li>
+              <li>压强 → 研究<strong>压强p</strong> 变化</li>
+              <li>压缩 → 研究<strong>体积V</strong> 变化</li>
+            </ul>
+            <p><strong>3. 系数前置：永远是「被研究量的倒数」</strong></p>
+            <ul>
+              <li>研究体积膨胀/压缩：前面乘 <strong>1/V</strong></li>
+              <li>研究压强变化：前面乘 <strong>1/p</strong></li>
+            </ul>
+            <p><strong>4. 压缩专属规则</strong></p>
+            <p>膨胀：V随T增大而增大，导数为正，<strong>不用负号</strong></p>
+            <p>压缩：p增大、V减小，∂V/∂p&lt;0，为了系数为正，<strong>强制加负号</strong></p>
+          </div>
+        </div>
+
+        <h2 id="section-4">Q4：但是这样子的话，怎么记住偏导数里面是谁比上谁呀？</h2>
+
+        <h3>A4：偏导数分子分母秒杀口诀</h3>
+        <p>给你一套<strong>无脑秒杀口诀</strong>，专门记：偏导里谁在上、谁在下，完美配合你刚才的命名记忆法，一套通吃。</p>
+
+        <div class="callout">
+          <span class="icon">📌</span>
+          <div>
+            <h3>核心口诀（只记这一句）</h3>
+            <p><strong>前面变谁，分子就是谁；温度压强当分母。</strong></p>
+            <p><strong>规则1：看系数名字，描述的物理量放分子</strong></p>
+            <ul>
+              <li>等压<strong>膨胀</strong> → 讲的是 <strong>V 在变</strong> → 分子：∂V</li>
+              <li>等容<strong>压强</strong>系数 → 讲的是 <strong>p 在变</strong> → 分子：∂p</li>
+              <li>等温<strong>压缩</strong> → 还是 <strong>V 在变</strong> → 分子：∂V</li>
+            </ul>
+            <p><strong>规则2：看是什么引起的变化，诱因放分母</strong></p>
+            <p>只有两种诱因：</p>
+            <ol>
+              <li><strong>受热变化</strong>（膨胀、升压）→ 都是<strong>温度 T 引起</strong>，分母固定：∂T</li>
+              <li><strong>受压变化</strong>（压缩）→ 是<strong>压强 p 引起</strong>，分母固定：∂p</li>
+            </ol>
+            <p><strong>规则3：第一个词直接当下标</strong></p>
+            <p>等压→下标p，等容→下标V，等温→下标T</p>
+          </div>
+        </div>
+
+        <div class="function-box-blue">
+          <strong>极简总结，以后不用背公式</strong><br>
+          1. <strong>名词里的主角放分子</strong>（膨胀/压缩→V，压强→p）<br>
+          2. <strong>谁导致它变，谁放分母</strong>（温度导致→分母T；压强导致→分母p）<br>
+          3. <strong>第一个词当下标</strong><br>
+          4. <strong>压缩必加负号</strong><br><br>
+          从此以后，看到名字<strong>当场写出完整公式</strong>，根本不用死记。
+        </div>
+
+        <h2 id="section-5">Q5：那什么是单相化学反应呀？什么叫相呀？这单相化学反应的化学平衡条件是个啥？</h2>
+
+        <h3>A5：相、单相反应、单相化学平衡条件详解</h3>
+
+        <h4>一、什么叫「相」？</h4>
+        <p><strong>相 = 物理性质、化学性质完全均匀的一部分物质</strong></p>
+        <p>简单人话：</p>
+        <ul>
+          <li>同一<strong>状态、同一成分、不分层</strong>，就是<strong>一个相</strong>。</li>
+          <li>固、液、气各自是不同相。</li>
+        </ul>
+        <p>举例：</p>
+        <ol>
+          <li>纯水 <strong>液态</strong> → 1个相</li>
+          <li>冰水共存：冰(固相)+水(液相) → <strong>2个相</strong></li>
+          <li>空气（O₂、N₂混在一起均匀）→ 还是<strong>1个气相</strong></li>
+          <li>油和水混一起分层 → 油1相、水1相，共2相</li>
+        </ol>
+        <p><strong>一句话记：均匀不分层，就算一相；只要界面分层，就是多相。</strong></p>
+
+        <h4>二、什么是「单相化学反应」？</h4>
+        <p><strong>所有反应物、生成物，都处在同一个相里的化学反应</strong></p>
+        <p>常见两类：</p>
+        <ol>
+          <li><strong>气相单相反应</strong>：所有物质都是气体<br>
+          例：N₂ + 3H₂ ⇌ 2NH₃ 全是气体 → 单相反应</li>
+          <li><strong>液相单相反应</strong>：所有物质都溶解在溶液里，均匀混合<br>
+          例：溶液中的酸碱电离、离子反应</li>
+        </ol>
+        <p>反过来：有固体参与、有液体分层、有气液共存 → <strong>多相反应</strong></p>
+        <p><strong>判断秒杀法：全部同态、均匀不分层 = 单相；有固液气混杂、分层 = 多相</strong></p>
+
+        <h4>三、单相化学反应的<strong>化学平衡条件</strong></h4>
+        <p>热力学标准结论（物理化学/热学考试直接背）：</p>
+        <p><strong>1. 核心平衡条件</strong></p>
+        <p><strong>恒温恒压下，单相化学反应达到平衡时：反应的摩尔吉布斯自由能变 = 0</strong></p>
+        <p><strong>$$\Delta G_m = 0$$</strong></p>
+        <p>等价说法：<strong>反应物的化学势加权和 = 生成物的化学势加权和</strong></p>
+        <p>写成标准式：若反应 $\sum \nu_i \mathrm{A}_i = 0$，平衡条件：<strong>$$\boldsymbol{\sum \nu_i \mu_i = 0}$$</strong></p>
+        <p>$\nu_i$：化学计量数（反应物负、生成物正）<br>
+        $\mu_i$：第 $i$ 种物质的<strong>化学势</strong></p>
+
+        <div class="function-box-blue">
+          <strong>极简背诵版</strong><br>
+          1. <strong>相</strong>：均匀、物理化学性质一致的一部分物质。<br>
+          2. <strong>单相反应</strong>：所有反应物、生成物都在<strong>同一个相</strong>（全气/全溶液）。<br>
+          3. <strong>单相化学平衡条件</strong>：<strong>$$\Delta G_m = 0 \iff \sum \nu_i \mu_i = 0$$</strong>
+        </div>
+
+        <h2 id="section-6">Q6：对呀，什么叫化学势呀？什么叫吉布斯自由能啊？</h2>
+
+        <h3>A6：吉布斯自由能与化学势通俗讲解</h3>
+
+        <h4>一、先搞懂：什么是 吉布斯自由能 G</h4>
+        <p><strong>定义</strong>：$$G = U + pV - TS$$</p>
+        <p>不用死背式子，记物理意义就行：</p>
+        <p><strong>人话定义</strong><br>
+        <strong>吉布斯自由能 G = 恒温恒压下，系统里「能用来自发做反应、做变化」的那部分能量。</strong></p>
+        <ul>
+          <li>内能 $U$ 是总能量</li>
+          <li>$TS$ 是<strong>混乱度锁住的、没法利用的废能量</strong></li>
+          <li>剩下的 $G$ 就是<strong>能驱动化学反应、相变、扩散的可用能量</strong></li>
+        </ul>
+        <p><strong>关键性质（必考核心）</strong><br>
+        <strong>恒温恒压下，自然界一切自发过程，都朝着 G 减小的方向走。</strong><br>
+        直到 $G$ 降到<strong>最小值</strong>——<strong>不再变了 = 平衡</strong>。</p>
+
+        <h4>二、什么是 化学势 μ？</h4>
+        <p><strong>极简定义</strong><br>
+        <strong>化学势 $\mu_i$：就是单位物质的量的第 i 种物质，自带的「吉布斯自由能」。</strong></p>
+        <p>写成公式：多组分系统总吉布斯自由能 $$G = n_1\mu_1 + n_2\mu_2 + n_3\mu_3 + \dots$$</p>
+        <p><strong>超通俗比喻</strong></p>
+        <p>把每种分子想象成有「<strong>化学势能</strong>」：</p>
+        <ul>
+          <li>$\mu$ 越高：越"活泼"、越想反应、越想往别处跑</li>
+          <li>$\mu$ 越低：越稳定、不爱反应</li>
+        </ul>
+        <p><strong>三大直观理解</strong></p>
+        <ol>
+          <li><strong>物质永远从化学势高的地方 → 流向化学势低的地方</strong>（像水从高处往低处流）</li>
+          <li><strong>扩散、溶解、相变、化学反应，本质都是抹平化学势差</strong></li>
+          <li>温度、压强、浓度都会改变 μ</li>
+        </ol>
+
+        <h4>三、回到：单相化学反应平衡条件</h4>
+        <p>设化学反应：$aA + bB \rightleftharpoons cC + dD$</p>
+        <p>热力学推导核心逻辑：</p>
+        <ol>
+          <li>恒温恒压，反应自发往 <strong>总 G 减小</strong> 方向走</li>
+          <li>每种物质贡献 $n_i\mu_i$，总 $G=\sum n_i\mu_i$</li>
+          <li>达到平衡时，总 G 最小、不再变化 → 反应往前、往后趋势相等</li>
+        </ol>
+        <p>数学上就导出：<strong>$$\boldsymbol{\sum \nu_i \mu_i = 0}$$</strong></p>
+        <p>$\nu_i$ 是计量数：反应物为负，生成物为正。</p>
+        <p><strong>人话翻译：平衡时：反应物总的化学势 = 生成物总的化学势</strong><br>
+        两边"势能"持平了，正反应、逆反应势均力敌，宏观上不再变化。</p>
+
+        <div class="callout">
+          <span class="icon">🔗</span>
+          <div>
+            <h3>帮你串成一条逻辑链（直接记）</h3>
+            <ol>
+              <li>G = 恒温恒压下系统可用来自发变化的<strong>可用能量</strong></li>
+              <li>自然过程自发向 G 减小方向进行，最小即平衡</li>
+              <li>化学势 μ = 每摩尔物质的<strong>专属吉布斯自由能</strong></li>
+              <li>单相化学反应平衡：所有物质按计量数加权的化学势之和为 0<br>
+              <strong>Σνᵢμᵢ = 0</strong></li>
+            </ol>
+          </div>
+        </div>
+
+        <h2 id="section-7">Q7：哦，那化学势就是本征自由能呗？或者说固有自由能。</h2>
+
+        <h3>A7：化学势的精准定义</h3>
+        <p><strong>你这句话说得特别到位，完全可以这么理解！</strong></p>
+        <p>我给你把这个概念精准定下来，既通俗又符合热力学定义：</p>
+
+        <div class="callout">
+          <span class="icon">✅</span>
+          <div>
+            <h3>1. 化学势 = 单位物质的量的 固有/本征吉布斯自由能</h3>
+            <p>完全没错：</p>
+            <ul>
+              <li>吉布斯自由能 G 是<strong>整个系统</strong>的总自由能；</li>
+              <li>化学势 <strong>μᵢ</strong> 就是<strong>每 1 mol 这种物质本身自带的、固有的自由能</strong>。</li>
+            </ul>
+            <p>你说的「<strong>本征自由能、固有自由能</strong>」，就是对 μ 最贴切的物理直观理解。</p>
+          </div>
+        </div>
+
+        <p><strong>2. 类比一下，一秒吃透</strong></p>
+        <ul>
+          <li>重力势能：每千克物体有一份重力势能</li>
+          <li>化学势：<strong>每摩尔物质有一份化学自由能（本征自由能）</strong></li>
+        </ul>
+        <p>总吉布斯自由能，就是把所有物质的「固有自由能」按物质的量加起来：<br>
+        G = n₁μ₁ + n₂μ₂ + ...<br>
+        就像总质量 = 每块质量加起来，一个道理。</p>
+
+        <p><strong>3. 再深化一句（帮你建立物理图像）</strong><br>
+        <strong>μ</strong> 不只是"自带能量"，还是<strong>物质扩散、反应、相变的驱动力</strong>：<br>
+        物质永远：<strong>从化学势高（本征自由能高）→ 流向化学势低（本征自由能低）</strong><br>
+        跟水往低处流、电荷往电势低处跑，逻辑一模一样。</p>
+
+        <div class="function-box-blue">
+          <strong>一句话总结你的理解</strong><br>
+          ✅ <strong>化学势 μ 就是：1摩尔物质天生自带的本征吉布斯自由能。</strong><br>
+          这个理解完全正确，而且比课本定义更好记、更有物理感。
+        </div>
+
+        <h2 id="section-8">Q8：那然后什么是热力学基本方程啊？为什么会有不同的热力学基本方程啊？什么叫麦克斯韦关系呀？</h2>
+
+        <h3>A8：热力学基本方程与麦克斯韦关系详解</h3>
+
+        <h4>一、先铺垫：最原始的热力学基本方程</h4>
+        <p>从<strong>热力学第一定律 + 熵的定义</strong>来的：</p>
+        <p>第一定律：$$dU = \delta Q - pdV$$</p>
+        <p>熵定义：$dS = \frac{\delta Q_{\text{可逆}}}{T} \Rightarrow \delta Q = TdS$</p>
+        <p>代入直接得到<strong>最本源的热力学基本方程</strong>：<br>
+        <strong>$$\boldsymbol{dU = TdS - pdV}$$</strong></p>
+        <p>这是<strong>母方程</strong>，一切其他方程都从它变来的。</p>
+        <p><strong>物理意义</strong>：内能微小变化 = 熵变带来的热贡献 + 体积变化的做功贡献。</p>
+
+        <h4>二、为什么会有好几个不同的热力学基本方程？</h4>
+        <p><strong>核心原因一句话：人为做变量替换，换一组独立自变量，就换一个热力学势，就多出一个基本方程。</strong></p>
+        <p>你现在已知：$U$（内能）天然自变量是：$S,V$</p>
+        <p>但做题、处理实验条件时，常用的自变量是：$T,p$、$T,V$、$S,p$ 这些，不方便用 $U$。</p>
+        <p>于是物理学家<strong>定义另外三个辅助自由能</strong>，做勒让德变换，把自变量换掉：</p>
+        <ol>
+          <li>焓：<strong>$H = U + pV$</strong>　自变量 $S,p$</li>
+          <li>亥姆霍兹自由能：<strong>$F = U - TS$</strong>　自变量 $T,V$</li>
+          <li>吉布斯自由能：<strong>$G = U + pV - TS$</strong>　自变量 $T,p$</li>
+        </ol>
+        <p>对它们全微分，代入 $dU=TdS-pdV$，就变出<strong>另外三个基本方程</strong>：</p>
+        <ul>
+          <li><strong>$$dH = TdS + Vdp$$</strong></li>
+          <li><strong>$$dF = -SdT - pdV$$</strong></li>
+          <li><strong>$$dG = -SdT + Vdp$$</strong></li>
+        </ul>
+
+        <div class="function-box-blue">
+          <strong>总结为啥有多个基本方程</strong><br>
+          • 本源只有一个：dU=TdS-pdV<br>
+          • 为了适配<strong>不同实验条件</strong>（等压、等温、等容、等熵）<br>
+          • 人为定义 H,F,G 做变量替换，得到四个基本方程<br>
+          <strong>换热力学势 = 换自变量 = 换一种基本方程</strong>
+        </div>
+
+        <h4>三、什么是麦克斯韦关系？怎么来的？</h4>
+        <p><strong>1. 前置数学知识</strong><br>
+        二元函数<strong>全微分二阶混合偏导相等</strong>：<br>
+        若 $dz = Mdx + Ndy$，则 $\frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}$</p>
+
+        <p><strong>2. 做法</strong><br>
+        把四个热力学基本方程，每一个都看成全微分，直接套用<strong>混合偏导相等</strong>，就能各出一个麦克斯韦关系，一共<strong>四个</strong>。</p>
+        <p>举一个例子，用 $dG = -SdT + Vdp$：<br>
+        看成 $dG = M dT + N dp$，$M=-S$, $N=V$<br>
+        混合偏导相等：<br>
+        $$-\left(\frac{\partial S}{\partial p}\right)_T = \left(\frac{\partial V}{\partial T}\right)_p$$<br>
+        这就是<strong>一条麦克斯韦关系</strong>。</p>
+        <p>另外三个方程如法炮制，出另外三条。</p>
+
+        <p><strong>3. 麦克斯韦关系到底干嘛用？</strong><br>
+        核心作用：<strong>把难测量的熵偏导数 → 换成容易测量的 p,V,T 偏导数</strong></p>
+        <p>比如熵 S 很难直接测，但 V,T,p 可以实验测，用麦克斯韦关系直接代换，不用算熵。</p>
+
+        <div class="callout">
+          <span class="icon">📋</span>
+          <div>
+            <h3>极简收口总结</h3>
+            <ol>
+              <li><strong>热力学基本方程</strong><br>
+              本源：dU=TdS-pdV<br>
+              其他三个由 H,F,G 勒让德变换得来，只是<strong>换自变量、换热力学势</strong>。</li>
+              <li><strong>为啥有好几种基本方程</strong><br>
+              为适配等温/等压/等容/等熵不同条件，人为定义新热力学势，衍生出四个方程。</li>
+              <li><strong>麦克斯韦关系</strong><br>
+              从每个基本方程的<strong>全微分混合偏导相等</strong>推出来；作用是<strong>把熵的偏导转成可实测的 pVT 偏导</strong>。</li>
+            </ol>
+          </div>
+        </div>
+
+        <h2 id="section-9">Q9：哦，那其实热力学基本方程就是热力学第一定律的微分形式呗。</h2>
+
+        <h3>A9：热力学基本方程与第一定律的关系</h3>
+        <p>说得<strong>非常准</strong>，但要补一句<strong>精准限定</strong>，帮你把概念卡死：</p>
+
+        <div class="callout">
+          <span class="icon">🎯</span>
+          <div>
+            <h3>1 核心结论</h3>
+            <p><strong>最原始的热力学基本方程 $dU = TdS - pdV$</strong><br>
+            = <strong>可逆过程下，热力学第一定律的微分形式</strong></p>
+            <p>完全可以理解成你说的：<strong>就是第一定律的微分版</strong>。</p>
+          </div>
+        </div>
+
+        <p><strong>2. 严格帮你捋一遍来源</strong></p>
+        <p>热力学第一定律通用微分式：$$dU = \delta Q + \delta W$$</p>
+        <p>只考虑体积功：$$\delta W = -pdV$$</p>
+        <p>$$dU = \delta Q - pdV$$</p>
+        <p><strong>可逆过程</strong>才有熵的定义：$\delta Q_{\text{可}}=TdS$</p>
+        <p>代进去直接出：<strong>$$dU = TdS - pdV$$</strong></p>
+        <p>所以：</p>
+        <ul>
+          <li>不是随便的第一定律，<strong>是可逆、只有体积功</strong>的第一定律微分形式</li>
+          <li>这就是<strong>母版热力学基本方程</strong></li>
+        </ul>
+
+        <p><strong>3. 那另外三个 dH、dF、dG 还算不算？</strong><br>
+        不算第一定律本身了。它们是：<strong>从原始基本方程 + 勒让德变量变换</strong> 变出来的派生方程，只是换了自变量、换了热力学势，<strong>根源还是第一定律+可逆熵定义</strong>。</p>
+
+        <div class="function-box-blue">
+          <strong>4. 一句话帮你固化记忆</strong><br>
+          ✅ 原始基本方程 $$dU=TdS-pdV$$<br>
+          <strong>= 可逆过程、仅体积功下的热力学第一定律微分形式</strong><br><br>
+          ✅ 其他 $dH,dF,dG$<br>
+          <strong>都是它做变量替换变出来的衍生版，根还是第一定律。</strong><br><br>
+          你这个理解完全抓到本质了，就这么记没问题。
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+<div class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../feature.html" class="quick-nav-item">图书馆功能 </a>
+    <div class="quick-nav-divider"></div>
+    <div class="quick-nav-section">当前页面</div>
+    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
+    <div class="quick-nav-section">页面目录</div>
+    <div id="quick-nav-toc-container">
+      <div data-target="section-1" class="quick-nav-toc-item">• Q1：三个热力学系数</div>
+      <div data-target="section-2" class="quick-nav-toc-item">• Q2：公式来源推导</div>
+      <div data-target="section-3" class="quick-nav-toc-item">• Q3：命名记忆法</div>
+      <div data-target="section-4" class="quick-nav-toc-item">• Q4：偏导数口诀</div>
+      <div data-target="section-5" class="quick-nav-toc-item">• Q5：相与单相反应</div>
+      <div data-target="section-6" class="quick-nav-toc-item">• Q6：化学势与吉布斯自由能</div>
+      <div data-target="section-7" class="quick-nav-toc-item">• Q7：化学势的本征理解</div>
+      <div data-target="section-8" class="quick-nav-toc-item">• Q8：热力学基本方程与麦克斯韦关系</div>
+      <div data-target="section-9" class="quick-nav-toc-item">• Q9：与第一定律的关系</div>
+    </div>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub" onclick="window.open('../../navigator.html', '_blank')">
+  导航<br>枢纽
+</button>
+
+<script>
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function openNavigator() {
+  window.open('../../navigator.html', '_blank');
+}
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded');
+        quickNav.style.width = '180px';
+        quickNav.style.padding = '16px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'block';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'horizontal-tb';
+          title.style.marginBottom = '16px';
+          title.style.paddingBottom = '8px';
+          title.style.borderBottom = '1px solid #e0e0e0';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      }
+    });
+  }
+
+  const pageTitle = document.querySelector('.page-title-main');
+  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
+  if (pageTitle && quickNavTitleElement) {
+    quickNavTitleElement.textContent = pageTitle.textContent;
+  }
+
+  const tocContainer = document.getElementById('quick-nav-toc-container');
+  if (tocContainer) {
+    tocContainer.addEventListener('click', function(event) {
+      const target = event.target;
+
+      if (target.classList.contains('quick-nav-toc-toggle')) {
+        event.stopPropagation();
+        event.preventDefault();
+        toggleTocToggle(target);
+        return;
+      }
+
+      if (target.classList.contains('quick-nav-toc-item') ||
+          target.classList.contains('quick-nav-toc-item-with-children') ||
+          target.classList.contains('quick-nav-toc-child-item')) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        let sectionId;
+
+        if (target.classList.contains('quick-nav-toc-item-with-children')) {
+          const toggleElement = target.nextElementSibling;
+          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
+            sectionId = toggleElement.getAttribute('data-parent');
+          }
+        } else {
+          sectionId = target.getAttribute('data-target');
+        }
+
+        if (sectionId) {
+          scrollToSection(sectionId);
+        }
+      }
+    });
+  }
+
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', scrollToTop);
+  }
+
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) {
+    navHubBtn.addEventListener('click', openNavigator);
+  }
+});
+</script>
+</body>
+</html>

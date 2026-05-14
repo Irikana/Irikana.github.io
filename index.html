@@ -54,7 +54,7 @@
               <div class="center-align">
                 <div class="news-featured">
                   <div class="news-featured-poster">
-                    <a href="./library/paper/SOTM_I_2026后记.html" target="_blank" rel="noopener noreferrer" class="news-featured-image">
+                    <a href="./library/paper/SOTM-I-2026-postscript.html" target="_blank" rel="noopener noreferrer" class="news-featured-image">
                       <img src="./image/poster/SOTM/2026/SOTM-I-2026.png" alt="SOTM I 2026 后记" loading="lazy" width="400" height="300">
                     </a>
                     <div class="news-featured-info">
@@ -62,26 +62,30 @@
                       <p class="news-featured-date">2026年2月3日</p>
                     </div>
                   </div>
-                  <div class="news-featured-text-list">
-                    <a href="./library/paper/语义化视觉组件更新.html" target="_blank" rel="noopener noreferrer" class="news-featured-text-card">
+                  <div class="news-featured-text-list" id="news-text-list">
+                    <a href="./library/paper/semantic-visual-component-update.html" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="2026-05-12">
                       <span class="card-title">语义化视觉组件更新</span>
                       <span class="card-date">2026年5月12日</span>
                     </a>
-                    <a href="./library/paper/周三狂热及难以进行的复习.html" target="_blank" rel="noopener noreferrer" class="news-featured-text-card">
+                    <a href="./library/paper/wednesday-frenzy-and-difficult-review.html" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="2026-05-12">
                       <span class="card-title">周三狂热及难以进行的复习</span>
                       <span class="card-date">2026年5月12日</span>
                     </a>
-                    <a href="./library/paper/视觉组件标准已创建.html" target="_blank" rel="noopener noreferrer" class="news-featured-text-card">
+                    <a href="./library/paper/visual-component-standards-created.html" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="2026-05-11">
                       <span class="card-title">视觉组件标准已创建</span>
                       <span class="card-date">2026年5月11日</span>
                     </a>
-                    <a href="./library/paper/图书馆可能进入活跃开发阶段.html" target="_blank" rel="noopener noreferrer" class="news-featured-text-card">
+                    <a href="./library/paper/library-may-enter-active-development.html" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="2026-05-11">
                       <span class="card-title">图书馆可能进入活跃开发阶段</span>
                       <span class="card-date">2026年5月11日</span>
                     </a>
-                    <a href="./library/paper/knowledge-hall-launch.html" target="_blank" rel="noopener noreferrer" class="news-featured-text-card">
+                    <a href="./library/paper/knowledge-hall-launch.html" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="2026-05-10">
                       <span class="card-title">知识馆正式启用</span>
                       <span class="card-date">2026年5月10日</span>
+                    </a>
+                    <a href="./library/paper/restless.html" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="2026-05-14">
+                      <span class="card-title">坐立不安</span>
+                      <span class="card-date">2026年5月14日</span>
                     </a>
 
                   </div>
@@ -459,6 +463,17 @@ window.addEventListener('DOMContentLoaded', function() {
 
   const langFloat = document.getElementById('lang-switch-float');
   if (langFloat) makeDraggable(langFloat, '.lang-float-header');
+
+  const newsTextList = document.getElementById('news-text-list');
+  if (newsTextList) {
+    const newsCards = Array.from(newsTextList.querySelectorAll('.news-featured-text-card[data-date]'));
+    newsCards.sort((a, b) => {
+      const dateA = new Date(a.getAttribute('data-date'));
+      const dateB = new Date(b.getAttribute('data-date'));
+      return dateB.getTime() - dateA.getTime();
+    });
+    newsCards.forEach(card => newsTextList.appendChild(card));
+  }
 });
 </script>
 
