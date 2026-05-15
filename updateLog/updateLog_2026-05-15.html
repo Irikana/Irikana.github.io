@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年5月15日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">2026年5月15日 更新日志</div>
+  </div>
+</header>
+
+<main class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-bg-yellow">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-05-15</div>
+      </div>
+
+      <!-- 主馆变更 -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-1" class="section-title-text-main">主馆变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>文章页脚注释格式统一</strong></p>
+                <p>- 统一 .article-footer-meta 组件格式：删除「注释：」「补充说明：」标签文字，仅保留 [*] 编号和对应内容，类似论文参考文献风格</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• library/paper/restless.html — 删除「注释：」标签</p>
+                <p>&nbsp;&nbsp;• library/paper/wednesday-frenzy-and-difficult-review.html — 删除「补充说明：」标签</p>
+
+                <p><strong>材料对话页字体层级整理</strong></p>
+                <p>- 为 restless-material-dialog.html 添加内联字体样式，建立清晰的标题层级</p>
+                <p>- 字体大小阶梯：h2=18px（问题标题）→ h3=16px（回答标题）→ h4=15.5px（小节标题）→ p/ol/ul=15px（正文）</p>
+                <p>- 解决此前使用浏览器默认字号导致的「不大不小」视觉混乱问题</p>
+                <p>- 涉及文件：library/paper/restless-material-dialog.html</p>
+
+                <p><strong>提示框左侧竖线 Bug 修复</strong></p>
+                <p>- 修复 .function-box-blue 和 .quote-box-grey 的双重左侧竖线问题</p>
+                <p>- 根因：两个组件同时使用了 CSS border-left 和 ::before 伪元素绘制两条叠加的竖线，导致放大后不对齐、手机端出现半黑线条</p>
+                <p>- 修复方案：移除 ::before 伪元素，统一仅使用 border-left 作为唯一竖线绘制机制</p>
+                <p>- 同步更新视觉组件标准文档（visual-components.md），移除过时的 ::before 定义</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• css/style.css — 删除 .function-box-blue::before 和 .quote-box-grey::before，统一 border-left 宽度</p>
+                <p>&nbsp;&nbsp;• .trae/rules/visual-components.md — 同步移除标准文档中的 ::before 定义</p>
+
+                <p><strong>动态功能视觉增强（v1.5）</strong></p>
+                <p>- 全面优化 7 大动态功能的 UI 视觉设计，从「占位符风格」升级为精致界面</p>
+                <p>- CSS 样式增强：</p>
+                <p>&nbsp;&nbsp;• 浮动按钮（搜索/主题/收藏）：圆角从 2px→8px，添加 box-shadow 阴影，hover 时渐变背景+scale 放大+上浮动画</p>
+                <p>&nbsp;&nbsp;• 搜索弹窗：圆角 10px，增加 scale(0.95)→scale(1) 弹入动画，backdrop-filter 模糊增强至 8px</p>
+                <p>&nbsp;&nbsp;• 搜索结果：类型标签改为实心白字胶囊样式（uppercase），结果项 hover 时右移 3px + 边框高亮</p>
+                <p>&nbsp;&nbsp;• 自动目录：渐变背景，圆角 8px，链接 hover 时左内边距展开动画</p>
+                <p>&nbsp;&nbsp;• 收藏按钮：从无背景改为浅色填充，已收藏状态使用金色渐变背景</p>
+                <p>&nbsp;&nbsp;• 收藏面板：scale(0.97)→scale(1) 弹入动画，自定义细滚动条</p>
+                <p>&nbsp;&nbsp;• 阅读工具栏：圆角 10px，工具按钮 active 状态使用渐变填充+投影</p>
+                <p>&nbsp;&nbsp;• 专注模式：隐藏元素增加 blur(1px) 模糊效果</p>
+                <p>&nbsp;&nbsp;• i18n 切换器：渐变背景，圆角 6px</p>
+                <p>&nbsp;&nbsp;• 全局过渡函数统一为 cubic-bezier(0.4, 0, 0.2, 1)</p>
+                <p>- JS 交互增强：</p>
+                <p>&nbsp;&nbsp;• 搜索支持键盘上下箭头导航 + Enter 跳转（.sel 选中态）</p>
+                <p>&nbsp;&nbsp;• 目录点击滚动增加 20px 顶部偏移（避免被固定导航遮挡）</p>
+                <p>&nbsp;&nbsp;• 字数统计使用 toLocaleString() 格式化（千位分隔符）</p>
+                <p>&nbsp;&nbsp;• 主题切换添加 0.35s 平滑过渡动画（.theme-transitioning）</p>
+                <p>&nbsp;&nbsp;• 收藏操作添加 Toast 提示（收藏成功/已取消收藏/已移除收藏）</p>
+                <p>&nbsp;&nbsp;• 收藏按钮 title 动态更新（反映当前状态）</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• js/library-dynamic.js — v1.4→v1.5 升级</p>
+                <p>&nbsp;&nbsp;• css/style.css — 全部动态功能 CSS 样式重写增强</p>
+
+                <p><strong>扁平化设计原则实施</strong></p>
+                <p>- 新增「扁平化设计原则」到开发规范，要求全站统一使用扁平化风格，禁用圆角</p>
+                <p>- 移除动态功能区域所有 UI 组件的 border-radius 属性（共约 25 处）</p>
+                <p>- 涉及组件：</p>
+                <p>&nbsp;&nbsp;• .search-toggle-btn、.search-container、.search-close-btn、.search-result-item、.search-result-type、.search-highlight、搜索滚动条</p>
+                <p>&nbsp;&nbsp;• .auto-toc、.auto-toc-toggle、.auto-toc-link</p>
+                <p>&nbsp;&nbsp;• .theme-toggle-btn</p>
+                <p>&nbsp;&nbsp;• .bookmark-btn、.bookmarks-trigger-btn、.bookmarks-count、.bookmarks-panel、.bookmark-item、.bookmark-remove-btn、收藏面板滚动条</p>
+                <p>&nbsp;&nbsp;• .reading-tools-toolbar、.tool-btn、.tools-collapse-btn</p>
+                <p>&nbsp;&nbsp;• .i18n-switcher、.i18n-no-translation-note</p>
+                <p>&nbsp;&nbsp;• 响应式 @media (max-width: 768px) 中全部对应组件的 border-radius</p>
+                <p>- JS 内联样式修复：Toast 提示框移除 border-radius:6px</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• css/style.css — 动态功能区域全部 border-radius 移除</p>
+                <p>&nbsp;&nbsp;• js/library-dynamic.js — Toast 内联样式 border-radius 移除</p>
+
+                <p><strong>动态功能全面修复（v1.6）</strong></p>
+                <p>- 修复搜索按钮不可用问题：改用 addEventListener 绑定键盘事件（避免被覆盖），所有按钮添加 type="button" 属性和 stopPropagation，增加空值防护</p>
+                <p>- 收藏按钮位置统一：优先放在 h1 / .page-title-main 标题下方（而非 article-meta 中），确保所有页面收藏按钮位置一致</p>
+                <p>- 阅读工具行宽布局修复：设置 maxWidth 时同步添加 margin:0 auto 居中，解决主页等页面设置窄/宽后内容居左的问题</p>
+                <p>- 专注模式下行宽保留：专注模式下不再强制覆盖用户设置的行宽，用户选择的窄/宽模式在专注模式下依然生效</p>
+                <p>- 便携式导航仪目录删除：从全部 34 个 HTML 页面的 quick-nav 中移除「页面目录」区域（已由自动目录功能替代），同时清理对应 JS 代码</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• js/library-dynamic.js — v1.5→v1.6 全面修复升级</p>
+                <p>&nbsp;&nbsp;• 全部 34 个 HTML 页面 — 删除 quick-nav 目录区 + 对应 JS</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 知识馆变更 -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-kh" class="section-title-text-main">知识馆变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>信息框内联样式字体颜色加深</strong></p>
+                <p>- 修复知识馆页面 .function-box-blue 内联样式中 color: #2980b9（浅蓝）在浅色模式下文字过浅难以阅读的问题，改为 #1a3a5c（深蓝）</p>
+                <p>- 同步修复 .notice-box-red 内联样式 color: #c0392b → #a04030（加深红色文字）</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• knowledge-hall/index.html — .function-box-blue L74 + .notice-box-red L64</p>
+                <p>&nbsp;&nbsp;• knowledge-hall/categories/phenomenon.html — .function-box-blue L51</p>
+                <p>&nbsp;&nbsp;• knowledge-hall/categories/recallable.html — .function-box-blue L51</p>
+                <p>&nbsp;&nbsp;• knowledge-hall/categories/traceable.html — .function-box-blue L51</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 规范变更 -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-2" class="section-title-text-main">规范变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>视觉组件标准同步更新</strong></p>
+                <p>- 移除 visual-components.md 中 .function-box-blue 和 .quote-box-grey 的 ::before 伪元素定义</p>
+                <p>- 确保标准文档与 style.css 实际代码保持一致</p>
+
+                <p><strong>新增扁平化设计原则</strong></p>
+                <p>- 在 project_rules.md 核心原则区域新增「扁平化设计原则」章节</p>
+                <p>- 明确要求全站 border-radius 必须为 0 或不设置，保持简洁专业的视觉一致性</p>
+                <p>- 涉及文件：.trae/rules/project_rules.md</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 主馆变更（续） -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-3" class="section-title-text-main">主馆变更（续）</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>动态功能 Bug 修复与稳定化（v1.0）</strong></p>
+                <p>- 动态功能版本号重置为 v1.0（此前为 v1.7），标志着功能进入稳定阶段</p>
+                <p>- 修复搜索结果中文文件名路径错误：磁盘上的文章文件已改名为英文，但搜索数据中仍使用旧中文文件名，导致点击搜索结果跳转到不存在的文件。已更新全部 9 个文章条目的路径映射</p>
+                <p>- 涉及的文件名映射更新：</p>
+                <p>&nbsp;&nbsp;• SOTM_I_2026后记.html → SOTM-I-2026-postscript.html</p>
+                <p>&nbsp;&nbsp;• 记录的冲动.html → impulse-to-record.html</p>
+                <p>&nbsp;&nbsp;• 视觉组件标准已创建.html → visual-component-standards-created.html</p>
+                <p>&nbsp;&nbsp;• 图书馆可能进入活跃开发阶段.html → library-may-enter-active-development.html</p>
+                <p>&nbsp;&nbsp;• Minesia 0.0.16更新.html → minesia-0.0.16-update.html</p>
+                <p>&nbsp;&nbsp;• Minesia第一个公开测试.html → minesia-first-public-test.html</p>
+                <p>&nbsp;&nbsp;• 周三狂热及难以进行的复习.html → wednesday-frenzy-and-difficult-review.html</p>
+                <p>&nbsp;&nbsp;• 语义化视觉组件更新.html → semantic-visual-component-update.html</p>
+                <p>- StyleEnforcer 样式安全网完善：新增 .force-light-mode 覆盖规则和 @media (prefers-color-scheme: dark) 媒体查询块，修复以下两个主题切换 Bug：</p>
+                <p>&nbsp;&nbsp;① 系统偏好暗色模式下信息框/警告框仍显示浅色样式（缺少 @media dark 规则）</p>
+                <p>&nbsp;&nbsp;② 手动切换到浅色模式时信息框文字仍为浅色（缺少 .force-light-mode 规则覆盖媒体查询暗色样式）</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• js/library-dynamic.js — Search.data 文件名更新 + StyleEnforcer 新增 force-light-mode + @media dark + 版本号 v1.0</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 知识馆变更（续） -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-kh2" class="section-title-text-main">知识馆变更（续）</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>知识馆侧边栏主题适配修复</strong></p>
+                <p>- 修复知识馆侧边栏在「系统暗色 + 手动浅色」场景下背景仍为黑色的问题</p>
+                <p>- 根因：知识馆页面仅有 @media (prefers-color-scheme: dark) 和 .force-dark-mode 暗色规则，缺少 .force-light-mode 亮色覆盖规则。当系统为暗色模式时，即使手动选择浅色模式，媒体查询的暗色 CSS 仍然生效</p>
+                <p>- 修复方案：在全部 4 个知识馆页面添加完整的 .force-light-mode {...} 规则块，强制恢复所有组件的浅色外观（侧边栏、导航项、内容区、卡片、页脚等）</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• knowledge-hall/index.html — 新增 .force-light-mode 规则块</p>
+                <p>&nbsp;&nbsp;• knowledge-hall/categories/phenomenon.html — 新增 .force-light-mode 规则块</p>
+                <p>&nbsp;&nbsp;• knowledge-hall/categories/recallable.html — 新增 .force-light-mode 规则块</p>
+                <p>&nbsp;&nbsp;• knowledge-hall/categories/traceable.html — 新增 .force-light-mode 规则块</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 规范变更（续） -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-4" class="section-title-text-main">规范变更（续）</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>新增 StyleEnforcer 样式安全网机制章节</strong></p>
+                <p>- 在 project_rules.md 中新增完整的「StyleEnforcer 样式安全网机制」章节</p>
+                <p>- 内容涵盖：模块作用、覆盖范围、三种模式说明、存在原因、修改视觉组件时的四步操作流程</p>
+                <p>- 明确了 style.css / visual-components.md / library-dynamic.js 三处同步更新的操作规范</p>
+                <p>- 涉及文件：.trae/rules/project_rules.md</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能</a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top"
+  onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub"
+  onclick="window.open('../navigator.html', '_blank')">
+  导航<br>枢纽
+</button>
+
+<script>
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function openNavigator() {
+  window.open('../navigator.html', '_blank');
+}
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded');
+        quickNav.style.width = '180px';
+        quickNav.style.padding = '16px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'block';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'horizontal-tb';
+          title.style.marginBottom = '16px';
+          title.style.paddingBottom = '8px';
+          title.style.borderBottom = '1px solid #e0e0e0';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      }
+    });
+  }
+
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', scrollToTop);
+  }
+
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) {
+    navHubBtn.addEventListener('click', openNavigator);
+  }
+});
+</script>
+</body>
+</html>

@@ -105,9 +105,6 @@
     <a href="../intro.html" class="quick-nav-item">图书馆入门</a>
     <a href="../rule.html" class="quick-nav-item">图书馆规则</a>
     <a href="../feature.html" class="quick-nav-item">图书馆功能</a>
-    <div class="quick-nav-divider"></div>
-    <div class="quick-nav-section">当前页面</div>
-    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
   </div>
 </div>
 
@@ -192,18 +189,12 @@ window.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  var pageTitle = document.querySelector('.page-title-main');
-  var quickNavTitle = document.getElementById('quick-nav-page-title');
-  if (pageTitle && quickNavTitle) {
-    quickNavTitle.textContent = pageTitle.textContent;
-    quickNavTitle.addEventListener('click', function(e) { e.stopPropagation(); window.scrollTo({top:0,behavior:'smooth'}); });
-    quickNavTitle.style.cursor = 'pointer';
-  }
   var backBtn = document.querySelector('.back-to-top');
   if (backBtn) backBtn.addEventListener('click', scrollToTop);
   var navBtn = document.querySelector('.nav-hub');
   if (navBtn) navBtn.addEventListener('click', openNavigator);
 });
 </script>
+<script src="../../js/library-dynamic.js"></script>
 </body>
 </html>

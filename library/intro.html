@@ -189,34 +189,6 @@
     <a href="intro.html" class="quick-nav-item">图书馆入门</a>
     <a href="rule.html" class="quick-nav-item">图书馆规则</a>
     <a href="feature.html" class="quick-nav-item">图书馆功能</a>
-    <div class="quick-nav-divider"></div>
-    <div class="quick-nav-section">当前页面</div>
-    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
-    <div class="quick-nav-section">页面目录</div>
-    <div id="quick-nav-toc-container">
-      <div class="quick-nav-toc-item" data-target="section-1">&bull; 牧羊人之图书馆</div>
-      <div class="quick-nav-toc-parent">
-        <div class="quick-nav-toc-item-with-children">&bull; 图书馆的历史</div>
-        <div class="quick-nav-toc-toggle collapsed" data-parent="section-2"></div>
-        <div class="quick-nav-toc-children">
-          <div class="quick-nav-toc-child-item" data-target="section-2-1">└ 概念创作</div>
-          <div class="quick-nav-toc-parent">
-            <div class="quick-nav-toc-child-item quick-nav-toc-item-with-children" data-target="section-2-2">
-              └ 灵感来源
-            </div>
-            <div class="quick-nav-toc-toggle collapsed" data-parent="section-2-2"></div>
-            <div class="quick-nav-toc-children">
-              <div class="quick-nav-toc-child-item" data-target="section-2-2-1">    └ SCP基金会（夸克百科）</div>
-              <div class="quick-nav-toc-child-item" data-target="section-2-2-2">    └ SCP基金会的世界观</div>
-              <div class="quick-nav-toc-child-item" data-target="section-2-2-3">    └ SCP基金会（我的总结）</div>
-              <div class="quick-nav-toc-child-item" data-target="section-2-2-4">    └ 被放逐者之图书馆（夸克）</div>
-              <div class="quick-nav-toc-child-item" data-target="section-2-2-5">    └ 被放逐者之图书馆（百度）</div>
-              <div class="quick-nav-toc-child-item" data-target="section-2-2-6">    └ 生化奇兵：无限</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -266,23 +238,6 @@ function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId);
   if (section) {
     section.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-
-function toggleTocToggle(toggleElement) {
-  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
-  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
-
-  if (childrenElement) {
-    if (childrenElement.classList.contains('show')) {
-      childrenElement.classList.remove('show');
-      toggleElement.classList.remove('expanded');
-      toggleElement.classList.add('collapsed');
-    } else {
-      childrenElement.classList.add('show');
-      toggleElement.classList.remove('collapsed');
-      toggleElement.classList.add('expanded');
-    }
   }
 }
 
@@ -352,57 +307,6 @@ window.addEventListener('DOMContentLoaded', function() {
     pathElement.textContent = getCurrentPath();
   }
 
-  const pageTitle = document.querySelector('.page-title-main');
-  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
-  if (pageTitle && quickNavTitleElement) {
-    quickNavTitleElement.textContent = pageTitle.textContent;
-  }
-
-  const tocContainer = document.getElementById('quick-nav-toc-container');
-  if (tocContainer) {
-    tocContainer.addEventListener('click', function(event) {
-      const target = event.target;
-
-      if (target.classList.contains('quick-nav-toc-toggle')) {
-        event.stopPropagation();
-        event.preventDefault();
-        toggleTocToggle(target);
-        return;
-      }
-
-      if (target.classList.contains('quick-nav-toc-item') ||
-          target.classList.contains('quick-nav-toc-item-with-children') ||
-          target.classList.contains('quick-nav-toc-child-item')) {
-        event.stopPropagation();
-        event.preventDefault();
-
-        let sectionId;
-
-        if (target.classList.contains('quick-nav-toc-item-with-children')) {
-          const toggleElement = target.nextElementSibling;
-          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
-            sectionId = toggleElement.getAttribute('data-parent');
-          }
-        } else {
-          sectionId = target.getAttribute('data-target');
-        }
-
-        if (sectionId) {
-          scrollToSection(sectionId);
-        }
-      }
-    });
-  }
-
-  const quickNavPageTitle = document.getElementById('quick-nav-page-title');
-  if (quickNavPageTitle) {
-    quickNavPageTitle.addEventListener('click', function(event) {
-      event.stopPropagation();
-      scrollToTop();
-    });
-    quickNavPageTitle.style.cursor = 'pointer';
-  }
-
   const backToTopBtn = document.querySelector('.back-to-top');
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', scrollToTop);
@@ -414,5 +318,6 @@ window.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+<script src="../js/library-dynamic.js"></script>
 </body>
 </html>

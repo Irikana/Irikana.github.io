@@ -150,6 +150,81 @@
         </div>
       </div>
 
+      <!-- 主馆变更（深夜大更新 - 动态功能系统） -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-4" class="section-title-text-main">主馆变更（深夜 - 动态功能系统 v1.0）</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>🚀 全站动态功能系统上线 [Alpha 015]</strong></p>
+                <p>在不改变任何内容和风格的前提下，为网站添加7大动态交互功能：</p>
+
+                <p><strong>1️⃣ 站内智能搜索</strong></p>
+                <p>- 快捷键：Ctrl+K (Windows) / Cmd+K (Mac)</p>
+                <p>- 搜索范围：所有页面、文章、知识分类</p>
+                <p>- 支持中英文关键词匹配和结果高亮</p>
+                <p>- 结果分类显示：页面 / 分类 / 文章</p>
+                <p>- 即时响应，200ms 防抖优化</p>
+
+                <p><strong>2️⃣ 自动目录导航 (Auto TOC)</strong></p>
+                <p>- 自动扫描文章中的 h2/h3 标题生成目录</p>
+                <p>- 滚动时自动高亮当前章节</p>
+                <p>- 点击目录项平滑滚动到对应位置</p>
+                <p>- 支持折叠/展开，仅在有≥2个标题时启用</p>
+
+                <p><strong>3️⃣ 字数统计与阅读时间</strong></p>
+                <p>- 自动统计中文/英文字数</p>
+                <p>- 估算阅读时间（按500字/分钟计算）</p>
+                <p>- 显示在文章元数据区（article-meta）</p>
+
+                <p><strong>4️⃣ 主题切换增强</strong></p>
+                <p>- 三种模式：跟随系统 / 浅色 / 深色</p>
+                <p>- 点击按钮循环切换</p>
+                <p>- 使用 localStorage 记忆用户偏好</p>
+                <p>- 强制覆盖系统偏好设置</p>
+
+                <p><strong>5️⃣ 本地书签/收藏夹</strong></p>
+                <p>- 文章页面显示 ☆ 收藏按钮</p>
+                <p>- 点击收藏/取消收藏，状态持久化存储</p>
+                <p>- 右下角浮动按钮打开收藏面板</p>
+                <p>- 支持查看和管理所有收藏的文章</p>
+
+                <p><strong>6️⃣ 阅读体验优化工具</strong></p>
+                <p>- 字体大小调节：A- / A+ （80%-150%）</p>
+                <p>- 行宽模式切换：窄(700px) / 标准 / 宽(1200px)</p>
+                <p>- 专注模式：隐藏所有干扰元素，沉浸式阅读</p>
+                <p>- 一键打印优化版</p>
+                <p>- 所有设置使用 localStorage 记忆</p>
+
+                <p><strong>7️⃣ 多语言版本增强</strong></p>
+                <p>- 自动检测浏览器语言偏好</p>
+                <p>- 语言不匹配时显示切换提示横幅</p>
+                <p>- 添加语言切换快捷入口</p>
+                <p>- 未翻译页面显示提示标记</p>
+
+                <p><strong>新增文件：</strong></p>
+                <p>&nbsp;&nbsp;<code>js/library-dynamic.js</code> - 动态功能核心库（~900行，纯前端实现）</p>
+
+                <p><strong>修改文件：</strong></p>
+                <p>&nbsp;&nbsp;<code>css/style.css</code> - 新增 ~750行动态功能样式（含暗色模式和响应式）</p>
+                <p>&nbsp;&nbsp;全站28个 HTML 页面引入 JS 脚本</p>
+
+                <p><strong>技术特点：</strong></p>
+                <p>- ✅ 纯前端实现，无需服务器</p>
+                <p>- ✅ 使用 localStorage 存储用户偏好</p>
+                <p>- ✅ 完整支持暗色模式</p>
+                <p>- ✅ 移动端响应式适配</p>
+                <p>- ✅ 零依赖外部库（除 MathJax 用于数学公式）</p>
+                <p>- ✅ 不改变任何现有内容和风格</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </main>
@@ -179,15 +254,6 @@
     <a href="../library/intro.html" class="quick-nav-item">图书馆入门</a>
     <a href="../library/rule.html" class="quick-nav-item">图书馆规则</a>
     <a href="../library/feature.html" class="quick-nav-item">图书馆功能</a>
-    <div class="quick-nav-divider"></div>
-    <div class="quick-nav-section">当前页面</div>
-    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
-    <div class="quick-nav-section">页面目录</div>
-    <div id="quick-nav-toc-container">
-      <div data-target="section-1" class="quick-nav-toc-item">• 主馆变更</div>
-      <div data-target="section-2" class="quick-nav-toc-item">• 主馆变更（下午补充）</div>
-      <div data-target="section-3" class="quick-nav-toc-item">• 主馆变更（晚间补充）</div>
-    </div>
   </div>
 </div>
 
@@ -215,23 +281,6 @@ function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId);
   if (section) {
     section.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-
-function toggleTocToggle(toggleElement) {
-  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
-  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
-
-  if (childrenElement) {
-    if (childrenElement.classList.contains('show')) {
-      childrenElement.classList.remove('show');
-      toggleElement.classList.remove('expanded');
-      toggleElement.classList.add('collapsed');
-    } else {
-      childrenElement.classList.add('show');
-      toggleElement.classList.remove('collapsed');
-      toggleElement.classList.add('expanded');
-    }
   }
 }
 
@@ -294,57 +343,6 @@ window.addEventListener('DOMContentLoaded', function() {
         if (hint) hint.style.display = 'block';
       }
     });
-  }
-
-  const pageTitle = document.querySelector('.page-title-main');
-  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
-  if (pageTitle && quickNavTitleElement) {
-    quickNavTitleElement.textContent = pageTitle.textContent;
-  }
-
-  const tocContainer = document.getElementById('quick-nav-toc-container');
-  if (tocContainer) {
-    tocContainer.addEventListener('click', function(event) {
-      const target = event.target;
-
-      if (target.classList.contains('quick-nav-toc-toggle')) {
-        event.stopPropagation();
-        event.preventDefault();
-        toggleTocToggle(target);
-        return;
-      }
-
-      if (target.classList.contains('quick-nav-toc-item') ||
-          target.classList.contains('quick-nav-toc-item-with-children') ||
-          target.classList.contains('quick-nav-toc-child-item')) {
-        event.stopPropagation();
-        event.preventDefault();
-
-        let sectionId;
-
-        if (target.classList.contains('quick-nav-toc-item-with-children')) {
-          const toggleElement = target.nextElementSibling;
-          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
-            sectionId = toggleElement.getAttribute('data-parent');
-          }
-        } else {
-          sectionId = target.getAttribute('data-target');
-        }
-
-        if (sectionId) {
-          scrollToSection(sectionId);
-        }
-      }
-    });
-  }
-
-  const quickNavPageTitle = document.getElementById('quick-nav-page-title');
-  if (quickNavPageTitle) {
-    quickNavPageTitle.addEventListener('click', function(event) {
-      event.stopPropagation();
-      scrollToTop();
-    });
-    quickNavPageTitle.style.cursor = 'pointer';
   }
 
   const backToTopBtn = document.querySelector('.back-to-top');

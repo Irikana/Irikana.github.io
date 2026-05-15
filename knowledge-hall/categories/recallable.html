@@ -43,15 +43,6 @@
     .kh-content p { font-size: 17px; line-height: 1.9; color: #444; margin: 16px 0; }
     .kh-card { background: transparent; border: 1px solid #e0e0e0; border-radius: 4px; padding: 24px; margin: 20px 0; }
 
-    .function-box-blue {
-      border-left: 4px solid #2980b9;
-      background: #f0f7fd;
-      padding: 18px 22px;
-      border-radius: 2px;
-      color: #2980b9;
-      font-size: 15px;
-      line-height: 1.7;
-    }
     .kh-card-title-link {
       text-decoration: none;
       color: inherit;
@@ -90,8 +81,8 @@
       .kh-sidebar { background: #222; border-right-color: #333; }
       .kh-site-title { color: #e8e6e3; }
       .kh-equality { color: #888; }
-      .kh-nav-item { color: #c0bdb8; }
-      .kh-nav-item:hover { background: #333; color: #e8e6e3; }
+      .kh-nav-item { color: #e8e6e3; }
+      .kh-nav-item:hover { background: #333; color: #fff; }
       .kh-nav-divider { background: #333; }
       .kh-nav-section { color: #666; }
       .kh-content h2 { color: #e8e6e3; border-bottom-color: #444; }
@@ -101,12 +92,48 @@
       .kh-card-title-link:hover h3 {
         color: #5d9ccc;
       }
-      .notice-box-red { background: #2a1a1a; border-left-color: #5c3030; color: #e0a0a0; }
-      .function-box-blue { background: #1a1e24; border-left-color: #2a3544; color: #7ab8e0; }
       .link-to-page { background: #2c3e50; color: #fff; }
       .link-to-page:hover { background: #3d526b; }
       .kh-footer { border-top-color: #333; color: #666; }
     }
+
+    .force-dark-mode body.kh-body,
+    .force-dark-mode.kh-body { background: #1a1a1a; color: #e8e6e3; }
+    .force-dark-mode .kh-sidebar { background: #222; border-right-color: #333; }
+    .force-dark-mode .kh-site-title { color: #e8e6e3; }
+    .force-dark-mode .kh-equality { color: #888; }
+    .force-dark-mode .kh-nav-item { color: #e8e6e3; }
+    .force-dark-mode .kh-nav-item:hover { background: #333; color: #fff; }
+    .force-dark-mode .kh-nav-divider { background: #333; }
+    .force-dark-mode .kh-nav-section { color: #666; }
+    .force-dark-mode .kh-content h2 { color: #e8e6e3; border-bottom-color: #444; }
+    .force-dark-mode .kh-content h3 { color: #c0bdb8; }
+    .force-dark-mode .kh-content p { color: #a0a0a0; }
+    .force-dark-mode .kh-card { background: transparent; border-color: #333; }
+    .force-dark-mode .kh-card-title-link:hover h3 {
+      color: #5d9ccc;
+    }
+    .force-dark-mode .link-to-page { background: #2c3e50; color: #fff; }
+    .force-dark-mode .link-to-page:hover { background: #3d526b; }
+    .force-dark-mode .kh-footer { border-top-color: #333; color: #666; }
+
+    .force-light-mode body.kh-body,
+    .force-light-mode.kh-body { background: #fff; color: #1a1a1a; }
+    .force-light-mode .kh-sidebar { background: #fafafa; border-right-color: #e0e0e0; }
+    .force-light-mode .kh-site-title { color: #2c3e50; }
+    .force-light-mode .kh-equality { color: #999; }
+    .force-light-mode .kh-nav-item { color: #1a1a1a; }
+    .force-light-mode .kh-nav-item:hover { background: #f0f0f0; color: #2c3e50; }
+    .force-light-mode .kh-nav-divider { background: #e0e0e0; }
+    .force-light-mode .kh-nav-section { color: #aaa; }
+    .force-light-mode .kh-content h2 { color: #1a1a1a; border-bottom-color: #2c3e50; }
+    .force-light-mode .kh-content h3 { color: #333; }
+    .force-light-mode .kh-content p { color: #444; }
+    .force-light-mode .kh-card { background: transparent; border-color: #e0e0e0; }
+    .force-light-mode .kh-card-title-link:hover h3 { color: #5d9ccc; }
+    .force-light-mode .link-to-page { background: #2c3e50; color: #fff; }
+    .force-light-mode .link-to-page:hover { background: #3d526b; }
+    .force-light-mode .kh-footer { border-top-color: #e0e0e0; color: #888; }
   </style>
 </head>
 <body class="kh-body">
@@ -155,5 +182,6 @@
   回到<br>顶部
 </button>
 
+<script src="../../js/library-dynamic.js"></script>
 </body>
 </html>

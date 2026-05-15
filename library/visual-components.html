@@ -581,22 +581,6 @@
     <div class="quick-nav-title">便携式导航仪</div>
     <div class="quick-nav-hint">光标移到此处展开</div>
     <div class="quick-nav-content"><a href="../index.html" class="quick-nav-item">图书馆主页</a><a href="intro.html" class="quick-nav-item">图书馆入门</a><a href="rule.html" class="quick-nav-item">图书馆规则</a><a href="feature.html" class="quick-nav-item">图书馆功能</a>
-      <div class="quick-nav-divider"></div>
-      <div class="quick-nav-section">当前页面</div>
-      <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
-      <div class="quick-nav-section">页面目录</div>
-      <div id="quick-nav-toc-container">
-        <div data-target="section-1" class="quick-nav-toc-item">• 信息提示框</div>
-        <div data-target="section-2" class="quick-nav-toc-item">• 折叠块</div>
-        <div data-target="section-3" class="quick-nav-toc-item">• 文章元数据区</div>
-        <div data-target="section-4" class="quick-nav-toc-item">• 新闻卡片</div>
-        <div data-target="section-5" class="quick-nav-toc-item">• 浮窗</div>
-        <div data-target="section-6" class="quick-nav-toc-item">• 导航组件</div>
-        <div data-target="section-7" class="quick-nav-toc-item">• 按钮与链接</div>
-        <div data-target="section-8" class="quick-nav-toc-item">• 文章列表</div>
-        <div data-target="section-9" class="quick-nav-toc-item">• 设计令牌速查表</div>
-        <div data-target="section-10" class="quick-nav-toc-item">• 响应式断点</div>
-      </div>
     </div>
   </div>
 
@@ -645,23 +629,6 @@ function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId);
   if (section) {
     section.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-
-function toggleTocToggle(toggleElement) {
-  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
-  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
-
-  if (childrenElement) {
-    if (childrenElement.classList.contains('show')) {
-      childrenElement.classList.remove('show');
-      toggleElement.classList.remove('expanded');
-      toggleElement.classList.add('collapsed');
-    } else {
-      childrenElement.classList.add('show');
-      toggleElement.classList.remove('collapsed');
-      toggleElement.classList.add('expanded');
-    }
   }
 }
 
@@ -731,67 +698,17 @@ window.addEventListener('DOMContentLoaded', function() {
     pathElement.textContent = getCurrentPath();
   }
 
-  const pageTitle = document.querySelector('.page-title-main');
-  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
-  if (pageTitle && quickNavTitleElement) {
-    quickNavTitleElement.textContent = pageTitle.textContent;
-  }
-
-  const tocContainer = document.getElementById('quick-nav-toc-container');
-  if (tocContainer) {
-    tocContainer.addEventListener('click', function(event) {
-      const target = event.target;
-
-      if (target.classList.contains('quick-nav-toc-toggle')) {
-        event.stopPropagation();
-        event.preventDefault();
-        toggleTocToggle(target);
-        return;
-      }
-
-      if (target.classList.contains('quick-nav-toc-item') ||
-          target.classList.contains('quick-nav-toc-item-with-children') ||
-          target.classList.contains('quick-nav-toc-child-item')) {
-        event.stopPropagation();
-        event.preventDefault();
-
-        let sectionId;
-
-        if (target.classList.contains('quick-nav-toc-item-with-children')) {
-          const toggleElement = target.nextElementSibling;
-          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
-            sectionId = toggleElement.getAttribute('data-parent');
-          }
-        } else {
-          sectionId = target.getAttribute('data-target');
-        }
-
-        if (sectionId) {
-          scrollToSection(sectionId);
-        }
-      }
-    });
-  }
-
-  const quickNavPageTitle = document.getElementById('quick-nav-page-title');
-  if (quickNavPageTitle) {
-    quickNavPageTitle.addEventListener('click', function(event) {
-      event.stopPropagation();
-      scrollToTop();
-    });
-    quickNavPageTitle.style.cursor = 'pointer';
-  }
-
-  const backToTopBtn = document.querySelector('.back-to-top');
+  const backToTopBtn = document.querySelector('.back-to-top:not([style*="relative"])');
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', scrollToTop);
   }
 
-  const navHubBtn = document.querySelector('.nav-hub');
+  const navHubBtn = document.querySelector('.nav-hub:not([style*="relative"])');
   if (navHubBtn) {
     navHubBtn.addEventListener('click', openNavigator);
   }
 });
 </script>
+<script src="../js/library-dynamic.js"></script>
 </body>
 </html>

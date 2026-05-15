@@ -17,6 +17,15 @@ window.MathJax = {
 };
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+.left-align h2 { font-size: 18px; font-weight: 600; margin-top: 2em; margin-bottom: 0.6em; line-height: 1.5; }
+.left-align h3 { font-size: 16px; font-weight: 600; margin-top: 1.2em; margin-bottom: 0.5em; line-height: 1.5; }
+.left-align h4 { font-size: 15.5px; font-weight: 600; margin-top: 1em; margin-bottom: 0.4em; line-height: 1.5; }
+.left-align p { font-size: 15px; line-height: 1.8; }
+.left-align ol,.left-align ul { font-size: 15px; line-height: 1.8; }
+.left-align li { margin-bottom: 0.25em; }
+.left-align strong { font-weight: 600; }
+</style>
 </head>
 <body>
 <header>
@@ -500,21 +509,6 @@ window.MathJax = {
     <a href="../intro.html" class="quick-nav-item">图书馆入门 </a>
     <a href="../rule.html" class="quick-nav-item">图书馆规则 </a>
     <a href="../feature.html" class="quick-nav-item">图书馆功能 </a>
-    <div class="quick-nav-divider"></div>
-    <div class="quick-nav-section">当前页面</div>
-    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
-    <div class="quick-nav-section">页面目录</div>
-    <div id="quick-nav-toc-container">
-      <div data-target="section-1" class="quick-nav-toc-item">• Q1：三个热力学系数</div>
-      <div data-target="section-2" class="quick-nav-toc-item">• Q2：公式来源推导</div>
-      <div data-target="section-3" class="quick-nav-toc-item">• Q3：命名记忆法</div>
-      <div data-target="section-4" class="quick-nav-toc-item">• Q4：偏导数口诀</div>
-      <div data-target="section-5" class="quick-nav-toc-item">• Q5：相与单相反应</div>
-      <div data-target="section-6" class="quick-nav-toc-item">• Q6：化学势与吉布斯自由能</div>
-      <div data-target="section-7" class="quick-nav-toc-item">• Q7：化学势的本征理解</div>
-      <div data-target="section-8" class="quick-nav-toc-item">• Q8：热力学基本方程与麦克斯韦关系</div>
-      <div data-target="section-9" class="quick-nav-toc-item">• Q9：与第一定律的关系</div>
-    </div>
   </div>
 </div>
 
@@ -606,48 +600,6 @@ window.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  const pageTitle = document.querySelector('.page-title-main');
-  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
-  if (pageTitle && quickNavTitleElement) {
-    quickNavTitleElement.textContent = pageTitle.textContent;
-  }
-
-  const tocContainer = document.getElementById('quick-nav-toc-container');
-  if (tocContainer) {
-    tocContainer.addEventListener('click', function(event) {
-      const target = event.target;
-
-      if (target.classList.contains('quick-nav-toc-toggle')) {
-        event.stopPropagation();
-        event.preventDefault();
-        toggleTocToggle(target);
-        return;
-      }
-
-      if (target.classList.contains('quick-nav-toc-item') ||
-          target.classList.contains('quick-nav-toc-item-with-children') ||
-          target.classList.contains('quick-nav-toc-child-item')) {
-        event.stopPropagation();
-        event.preventDefault();
-
-        let sectionId;
-
-        if (target.classList.contains('quick-nav-toc-item-with-children')) {
-          const toggleElement = target.nextElementSibling;
-          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
-            sectionId = toggleElement.getAttribute('data-parent');
-          }
-        } else {
-          sectionId = target.getAttribute('data-target');
-        }
-
-        if (sectionId) {
-          scrollToSection(sectionId);
-        }
-      }
-    });
-  }
-
   const backToTopBtn = document.querySelector('.back-to-top');
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', scrollToTop);
@@ -659,5 +611,6 @@ window.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+<script src="../js/library-dynamic.js"></script>
 </body>
 </html>

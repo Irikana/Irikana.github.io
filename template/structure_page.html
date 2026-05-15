@@ -515,79 +515,6 @@ body {
   font-size: 10px;
 }
 
-/* 注意事项和引用内容样式 */
-.notice-box {
-  padding: 0 0 0 10px;
-  background-color: red;
-}
-
-.notice-box-red {
-  background-color: #FFCCCC;
-  padding: 15px;
-  margin: 10px;
-  position: relative;
-  overflow: hidden;
-}
-
-.notice-box-red::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  background-color: #ff0000;
-  background: linear-gradient(180deg, #ff0000 0%, #cc0000 100%);
-}
-
-.notice-header {
-  background-color: #98d982;
-  margin-bottom: 15px;
-}
-
-.notice-box-alt {
-  padding: 0 0 0 10px;
-  background-color: red;
-}
-
-.function-box-blue {
-  background-color: #CCCCFF;
-  padding: 15px;
-  margin: 10px;
-  position: relative;
-  overflow: hidden;
-}
-
-.function-box-blue::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  background-color: #0000ff;
-  background: linear-gradient(180deg, #0000ff 0%, #0000cc 100%);
-}
-
-.quote-box-grey {
-  background-color: #E0E0E0;
-  padding: 15px;
-  margin: 10px;
-  position: relative;
-  overflow: hidden;
-}
-
-.quote-box-grey::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  background-color: #666666;
-  background: linear-gradient(180deg, #808080 0%, #606060 100%);
-}
-
 /* 浮动按钮样式 */
 .float-button {
   position: fixed;
@@ -1944,42 +1871,6 @@ body {
     <a href="https://irikana.github.io/library/intro.html" class="quick-nav-item">图书馆入门</a>
     <a href="https://irikana.github.io/library/rule.html" class="quick-nav-item">图书馆规则</a>
     <a href="https://irikana.github.io/library/feature.html" class="quick-nav-item">图书馆功能</a>
-    <!-- 分割线 -->
-    <div class="quick-nav-divider"></div>
-    <!-- 当前页面信息 -->
-    <div class="quick-nav-section">当前页面</div>
-    <div id="quick-nav-page-title" class="quick-nav-page-title" style="cursor: pointer;">牧羊人图书馆（此行为页面标题）</div>
-    <div class="quick-nav-section">页面目录</div>
-    <div id="quick-nav-toc-container">
-      <!-- 一级标题1,包含二级和三级嵌套示例 -->
-      <div class="quick-nav-toc-parent">
-        <div class="quick-nav-toc-item-with-children">• 标题1</div>
-        <div class="quick-nav-toc-toggle collapsed" data-parent="section-1"></div>
-        <div class="quick-nav-toc-children">
-          <!-- 二级标题1.1,包含三级嵌套 -->
-          <div class="quick-nav-toc-parent">
-            <div class="quick-nav-toc-child-item quick-nav-toc-item-with-children" data-target="section-1-1">
-              └ 下级标题 1.1
-            </div>
-            <div class="quick-nav-toc-toggle collapsed" data-parent="section-1-1"></div>
-            <div class="quick-nav-toc-children">
-              <!-- 三级标题1.1.1 -->
-              <div class="quick-nav-toc-child-item" data-target="section-1-1-1">    └ 下下级标题 1.1.1</div>
-              <!-- 三级标题1.1.2 -->
-              <div class="quick-nav-toc-child-item" data-target="section-1-1-2">    └ 下下级标题 1.1.2</div>
-            </div>
-          </div>
-          <!-- 二级标题1.2 -->
-          <div class="quick-nav-toc-child-item" data-target="section-1-2">
-            └ 下级标题 1.2
-          </div>
-        </div>
-      </div>
-      <!-- 一级标题2 -->
-      <div class="quick-nav-toc-item" data-target="section-2">• 标题2</div>
-      <!-- 一级标题3 -->
-      <div class="quick-nav-toc-item" data-target="section-3">• 标题3</div>
-    </div>
   </div>
 </div>
 
@@ -2040,84 +1931,12 @@ function scrollToSection(sectionId) {
   }
 }
 
-// 切换目录折叠状态
-function toggleTocToggle(toggleElement) {
-  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
-  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
-  
-  if (childrenElement) {
-    if (childrenElement.classList.contains('show')) {
-      childrenElement.classList.remove('show');
-      toggleElement.classList.remove('expanded');
-      toggleElement.classList.add('collapsed');
-    } else {
-      childrenElement.classList.add('show');
-      toggleElement.classList.remove('collapsed');
-      toggleElement.classList.add('expanded');
-    }
-  }
-}
-
 // 页面加载完成后初始化
 window.addEventListener('DOMContentLoaded', function() {
   // 更新当前路径显示
   const pathElement = document.getElementById('current-path');
   if (pathElement) {
     pathElement.textContent = getCurrentPath();
-  }
-
-  // 更新便捷式导航仪中的当前页面标题
-  const pageTitle = document.querySelector('.page-title-main');
-  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
-  if (pageTitle && quickNavTitleElement) {
-    quickNavTitleElement.textContent = pageTitle.textContent;
-  }
-
-  // 使用事件委托处理目录点击
-  const tocContainer = document.getElementById('quick-nav-toc-container');
-  if (tocContainer) {
-    tocContainer.addEventListener('click', function(event) {
-      const target = event.target;
-      
-      if (target.classList.contains('quick-nav-toc-toggle')) {
-        event.stopPropagation();
-        event.preventDefault();
-        toggleTocToggle(target);
-        return;
-      }
-      
-      if (target.classList.contains('quick-nav-toc-item') || 
-          target.classList.contains('quick-nav-toc-item-with-children') ||
-          target.classList.contains('quick-nav-toc-child-item')) {
-        event.stopPropagation();
-        event.preventDefault();
-        
-        let sectionId;
-        
-        if (target.classList.contains('quick-nav-toc-item-with-children')) {
-          const toggleElement = target.nextElementSibling;
-          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
-            sectionId = toggleElement.getAttribute('data-parent');
-          }
-        } else {
-          sectionId = target.getAttribute('data-target');
-        }
-        
-        if (sectionId) {
-          scrollToSection(sectionId);
-        }
-      }
-    });
-  }
-
-  // 为当前页面标题添加点击事件（回到页面顶部）
-  const quickNavPageTitle = document.getElementById('quick-nav-page-title');
-  if (quickNavPageTitle) {
-    quickNavPageTitle.addEventListener('click', function(event) {
-      event.stopPropagation();
-      scrollToTop();
-    });
-    quickNavPageTitle.style.cursor = 'pointer';
   }
 
   // 绑定回到顶部按钮事件

@@ -57,8 +57,7 @@
 
       <div class="article-footer-meta">
         <div class="article-footer-meta-item">
-          <span class="article-footer-label">注释：</span>
-          <span class="article-footer-value">[1] <a href="./restless-material-dialog.html" target="_blank" class="ext-link">查看与AI的完整材料对话（热力学基础概念问答）</a></span>
+          <span class="article-footer-value">[1] <a href="./restless-material-dialog.html" target="_blank" class="ext-link">查看与AI的完整材料对话（热力学基础概念问答） </a></span>
         </div>
       </div>
 
@@ -94,9 +93,6 @@
     <a href="../intro.html" class="quick-nav-item">图书馆入门 </a>
     <a href="../rule.html" class="quick-nav-item">图书馆规则 </a>
     <a href="../feature.html" class="quick-nav-item">图书馆功能 </a>
-    <div class="quick-nav-divider"></div>
-    <div class="quick-nav-section">当前页面</div>
-    <div id="quick-nav-page-title" class="quick-nav-page-title">加载中...</div>
   </div>
 </div>
 
@@ -181,12 +177,6 @@ window.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  const pageTitle = document.querySelector('.page-title-main');
-  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
-  if (pageTitle && quickNavTitleElement) {
-    quickNavTitleElement.textContent = pageTitle.textContent;
-  }
-
   const backToTopBtn = document.querySelector('.back-to-top');
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', scrollToTop);
@@ -198,5 +188,6 @@ window.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+<script src="../js/library-dynamic.js"></script>
 </body>
 </html>

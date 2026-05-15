@@ -162,13 +162,6 @@
     <a href="./library/intro.html" class="quick-nav-item">Introduction</a>
     <a href="./library/rule.html" class="quick-nav-item">Rules</a>
     <a href="./library/feature.html" class="quick-nav-item">Features</a>
-    <div class="quick-nav-divider"></div>
-    <div class="quick-nav-section">Current Page</div>
-    <div id="quick-nav-page-title" class="quick-nav-page-title">Loading...</div>
-    <div class="quick-nav-section">Table of Contents</div>
-    <div id="quick-nav-toc-container">
-      <div class="quick-nav-toc-item" data-target="section-news">&bull; News</div>
-    </div>
   </div>
 </div>
 
@@ -196,23 +189,6 @@ function scrollToSection(sectionId) {
   const section = document.getElementById(sectionId);
   if (section) {
     section.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-
-function toggleTocToggle(toggleElement) {
-  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
-  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
-
-  if (childrenElement) {
-    if (childrenElement.classList.contains('show')) {
-      childrenElement.classList.remove('show');
-      toggleElement.classList.remove('expanded');
-      toggleElement.classList.add('collapsed');
-    } else {
-      childrenElement.classList.add('show');
-      toggleElement.classList.remove('collapsed');
-      toggleElement.classList.add('expanded');
-    }
   }
 }
 
@@ -277,55 +253,9 @@ window.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  const pageTitle = document.querySelector('.page-title-main');
-  const quickNavTitleElement = document.getElementById('quick-nav-page-title');
-  if (pageTitle && quickNavTitleElement) {
-    quickNavTitleElement.textContent = pageTitle.textContent;
-  }
-
-  const tocContainer = document.getElementById('quick-nav-toc-container');
-  if (tocContainer) {
-    tocContainer.addEventListener('click', function(event) {
-      const target = event.target;
-
-      if (target.classList.contains('quick-nav-toc-toggle')) {
-        event.stopPropagation();
-        event.preventDefault();
-        toggleTocToggle(target);
-        return;
-      }
-
-      if (target.classList.contains('quick-nav-toc-item') ||
-          target.classList.contains('quick-nav-toc-item-with-children') ||
-          target.classList.contains('quick-nav-toc-child-item')) {
-        event.stopPropagation();
-        event.preventDefault();
-
-        let sectionId;
-
-        if (target.classList.contains('quick-nav-toc-item-with-children')) {
-          const toggleElement = target.nextElementSibling;
-          if (toggleElement && toggleElement.classList.contains('quick-nav-toc-toggle')) {
-            sectionId = toggleElement.getAttribute('data-parent');
-          }
-        } else {
-          sectionId = target.getAttribute('data-target');
-        }
-
-        if (sectionId) {
-          scrollToSection(sectionId);
-        }
-      }
-    });
-  }
-
-  const quickNavPageTitle = document.getElementById('quick-nav-page-title');
-  if (quickNavPageTitle) {
-    quickNavPageTitle.addEventListener('click', function(event) {
-      event.stopPropagation();
-      scrollToTop();
-    });
-    quickNavPageTitle.style.cursor = 'pointer';
+  const pathElement = document.getElementById('current-path');
+  if (pathElement) {
+    pathElement.textContent = getCurrentPath();
   }
 
   const backToTopBtn = document.querySelector('.back-to-top');
@@ -339,6 +269,7 @@ window.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+<script src="../js/library-dynamic.js"></script>
 
 </body>
 </html>

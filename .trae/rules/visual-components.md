@@ -24,14 +24,6 @@
   border: var(--line-width) solid #d0dce8;
   border-left: 4px solid var(--color-accent);
 }
-
-.function-box-blue::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 4px;
-  background-color: var(--color-accent);
-}
 ```
 
 **知识馆内联等效写法**（用于 knowledge-hall/ 页面，因不依赖 CSS 变量）：
@@ -93,14 +85,6 @@
   border-left: 3px solid var(--color-text-light);
   font-style: italic;
   color: var(--color-text-secondary);
-}
-
-.quote-box-grey::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background-color: var(--color-text-light);
 }
 ```
 
@@ -1089,6 +1073,135 @@ details details {
 | `--line-width` | `1px` | — | 线宽 |
 | `--radius-sm` | `0px` | — | 小圆角 |
 | `--radius-md` | `0px` | — | 中圆角 |
+
+---
+
+## 11. 自动目录 — `.auto-toc`（内联式）
+
+**用途**：文章页内容区顶部的自动生成目录，根据页面 `<h2>`~`<h3>` 标题构建。由 `library-dynamic.js` 的 TOC 模块自动生成。
+
+**核心类名**：
+- `.auto-toc` — 目录容器
+- `.auto-toc-header` — 标题栏（可点击展开/收起）
+- `.auto-toc-title` — "📖 目录" 文字
+- `.auto-toc-toggle` — 折叠三角按钮
+- `.auto-toc-list` / `.auto-toc-link` — 目录列表和链接
+- `.auto-toc-level-3` — 三级标题缩进
+
+**标准样式（style.css）**：
+
+```css
+.auto-toc {
+  background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
+  border: 1px solid var(--color-border);
+  padding: 14px 18px;
+  margin-bottom: var(--space-lg);
+}
+
+.auto-toc-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px; padding-bottom: 8px;
+  border-bottom: 1px dashed var(--color-border);
+  cursor: pointer; user-select: none;
+}
+
+.auto-toc-title { font-size: 13px; font-weight: 700; color: var(--color-accent); }
+
+.auto-toc-toggle { background:none; border:none; font-size:11px; color:var(--color-text-light); cursor:pointer; }
+.auto-toc.collapsed .auto-toc-toggle { transform: rotate(-90deg); }
+.auto-toc.collapsed .auto-toc-list { display: none; }
+
+.auto-toc-link {
+  display: block; font-size: 13px; color: var(--color-text-secondary);
+  text-decoration: none; padding: 4px 10px; border-left: 2px solid transparent;
+  transition: all 0.15s ease; line-height: 1.5;
+}
+.auto-toc-link:hover { color: var(--color-accent); border-left-color: var(--color-accent); }
+.auto-toc-link.active { color: var(--color-accent); font-weight: 600; }
+.auto-toc-level-3 { padding-left: 16px; }
+```
+
+**HTML 模板**（JS 自动生成）：
+
+```html
+<nav class="auto-toc" id="auto-toc">
+  <div class="auto-toc-header">
+    <span class="auto-toc-title">&#128214; 目录</span>
+    <button type="button" class="auto-toc-toggle">▼</button>
+  </div>
+  <div class="auto-toc-list" id="toc-list">
+    <a href="#section-id" class="auto-toc-link auto-toc-level-2">章节标题</a>
+    <a href="#sub-section-id" class="auto-toc-link auto-toc-level-3">子章节</a>
+  </div>
+</nav>
+```
+
+**注意事项**：
+- 由 JS 自动生成，无需手写 HTML
+- 整个标题栏可点击展开/收起（手机端友好）
+- 点击目录项平滑滚动到对应标题，当前项高亮显示
+
+---
+
+## 12. 版本号显示 — `.sl-version`
+
+**用途**：在页脚版权区动态注入当前版本号（如 `· alpha-012`），由 `library-dynamic.js` 的 `VersionDisplay` 模块自动追加。
+
+**标准样式（style.css）**：
+
+```css
+.sl-version {
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: 0.5px;
+}
+```
+
+**JS 生成逻辑**：
+
+```javascript
+// library-dynamic.js 中 VersionDisplay.init()
+var span = E('span');
+span.className = 'sl-version';
+span.innerHTML = ' · ' + this.ver;  // ver 值为 'alpha-012'
+footer.appendChild(span);
+```
+
+**注意事项**：
+- 仅在存在 `.copyright-color` 或 `.copyright-text` 元素时才注入
+- 若已存在 `.sl-version` 元素则跳过（防重复）
+- 版本号字符串在 `VersionDisplay.ver` 属性中统一管理
+
+---
+
+## 13. Toast 提示 — `#sl-toast`
+
+**用途**：收藏操作（添加/取消/移除）时的浮动提示框，从顶部滑入、1.5秒后自动消失。由 `library-dynamic.js` 的 `BM.showToast()` 动态创建。
+
+**内联样式**（JS 动态设置，无 CSS 类定义）：
+
+```javascript
+t.style.cssText = 'position:fixed;top:-40px;left:50%;transform:translateX(-50%);'
+  + 'background:#2c3e50;color:#fff;padding:8px 20px;font-size:13px;'
+  + 'z-index:10000;transition:top 0.3s ease;'
+  + 'box-shadow:0 4px 12px rgba(0,0,0,0.15);letter-spacing:0.3px;';
+```
+
+**动画行为**：
+1. 创建时初始 `top: -40px`（屏幕外上方）
+2. 10ms 后 `top: 20px`（滑入可视区）
+3. 1500ms 后 `top: -40px`（滑出）
+4. 300ms 过渡完成后从 DOM 移除
+
+**触发场景**：
+- `BM.showToast('收藏成功')` — 添加收藏时
+- `BM.showToast('已取消收藏')` — 取消收藏时
+- `BM.showToast('已移除收藏')` — 从面板移除时
+
+**注意事项**：
+- 每次显示前会先移除已存在的旧 toast（防重叠）
+- 使用纯内联样式，不依赖 CSS 类
+- 扁平化设计（无 border-radius）
 
 ---
 

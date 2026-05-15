@@ -77,13 +77,6 @@
   <div class="quick-nav-title">Navigator</div>
   <div class="quick-nav-hint">Hover to expand</div>
   <div class="quick-nav-content"><a href="../index.html" class="quick-nav-item">Home</a><a href="../library/intro.html" class="quick-nav-item">Introduction</a><a href="../library/rule.html" class="quick-nav-item">Rules</a><a href="../library/feature.html" class="quick-nav-item">Features</a>
-    <div class="quick-nav-divider"></div>
-    <div class="quick-nav-section">Current Page</div>
-    <div id="quick-nav-page-title" class="quick-nav-page-title">Loading...</div>
-    <div class="quick-nav-section">Table of Contents</div>
-    <div id="quick-nav-toc-container">
-      <div data-target="section-1" class="quick-nav-toc-item">&bull; Knowledge Hall Officially Launched</div>
-    </div>
   </div>
 </div>
 
@@ -118,15 +111,6 @@ function getCurrentPath() {
 
 function scrollToSection(sectionId) { const s = document.getElementById(sectionId); if (s) s.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 
-function toggleTocToggle(toggleElement) {
-  const parentElement = toggleElement.closest('.quick-nav-toc-parent');
-  const childrenElement = parentElement.querySelector('.quick-nav-toc-children');
-  if (childrenElement) {
-    if (childrenElement.classList.contains('show')) { childrenElement.classList.remove('show'); toggleElement.classList.remove('expanded'); toggleElement.classList.add('collapsed'); }
-    else { childrenElement.classList.add('show'); toggleElement.classList.remove('collapsed'); toggleElement.classList.add('expanded'); }
-  }
-}
-
 window.addEventListener('DOMContentLoaded', function() {
   const quickNav = document.querySelector('.quick-nav');
   const isMobile = window.innerWidth <= 768;
@@ -147,23 +131,10 @@ window.addEventListener('DOMContentLoaded', function() {
   }
   const currentPathElement = document.getElementById('current-path');
   if (currentPathElement) { currentPathElement.textContent = getCurrentPath(); }
-  const qt = document.getElementById('quick-nav-page-title');
-  if (qt) { qt.textContent = document.title.replace("Shepherd's Library - ", ''); qt.addEventListener('click', function(e) { e.stopPropagation(); scrollToTop(); }); qt.style.cursor = 'pointer'; }
-  const tc = document.getElementById('quick-nav-toc-container');
-  if (tc) { tc.addEventListener('click', function(e) {
-    const t = e.target;
-    if (t.classList.contains('quick-nav-toc-toggle')) { e.stopPropagation(); e.preventDefault(); toggleTocToggle(t); return; }
-    if (t.classList.contains('quick-nav-toc-item') || t.classList.contains('quick-nav-toc-item-with-children') || t.classList.contains('quick-nav-toc-child-item')) {
-      e.stopPropagation(); e.preventDefault();
-      let sid;
-      if (t.classList.contains('quick-nav-toc-item-with-children')) { const te = t.nextElementSibling; if (te && te.classList.contains('quick-nav-toc-toggle')) sid = te.getAttribute('data-parent'); }
-      else { sid = t.getAttribute('data-target'); }
-      if (sid) { scrollToSection(sid); }
-    }
-  }); }
   const btt = document.querySelector('.back-to-top'); if (btt) btt.addEventListener('click', scrollToTop);
   const nh = document.querySelector('.nav-hub'); if (nh) nh.addEventListener('click', openNavigator);
 });
 </script>
+<script src="../../../js/library-dynamic.js"></script>
 </body>
 </html>
