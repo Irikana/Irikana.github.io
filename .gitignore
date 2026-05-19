@@ -1,0 +1,17 @@
+# Notion 导出中间产物（旧页面 + 压缩包）
+notionExport/
+
+# IDE / 编辑器配置
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 临时文件
+*.tmp
+*.temp

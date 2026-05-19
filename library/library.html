@@ -30,7 +30,7 @@
   <main>
     <div class="gjs-row content-row content-bg-white">
       <div class="content-width-limiter">
-        <div class="gjs-cell content-bg-yellow">
+        <div class="gjs-cell content-main">
 
           <section class="gjs-row notice-header page-header-section">
             <div class="gjs-cell">
@@ -48,7 +48,7 @@
           <section class="gjs-row notice-header section-header-repeat page-section-reset">
             <div class="gjs-cell">
               <h2 id="section-2" class="section-title-text-sub">绪论</h2>
-              <div class="gjs-row yellowgreen-bg content-bg-white-text">
+              <div class="gjs-row bg-transparent content-bg-white-text">
                 <div class="gjs-cell">
                   <div class="center-align">
                     <p>这个页面可以视为牧羊人图书馆的主要页面，请不要与 <a href="../index.html">牧羊人图书馆主页</a> 混淆，这里引用的页面仅仅只是"牧羊人图书馆项目"的主页，而这个页面，是"牧羊人图书馆"的页面，这并不代表哪一个页面更重要，而仅仅只是为它们做一个区分，<a href="../index.html">牧羊人图书馆主页</a> 同样重要，你应当在来到该页面之前查看过该页面。</p>
@@ -58,7 +58,7 @@
             </div>
           </section>
 
-          <div class="gjs-row yellowgreen-bg content-bg-white-text">
+          <div class="gjs-row bg-transparent content-bg-white-text">
             <div class="gjs-cell">
               <div class="center-align">
                 <p>我们把图书馆中所有知识划分为一些主要的类型，考虑到以后储存到这里的知识会相当多，我们打算在未来添加一个单独的页面来储存其他页面，然而，在初期，我只打算在更新中处理图书馆的结构性问题，它们同样重要。所以，在初期，图书馆所保存和记录的知识会很少，无论如何，为了更好的处理结构性问题，我会适当的在这段时期就放入一些知识，来作为结构性问题的一个临时解决方案，比如你在该页面看到的文章。</p>
@@ -69,7 +69,7 @@
           <section class="gjs-row notice-header section-header-repeat page-section-reset">
             <div class="gjs-cell">
               <h3 id="section-3" class="section-title-text-sub-sub">文章</h3>
-              <div class="gjs-row yellowgreen-bg content-bg-white-sub">
+              <div class="gjs-row bg-transparent content-bg-white-sub">
                 <div class="gjs-cell">
                   <div class="center-align">
                     <p>这里储存着我写的文章。</p>
@@ -80,7 +80,7 @@
           </section>
 
           <h4 id="section-3-1" class="subsection-header">录音文章</h4>
-          <div class="gjs-row yellowgreen-bg content-bg-white-sub">
+          <div class="gjs-row bg-transparent content-bg-white-sub">
             <div class="gjs-cell">
               <div class="center-align">
                 <p>用录音机录制我的声音，然后在AI的帮助下完成向文字的转换，通过这样的方式创造的文章称为<strong>录音文章</strong>。</p>
@@ -125,124 +125,6 @@
     导航<br>枢纽
   </button>
 
-<script id="ext-inline-js-import-body-end-2">
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-}
-
-function openNavigator() {
-  window.open('../navigator.html', '_blank');
-}
-
-function getCurrentPath() {
-  const path = window.location.pathname;
-  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
-
-  if (formattedPath === '' || formattedPath === 'index') {
-    return '首页';
-  }
-
-  formattedPath = formattedPath
-    .split('/')
-    .map(segment => {
-      const fileNameIndex = segment.lastIndexOf('.');
-      if (fileNameIndex > 0) {
-        segment = segment.substring(0, fileNameIndex);
-      }
-      return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
-    })
-    .join(' → ');
-
-  return formattedPath;
-}
-
-function scrollToSection(sectionId) {
-  const section = document.getElementById(sectionId);
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-
-window.addEventListener('DOMContentLoaded', function() {
-  const quickNav = document.querySelector('.quick-nav');
-  const isMobile = window.innerWidth <= 768;
-
-  if (quickNav && isMobile) {
-    quickNav.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded')) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '4px';
-          title.style.paddingBottom = '0';
-          title.style.borderBottom = 'none';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      } else {
-        quickNav.classList.add('expanded');
-        quickNav.style.width = '180px';
-        quickNav.style.padding = '16px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'block';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'horizontal-tb';
-          title.style.marginBottom = '16px';
-          title.style.paddingBottom = '8px';
-          title.style.borderBottom = '1px solid #e0e0e0';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'none';
-      }
-    });
-  }
-
-  if (quickNav && isMobile) {
-    document.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '4px';
-          title.style.paddingBottom = '0';
-          title.style.borderBottom = 'none';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      }
-    });
-  }
-
-  const pathElement = document.getElementById('current-path');
-  if (pathElement) {
-    pathElement.textContent = getCurrentPath();
-  }
-
-  const backToTopBtn = document.querySelector('.back-to-top');
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', scrollToTop);
-  }
-
-  const navHubBtn = document.querySelector('.nav-hub');
-  if (navHubBtn) {
-    navHubBtn.addEventListener('click', openNavigator);
-  }
-});
-</script>
 <script src="../js/library-dynamic.js"></script>
 </body>
 </html>

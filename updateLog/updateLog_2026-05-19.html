@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年5月19日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">2026年5月19日 更新日志</div>
+  </div>
+</header>
+
+<main class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-05-19</div>
+      </div>
+
+      <!-- 主馆变更 -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-1" class="section-title-text-main">主馆变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>新增 .gitignore 文件</strong></p>
+                <p>- 创建项目根目录下的 .gitignore 文件，将 notionExport/ 目录（Notion 导出中间产物）加入忽略列表</p>
+                <p>- 同时忽略 IDE 配置文件（.vscode/、.idea/）、操作系统文件（.DS_Store、Thumbs.db）和临时文件</p>
+                <p>- 涉及文件：.gitignore（新建）</p>
+
+                <p><strong>内联 JavaScript 统一迁移至 library-dynamic.js</strong></p>
+                <p>- 消除 index.html 和 en/index.html 中约 200 行重复的内联 JavaScript 代码</p>
+                <p>- 新增 4 个动态功能模块到 library-dynamic.js：</p>
+                <p>&nbsp;&nbsp;• MobileNavToggle — 移动端导航仪点击展开/折叠逻辑</p>
+                <p>&nbsp;&nbsp;• FloatClose — 知识馆浮窗和语言切换浮窗的关闭按钮事件绑定</p>
+                <p>&nbsp;&nbsp;• FloatDrag — 知识馆浮窗和语言切换浮窗的拖拽功能（此前仅 index.html 内联实现）</p>
+                <p>&nbsp;&nbsp;• NewsSorter — 新闻文字列表按 data-date 降序排序</p>
+                <p>- 修复 FloatFix 中导航枢纽路径硬编码问题（./navigator.html → ROOT + 'navigator.html'），确保英文版页面路径正确</p>
+                <p>- 动态功能版本号从 v1.0 升级至 v1.1</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• js/library-dynamic.js — 新增 4 个模块 + 版本升级 + 路径修复</p>
+                <p>&nbsp;&nbsp;• index.html — 删除全部内联 &lt;script&gt; 块（约 190 行）</p>
+                <p>&nbsp;&nbsp;• en/index.html — 删除全部内联 &lt;script&gt; 块（约 190 行）</p>
+
+                <p><strong>StyleEnforcer CSS 语法错误修复</strong></p>
+                <p>- 修复 library-dynamic.js 中 StyleEnforcer 模块的 .quote-box-grey 样式注入字符串</p>
+                <p>- 错误原因：!important 被错误地放在 var() 函数内部（var(--color-bg-subtle,!important)），导致 CSS 解析失效</p>
+                <p>- 修复为正确语法：var(--color-bg-subtle)!important</p>
+                <p>- 同时修复 border 和 border-left-color 的同类错误</p>
+                <p>- 影响：暗色模式下 .quote-box-grey 引用框可能无法正确显示样式</p>
+                <p>- 涉及文件：js/library-dynamic.js — StyleEnforcer.init() 注入样式字符串</p>
+
+                <p><strong>CSS 类名语义化重命名</strong></p>
+                <p>- 对 3 个命名令人困惑的 CSS 类进行重命名，全项目同步替换：</p>
+                <p>&nbsp;&nbsp;• .content-bg-yellow → .content-main（实际背景为白色，非黄色。35 个 HTML 文件 + style.css 全部引用已更新）</p>
+                <p>&nbsp;&nbsp;• .yellowgreen-bg → .bg-transparent（实际背景为透明。10 个 HTML 文件 + style.css 全部引用已更新）</p>
+                <p>&nbsp;&nbsp;• .darkgrey-bg 硬编码色值修复：#e8e8e8 → var(--color-bg-muted)（使用 CSS 变量替代硬编码颜色值）</p>
+                <p>- 所有重命名同步覆盖：亮色定义、@media 响应式、@media (prefers-color-scheme: dark) 暗色模式</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• css/style.css — 类名定义 + 全部引用点（共 12 处）</p>
+                <p>&nbsp;&nbsp;• 35 个含 .content-bg-yellow 的 HTML 文件 → .content-main</p>
+                <p>&nbsp;&nbsp;• 10 个含 .yellowgreen-bg 的 HTML 文件 → .bg-transparent</p>
+
+                <p><strong>新增阅读进度条（ReadingProgress 模块）</strong></p>
+                <p>- 在页面顶部（z-index:9999）显示 3px 高的固定进度条，随滚动实时更新宽度</p>
+                <p>- 使用 passive scroll listener，不影响滚动性能</p>
+                <p>- 仅在存在 &lt;main&gt; / .kh-main / #main-content 的页面创建（主页等短页不创建）</p>
+                <p>- 样式通过 StyleEnforcer 统一注入，确保知识馆等内联样式页面也生效</p>
+                <p>- 涉及文件：js/library-dynamic.js — 新增 ReadingProgress 模块 + StyleEnforcer 注入样式；css/style.css — 新增标准定义</p>
+
+                <p><strong>新增搜索结果高亮（SearchHighlight 模块）</strong></p>
+                <p>- 搜索结果链接自动附加 ?q=关键词 URL 参数（Search.doSearch 修改）</p>
+                <p>- 页面加载后 SearchHighlight.init() 读取参数，用 TreeWalker 遍历正文文本节点进行大小写不敏感匹配</p>
+                <p>- 匹配处插入 &lt;mark class="sl-highlight"&gt; 标签，黄色高亮 + 微阴影</p>
+                <p>- 首个匹配项自动滚动到视口中央；高亮完成后立即清除 URL 参数（history.replaceState）</p>
+                <p>- 自动跳过 SCRIPT/STYLE/TEXTAREA/INPUT/SELECT/MARK/CODE/PRE 等非正文标签</p>
+                <p>- 涉及文件：js/library-dynamic.js — 新增 SearchHighlight 模块 + Search.doSearch 修改；css/style.css — 新增 .sl-highlight 标准样式</p>
+
+                <p><strong>TOC 目录体验改进（TocFloat 模块 + IntersectionObserver 增强）</strong></p>
+                <p>- 问题：原始 TOC 固定在页面顶部，向下阅读后想使用目录必须回到顶部</p>
+                <p>- 解决方案：新增悬浮目录按钮和面板系统：</p>
+                <p>&nbsp;&nbsp;• 当原始 TOC 滚出视口后，左侧（便携式导航仪右侧 44px 处）自动出现 📖 按钮</p>
+                <p>&nbsp;&nbsp;• 点击按钮弹出浮动目录面板（含原始目录的克隆），点击项可跳转并关闭面板</p>
+                <p>&nbsp;&nbsp;• 面板支持外部点击自动关闭、IntersectionObserver 联动同步高亮状态</p>
+                <p>&nbsp;&nbsp;• 响应式适配：≤768px 时按钮缩小并靠左边缘，面板自适应宽度</p>
+                <p>- IntersectionObserver 增强：增加 threshold:0 参数确保更精确触发；同时同步更新悬浮面板中的活跃项</p>
+                <p>- 涉及文件：js/library-dynamic.js — 新增 TocFloat 模块 + TOC IntersectionObserver 改进；css/style.css — 新增悬浮组件标准样式；.trae/rules/visual-components.md — 新增第 14~16 节文档</p>
+
+                <p><strong>TOC 初始化鲁棒性增强</strong></p>
+                <p>- 问题：部分页面（尤其是 file:// 协议本地打开时）TOC 目录不显示，打开 DevTools 后才出现</p>
+                <p>- 修复措施：</p>
+                <p>&nbsp;&nbsp;• TOC 选择器链增加 .content-main 回退（适配重命名后的类名）</p>
+                <p>&nbsp;&nbsp;• start() 函数增加 _started 防重复标志，避免多次初始化</p>
+                <p>&nbsp;&nbsp;• 新增 deferredStart() 兜底：document.readyState 为 'interactive' 时使用 requestAnimationFrame 延迟一帧再初始化</p>
+                <p>&nbsp;&nbsp;• 三种 readyState 分别处理：loading → DOMContentLoaded / interactive → rAF 兜底 / complete → 立即执行</p>
+                <p>- 涉及文件：js/library-dynamic.js — TOC.init 选择器链 + start() 启动逻辑</p>
+
+                <p><strong>视觉组件标准 HTML 版本（visual-components.html）更新</strong></p>
+                <p>- 清理旧内联 JS（ext-inline-js-import-body-end-2 块，约 120 行），功能已由 library-dynamic.js 统一接管</p>
+                <p>- 新增 6 个组件章节，与 visual-components.md 保持同步：</p>
+                <p>&nbsp;&nbsp;• Section 10: 自动目录 .auto-toc</p>
+                <p>&nbsp;&nbsp;• Section 11: 页面日期 .page-date</p>
+                <p>&nbsp;&nbsp;• Section 12: 文章类型标签 &amp; 标签 .article-type-badge / .article-tag</p>
+                <p>&nbsp;&nbsp;• Section 13: 阅读进度条 #sl-reading-progress</p>
+                <p>&nbsp;&nbsp;• Section 14: 搜索高亮 .sl-highlight</p>
+                <p>&nbsp;&nbsp;• Section 15: 悬浮目录按钮 TocFloat</p>
+                <p>- 涉及文件：library/visual-components.html</p>
+
+                <p><strong>批量清理残留旧内联 JS</strong></p>
+                <p>- 发现并清理 7 个 HTML 文件中的旧内联 script 块（ext-inline-js-import-body-end-2）：</p>
+                <p>&nbsp;&nbsp;• library/paper/impulse-to-record.html</p>
+                <p>&nbsp;&nbsp;• library/rule.html、library/library.html、library/feature.html</p>
+                <p>&nbsp;&nbsp;• en/library/rule.html、en/library/library.html、en/library/feature.html</p>
+                <p>- 全项目 ext-inline-js-import-body-end-2 字符串已归零（0 匹配）</p>
+
+                <p><strong>视觉组件标准 HTML 彻底重写——与 MD 权威源完全同步</strong></p>
+                <p>- 问题：visual-components.html 缺少 5 个章节、编号混乱（含重复 id="section-10"）、章节位置错误</p>
+                <p>- 新增 6 个缺失章节：</p>
+                <p>&nbsp;&nbsp;• Section 3.5: 页面日期 .page-date（从错误位置 Section 11 移回正确位置）</p>
+                <p>&nbsp;&nbsp;• Section 3.6: 文章页脚元数据 .article-footer-meta（全新，原完全缺失）</p>
+                <p>&nbsp;&nbsp;• Section 3.7: 文章类型标签 &amp; 标签 .article-type-badge / .article-tag（从错误位置 Section 12 移回正确位置）</p>
+                <p>&nbsp;&nbsp;• Section 9: 已废弃标记 .deprecated-badge（从 Section 7-2 子章节独立成章）</p>
+                <p>&nbsp;&nbsp;• Section 12: 版本号显示 .sl-version（全新，原完全缺失）</p>
+                <p>&nbsp;&nbsp;• Section 13: Toast 提示 #sl-toast（全新，原完全缺失）</p>
+                <p>- 编号体系全面修正：Section 9~16 重新编号，消除 id="section-10" 重复冲突</p>
+                <p>- 附录 ID 从 section-10 改为 section-appendix，避免与设计令牌表冲突</p>
+                <p>- Section 7 移除了嵌套的已废弃标记子章节（7-2），内容迁移至独立 Section 9</p>
+                <p>- 最终结构：16 个编号章节 + 1 个附录 = 与 visual-components.md 的 19 个 MD 章节一一对应</p>
+                <p>- 涉及文件：library/visual-components.html（彻底重写）</p>
+
+                <p><strong>TOC 悬浮按钮触发阈值优化</strong></p>
+                <p>- 问题：部分页面下滚动后悬浮目录按钮不显示，需放大到 125% 才出现</p>
+                <p>- 原因：触发条件为 rect.bottom &lt; 0（TOC 完全滚出视口才显示），大屏短页面下 TOC 始终部分可见</p>
+                <p>- 修复：改为 rect.top &lt; 60（TOC 顶部距视口顶部 &lt;60px 即显示），滚动一小段即可触发</p>
+                <p>- 涉及文件：js/library-dynamic.js — TocFloat.init() scroll 监听阈值；.trae/rules/visual-components.md — 文档同步</p>
+
+                <p><strong>视觉组件标准同步流程规范化 + 安全同步脚本</strong></p>
+                <p>- 在 project_rules.md 中新增「视觉组件标准完整同步流程」章节，定义 7 步标准操作流程：</p>
+                <p>&nbsp;&nbsp;• 第一步：修改权威源（visual-components.md）</p>
+                <p>&nbsp;&nbsp;• 第二步：同步 CSS 主馆定义（style.css）</p>
+                <p>&nbsp;&nbsp;• 第三步：同步 StyleEnforcer 安全网（library-dynamic.js）</p>
+                <p>&nbsp;&nbsp;• 第四步：同步 visual-components.html 可视化参考页</p>
+                <p>&nbsp;&nbsp;• 第五步：全项目页面安全同步（只替换属性值，不动正文文字）</p>
+                <p>&nbsp;&nbsp;• 第六步：验证</p>
+                <p>&nbsp;&nbsp;• 第七步：记录日志</p>
+                <p>- 新增同步范围清单表，明确 9 个需覆盖区域和 5 个排除目录</p>
+                <p>- 创建 .trae/scripts/sync-components.ps1 安全同步脚本：</p>
+                <p>&nbsp;&nbsp;• 只在 class=&quot;...&quot;、style=&quot;...&quot; 属性值内、&lt;style&gt; 块内进行替换</p>
+                <p>&nbsp;&nbsp;• 绝不触碰标签之间的正文文字内容（文章正文、说明文字等）</p>
+                <p>&nbsp;&nbsp;• 自动跳过 notionExport/、.trae/ 等非页面目录</p>
+                <p>&nbsp;&nbsp;• 支持 -DryRun 预览模式，先看结果再决定是否执行</p>
+                <p>&nbsp;&nbsp;• 支持多对类名批量替换</p>
+                <p>&nbsp;&nbsp;• 已通过 DryRun 测试：content-main 检测到 35 个文件中的 35 处匹配，全部正确识别</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• .trae/rules/project_rules.md — 新增完整同步流程章节</p>
+                <p>&nbsp;&nbsp;• .trae/scripts/sync-components.ps1 — 新建（PS5 兼容的安全同步工具）</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top"
+  onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub"
+  onclick="window.open('../navigator.html', '_blank')">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

@@ -67,7 +67,7 @@
 ### 版本号规则
 - 采用 **方案B**：`alpha-{自定义编号}`（如 `alpha-001`、`alpha-004`）
 - 编号完全由作者自主控制，不绑定日期
-- 当前版本：**alpha-015**
+- 当前版本：**alpha-016**
 
 ### 更新日志规则
 - **每次开发的净变更保存于更新日志当中**
@@ -241,6 +241,86 @@ Irikana.github.io/
 - **当在视觉组件标准（visual-components.md）中修改组件定义时，必须将变更同步到全局所有使用该组件的页面**
 - 操作流程：修改标准文档 → Grep 搜索全项目所有使用该组件的文件 → 逐一同步修改
 - 此规则确保标准文档始终与实际代码保持一致，避免"标准写了但没执行"的情况
+
+### 视觉组件标准完整同步流程
+
+当修改 `visual-components.md`（权威源）中的任何组件定义时，**必须按以下顺序依次执行所有步骤**：
+
+#### 第一步：修改权威源
+1. 编辑 `.trae/rules/visual-components.md` 中对应组件的定义
+
+#### 第二步：同步 CSS 主馆定义
+2. 在 `css/style.css` 中更新该组件的标准样式规则（如有变更）
+3. 同步更新 `@media (prefers-color-scheme: dark)` 暗色模式规则
+4. 同步更新响应式断点规则（如有涉及）
+
+#### 第三步：同步 StyleEnforcer 安全网
+5. 在 `js/library-dynamic.js` 的 `StyleEnforcer.init()` 注入样式字符串中更新对应规则
+6. 确保亮色、`.force-dark-mode`、暗色媒体查询三份拷贝全部同步
+
+#### 第四步：同步 visual-components.html
+7. 更新 `library/visual-components.html` 中对应的章节内容
+8. 保持 HTML 的章节编号和 ID 与 MD 一致
+9. 新增的组件章节必须包含：实际渲染效果展示 + 标准 HTML 模板代码 + 使用说明
+
+#### 第五步：全项目页面同步（安全替换）
+10. 对于**类名重命名 / 属性值变更**等机械性替换：
+    - 使用 `.trae/scripts/sync-components.ps1` 脚本或手动 Grep 替换
+    - **安全边界**：只替换以下位置中的类名/属性值：
+      - `<div class="...旧类名...">` 等 HTML class 属性内
+      - `<style>` 块内的 CSS 选择器和属性值
+      - `style="..."` 内联属性中的类名引用
+      - JS 字符串中的类名字面量（如 `'function-box-blue'`）
+    - **禁止替换**：HTML 标签之间的正文文字内容（文章、说明文字等）
+11. 对于**新增组件**：仅在需要使用的页面添加，不强制全量添加
+12. 对于**删除组件**：确认无页面使用后才可移除
+
+#### 第六步：验证
+13. 用 Grep 验证旧类名/旧值是否已完全清除（排除 notionExport/ 目录）
+14. 刷新关键页面（主页、一篇知识馆页、一篇文章页）目视检查效果
+
+#### 第七步：记录日志
+15. 将净变更记录到当日 `updateLog/updateLog_{YYYY-MM-DD}.html`
+
+#### 同步范围清单
+
+每次同步必须覆盖以下区域（除非用户特别强调仅限特定范围）：
+
+| 区域 | 路径 | 说明 |
+|------|------|------|
+| CSS 主馆 | `css/style.css` | 标准定义 + 暗色 + 响应式 |
+| 动态功能 | `js/library-dynamic.js` | StyleEnforcer + 其他模块引用 |
+| 视觉组件 MD | `.trae/rules/visual-components.md` | 权威源 |
+| 视觉组件 HTML | `library/visual-components.html` | 可视化参考页 |
+| 主馆页面 | `index.html`, `navigator.html`, `library/*.html`, `library/paper/*.html` | 所有主馆 HTML |
+| 英文版页面 | `en/index.html`, `en/library/*.html` | 所有英文版 HTML |
+| 知识馆页面 | `knowledge-hall/*.html`, `knowledge-hall/categories/*.html` | 所有知识馆 HTML |
+| 日志页面 | `updateLog/*.html` | 更新日志页 |
+| **不同步** | `notionExport/`, `.trae/`, `template/`, `docs/`, `.arts/` | 排除目录 |
+
+#### 同步脚本使用说明
+
+项目提供了 `.trae/scripts/sync-components.ps1` 脚本用于安全的批量类名替换：
+
+```powershell
+# 基本用法：重命名一个类名
+.\sync-components.ps1 -OldName "content-bg-yellow" -NewName "content-main"
+
+# 多个替换（按顺序执行）
+.\sync-components.ps1 -OldName "content-bg-yellow","yellowgreen-bg" -NewName "content-main","bg-transparent"
+
+# 仅预览不实际修改（DryRun 模式）
+.\sync-components.ps1 -OldName "old-class" -NewName "new-class" -DryRun
+
+# 排除特定目录
+.\sync-components.ps1 -OldName "old" -NewName "new" -ExcludeDirs "updateLog","en"
+```
+
+**脚本安全机制**：
+- 只匹配 `class="..."`、`<style>` 块、`style="..."` 属性中的内容
+- 不触碰标签间的正文文字
+- 自动跳过 `notionExport/` 目录
+- 支持 `-DryRun` 预览模式，先看结果再决定是否执行
 
 ### StyleEnforcer 样式安全网机制
 - **`library-dynamic.js` 中的 `StyleEnforcer` 模块是全站视觉组件样式的最终安全网**

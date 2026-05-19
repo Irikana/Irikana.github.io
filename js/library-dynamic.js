@@ -1,5 +1,5 @@
 /**
- * 牧羊人图书馆 动态功能 v1.7
+ * 牧羊人图书馆 动态功能 v1.2
  * 稳定版 - 全面修复
  */
 (function() {
@@ -159,7 +159,7 @@
       if (!results.length) { box.innerHTML = '<div class="search-no-results">\u672a\u627e\u5230 "' + q + '" \u76f8\u5173\u7ed3\u679c</div>'; return; }
       var h = '';
       for (var j = 0; j < results.length; j++) {
-        h += '<a href="' + results[j].u + '" class="search-result-item">';
+        h += '<a href="' + results[j].u + (results[j].u.indexOf('?') > -1 ? '&' : '?') + 'q=' + encodeURIComponent(q) + '" class="search-result-item">';
         h += '<span class="search-result-title">' + results[j].t + '</span>';
         h += '<span class="search-result-excerpt">' + results[j].k.substring(0, 70) + '</span></a>';
       }
@@ -171,7 +171,7 @@
   var TOC = {
     init: function() {
       if (location.pathname.indexOf('/knowledge-hall/index.html') > -1) return;
-      var main = $q('.kh-main') || $q('#main-content') || $q('main');
+      var main = $q('.kh-main') || $q('#main-content') || $q('main') || $q('.content-main');
       if (!main) return;
       var hs = main.querySelectorAll('h2, h3');
       if (hs.length < 2) return;
@@ -226,9 +226,17 @@
               for (var m = 0; m < act.length; m++) act[m].classList.remove('active');
               var ai = $q('.auto-toc-link[href="#' + entries[k].target.id + '"]');
               if (ai) ai.classList.add('active');
+              if (typeof TocFloat !== 'undefined' && TocFloat.visible && TocFloat.panel) {
+                var cloneAi = TocFloat.panel.querySelector('.auto-toc-link[href="#' + entries[k].target.id + '"]');
+                if (cloneAi) {
+                  var allClone = TocFloat.panel.querySelectorAll('.auto-toc-link.active');
+                  for (var p = 0; p < allClone.length; p++) allClone[p].classList.remove('active');
+                  cloneAi.classList.add('active');
+                }
+              }
             }
           }
-        }, { rootMargin: '-15% 0px -70% 0px' });
+        }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
         for (var n = 0; n < hs.length; n++) obs.observe(hs[n]);
       }
     }
@@ -237,7 +245,7 @@
   /* ========== 3. READING META ========== */
   var RMeta = {
     init: function() {
-      var content = $q('.left-align') || $q('.kh-content') || $q('.content-bg-yellow') || $q('main');
+      var content = $q('.left-align') || $q('.kh-content') || $q('.content-main') || $q('main');
       if (!content) return;
       var text = content.textContent || '';
       var cn = (text.match(/[\u4e00-\u9fa5]/g) || []).length;
@@ -481,7 +489,7 @@
   };
 
   /* ========== 8. VERSION ========== */
-  var Ver = { v: 'alpha-015',
+  var Ver = { v: 'alpha-016',
     init: function() {
       var footer = $q('.copyright-color') || $q('footer .copyright-text') || $q('.copyright-text');
       if (!footer || $q('.sl-version')) return;
@@ -534,7 +542,7 @@
         /* 亮色模式（默认） */
         '.function-box-blue{background-color:rgba(248,250,255,0.85)!important;border:1px solid rgba(208,220,232,0.8)!important;border-left:4px solid #2c3e50!important;color:#1a3a5c!important;font-size:15px!important;line-height:1.7!important;padding:16px!important;margin:8px 0!important;}' +
         '.notice-box-red{background-color:rgba(254,249,249,0.85)!important;border:1px solid rgba(245,198,198,0.8)!important;border-left:4px solid #e74c3c!important;color:#a04030!important;font-size:15px!important;line-height:1.8!important;padding:16px!important;margin:16px 0!important;}' +
-        '.quote-box-grey{background-color:var(--color-bg-subtle,!important);border:1px solid var(--color-border,!important);border-left:3px solid var(--color-text-light,!important);font-style:italic!important;color:var(--color-text-secondary)!important;padding:16px!important;margin:8px 0!important;}' +
+        '.quote-box-grey{background-color:var(--color-bg-subtle)!important;border:1px solid var(--color-border)!important;border-left:3px solid var(--color-text-light)!important;font-style:italic!important;color:var(--color-text-secondary)!important;padding:16px!important;margin:8px 0!important;}' +
         /* force-dark-mode 手动切换暗色 */
         '.force-dark-mode .function-box-blue{background-color:rgba(44,62,80,0.15)!important;border-color:rgba(93,156,204,0.3)!important;border-left-color:#5d9ccc!important;color:#c8d6e5!important;}' +
         '.force-dark-mode .notice-box-red{background-color:rgba(80,30,30,0.15)!important;border-color:rgba(200,100,100,0.2)!important;border-left-color:#c0392b!important;color:#e0a0a0!important;}' +
@@ -548,7 +556,29 @@
         /* force-light-mode 手动切换亮色（覆盖系统暗色偏好） */
         '.force-light-mode .function-box-blue{background-color:rgba(248,250,255,0.85)!important;border:1px solid rgba(208,220,232,0.8)!important;border-left:4px solid #2c3e50!important;color:#1a3a5c!important;}' +
         '.force-light-mode .notice-box-red{background-color:rgba(254,249,249,0.85)!important;border:1px solid rgba(245,198,198,0.8)!important;border-left:4px solid #e74c3c!important;color:#a04030!important;}' +
-        '.force-light-mode .quote-box-grey{background-color:#f5f5f5!important;border:1px solid #e0e0e0!important;border-left:3px solid #888!important;font-style:italic!important;color:#555!important;}';
+        '.force-light-mode .quote-box-grey{background-color:#f5f5f5!important;border:1px solid #e0e0e0!important;border-left:3px solid #888!important;font-style:italic!important;color:#555!important;}' +
+        /* 阅读进度条 */
+        '#sl-reading-progress{position:fixed;top:0;left:0;height:6px;background:#7fb3d5;z-index:9999;transition:width 0.1s ease-out;width:0;pointer-events:none;}' +
+        /* 搜索高亮 */
+        '.sl-highlight{background:#fff3a6;padding:1px 3px;border-radius:0;font-weight:600;box-shadow:0 1px 3px rgba(255,200,0,0.25);color:#1a1a1a;}' +
+        '@media (prefers-color-scheme: dark){.sl-highlight{background:#5c4d00;color:#fff8dc;}}' +
+        '.force-dark-mode .sl-highlight{background:#5c4d00;color:#fff8dc;}' +
+        /* 悬浮目录按钮 */
+        '#sl-toc-float-btn{position:fixed;left:44px;top:50%;transform:translateY(-50%) scale(0);width:36px;height:36px;background:#fff;border:1px solid var(--color-border,#e0e0e0);cursor:pointer;font-size:16px;z-index:998;display:flex;align-items:center;justify-content:center;transition:all 0.25s cubic-bezier(0.4,0,0.2,1);opacity:0;box-shadow:2px 0 8px rgba(0,0,0,0.06);}' +
+        '#sl-toc-float-btn.visible{transform:translateY(-50%) scale(1);opacity:1;}' +
+        '#sl-toc-float-btn:hover{background:#2c3e50;color:#fff;border-color:#2c3e50;}' +
+        '#sl-toc-float-btn.active{background:#2c3e50;color:#fff;border-color:#2c3e50;}' +
+        '@media (prefers-color-scheme: dark){#sl-toc-float-btn{background:#1a1a1a;border-color:#333;color:#ccc;}#sl-toc-float-btn:hover,#sl-toc-float-btn.active{background:#5d9ccc;color:#fff;border-color:#5d9ccc;}}' +
+        '.force-dark-mode #sl-toc-float-btn{background:#1a1a1a;border-color:#333;color:#ccc;}.force-dark-mode #sl-toc-float-btn:hover,.force-dark-mode #sl-toc-float-btn.active{background:#5d9ccc;color:#fff;border-color:#5d9ccc;}' +
+        /* 悬浮目录面板 */
+        '#sl-toc-float-panel{position:fixed;left:88px;top:50%;transform:translateY(-50%) translateX(-10px);max-height:60vh;width:220px;background:#fff;border:1px solid var(--color-border,#e0e0e0);z-index:997;opacity:0;pointer-events:none;transition:all 0.22s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;box-shadow:4px 8px 24px rgba(0,0,0,0.12);}' +
+        '#sl-toc-float-panel.visible{transform:translateY(-50%) translateX(0);opacity:1;pointer-events:auto;}' +
+        '.sl-toc-panel-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #e0e0e0;font-size:13px;font-weight:700;color:#2c3e50;letter-spacing:0.5px;position:sticky;top:0;background:#fff;}' +
+        '.sl-toc-panel-close{background:none;border:none;font-size:18px;color:#888;cursor:pointer;line-height:1;}' +
+        '.sl-toc-panel-close:hover{color:#e74c3c;}' +
+        '#toc-clone-list{padding:8px 0;}' +
+        '@media (prefers-color-scheme: dark){#sl-toc-float-panel{background:#1a1a1a;border-color:#333;}.sl-toc-panel-header{background:#1a1a1a;color:#c8d6e5;border-color:#333;}}' +
+        '.force-dark-mode #sl-toc-float-panel{background:#1a1a1a;border-color:#333;}.force-dark-mode .sl-toc-panel-header{background:#1a1a1a;color:#c8d6e5;border-color:#333;}';
       document.head.appendChild(style);
     }
   };
@@ -559,12 +589,277 @@
       var btt = $q('.float-button.back-to-top:not([style*="relative"])');
       var nh = $q('.float-button.nav-hub:not([style*="relative"])');
       if (btt && !btt.onclick) btt.onclick = function() { window.scrollTo({top:0,behavior:'smooth'}); };
-      if (nh && !nh.onclick) nh.onclick = function() { window.open('./navigator.html','_blank'); };
+      if (nh && !nh.onclick) nh.onclick = function() { window.open(ROOT + 'navigator.html','_blank'); };
+    }
+  };
+
+  /* ========== MOBILE NAV TOGGLE ========== */
+  var MobileNavToggle = {
+    init: function() {
+      var qn = $q('.quick-nav');
+      if (!qn) return;
+      var isMobile = window.innerWidth <= 768;
+      if (!isMobile) return;
+      var toggle = function(expand) {
+        if (expand) {
+          qn.classList.add('expanded');
+          qn.style.width = '180px';
+          qn.style.padding = '16px';
+          var c = $q('.quick-nav-content', qn); if (c) c.style.display = 'block';
+          var t = $q('.quick-nav-title', qn);
+          if (t) { t.style.writingMode = 'horizontal-tb'; t.style.marginBottom = '16px'; t.style.paddingBottom = '8px'; t.style.borderBottom = '1px solid #e0e0e0'; }
+          var h = $q('.quick-nav-hint', qn); if (h) h.style.display = 'none';
+        } else {
+          qn.classList.remove('expanded');
+          qn.style.width = '32px';
+          qn.style.padding = '8px 4px';
+          var c = $q('.quick-nav-content', qn); if (c) c.style.display = 'none';
+          var t = $q('.quick-nav-title', qn);
+          if (t) { t.style.writingMode = 'vertical-rl'; t.style.marginBottom = '4px'; t.style.paddingBottom = '0'; t.style.borderBottom = 'none'; }
+          var h = $q('.quick-nav-hint', qn); if (h) h.style.display = 'block';
+        }
+      };
+      qn.addEventListener('click', function(ev) {
+        if (qn.classList.contains('expanded')) toggle(false);
+        else toggle(true);
+      });
+      document.addEventListener('click', function(ev) {
+        if (qn.classList.contains('expanded') && !qn.contains(ev.target)) toggle(false);
+      });
+    }
+  };
+
+  /* ========== FLOAT CLOSE BUTTONS ========== */
+  var FloatClose = {
+    init: function() {
+      var khClose = $q('.kh-float-close');
+      if (khClose) khClose.addEventListener('click', function() {
+        var f = $('knowledge-hall-float'); if (f) f.classList.add('hidden');
+      });
+      var langClose = $q('.lang-float-close');
+      if (langClose) langClose.addEventListener('click', function() {
+        var f = $('lang-switch-float'); if (f) f.classList.add('hidden');
+      });
+    }
+  };
+
+  /* ========== FLOAT DRAG (kh-float / lang-switch-float) ========== */
+  var FloatDrag = {
+    init: function() {
+      this.makeDraggable($('knowledge-hall-float'), '.kh-float-header');
+      this.makeDraggable($('lang-switch-float'), '.lang-float-header');
+    },
+    makeDraggable: function(el, headerSel) {
+      if (!el) return;
+      var hdr = $q(headerSel, el);
+      if (!hdr) return;
+      var dragging = false, sx, sy, ix, iy;
+      hdr.addEventListener('mousedown', function(e) {
+        dragging = true; sx = e.clientX; sy = e.clientY;
+        var r = el.getBoundingClientRect(); ix = r.left; iy = r.top;
+        el.style.transition = 'none';
+        el.style.right = 'auto'; el.style.bottom = 'auto';
+        el.style.left = ix + 'px'; el.style.top = iy + 'px';
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', function(e) {
+        if (!dragging) return;
+        el.style.left = (ix + e.clientX - sx) + 'px';
+        el.style.top = (iy + e.clientY - sy) + 'px';
+      });
+      document.addEventListener('mouseup', function() {
+        if (!dragging) return;
+        dragging = false; el.style.transition = '';
+      });
+    }
+  };
+
+  /* ========== NEWS SORTER ========== */
+  var NewsSorter = {
+    init: function() {
+      var list = $('news-text-list');
+      if (!list) return;
+      var cards = Array.from(list.querySelectorAll('.news-featured-text-card[data-date]'));
+      cards.sort(function(a, b) {
+        return new Date(b.getAttribute('data-date')).getTime() - new Date(a.getAttribute('data-date')).getTime();
+      });
+      cards.forEach(function(c) { list.appendChild(c); });
+    }
+  };
+
+  /* ========== READING PROGRESS BAR ========== */
+  var ReadingProgress = {
+    bar: null,
+    init: function() {
+      var main = $q('.kh-main') || $q('#main-content') || $q('main');
+      if (!main) return;
+      this.bar = E('div');
+      this.bar.id = 'sl-reading-progress';
+      document.body.appendChild(this.bar);
+      window.addEventListener('scroll', this.update.bind(this), { passive: true });
+      this.update();
+    },
+    update: function() {
+      if (!this.bar) return;
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var pct = docHeight > 0 ? Math.min(100, (scrollTop / docHeight) * 100) : 0;
+      this.bar.style.width = pct + '%';
+    }
+  };
+
+  /* ========== SEARCH HIGHLIGHT ========== */
+  var SearchHighlight = {
+    init: function() {
+      var params = new URLSearchParams(location.search);
+      var q = params.get('q');
+      if (!q || !q.trim()) return;
+      q = decodeURIComponent(q).trim();
+      this.highlight(q);
+      if (history.replaceState) {
+        history.replaceState(null, '', location.pathname);
+      }
+    },
+    highlight: function(q) {
+      var main = $q('.kh-main') || $q('#main-content') || $q('main') || $q('.content-main') || document.body;
+      if (!main) return;
+      var walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, null, false);
+      var nodes = [];
+      while (walker.nextNode()) {
+        if (walker.currentNode.parentNode &&
+            !['SCRIPT','STYLE','TEXTAREA','INPUT','SELECT','MARK','CODE','PRE'].includes(walker.currentNode.parentNode.tagName)) {
+          nodes.push(walker.currentNode);
+        }
+      }
+      for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
+        var text = node.textContent;
+        if (text.toLowerCase().indexOf(q.toLowerCase()) === -1) continue;
+        var idx = text.toLowerCase().indexOf(q.toLowerCase());
+        var before = document.createTextNode(text.substring(0, idx));
+        var mark = E('mark');
+        mark.className = 'sl-highlight';
+        mark.textContent = text.substring(idx, idx + q.length);
+        var after = document.createTextNode(text.substring(idx + q.length));
+        var parent = node.parentNode;
+        parent.insertBefore(before, node);
+        parent.insertBefore(mark, node);
+        parent.insertBefore(after, node);
+        parent.removeChild(node);
+        if (i === 0 && mark.scrollIntoView) {
+          setTimeout(function() { mark.scrollIntoView({block:'center'}); }, 300);
+        }
+      }
+    }
+  };
+
+  /* ========== TOC FLOAT (悬浮目录按钮) ========== */
+  var TocFloat = {
+    btn: null,
+    panel: null,
+    tocEl: null,
+    visible: false,
+    init: function() {
+      this.tocEl = $('auto-toc');
+      if (!this.tocEl) return;
+      this.btn = E('button');
+      this.btn.id = 'sl-toc-float-btn';
+      this.btn.className = 'sl-toc-float-btn';
+      this.btn.innerHTML = '&#128214;';
+      this.btn.title = '\u76ee\u5f55';
+      this.btn.setAttribute('type', 'button');
+      document.body.appendChild(this.btn);
+
+      this.panel = E('div');
+      this.panel.id = 'sl-toc-float-panel';
+      this.panel.className = 'sl-toc-float-panel';
+
+      var tocList = $('toc-list');
+      if (tocList) {
+        this.panel.innerHTML = '<div class="sl-toc-panel-header"><span>\u76ee\u5f55</span><button type="button" class="sl-toc-panel-close">&times;</button></div>';
+        var clone = tocList.cloneNode(true);
+        clone.id = 'toc-clone-list';
+        this.panel.appendChild(clone);
+      }
+
+      document.body.appendChild(this.panel);
+
+      var self = this;
+      this.btn.addEventListener('click', function() { self.toggle(); });
+      var closeBtn = this.panel.querySelector('.sl-toc-panel-close');
+      if (closeBtn) closeBtn.addEventListener('click', function() { self.hide(); });
+
+      document.addEventListener('click', function(e) {
+        if (self.visible && !self.panel.contains(e.target) && e.target !== self.btn) {
+          self.hide();
+        }
+      });
+
+      var tocLinks = this.panel.querySelectorAll('.auto-toc-link');
+      for (var k = 0; k < tocLinks.length; k++) {
+        (function(link) {
+          link.addEventListener('click', function(ev) {
+            ev.preventDefault();
+            var tid = link.getAttribute('href').substring(1);
+            var el = document.getElementById(tid);
+            if (el) {
+              var off = el.getBoundingClientRect().top + window.pageYOffset - 18;
+              window.scrollTo({ top: off, behavior: 'smooth' });
+            }
+            var act = $qa('.auto-toc-link.active');
+            for (var m = 0; m < act.length; m++) act[m].classList.remove('active');
+            link.classList.add('active');
+            var origLink = $q('.auto-toc-list .auto-toc-link[href="#' + tid + '"]');
+            if (origLink) origLink.classList.add('active');
+            self.hide();
+          });
+        })(tocLinks[k]);
+      }
+
+      window.addEventListener('scroll', function() {
+        if (!self.tocEl) return;
+        var rect = self.tocEl.getBoundingClientRect();
+        if (rect.top < 60) {
+          self.btn.classList.add('visible');
+        } else {
+          self.btn.classList.remove('visible');
+          if (self.visible) self.hide();
+        }
+      }, { passive: true });
+    },
+    toggle: function() {
+      this.visible ? this.hide() : this.show();
+    },
+    show: function() {
+      this.visible = true;
+      this.panel.classList.add('visible');
+      this.btn.classList.add('active');
+      this.syncActive();
+    },
+    hide: function() {
+      this.visible = false;
+      this.panel.classList.remove('visible');
+      this.btn.classList.remove('active');
+    },
+    syncActive: function() {
+      var curActive = $q('.auto-toc-list .auto-toc-link.active');
+      if (!curActive) return;
+      var href = curActive.getAttribute('href');
+      var cloneActive = this.panel.querySelector('.auto-toc-link[href="' + href + '"]');
+      if (cloneActive) {
+        var allClone = this.panel.querySelectorAll('.auto-toc-link.active');
+        for (var i = 0; i < allClone.length; i++) allClone[i].classList.remove('active');
+        cloneActive.classList.add('active');
+        cloneActive.scrollIntoView({ block: 'nearest' });
+      }
     }
   };
 
   /* ========== START ========== */
+  var _started = false;
   function start() {
+    if (_started) return;
+    _started = true;
     try { Search.init(); } catch(e) { console.warn('[SL] Search error:', e.message); }
     try { TOC.init(); } catch(e) { console.warn('[SL] TOC error:', e.message); }
     try { RMeta.init(); } catch(e) { console.warn('[SL] Meta error:', e.message); }
@@ -576,10 +871,27 @@
     try { QNDrag.init(); } catch(e) { console.warn('[SL] QNDrag error:', e.message); }
     try { StyleEnforcer.init(); } catch(e) { console.warn('[SL] StyleEnforcer error:', e.message); }
     try { FloatFix.init(); } catch(e) { console.warn('[SL] FloatFix error:', e.message); }
-    console.log('%c✨ \u7267\u7f8a\u4eba\u56fe\u4e66\u9986\u52a8\u6001\u529f\u80fd v1.0 \u5df2\u52a0\u8f7d', 'color:#27ae60;font-weight:bold;font-size:14px');
+    try { MobileNavToggle.init(); } catch(e) { console.warn('[SL] MobileNavToggle error:', e.message); }
+    try { FloatClose.init(); } catch(e) { console.warn('[SL] FloatClose error:', e.message); }
+    try { FloatDrag.init(); } catch(e) { console.warn('[SL] FloatDrag error:', e.message); }
+    try { NewsSorter.init(); } catch(e) { console.warn('[SL] NewsSorter error:', e.message); }
+    try { ReadingProgress.init(); } catch(e) { console.warn('[SL] ReadingProgress error:', e.message); }
+    try { SearchHighlight.init(); } catch(e) { console.warn('[SL] SearchHighlight error:', e.message); }
+    try { TocFloat.init(); } catch(e) { console.warn('[SL] TocFloat error:', e.message); }
+    console.log('%c✨ \u7267\u7f8a\u4eba\u56fe\u4e66\u9986\u52a8\u6001\u529f\u80fd v1.2 \u5df2\u52a0\u8f7d', 'color:#27ae60;font-weight:bold;font-size:14px');
+  }
+
+  function deferredStart() {
+    if (_started) return;
+    requestAnimationFrame(function() {
+      if (_started) return;
+      _started = false;
+      start();
+    });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else if (document.readyState === 'interactive') deferredStart();
   else start();
 
 })();

@@ -27,7 +27,7 @@
 
   <main class="gjs-row content-row content-bg-white">
     <div class="content-width-limiter">
-      <div class="gjs-cell content-bg-yellow">
+      <div class="gjs-cell content-main">
 
         <section class="gjs-row notice-header page-header-section">
           <div class="gjs-cell">
@@ -214,6 +214,112 @@
     &lt;span class="article-meta-value"&gt;2026年5月11日&lt;/span&gt;
   &lt;/span&gt;
 &lt;/div&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 3.5: 页面日期 ========== -->
+        <section class="gjs-row notice-header section-header page-header-section">
+          <div class="gjs-cell">
+            <h2 id="section-3-5" class="section-title-text-main">3.5 页面日期显示 — .page-date</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：页面标题下方展示创建日期，用于标注创建时间的页面。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <div class="page-date">创建于 2026年1月7日</div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="page-date"&gt;创建于 2026年1月7日&lt;/div&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 3.6: 文章页脚元数据 ========== -->
+        <section class="gjs-row notice-header section-header page-header-section">
+          <div class="gjs-cell">
+            <h2 id="section-3-6" class="section-title-text-main">3.6 文章页脚元数据 — .article-footer-meta</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：文章页底部元信息区域（上边框分隔），用于展示补充说明、注释等内容。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <div class="article-footer-meta">
+                  <div class="article-footer-meta-item">
+                    <span class="article-footer-label">补充说明：</span>
+                    <span class="article-footer-value">此处为补充说明或注释内容。</span>
+                  </div>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="article-footer-meta"&gt;
+  &lt;div class="article-footer-meta-item"&gt;
+    &lt;span class="article-footer-label"&gt;补充说明：&lt;/span&gt;
+    &lt;span class="article-footer-value"&gt;此处为补充说明或注释内容。&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 3.7: 文章类型标签 & 标签 ========== -->
+        <section class="gjs-row notice-header section-header page-header-section">
+          <div class="gjs-cell">
+            <h2 id="section-3-7" class="section-title-text-main">3.7 文章类型标签 &amp; 标签 — .article-type-badge / .article-tag</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：在文章元数据中标注文章类型和属性标签。
+
+                <p><strong>类型标签（.article-type-badge）</strong>：</p>
+                <table style="width:100%;border-collapse:collapse;margin:8px 0;font-size:14px;line-height:1.7;">
+                  <thead>
+                    <tr style="background:var(--color-accent);color:#fff;">
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">类型</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">含义</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);"><span class="article-type-badge">录音文章</span></td><td style="padding:8px 12px;border:1px solid var(--color-border);">录音转文字创作</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);"><span class="article-type-badge">手写文章</span></td><td style="padding:8px 12px;border:1px solid var(--color-border);">手写转文字创作</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);"><span class="article-type-badge">信息文章</span></td><td style="padding:8px 12px;border:1px solid var(--color-border);">打字直接创作</td></tr>
+                  </tbody>
+                </table>
+
+                <p><strong>属性标签（.article-tag）</strong>：</p>
+                <table style="width:100%;border-collapse:collapse;margin:8px 0;font-size:14px;line-height:1.7;">
+                  <thead>
+                    <tr style="background:var(--color-accent);color:#fff;">
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">标签类名</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">含义</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">视觉</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.article-tag</td><td style="padding:8px 12px;border:1px solid var(--color-border);">通用标签（如"新闻"）</td><td style="padding:8px 12px;border:1px solid var(--color-border);"><span class="article-tag">新闻</span></td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.tag-ai</td><td style="padding:8px 12px;border:1px solid var(--color-border);">包含AI生成/辅助内容</td><td style="padding:8px 12px;border:1px solid var(--color-border);"><span class="article-tag tag-ai">包含AI</span></td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.tag-edited</td><td style="padding:8px 12px;border:1px solid var(--color-border);">有删减/修改</td><td style="padding:8px 12px;border:1px solid var(--color-border);"><span class="article-tag tag-edited">有删减</span></td></tr>
+                  </tbody>
+                </table>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">嵌入 article-meta 的完整示例：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;span class="article-meta-item"&gt;
+  &lt;span class="article-meta-label"&gt;文章类型：&lt;/span&gt;
+  &lt;span class="article-meta-value"&gt;&lt;span class="article-type-badge"&gt;录音文章&lt;/span&gt;&lt;/span&gt;
+&lt;/span&gt;
+&lt;span class="article-meta-item"&gt;
+  &lt;span class="article-meta-label"&gt;标签：&lt;/span&gt;
+  &lt;span class="article-meta-value"&gt;
+    &lt;span class="article-tag"&gt;新闻&lt;/span&gt;
+    &lt;span class="article-tag tag-ai"&gt;包含AI&lt;/span&gt;
+    &lt;span class="article-tag tag-edited"&gt;有删减&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/span&gt;</code></pre>
 
               </div>
             </div>
@@ -416,7 +522,7 @@
         <!-- ========== Section 7: 按钮 & 链接 ========== -->
         <section class="gjs-row notice-header section-header page-header-section">
           <div class="gjs-cell">
-            <h2 id="section-7" class="section-title-text-main">7. 按钮 & 链接</h2>
+            <h2 id="section-7" class="section-title-text-main">7. 按钮 &amp; 链接</h2>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
 
@@ -443,15 +549,6 @@
   onclick="openNavigator()"&gt;
   导航&lt;br&gt;枢纽
 &lt;/button&gt;</code></pre>
-
-                <h3 id="section-7-2" class="subsection-header" style="margin-top:32px;">已废弃标记 — .deprecated-badge</h3>
-                <p>标记已废弃的内容。
-
-                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
-                <p>此功能<span class="deprecated-badge">已废弃</span></p>
-
-                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
-                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;span class="deprecated-badge"&gt;已废弃&lt;/span&gt;</code></pre>
 
               </div>
             </div>
@@ -487,10 +584,29 @@
           </div>
         </section>
 
-        <!-- ========== Section 9: 设计令牌速查表 ========== -->
+        <!-- ========== Section 9: 已废弃标记 ========== -->
         <section class="gjs-row notice-header section-header page-header-section">
           <div class="gjs-cell">
-            <h2 id="section-9" class="section-title-text-main">9. 设计令牌速查表（CSS 变量）</h2>
+            <h2 id="section-9" class="section-title-text-main">9. 已废弃标记 — .deprecated-badge</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：标记已废弃的内容。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <p>此功能<span class="deprecated-badge">已废弃</span></p>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;span class="deprecated-badge"&gt;已废弃&lt;/span&gt;</code></pre>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 10: 设计令牌速查表 ========== -->
+        <section class="gjs-row notice-header section-header page-header-section">
+          <div class="gjs-cell">
+            <h2 id="section-10" class="section-title-text-main">10. 设计令牌速查表（CSS 变量）</h2>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <p>以下表格列出了项目中所有 CSS 变量的亮色/暗色值及用途说明。
@@ -535,7 +651,7 @@
         <!-- ========== 附录：响应式断点汇总 ========== -->
         <section class="gjs-row notice-header section-header page-header-section">
           <div class="gjs-cell">
-            <h2 id="section-10" class="section-title-text-main">附录：响应式断点汇总</h2>
+            <h2 id="section-appendix" class="section-title-text-main">附录：响应式断点汇总</h2>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
 
@@ -554,6 +670,196 @@
                     <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">≥1024px</td><td style="padding:8px 12px;border:1px solid var(--color-border);">桌面端</td><td style="padding:8px 12px;border:1px solid var(--color-border);">标准布局</td></tr>
                   </tbody>
                 </table>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 11: 自动目录 — .auto-toc ========== -->
+        <section class="gjs-row notice-header section-header page-header-section">
+          <div class="gjs-cell">
+            <h2 id="section-11" class="section-title-text-main">11. 自动目录 — .auto-toc（内联式）</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：文章页内容区顶部的自动生成目录，根据页面 h2~h3 标题构建。由 library-dynamic.js 的 TOC 模块自动生成。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <nav class="auto-toc" style="position:relative;">
+                  <div class="auto-toc-header"><span class="auto-toc-title">&#128214; 目录</span><button type="button" class="auto-toc-toggle">&#9660;</button></div>
+                  <div class="auto-toc-list">
+                    <a href="#section-1" class="auto-toc-link auto-toc-level-2">1. 信息提示框</a>
+                    <a href="#section-2" class="auto-toc-link auto-toc-level-2">2. 折叠块</a>
+                    <a href="#section-2-1" class="auto-toc-link auto-toc-level-3">基本折叠块</a>
+                  </div>
+                </nav>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">说明：</p>
+                <p>此组件由 JS 动态生成，无需手写 HTML。页面中只需有 ≥2 个 h2/h3 标题即可自动创建。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 12: 版本号显示 — .sl-version ========== -->
+        <section class="gjs-row notice-header section-header page-header-section">
+          <div class="gjs-cell">
+            <h2 id="section-12" class="section-title-text-main">12. 版本号显示 — .sl-version</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：在页脚版权区动态注入当前版本号（如 <code>· alpha-012</code>），由 library-dynamic.js 的 VersionDisplay 模块自动追加。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果（模拟注入结果）：</p>
+                <div style="padding:12px;background:var(--color-bg-subtle);border:1px solid var(--color-border);font-size:13px;">
+                  © 2026 薛柯道 牧羊人图书馆<br>保留所有权利<span class="sl-version"> · alpha-016</span>
+                </div>
+                <p style="font-size:12px;color:#888;margin-top:4px;">↑ 版本号由 JS 动态追加到 .copyright-color 或 .copyright-text 元素内</p>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">JS 生成逻辑：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>// library-dynamic.js 中 VersionDisplay.init()
+var span = E('span');
+span.className = 'sl-version';
+span.innerHTML = ' · ' + this.ver;  // ver 值为 'alpha-012'
+footer.appendChild(span);</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">注意事项：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>仅在存在 <code>.copyright-color</code> 或 <code>.copyright-text</code> 元素时才注入</li>
+                  <li>若已存在 <code>.sl-version</code> 元素则跳过（防重复）</li>
+                  <li>版本号字符串在 <code>VersionDisplay.ver</code> 属性中统一管理</li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 13: Toast 提示 — #sl-toast ========== -->
+        <section class="gjs-row notice-header section-header page-header-section">
+          <div class="gjs-cell">
+            <h2 id="section-13" class="section-title-text-main">13. Toast 提示 — #sl-toast</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：收藏操作（添加/取消/移除）时的浮动提示框，从顶部滑入、1.5秒后自动消失。由 library-dynamic.js 的 BM.showToast() 动态创建。
+
+                <p style="font-weight:600;margin-bottom:8px;">外观模拟（Toast 使用纯内联样式，JS 动态创建）：</p>
+                <div style="position:relative;display:flex;justify-content:center;">
+                  <div style="display:inline-block;background:#2c3e50;color:#fff;padding:8px 20px;font-size:13px;z-index:10000;box-shadow:0 4px 12px rgba(0,0,0,0.15);letter-spacing:0.3px;">收藏成功</div>
+                </div>
+                <p style="font-size:12px;color:#888;margin-top:4px;text-align:center;">↑ Toast 外观模拟（实际为 fixed 定位，从顶部滑入/滑出）</p>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">内联样式（JS 动态设置）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>t.style.cssText = 'position:fixed;top:-40px;left:50%;transform:translateX(-50%);'
+  + 'background:#2c3e50;color:#fff;padding:8px 20px;font-size:13px;'
+  + 'z-index:10000;transition:top 0.3s ease;'
+  + 'box-shadow:0 4px 12px rgba(0,0,0,0.15);letter-spacing:0.3px;';</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">动画行为：</p>
+                <ol style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>创建时初始 <code>top: -40px</code>（屏幕外上方）</li>
+                  <li>10ms 后 <code>top: 20px</code>（滑入可视区）</li>
+                  <li>1500ms 后 <code>top: -40px</code>（滑出）</li>
+                  <li>300ms 过渡完成后从 DOM 移除</li>
+                </ol>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">触发场景：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li><code>BM.showToast('收藏成功')</code> — 添加收藏时</li>
+                  <li><code>BM.showToast('已取消收藏')</code> — 取消收藏时</li>
+                  <li><code>BM.showToast('已移除收藏')</code> — 从面板移除时</li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 14: 阅读进度条 — #sl-reading-progress ========== -->
+        <section class="gjs-row notice-header section-header page-header-section">
+          <div class="gjs-cell">
+            <h2 id="section-14" class="section-title-text-main">14. 阅读进度条 — #sl-reading-progress</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：文章页顶部显示的阅读进度指示条，随页面滚动实时更新宽度。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果（模拟）：</p>
+                <div style="position:relative;height:6px;background:#e0e0e0;border-radius:0;overflow:hidden;">
+                  <div style="position:absolute;top:0;left:0;height:100%;width:65%;background:#7fb3d5;"></div>
+                </div>
+                <p style="font-size:12px;color:#888;margin-top:4px;">↑ 模拟 65% 进度（实际为 fixed 定位在页面最顶部）</p>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">说明：</p>
+                <p>由 library-dynamic.js 的 ReadingProgress 模块自动创建。仅在存在 &lt;main&gt; / .kh-main / #main-content 的页面创建。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 15: 搜索高亮 — .sl-highlight ========== -->
+        <section class="gjs-row notice-header section-header page-header-section">
+          <div class="gjs-cell">
+            <h2 id="section-15" class="section-title-text-main">15. 搜索高亮 — .sl-highlight</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：从搜索结果跳转到目标页面后，高亮匹配关键词的标记元素。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <p>这是一段包含<span class="sl-highlight">搜索关键词</span>的示例文本，用于展示高亮样式的外观效果。</p>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">说明：</p>
+                <p>由 SearchHighlight 模块自动插入 &lt;mark class="sl-highlight"&gt; 标签。大小写不敏感匹配。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 16: 悬浮目录按钮 — #sl-toc-float-btn / .sl-toc-float-panel ========== -->
+        <section class="gjs-row notice-header section-header page-header-section">
+          <div class="gjs-cell">
+            <h2 id="section-16" class="section-title-text-main">16. 悬浮目录按钮 — #sl-toc-float-btn / .sl-toc-float-panel</h2>
+            <div class="gjs-row content-bg-lightgrey">
+              <div class="gjs-cell">
+                <p>用途：当用户向下滚动、原始 TOC 离开视口时，左侧出现悬浮的 📖 按钮。点击弹出目录面板，无需回到页面顶部即可导航。
+
+                <p style="font-weight:600;margin-bottom:8px;">核心组件：</p>
+                <table style="width:100%;border-collapse:collapse;margin:8px 0;font-size:14px;line-height:1.7;">
+                  <thead>
+                    <tr style="background:var(--color-accent);color:#fff;">
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">元素</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">类名/ID</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">说明</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);">触发按钮</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">#sl-toc-float-btn</td><td style="padding:8px 12px;border:1px solid var(--color-border);">固定在便携式导航仪右侧（left:44px），垂直居中</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);">目录面板</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">#sl-toc-float-panel</td><td style="padding:8px 12px;border:1px solid var(--color-border);">点击按钮后滑出的浮动面板，含目录克隆</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);">面板头部</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.sl-toc-panel-header</td><td style="padding:8px 12px;border:1px solid var(--color-border);">"目录"标题 + 关闭按钮（×）</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);">克隆列表</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">#toc-clone-list</td><td style="padding:8px 12px;border:1px solid var(--color-border);">原始 TOC 列表的深拷贝，独立于原始目录</td></tr>
+                  </tbody>
+                </table>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">按钮外观模拟：</p>
+                <div style="display:inline-block;width:36px;height:36px;border:1px solid #e0e0e0;background:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;">&#128214;</div>
+                <p style="font-size:12px;color:#888;margin-top:4px;">↑ 悬浮目录按钮（实际为 fixed 定位在左侧）</p>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">面板外观模拟：</p>
+                <div style="display:inline-block;min-width:200px;border:1px solid #e0e0e0;background:#fff;padding:0;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #e0e0e0;font-size:13px;font-weight:700;color:#2c3e50;"><span>目录</span><span style="cursor:pointer;font-size:18px;color:#888;">&times;</span></div>
+                  <div style="padding:8px 0;">
+                    <a href="#" style="display:block;font-size:13px;color:#555;text-decoration:none;padding:4px 10px;border-left:2px solid transparent;">1. 信息提示框</a>
+                    <a href="#" style="display:block;font-size:13px;color:#555;text-decoration:none;padding:4px 10px;border-left:2px solid transparent;">2. 折叠块</a>
+                    <a href="#" style="display:block;font-size:13px;color:#2c3e50;text-decoration:none;padding:4px 10px;border-left:2px solid #2c3e50;font-weight:600;">11. 自动目录</a>
+                  </div>
+                </div>
+                <p style="font-size:12px;color:#888;margin-top:4px;">↑ 悬浮目录面板（实际为 fixed 定位，点击按钮后滑出）</p>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">交互行为：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>原始 TOC 滚出视口 → 左侧自动出现 📖 按钮</li>
+                  <li>点击按钮 → 面板滑出 + 同步当前活跃章节高亮</li>
+                  <li>点击目录项 → 跳转 + 关闭面板</li>
+                  <li>IntersectionObserver 联动同步高亮状态</li>
+                </ul>
 
               </div>
             </div>
@@ -591,124 +897,6 @@
     导航<br>枢纽
   </button>
 
-<script id="ext-inline-js-import-body-end-2">
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-}
-
-function openNavigator() {
-  window.open('../navigator.html', '_blank');
-}
-
-function getCurrentPath() {
-  const path = window.location.pathname;
-  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
-
-  if (formattedPath === '' || formattedPath === 'index') {
-    return '首页';
-  }
-
-  formattedPath = formattedPath
-    .split('/')
-    .map(segment => {
-      const fileNameIndex = segment.lastIndexOf('.');
-      if (fileNameIndex > 0) {
-        segment = segment.substring(0, fileNameIndex);
-      }
-      return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
-    })
-    .join(' → ');
-
-  return formattedPath;
-}
-
-function scrollToSection(sectionId) {
-  const section = document.getElementById(sectionId);
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-
-window.addEventListener('DOMContentLoaded', function() {
-  const quickNav = document.querySelector('.quick-nav');
-  const isMobile = window.innerWidth <= 768;
-
-  if (quickNav && isMobile) {
-    quickNav.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded')) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '4px';
-          title.style.paddingBottom = '0';
-          title.style.borderBottom = 'none';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      } else {
-        quickNav.classList.add('expanded');
-        quickNav.style.width = '180px';
-        quickNav.style.padding = '16px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'block';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'horizontal-tb';
-          title.style.marginBottom = '16px';
-          title.style.paddingBottom = '8px';
-          title.style.borderBottom = '1px solid #e0e0e0';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'none';
-      }
-    });
-  }
-
-  if (quickNav && isMobile) {
-    document.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '4px';
-          title.style.paddingBottom = '0';
-          title.style.borderBottom = 'none';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      }
-    });
-  }
-
-  const pathElement = document.getElementById('current-path');
-  if (pathElement) {
-    pathElement.textContent = getCurrentPath();
-  }
-
-  const backToTopBtn = document.querySelector('.back-to-top:not([style*="relative"])');
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', scrollToTop);
-  }
-
-  const navHubBtn = document.querySelector('.nav-hub:not([style*="relative"])');
-  if (navHubBtn) {
-    navHubBtn.addEventListener('click', openNavigator);
-  }
-});
-</script>
 <script src="../js/library-dynamic.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -22,7 +22,7 @@
 
 <main class="gjs-row content-row content-bg-white">
   <div class="content-width-limiter">
-    <div class="gjs-cell content-bg-yellow">
+    <div class="gjs-cell content-main">
       <div class="quote-box-grey">
         <div class="left-align">2026-05-10</div>
       </div>
@@ -47,7 +47,7 @@
                 <p><strong>浮动按钮与排版优化 [Alpha 006]</strong></p>
                 <p>- 修复回到顶部按钮与导航枢纽按钮重叠的问题</p>
                 <p>- 新增语言切换浮窗（中英文互跳）</p>
-                <p>- 移除 .content-bg-yellow / .content-bg-white 的边框和圆角</p>
+                <p>- 移除 .content-main / .content-bg-white 的边框和圆角</p>
 
                 <p><strong>新闻板块间距大幅优化 [Alpha 007]</strong></p>
                 <p>- .section-title-text-main 的 margin-bottom 缩减至 var(--space-xs) (4px)</p>
@@ -58,7 +58,7 @@
                 <p>- .section-title-text-main: margin-bottom 多次调整</p>
                 <p>- .news-card-text-only: padding、min-height、内部元素样式全面优化</p>
                 <p>- .float-button .back-to-top: bottom 值调整</p>
-                <p>- .content-bg-yellow / .content-bg-white / .content-bg-white-sub: 移除 border 和 border-radius</p>
+                <p>- .content-main / .content-bg-white / .content-bg-white-sub: 移除 border 和 border-radius</p>
                 <p>- 新增 .lang-switch-float 及相关子类样式组</p>
 
                 <p><strong>便携式导航仪移动端交互优化</strong></p>
@@ -136,7 +136,7 @@
                 <p>- 新增内容区域通用链接箭头样式，自动应用于以下容器内的所有链接：</p>
                 <p>&nbsp;&nbsp;• .content-bg-white（主页入口板块等）</p>
                 <p>&nbsp;&nbsp;• .content-bg-white-sub（主页前情提要子板块）</p>
-                <p>&nbsp;&nbsp;• .yellowgreen-bg（导航枢纽、文章页面等）</p>
+                <p>&nbsp;&nbsp;• .bg-transparent（导航枢纽、文章页面等）</p>
                 <p>- 排除特殊类名避免冲突：.news-card-text-only, .news-card-image, .link-to-page, nav相关类, float相关类</p>
                 <p>- 箭头效果：SVG矢量图标 + hover时向右平移3px + 透明度变化</p>
                 <p>- 影响范围：导航枢纽所有链接、主页内容区链接、所有library页面内容链接自动获得统一箭头样式</p>

@@ -239,7 +239,7 @@ img {
   margin-right: auto;
 }
 
-.content-bg-yellow,
+.content-main,
 .content-bg-white {
   background-color: var(--color-bg);
   border: none;
@@ -410,7 +410,7 @@ img {
 }
 
 .darkgrey-bg {
-  background-color: #e8e8e8;
+  background-color: var(--color-bg-muted);
 }
 
 .blue-bg {
@@ -429,7 +429,7 @@ img {
   background-color: #fefefe;
 }
 
-.yellowgreen-bg {
+.bg-transparent {
   background-color: transparent;
 }
 
@@ -1728,11 +1728,11 @@ strong {
   .content-row {
     padding: var(--space-md) var(--space-sm);
   }
-
+.content-main,
   .content-bg-white,
   .content-bg-white-text,
   .content-bg-white-sub,
-  .content-bg-yellow {
+  .content-main {
     padding: var(--space-md) var(--space-sm);
   }
 
@@ -2301,7 +2301,7 @@ details details {
 .link-to-page,
 .mobile-nav-link,
 .content-bg-white a:not(.news-card-text-only):not(.news-card-image),
-.content-bg-yellow a:not(.news-card-text-only):not(.news-card-image),
+.content-main a:not(.news-card-text-only):not(.news-card-image),
 .content-bg-lightgrey a,
 .notice-box-red a,
 .function-box-blue a,
@@ -2319,7 +2319,7 @@ details details {
 .link-to-page:hover,
 .mobile-nav-link:hover,
 .content-bg-white a:hover,
-.content-bg-yellow a:hover,
+.content-main a:hover,
 .content-bg-lightgrey a:hover,
 .notice-box-red a:hover,
 .function-box-blue a:hover,
@@ -2381,7 +2381,7 @@ details details {
 /* 内容区域通用链接箭头样式 */
 .content-bg-white a:not(.news-card-text-only):not(.news-card-image):not(.link-to-page):not([class*="nav-"]):not([class*="float"])::after,
 .content-bg-white-sub a:not(.news-card-text-only):not(.news-card-image):not(.link-to-page):not([class*="nav-"]):not([class*="float"])::after,
-.yellowgreen-bg a:not(.news-card-text-only):not(.news-card-image):not(.link-to-page):not([class*="nav-"]):not([class*="float"])::after {
+.bg-transparent a:not(.news-card-text-only):not(.news-card-image):not(.link-to-page):not([class*="nav-"]):not([class*="float"])::after {
   content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17L17 7'/%3E%3Cpath d='M7 7h10v10'/%3E%3C/svg%3E");
   margin-left: 4px;
   font-size: 0;
@@ -2393,7 +2393,7 @@ details details {
 
 .content-bg-white a:hover:not(.news-card-text-only):not(.news-card-image):not(.link-to-page):not([class*="nav-"]):not([class*="float"])::after,
 .content-bg-white-sub a:hover:not(.news-card-text-only):not(.news-card-image):not(.link-to-page):not([class*="nav-"]):not([class*="float"])::after,
-.yellowgreen-bg a:hover:not(.news-card-text-only):not(.news-card-image):not(.link-to-page):not([class*="nav-"]):not([class*="float"])::after {
+.bg-transparent a:hover:not(.news-card-text-only):not(.news-card-image):not(.link-to-page):not([class*="nav-"]):not([class*="float"])::after {
   transform: translateX(3px);
   opacity: 1;
 }
@@ -2469,11 +2469,11 @@ details details {
     background-color: var(--color-bg);
   }
 
-  .content-bg-yellow,
-  .content-bg-white,
-  .content-bg-white-text,
-  .content-bg-white-sub,
-  .content-bg-white-section {
+  .content-main,
+.content-bg-white,
+.content-bg-white-text,
+.content-bg-white-sub,
+.content-bg-white-section {
     background-color: var(--color-bg-subtle);
     border-color: var(--color-border);
   }
@@ -2539,7 +2539,7 @@ details details {
     background-color: var(--color-bg);
   }
 
-  .yellowgreen-bg {
+  .bg-transparent {
     background-color: transparent;
   }
 
@@ -2959,7 +2959,7 @@ details details {
   .link-to-page,
   .mobile-nav-link,
   .content-bg-white a,
-  .content-bg-yellow a,
+  .content-main a,
   .content-bg-lightgrey a,
   .notice-box-red a,
   .function-box-blue a,
@@ -3913,5 +3913,137 @@ details details {
     flex-direction: column;
     gap: var(--space-xs);
     text-align: center;
+  }
+}
+
+/* ========== 14. 阅读进度条 — #sl-reading-progress ========== */
+
+#sl-reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 6px;
+  background-color: #7fb3d5;
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+  width: 0;
+  pointer-events: none;
+}
+
+/* ========== 15. 搜索高亮 — .sl-highlight ========== */
+
+.sl-highlight {
+  background-color: #fff3a6;
+  padding: 1px 3px;
+  border-radius: 0;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(255, 200, 0, 0.25);
+  color: var(--color-text);
+}
+
+@media (prefers-color-scheme: dark) {
+  .sl-highlight {
+    background-color: #5c4d00;
+    color: #fff8dc;
+  }
+}
+
+/* ========== 16. 悬浮目录按钮 — #sl-toc-float-btn / .sl-toc-float-panel ========== */
+
+#sl-toc-float-btn {
+  position: fixed;
+  left: 44px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 36px;
+  height: 36px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
+}
+
+#sl-toc-float-btn.visible {
+  transform: translateY(-50%) scale(1);
+  opacity: 1;
+}
+
+#sl-toc-float-btn:hover,
+#sl-toc-float-btn.active {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
+}
+
+#sl-toc-float-panel {
+  position: fixed;
+  left: 88px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px);
+  max-height: 60vh;
+  width: 220px;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  z-index: 997;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  box-shadow: 4px 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+#sl-toc-float-panel.visible {
+  transform: translateY(-50%) translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sl-toc-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-bg);
+}
+
+.sl-toc-panel-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--color-text-light);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.sl-toc-panel-close:hover {
+  color: #e74c3c;
+}
+
+@media (max-width: 768px) {
+  #sl-toc-float-btn {
+    left: 4px;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  #sl-toc-float-panel {
+    left: 44px;
+    width: calc(100vw - 52px);
+    max-width: 280px;
   }
 }

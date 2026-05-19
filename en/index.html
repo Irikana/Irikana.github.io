@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -38,7 +38,7 @@
 
 <main id="main-content" class="gjs-row content-row content-bg-white">
   <div class="content-width-limiter">
-    <div class="gjs-cell content-bg-yellow">
+    <div class="gjs-cell content-main">
 
       <!-- Alpha Stage Notice -->
       <div class="notice-box-red">
@@ -130,7 +130,7 @@
       <section class="gjs-row notice-header section-header page-header-section">
         <div class="gjs-cell">
           <h2 id="section-entrance" class="section-title-text-main">Entrance</h2>
-          <div class="gjs-row yellowgreen-bg content-bg-white">
+          <div class="gjs-row bg-transparent content-bg-white">
             <div class="gjs-cell">
               <div class="center-align">
                 <p>Enter Shepherd's Library from here. Have a pleasant journey.<br><a href="library/library.html">Shepherd's Library</a></p>
@@ -202,200 +202,6 @@
   </div>
 </div>
 
-<script>
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-}
-
-function openNavigator() {
-  window.open('../navigator.html', '_blank');
-}
-
-function getCurrentPath() {
-  const path = window.location.pathname;
-  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
-
-  if (formattedPath === '' || formattedPath === 'index' || formattedPath === 'en') {
-    return 'Home';
-  }
-
-  formattedPath = formattedPath
-    .split('/')
-    .map(segment => {
-      const fileNameIndex = segment.lastIndexOf('.');
-      if (fileNameIndex > 0) {
-        segment = segment.substring(0, fileNameIndex);
-      }
-      return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
-    })
-    .join(' → ');
-
-  return formattedPath;
-}
-
-function scrollToSection(sectionId) {
-  const section = document.getElementById(sectionId);
-  if (section) {
-    section.scrollIntoView({ behavior: 'smooth' });
-  }
-}
-
-window.addEventListener('DOMContentLoaded', function() {
-  const quickNav = document.querySelector('.quick-nav');
-  const isMobile = window.innerWidth <= 768;
-
-  if (quickNav && isMobile) {
-    quickNav.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded')) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '4px';
-          title.style.paddingBottom = '0';
-          title.style.borderBottom = 'none';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      } else {
-        quickNav.classList.add('expanded');
-        quickNav.style.width = '180px';
-        quickNav.style.padding = '16px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'block';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'horizontal-tb';
-          title.style.marginBottom = '16px';
-          title.style.paddingBottom = '8px';
-          title.style.borderBottom = '1px solid #e0e0e0';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'none';
-      }
-    });
-  }
-
-  if (quickNav && isMobile) {
-    document.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '4px';
-          title.style.paddingBottom = '0';
-          title.style.borderBottom = 'none';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      }
-    });
-  }
-
-  const pathElement = document.getElementById('current-path');
-  if (pathElement) {
-    pathElement.textContent = getCurrentPath();
-  }
-
-  const backToTopBtn = document.querySelector('.back-to-top');
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', scrollToTop);
-  }
-
-  const navHubBtn = document.querySelector('.nav-hub');
-  if (navHubBtn) {
-    navHubBtn.addEventListener('click', openNavigator);
-  }
-
-  const khFloatClose = document.querySelector('.kh-float-close');
-  if (khFloatClose) {
-    khFloatClose.addEventListener('click', function() {
-      const khFloat = document.getElementById('knowledge-hall-float');
-      if (khFloat) {
-        khFloat.classList.add('hidden');
-      }
-    });
-  }
-
-  const langFloatClose = document.querySelector('.lang-float-close');
-  if (langFloatClose) {
-    langFloatClose.addEventListener('click', function() {
-      const langFloat = document.getElementById('lang-switch-float');
-      if (langFloat) {
-        langFloat.classList.add('hidden');
-      }
-    });
-  }
-
-  function makeDraggable(floatElement, headerSelector) {
-    if (!floatElement) return;
-    const header = floatElement.querySelector(headerSelector);
-    if (!header) return;
-
-    let isDragging = false;
-    let startX, startY, initialX, initialY;
-
-    header.addEventListener('mousedown', function(e) {
-      isDragging = true;
-      startX = e.clientX;
-      startY = e.clientY;
-      const rect = floatElement.getBoundingClientRect();
-      initialX = rect.left;
-      initialY = rect.top;
-      floatElement.style.transition = 'none';
-      floatElement.style.right = 'auto';
-      floatElement.style.bottom = 'auto';
-      floatElement.style.left = initialX + 'px';
-      floatElement.style.top = initialY + 'px';
-      e.preventDefault();
-    });
-
-    document.addEventListener('mousemove', function(e) {
-      if (!isDragging) return;
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-      floatElement.style.left = (initialX + dx) + 'px';
-      floatElement.style.top = (initialY + dy) + 'px';
-    });
-
-    document.addEventListener('mouseup', function() {
-      if (isDragging) {
-        isDragging = false;
-        floatElement.style.transition = '';
-      }
-    });
-  }
-
-  const khFloat = document.getElementById('knowledge-hall-float');
-  if (khFloat) makeDraggable(khFloat, '.kh-float-header');
-
-  const langFloat = document.getElementById('lang-switch-float');
-  if (langFloat) makeDraggable(langFloat, '.lang-float-header');
-
-  const newsTextList = document.getElementById('news-text-list');
-  if (newsTextList) {
-    const newsCards = Array.from(newsTextList.querySelectorAll('.news-featured-text-card[data-date]'));
-    newsCards.sort((a, b) => {
-      const dateA = new Date(a.getAttribute('data-date'));
-      const dateB = new Date(b.getAttribute('data-date'));
-      return dateB.getTime() - dateA.getTime();
-    });
-    newsCards.forEach(card => newsTextList.appendChild(card));
-  }
-});
-</script>
 <script src="../js/library-dynamic.js"></script>
 
 </body>

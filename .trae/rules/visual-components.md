@@ -1205,6 +1205,145 @@ t.style.cssText = 'position:fixed;top:-40px;left:50%;transform:translateX(-50%);
 
 ---
 
+## 14. 阅读进度条 — `#sl-reading-progress`
+
+**用途**：文章页顶部显示的阅读进度指示条，随页面滚动实时更新宽度。
+
+**标准样式（style.css）**：
+
+```css
+#sl-reading-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 6px;
+  background-color: #7fb3d5;
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+  width: 0;
+  pointer-events: none;
+}
+```
+
+**JS 生成逻辑**：
+
+```javascript
+// library-dynamic.js 中 ReadingProgress 模块自动创建
+var bar = document.createElement('div');
+bar.id = 'sl-reading-progress';
+document.body.appendChild(bar);
+// scroll 事件中动态计算：scrollTop / (docHeight - clientHeight) * 100%
+```
+
+**注意事项**：
+- 仅在存在 `<main>` 或 `.kh-main` 或 `#main-content` 的页面创建
+- 使用 passive scroll listener，不影响滚动性能
+- 由 StyleEnforcer 注入兜底样式（确保知识馆等非 style.css 页面也生效）
+
+---
+
+## 15. 搜索高亮 — `.sl-highlight`
+
+**用途**：从搜索结果跳转到目标页面后，高亮匹配关键词的标记元素。
+
+**标准样式（style.css）**：
+
+```css
+.sl-highlight {
+  background-color: #fff3a6;
+  padding: 1px 3px;
+  border-radius: 0;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(255, 200, 0, 0.25);
+  color: var(--color-text);
+}
+```
+
+**暗色模式覆盖**：
+
+```css
+@media (prefers-color-scheme: dark) {
+  .sl-highlight {
+    background-color: #5c4d00;
+    color: #fff8dc;
+  }
+}
+```
+
+**工作流程**：
+1. 用户搜索关键词 → Search.doSearch() 在结果 URL 后附加 `?q=关键词`
+2. 用户点击结果 → 页面加载后 SearchHighlight.init() 读取 URL 参数
+3. 用 TreeWalker 遍历正文文本节点 → 匹配处插入 `<mark class="sl-highlight">`
+4. 首个匹配项自动滚动到视口中央
+5. 高亮完成后用 `history.replaceState()` 清除 URL 参数
+
+**注意事项**：
+- 跳过 SCRIPT/STYLE/TEXTAREA/INPUT/SELECT/MARK/CODE/PRE 标签内的文本
+- 大小写不敏感匹配
+- 高亮后 URL 参数立即清除，刷新页面不会重复高亮
+
+---
+
+## 16. 悬浮目录按钮 — `#sl-toc-float-btn` / `.sl-toc-float-panel`
+
+**用途**：当用户向下滚动、原始 TOC 目录离开视口时，左侧出现悬浮的 📖 按钮。点击弹出目录面板，无需回到页面顶部即可导航。
+
+**核心组件**：
+
+| 元素 | 类名/ID | 说明 |
+|------|---------|------|
+| 触发按钮 | `#sl-toc-float-btn` | 固定在便携式导航仪右侧（left:44px），垂直居中 |
+| 目录面板 | `#sl-toc-float-panel` | 点击按钮后滑出的浮动面板，含目录克隆 |
+| 面板头部 | `.sl-toc-panel-header` | "目录"标题 + 关闭按钮（×） |
+| 克隆列表 | `#toc-clone-list` | 原始 TOC 列表的深拷贝，独立于原始目录 |
+
+**标准样式（style.css）关键要点**：
+
+```css
+/* 按钮默认隐藏，TOC 离开视口后 .visible 显示 */
+#sl-toc-float-btn {
+  position: fixed; left: 44px; top: 50%;
+  transform: translateY(-50%) scale(0);
+  opacity: 0; /* 默认不可见 */
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#sl-toc-float-btn.visible { transform: translateY(-50%) scale(1); opacity: 1; }
+
+/* 面板默认隐藏偏移 */
+#sl-toc-float-panel {
+  position: fixed; left: 88px; top: 50%;
+  transform: translateY(-50%) translateX(-10px);
+  opacity: 0; pointer-events: none;
+  max-height: 60vh; overflow-y: auto;
+}
+#sl-toc-float-panel.visible {
+  transform: translateY(-50%) translateX(0);
+  opacity: 1; pointer-events: auto;
+}
+```
+
+**交互行为**：
+1. **监听滚动**：当原始 `#auto-toc` 的顶部滚到距视口顶部 60px 以内时（`rect.top < 60`），左侧自动出现 📖 按钮
+2. **点击按钮**：面板滑出 + 同步当前活跃章节高亮
+3. **点击目录项**：平滑滚动到对应章节 + 关闭面板 + 更新原始 TOC 高亮
+4. **IntersectionObserver 联动**：滚动经过章节时，同时更新原始 TOC 和克隆面板的高亮状态
+5. **外部点击关闭**：点击面板和按钮以外的区域自动关闭
+
+**响应式适配（≤768px）**：
+
+```css
+@media (max-width: 768px) {
+  #sl-toc-float-btn { left: 4px; width: 32px; height: 32px; }
+  #sl-toc-float-panel { left: 44px; width: calc(100vw - 52px); }
+}
+```
+
+**注意事项**：
+- 仅在页面存在 `#auto-toc`（即有 ≥2 个 h2/h3 标题）时才初始化
+- 面板内的目录是原始 TOC 的 cloneNode(true)，两者独立但通过 href 同步高亮
+- 与便携式导航仪（`.quick-nav`）并排显示，互不遮挡
+
+---
+
 ## 附录：响应式断点汇总
 
 | 断点 | 适用场景 | 关键变化 |
