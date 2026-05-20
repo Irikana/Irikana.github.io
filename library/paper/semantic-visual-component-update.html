@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -117,6 +117,8 @@
 </button>
 
 <script>
+const PAGE_DISPLAY_NAME = '语义化视觉组件更新';
+
 function scrollToTop() {
   window.scrollTo({
     top: 0,
@@ -126,6 +128,34 @@ function scrollToTop() {
 
 function openNavigator() {
   window.open('../../navigator.html', '_blank');
+}
+
+function getCurrentPath() {
+  const path = window.location.pathname;
+  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
+
+  if (formattedPath === '' || formattedPath === 'index') {
+    return '首页';
+  }
+
+  const segments = formattedPath.split('/');
+  formattedPath = segments.map((segment, index) => {
+    const fileNameIndex = segment.lastIndexOf('.');
+    if (fileNameIndex > 0) {
+      segment = segment.substring(0, fileNameIndex);
+    }
+    if (index === segments.length - 1 && PAGE_DISPLAY_NAME) {
+      return PAGE_DISPLAY_NAME;
+    }
+    return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
+  }).join(' → ');
+
+  return formattedPath;
+}
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) { section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 }
 
 window.addEventListener('DOMContentLoaded', function() {
@@ -193,6 +223,9 @@ window.addEventListener('DOMContentLoaded', function() {
   if (backBtn) backBtn.addEventListener('click', scrollToTop);
   var navBtn = document.querySelector('.nav-hub');
   if (navBtn) navBtn.addEventListener('click', openNavigator);
+
+  const currentPathElement = document.getElementById('current-path');
+  if (currentPathElement) { currentPathElement.textContent = getCurrentPath(); }
 });
 </script>
 <script src="../../js/library-dynamic.js"></script>

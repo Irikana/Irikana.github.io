@@ -46,6 +46,22 @@
                 <p>&nbsp;&nbsp;• 补充 DOMContentLoaded 中 currentPath 元素更新逻辑</p>
                 <p>- 涉及文件：library/paper/restless.html</p>
 
+                <p><strong>批量修复 3 个文章页动态功能缺失 / 代码质量问题</strong></p>
+                <p>- 通过全项目体检发现并修复以下问题：</p>
+                <p><strong>① restless-material-dialog.html（坐立不安的材料对话）</strong></p>
+                <p>&nbsp;&nbsp;• library-dynamic.js 路径错误（../js → ../../js），动态脚本 404 无法加载</p>
+                <p>&nbsp;&nbsp;• 缺失 PAGE_DISPLAY_NAME、getCurrentPath()、currentPath 更新逻辑</p>
+                <p><strong>② impulse-to-record.html（记录的冲动）</strong></p>
+                <p>&nbsp;&nbsp;• 完全没有内联 &lt;script&gt; 块，缺失全部标准辅助函数</p>
+                <p>&nbsp;&nbsp;• 残留 GrapeJS 垃圾类名 c33289、c33382，已清除</p>
+                <p><strong>③ semantic-visual-component-update.html（语义化视觉组件更新）</strong></p>
+                <p>&nbsp;&nbsp;• 缺失 PAGE_DISPLAY_NAME、getCurrentPath()、scrollToSection()</p>
+                <p>- 修复后所有 11 篇文章页均具备完整的动态功能（TOC 目录、阅读进度条、版本号显示、搜索高亮等）</p>
+                <p>- 涉及文件：</p>
+                <p>&nbsp;&nbsp;• library/paper/restless-material-dialog.html — 路径修正 + 辅助函数补充</p>
+                <p>&nbsp;&nbsp;• library/paper/impulse-to-record.html — 完整脚本添加 + 垃圾类名清除</p>
+                <p>&nbsp;&nbsp;• library/paper/semantic-visual-component-update.html — 辅助函数补充</p>
+
               </div>
             </div>
           </div>
