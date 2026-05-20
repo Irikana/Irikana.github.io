@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年5月20日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">2026年5月20日 更新日志</div>
+  </div>
+</header>
+
+<main class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-05-20</div>
+      </div>
+
+      <!-- 主馆变更 -->
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-1" class="section-title-text-main">主馆变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>修复「坐立不安」文章页动态功能缺失</strong></p>
+                <p>- 问题：library/paper/restless.html 页面缺少全部动态功能（TOC 目录、阅读进度条、版本号显示、搜索高亮等）</p>
+                <p>- 根因：library-dynamic.js 引用路径错误（../js → 应为 ../../js），导致动态脚本无法加载；同时缺失 PAGE_DISPLAY_NAME、getCurrentPath()、scrollToSection() 等标准辅助函数</p>
+                <p>- 修复内容：</p>
+                <p>&nbsp;&nbsp;• 修正 library-dynamic.js 路径为 ../../js/library-dynamic.js</p>
+                <p>&nbsp;&nbsp;• 补充 const PAGE_DISPLAY_NAME = '坐立不安'</p>
+                <p>&nbsp;&nbsp;• 补充 getCurrentPath() 面包屑路径生成函数</p>
+                <p>&nbsp;&nbsp;• 补充 scrollToSection() 锚点滚动函数</p>
+                <p>&nbsp;&nbsp;• 补充 DOMContentLoaded 中 currentPath 元素更新逻辑</p>
+                <p>- 涉及文件：library/paper/restless.html</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top"
+  onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub"
+  onclick="window.open('../navigator.html', '_blank')">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>
