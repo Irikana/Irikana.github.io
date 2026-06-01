@@ -6,10 +6,7 @@
   <title>运动在对称操作下的不变性</title>
   <script>
   MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']]
-    },
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
     svg: { fontCache: 'global' }
   };
   </script>
@@ -19,7 +16,7 @@
     @media(prefers-color-scheme:dark){:root{--accent:#5d9ccc;--text:#e8e6e3;--text-sec:#a0a0a0;--text-light:#707070;--bg:#1a1a1a;--bg-sub:#222;--border:#333;--red:#e07070;--blue:#7ab8e0;--green:#6fcf97;--gold:#d4a840}}
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh;width:100vw}
-    .slide{position:absolute;top:0;left:0;width:100vw;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:36px 70px;opacity:0;transition:opacity .3s ease;pointer-events:none}
+    .slide{position:absolute;top:0;left:0;width:100vw;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:36px 70px;opacity:0;transition:opacity .3s ease;pointer-events:none;overflow-y:auto}
     .slide.active{opacity:1;pointer-events:auto}
     .st{font-size:42px;font-weight:700;color:var(--accent);text-align:center;line-height:1.3;letter-spacing:1px}
     .ssub{font-size:17px;color:var(--text-sec);text-align:center;font-style:italic;margin-top:6px;letter-spacing:.5px}
@@ -49,21 +46,32 @@
     .sflow .sn{background:var(--accent);color:#fff;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
     .sflow .stx{font-size:15px;line-height:1.6;color:var(--text-sec);padding-top:2px}
     .dcon{display:flex;justify-content:center;margin:8px 0}
-    .timeline{position:relative;padding-left:22px;margin:6px 0}
-    .timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:var(--border)}
-    .tl-item{position:relative;margin-bottom:8px;padding-left:14px}
-    .tl-item:last-child{margin-bottom:0}
-    .tl-item::before{content:'';position:absolute;left:-20px;top:7px;width:8px;height:8px;background:var(--accent);border:2px solid var(--bg)}
-    .tl-year{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.3px}
-    .tl-text{font-size:13.5px;line-height:1.55;color:var(--text-sec)}
-    .tl-text .hl,.tl-text .bl,.tl-text .gn,.tl-text .ac,.tl-text .gd{font-weight:600}
-    .hist-note{font-size:12px;color:var(--text-light);font-style:italic;margin-top:6px;border-top:1px dashed var(--border);padding-top:6px}
+    .narr{font-size:15.5px;line-height:1.75;color:var(--text-sec);margin:4px 0;text-indent:2em}
+    .narr:first-child{text-indent:0}
+    .narr .hl,.narr .bl,.narr .gn,.narr .ac,.narr .gd{font-weight:600}
+    .narr-sep{border:none;border-top:1px dashed var(--border);margin:10px 0}
+    .narr-year{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.5px;margin-top:6px;text-indent:0}
     .nav{position:fixed;bottom:0;left:0;right:0;height:32px;background:var(--bg-sub);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:12px;color:var(--text-light);z-index:100}
     .nav .prog{position:absolute;top:0;left:0;height:3px;background:var(--accent);transition:width .3s ease}
     .step-dots{display:flex;gap:5px;align-items:center}
     .step-dot{width:7px;height:7px;background:var(--border);transition:background .2s}
     .step-dot.done{background:var(--accent)}.step-dot.cur{background:var(--red)}
-    @media(max-width:768px){.slide{padding:20px 16px}.st{font-size:26px}.sc h2{font-size:20px}.sc p{font-size:14px}.twocol{grid-template-columns:1fr}.choices{grid-template-columns:repeat(2,1fr)}.tl-text{font-size:12px}.tl-year{font-size:11px}}
+    .m-ctrl{display:none;position:fixed;bottom:40px;left:0;right:0;padding:8px 16px;z-index:200;justify-content:center;gap:12px;align-items:center}
+    .m-btn{width:48px;height:48px;border-radius:0;border:2px solid var(--accent);background:var(--bg);color:var(--accent);font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;transition:background .15s,color .15s}
+    .m-btn:active{background:var(--accent);color:#fff}
+    .m-btn.play{width:56px;height:56px;font-size:22px;border-width:3px}
+    .m-btn.playing{background:var(--accent);color:#fff}
+    @media(max-width:768px){
+      .slide{padding:20px 16px 100px}
+      .st{font-size:26px}
+      .sc h2{font-size:20px}
+      .sc p{font-size:14px}
+      .narr{font-size:13.5px;line-height:1.65}
+      .twocol{grid-template-columns:1fr}
+      .choices{grid-template-columns:repeat(2,1fr)}
+      .m-ctrl{display:flex}
+      .nav{bottom:0;height:28px}
+    }
   </style>
 </head>
 <body>
@@ -95,6 +103,30 @@
 </div>
 
 <div class="slide" id="s3">
+  <div class="sc">
+    <h2>对称性的物理学史（上）：从直觉到定理</h2>
+    <p class="narr">对称性的故事，始于人类对宇宙和谐最古老的直觉。毕达哥拉斯学派说"万物皆数"，柏拉图用五种正多面体对应五种元素——在他们的眼中，对称不是数学工具，而是宇宙的<span class="ac">本质</span>。</p>
+    <p class="narr">开普勒花了一辈子寻找行星轨道之间的完美几何对称，他在《世界的和谐》中为每颗行星谱写旋律，将角速度之比对应为音乐的协和音程。讽刺的是，他毕生追寻的"完美对称"最终被证明是错的——但他为此收集的精确观测数据，却意外地诞生了真正的行星运动定律。</p>
+    <p class="narr">1632年，伽利略在"船舱"思想实验中，第一次明确表述了一个物理学对称性：<span class="bl">在所有匀速直线运动的参考系中，物理定律保持不变</span>。牛顿在《原理》中进一步阐明了这一点。然而，此后的两百年里，没有人意识到"对称性"本身可以成为一个独立的物理概念。</p>
+    <p class="narr">转折发生在1915年。爱因斯坦发表广义相对论后，一个核心问题困扰着整个物理学界：<span class="hl">能量守恒定律是否仍然成立？</span>希尔伯特和克莱因将这个问题交给了哥廷根大学一位连正式教职都没有的数学家——艾米·诺特。诺特是女性，大学不允许她开课，希尔伯特不得不以自己的名义开课让她来讲，据说他在教授会议上愤怒地说：<span class="ac">"大学又不是澡堂！"</span></p>
+    <p class="narr">诺特用了不到两年，不仅彻底解决了广义相对论的能量守恒问题，而且证明了一个更深刻的定理：<span class="bl">每一个连续对称性，都对应一个守恒律</span>。时间平移→能量守恒，空间平移→动量守恒，空间旋转→角动量守恒——这些原本各自独立的实验定律，原来共享同一个起源。1918年7月26日，因女性身份无法成为哥廷根皇家科学学会成员，她的论文由克莱因代为宣读。那仅有十几页的论文，彻底改变了物理学的发展轨迹。</p>
+  </div>
+</div>
+
+<div class="slide" id="s4">
+  <div class="sc">
+    <h2>对称性的物理学史（下）：破缺之美</h2>
+    <p class="narr">诺特定理让物理学界意识到对称性的力量。1927年，维格纳提出<span class="ac">宇称守恒定律</span>——物理定律在镜像变换下应保持不变。此后三十年，没有人质疑过它。它被视为和能量守恒一样不可动摇的基本定律，尽管<span class="hl">从来没有一个实验在弱相互作用中证实过它</span>——它只是一个先入为主的假设。</p>
+    <p class="narr">1950年代，θ-τ之谜让物理学界陷入两难：两种奇异粒子在所有可测性质上完全相同，但衰变方式不同——一个给出宇称+1，另一个给出-1。如果宇称守恒，它们必须是不同粒子；但它们又如此相似。1956年4月，费曼在罗切斯特会议上替布洛克问了一个所有人都不敢问的问题："如果宇称不守恒呢？"杨振宁和李政道由此系统地检查了所有实验，发现了那个惊人的空白。10月1日，他们在《物理评论》上提出弱相互作用中宇称可能不守恒。年底，吴健雄用钴-60的β衰变实验证实了这一点——<span class="hl">宇宙并不是完美对称的</span>。泡利在收到消息前还说过"我不相信上帝是一个左撇子"。</p>
+    <p class="narr">但对称性的故事并未因此结束，反而走向了更深刻的方向。1957年，BCS超导理论揭示了一种奇特的现象：描述系统的拉格朗日量是对称的，但基态<span class="hl">破坏了</span>这种对称——<span class="ac">自发对称破缺</span>。南部阳一郎将这一思想从凝聚态物理推广到粒子物理，与约纳-拉西尼奥建立NJL模型解释核子质量起源。随后，戈德斯通定理预言了无质量玻色子，安德森发现它们在超导中被光子"吃掉"，最终在1964年，三组物理学家独立提出了<span class="bl">希格斯机制</span>：规范玻色子通过"吃掉"戈德斯通玻色子获得质量，同时产生有质量的希格斯玻色子。</p>
+    <p class="narr">1967年，温伯格将希格斯机制与杨-米尔斯理论结合，建立了电弱统一理论；1983年CERN发现了它预言的W和Z玻色子；2012年7月4日，LHC发现了125 GeV的希格斯玻色子——标准模型的最后一块拼图完成。而在宇宙学中，暴胀由标量场的自发对称破缺驱动，物质-反物质的不对称与CP对称破缺密切相关。</p>
+    <div class="cbox" style="margin-top:10px;border-color:var(--accent);padding:10px 18px">
+      <p style="font-size:15px">宇宙的<span class="ac">秩序</span>来源于对称性，宇宙的<span class="hl">多样性</span>来源于对称破缺。而这一切，始于1918年诺特写下的那十几页纸。</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s5">
   <div class="sc">
     <h2>案例一：匀速游动的鱼</h2>
     <p>一条鱼以恒定速度向左游动，水对鱼的作用力方向是？</p>
@@ -131,7 +163,7 @@
   </div>
 </div>
 
-<div class="slide" id="s4">
+<div class="slide" id="s6">
   <div class="sc">
     <h2>案例二：凹凸轨道</h2>
     <p>两个相同的圆弧轨道，一凹一凸，关于水平线对称。相同小球以相同速度释放，无能量损耗。哪个先到？</p>
@@ -173,7 +205,7 @@
   </div>
 </div>
 
-<div class="slide" id="s5">
+<div class="slide" id="s7">
   <div class="sc">
     <h2>对称性破缺分析</h2>
     <div class="dcon">
@@ -215,186 +247,7 @@
   </div>
 </div>
 
-<div class="slide" id="s6">
-  <div class="sc">
-    <h2>对称性的物理学史（一）：前诺特时代</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-year">公元前 5 世纪</div>
-        <div class="tl-text">毕达哥拉斯学派提出<span class="ac">"万物皆数"</span>，认为宇宙的本质是数学和谐</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">公元前 4 世纪</div>
-        <div class="tl-text">柏拉图《蒂迈欧篇》用五种<span class="ac">正多面体</span>与元素对应（正四面体=火、正六面体=土、正八面体=气、正二十面体=水、正十二面体=宇宙），将对称性视为宇宙完美性的体现</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1596 / 1619</div>
-        <div class="tl-text">开普勒试图用五个柏拉图立体嵌套解释行星轨道间距；在《世界的和谐》中将行星角速度比对应<span class="ac">音乐协和音程</span>，行星运动第三定律正是此书的副产品</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1632</div>
-        <div class="tl-text">伽利略在《两大世界体系对话》中通过"船舱"思想实验阐述<span class="bl">相对性原理</span>——物理定律在所有匀速直线运动的参考系中保持不变，这是最早被明确表述的物理学对称性</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1687</div>
-        <div class="tl-text">牛顿在《自然哲学的数学原理》中明确阐述了伽利略相对性原理，其运动方程天然具有<span class="ac">空间平移、旋转和时间平移不变性</span></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">18–19 世纪</div>
-        <div class="tl-text">拉格朗日与哈密顿建立分析力学，拉格朗日量 $L = T - V$ 的引入使对称性可通过<span class="ac">变分原理</span>来研究</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1864</div>
-        <div class="tl-text">麦克斯韦揭示电磁现象的统一，其方程具有<span class="ac">洛伦兹对称性</span>，为狭义相对论奠定基础</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1899–1905</div>
-        <div class="tl-text">洛伦兹引入变换雏形（1899），庞加莱完善数学形式并命名<span class="ac">"洛伦兹变换"</span>（1905）</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1905 / 1915</div>
-        <div class="tl-text">爱因斯坦：狭义相对论将洛伦兹对称性提升为时空基本属性；广义相对论提出<span class="ac">广义协变性原理</span>——物理定律在任意坐标变换下保持不变，直接催生了诺特定理</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="slide" id="s7">
-  <div class="sc">
-    <h2>对称性的物理学史（二）：诺特定理</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-year">1915</div>
-        <div class="tl-text">广义相对论发表后，<span class="hl">能量守恒定律是否成立</span>成为困扰物理学界的核心问题。希尔伯特和克莱因将此问题交给了艾米·诺特（Emmy Noether）</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">背景</div>
-        <div class="tl-text">诺特是20世纪最伟大的女数学家之一，在哥廷根长期因性别限制无法获得正式教职。希尔伯特以自己的名义开课让她讲授，据说在教授会议上说：<span class="ac">"大学又不是澡堂！"</span></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1918.7.26</div>
-        <div class="tl-text">因女性身份无法成为哥廷根皇家科学学会成员，论文由<span class="ac">克莱因代为宣读</span>。论文《不变变分问题》仅十几页，却彻底改变了物理学</div>
-      </div>
-    </div>
-    <div class="cbox" style="margin-top:10px;border-color:var(--blue);text-align:left">
-      <p><span class="bl">诺特第一定理</span>：若作用量在具有 $\rho$ 个参数的有限连续李群变换下保持不变，则存在 $\rho$ 个对应的守恒量</p>
-      <p style="margin-top:4px"><span class="bl">诺特第二定理</span>：若作用量在具有无穷多参数的局域变换群下保持不变，则运动方程之间满足一定的微分恒等式</p>
-    </div>
-    <div class="twocol" style="margin-top:8px">
-      <div class="cbox2" style="border-left:3px solid var(--accent)">
-        <h4 style="color:var(--accent)">对称性 → 守恒律</h4>
-        <p>时间平移 → 能量守恒</p>
-        <p>空间平移 → 动量守恒</p>
-        <p>空间旋转 → 角动量守恒</p>
-        <p>U(1) 规范 → 电荷守恒</p>
-      </div>
-      <div class="cbox2" style="border-left:3px solid var(--red)">
-        <h4 style="color:var(--red)">深刻意义</h4>
-        <p>在诺特定理之前，这些守恒律只是独立的实验定律</p>
-        <p>诺特定理揭示了它们的<span class="hl">共同起源</span>：宇宙时空和内在结构的对称性</p>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="slide" id="s8">
-  <div class="sc">
-    <h2>对称性的物理学史（三）：宇称不守恒</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-year">1927</div>
-        <div class="tl-text">维格纳提出<span class="ac">宇称守恒定律</span>——物理定律在空间反射（镜像）变换下保持不变。此后30年，宇称守恒被视为不可动摇的基本定律</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1950s 初</div>
-        <div class="tl-text"><span class="gd">θ-τ 之谜</span>：两种奇异粒子 θ 和 τ 在质量、寿命、电荷、自旋上完全相同，但 θ 衰变为两个 π 介子（宇称 +1），τ 衰变为三个 π 介子（宇称 -1）。若宇称守恒，它们必须是不同粒子——但性质又完全一致</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1956.4</div>
-        <div class="tl-text">罗切斯特会议上，费曼替马丁·布洛克提问："如果宇称不守恒，那会有什么后果？"——启发了杨振宁和李政道</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1956.10.1</div>
-        <div class="tl-text">杨振宁和李政道在《物理评论》发表论文，系统检查后发现：<span class="hl">在弱相互作用中，宇称守恒从未被实验证实</span>，它只是先入为主的假设</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1956 底</div>
-        <div class="tl-text">吴健雄利用钴-60 原子核的 β 衰变实验，<span class="hl">首次证实弱相互作用中宇称不守恒</span>。她放弃了圣诞假期坚持推进实验</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1957</div>
-        <div class="tl-text">杨振宁和李政道获诺贝尔物理学奖，成为最早获此殊荣的华人科学家</div>
-      </div>
-    </div>
-    <div class="hist-note">泡利在实验结果出来前说："我不相信上帝是一个左撇子。"结果出来后他不得不承认自己错了。</div>
-  </div>
-</div>
-
-<div class="slide" id="s9">
-  <div class="sc">
-    <h2>对称性的物理学史（四）：自发对称破缺</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-year">1957</div>
-        <div class="tl-text">BCS 超导理论提出。重要特征：超导态的基态<span class="hl">破坏了</span>电磁 U(1) 规范对称性，尽管拉格朗日量本身是规范不变的——这种"拉格朗日量对称，但基态不对称"的现象，被称为<span class="ac">自发对称破缺</span></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1960</div>
-        <div class="tl-text">南部阳一郎将超导中的自发对称破缺推广到粒子物理，与约纳-拉西尼奥建立<span class="ac">NJL 模型</span>，用动力学对称性破缺解释核子质量起源。被誉为"对称性破缺之父"</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1961</div>
-        <div class="tl-text">戈德斯通定理：连续整体对称性自发破缺时，必然产生<span class="ac">无质量的戈德斯通玻色子</span></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1963</div>
-        <div class="tl-text">安德森指出：在超导中，戈德斯通玻色子被光子<span class="ac">"吃掉"</span>，使光子获得有效质量——这正是希格斯机制在凝聚态物理中的前身</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1964</div>
-        <div class="tl-text">三组物理学家独立将此思想推广到相对论性场论——<span class="bl">希格斯机制</span>：局域规范对称性自发破缺时，戈德斯通玻色子被规范玻色子吃掉使其获得质量，同时产生有质量的<span class="bl">希格斯玻色子</span></div>
-      </div>
-    </div>
-    <div class="hist-note">三组：恩格勒 & 布罗特（8月）、希格斯（7月/9月）、古拉尔尼克 & 哈根 & 基布尔（10月）</div>
-  </div>
-</div>
-
-<div class="slide" id="s10">
-  <div class="sc">
-    <h2>对称性的物理学史（五）：现代发展</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-year">1967 / 1968</div>
-        <div class="tl-text">温伯格（1967）和萨拉姆（1968）独立建立<span class="bl">电弱统一理论</span>，将希格斯机制与杨-米尔斯规范场论结合，预言 W⁺、W⁻、Z⁰ 规范玻色子</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1973</div>
-        <div class="tl-text">小林诚和益川敏英提出三代夸克混合矩阵中的复相位是<span class="hl">CP 破坏的必要且充分条件</span>，为解释宇宙物质-反物质不对称提供关键线索</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1983</div>
-        <div class="tl-text">CERN 发现 W 和 Z 玻色子，证实电弱统一理论</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">标准模型</div>
-        <div class="tl-text">基于 $\mathrm{SU(3) \times SU(2) \times U(1)}$ 规范对称性，描述所有已知基本粒子及其相互作用（除引力外）。所有基本粒子的质量都通过与希格斯场的相互作用获得</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2012.7.4</div>
-        <div class="tl-text">CERN 的 LHC 发现质量约 125 GeV 的新玻色子，与<span class="bl">希格斯玻色子</span>一致——标准模型最后一块拼图完成</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">宇宙学</div>
-        <div class="tl-text">暴胀理论：宇宙早期暴胀由标量场的<span class="ac">自发对称破缺</span>驱动；物质-反物质不对称与<span class="hl">CP 对称破缺</span>密切相关</div>
-      </div>
-    </div>
-    <div class="cbox" style="margin-top:8px;border-color:var(--accent);padding:10px 18px">
-      <p style="font-size:15px">宇宙的<span class="ac">秩序</span>来源于对称性，宇宙的<span class="hl">多样性</span>来源于对称破缺。而这一切，始于1918年诺特写下的那十几页纸。</p>
-    </div>
-  </div>
-</div>
-
-<div class="slide" id="s11">
   <div class="sc">
     <h2>总结</h2>
     <div class="twocol">
@@ -422,15 +275,21 @@
   </div>
 </div>
 
-<div class="slide" id="s12">
+<div class="slide" id="s9">
   <div class="st">谢谢</div>
   <div class="ssub">Thank You</div>
   <p style="text-align:center;color:var(--text-light);margin-top:36px;font-size:18px">Q &amp; A</p>
 </div>
 
+<div class="m-ctrl" id="mCtrl">
+  <button class="m-btn" id="mPrev" title="上一步">&#9664;</button>
+  <button class="m-btn play" id="mPlay" title="自动播放">&#9654;</button>
+  <button class="m-btn" id="mNext" title="下一步">&#9654;&#9654;</button>
+</div>
+
 <div class="nav">
   <div class="prog" id="prog"></div>
-  <span id="counter">1 / 12</span>
+  <span id="counter">1 / 9</span>
   <div class="step-dots" id="stepDots"></div>
   <span>← → 翻页 / 步进</span>
 </div>
@@ -440,6 +299,8 @@
   var slides=document.querySelectorAll('.slide');
   var total=slides.length;
   var cur=0,step=0;
+  var playTimer=null;
+  var playing=false;
 
   function maxStep(i){
     var m=0;
@@ -457,16 +318,16 @@
       else el.classList.remove('vis');
     });
 
-    if(i===2){
+    if(i===4){
       var c=document.getElementById('chC');
       if(c){if(s>=2)c.classList.add('ok');else c.classList.remove('ok');}
     }
-    if(i===3){
+    if(i===5){
       var f=document.getElementById('chF');
       if(f){if(s>=2)f.classList.add('ok');else f.classList.remove('ok');}
     }
 
-    if(i===4){
+    if(i===6){
       var app=document.getElementById('apparatus');
       var gso=document.getElementById('greenSolidOrig');
       var gbo=document.getElementById('greenBallOrig');
@@ -511,6 +372,10 @@
     document.getElementById('prog').style.width=((cur+1)/total*100)+'%';
   }
 
+  function typeset(){
+    if(typeof MathJax!=='undefined'&&MathJax.typeset)setTimeout(function(){MathJax.typeset()},100);
+  }
+
   function goNext(){
     var ms=maxStep(cur);
     if(step<ms){step++;updSteps(cur,step);}
@@ -518,9 +383,9 @@
       slides[cur].classList.remove('active');
       cur++;step=0;
       slides[cur].classList.add('active');
-      updSteps(cur,0);updUI();
-      if(typeof MathJax!=='undefined'&&MathJax.typeset)setTimeout(function(){MathJax.typeset()},100);
-    }
+      slides[cur].scrollTop=0;
+      updSteps(cur,0);updUI();typeset();
+    }else{stopPlay();}
   }
 
   function goPrev(){
@@ -530,19 +395,64 @@
       cur--;
       step=maxStep(cur);
       slides[cur].classList.add('active');
+      slides[cur].scrollTop=0;
       updSteps(cur,step);updUI();
     }
+  }
+
+  function startPlay(){
+    playing=true;
+    document.getElementById('mPlay').classList.add('playing');
+    document.getElementById('mPlay').innerHTML='&#10074;&#10074;';
+    tick();
+  }
+
+  function stopPlay(){
+    playing=false;
+    if(playTimer)clearTimeout(playTimer);
+    playTimer=null;
+    document.getElementById('mPlay').classList.remove('playing');
+    document.getElementById('mPlay').innerHTML='&#9654;';
+  }
+
+  function tick(){
+    if(!playing)return;
+    var ms=maxStep(cur);
+    var delay=(step<ms)?1200:2500;
+    playTimer=setTimeout(function(){
+      if(!playing)return;
+      goNext();
+      if(playing)tick();
+    },delay);
   }
 
   document.addEventListener('keydown',function(e){
     if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();goNext();}
     else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();goPrev();}
-    else if(e.key==='Home'){e.preventDefault();slides[cur].classList.remove('active');cur=0;step=0;slides[cur].classList.add('active');updSteps(cur,0);updUI();}
-    else if(e.key==='End'){e.preventDefault();slides[cur].classList.remove('active');cur=total-1;step=0;slides[cur].classList.add('active');updSteps(cur,0);updUI();}
+    else if(e.key==='Home'){e.preventDefault();stopPlay();slides[cur].classList.remove('active');cur=0;step=0;slides[cur].classList.add('active');updSteps(cur,0);updUI();}
+    else if(e.key==='End'){e.preventDefault();stopPlay();slides[cur].classList.remove('active');cur=total-1;step=0;slides[cur].classList.add('active');updSteps(cur,0);updUI();}
   });
 
+  document.getElementById('mPrev').addEventListener('click',function(e){e.preventDefault();stopPlay();goPrev();});
+  document.getElementById('mNext').addEventListener('click',function(e){e.preventDefault();stopPlay();goNext();});
+  document.getElementById('mPlay').addEventListener('click',function(e){
+    e.preventDefault();
+    if(playing)stopPlay();else startPlay();
+  });
+
+  var touchX=0;
+  document.addEventListener('touchstart',function(e){touchX=e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){
+      stopPlay();
+      if(dx<0)goNext();else goPrev();
+    }
+  },{passive:true});
+
   updSteps(0,0);updUI();
-  if(typeof MathJax!=='undefined'&&MathJax.typeset)setTimeout(function(){MathJax.typeset()},1500);
+  typeset();
+  setTimeout(typeset,2000);
 })();
 </script>
 </body>
