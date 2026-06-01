@@ -183,6 +183,7 @@
         '<div class="auto-toc-header"><span class="auto-toc-title">&#128214; \u76ee\u5f55</span><button type="button" class="auto-toc-toggle" id="toc-toggle">&#9660;</button></div>' +
         '<div class="auto-toc-list" id="toc-list"></div>';
       main.insertBefore(nav, main.firstChild);
+      nav.style.display = 'none';
 
       var list = $('toc-list');
       for (var i = 0; i < hs.length; i++) {
@@ -559,6 +560,8 @@
         '.force-light-mode .quote-box-grey{background-color:#f5f5f5!important;border:1px solid #e0e0e0!important;border-left:3px solid #888!important;font-style:italic!important;color:#555!important;}' +
         /* 阅读进度条 */
         '#sl-reading-progress{position:fixed;top:0;left:0;height:6px;background:#7fb3d5;z-index:9999;transition:width 0.1s ease-out;width:0;pointer-events:none;}' +
+        /* 隐藏内联目录 */
+        '.auto-toc{display:none!important;}' +
         /* 搜索高亮 */
         '.sl-highlight{background:#fff3a6;padding:1px 3px;border-radius:0;font-weight:600;box-shadow:0 1px 3px rgba(255,200,0,0.25);color:#1a1a1a;}' +
         '@media (prefers-color-scheme: dark){.sl-highlight{background:#5c4d00;color:#fff8dc;}}' +
@@ -826,6 +829,7 @@
           if (self.visible) self.hide();
         }
       }, { passive: true });
+      self.btn.classList.add('visible');
     },
     toggle: function() {
       this.visible ? this.hide() : this.show();

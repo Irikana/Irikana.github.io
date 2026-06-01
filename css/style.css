@@ -3205,6 +3205,7 @@ details details {
 /* ========== Dynamic Features - Auto TOC (内联式) ========== */
 
 .auto-toc {
+  display: none;
   background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
   border: 1px solid var(--color-border);
   padding: 14px 18px;
@@ -4045,5 +4046,221 @@ details details {
     left: 44px;
     width: calc(100vw - 52px);
     max-width: 280px;
+  }
+}
+
+/* ========== 17. 创作作品 — Story/Work ========== */
+
+.story-work {
+  line-height: 1.9;
+  font-size: 15px;
+  color: var(--color-text);
+}
+
+.story-work p {
+  margin: 0.3em 0;
+  line-height: 1.9;
+}
+
+.story-work p.story-narration {
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin: 0.8em 0;
+}
+
+.story-work p.story-narration:first-letter {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.story-scene-break {
+  text-align: center;
+  margin: 2em 0;
+  color: var(--color-text-light);
+  font-size: 14px;
+  letter-spacing: 1em;
+  user-select: none;
+}
+
+.story-scene-break::before {
+  content: "· · ·";
+}
+
+.story-time-place {
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-light);
+  margin: 1.5em 0;
+  font-style: italic;
+}
+
+.story-speaker {
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-right: 0;
+}
+
+.story-work h2 {
+  font-size: 20px;
+  margin: 2em 0 1em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.story-work h3 {
+  font-size: 17px;
+  margin: 1.5em 0 0.8em;
+}
+
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3em;
+  padding-top: 1em;
+  border-top: 1px solid var(--color-border);
+  gap: var(--space-md);
+}
+
+.chapter-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--color-border);
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.chapter-nav a:hover {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-accent);
+}
+
+.chapter-nav a.chapter-nav-center {
+  border: none;
+  font-size: 13px;
+  color: var(--color-text-light);
+}
+
+.chapter-nav a.chapter-nav-center:hover {
+  color: var(--color-accent);
+  background: none;
+}
+
+.works-index-section {
+  margin: 2em 0;
+}
+
+.works-index-section h2 {
+  font-size: 18px;
+  color: var(--color-accent);
+  margin-bottom: 0.8em;
+  padding-bottom: 0.3em;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.works-chapter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.works-chapter-list li {
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.works-chapter-list li:last-child {
+  border-bottom: none;
+}
+
+.works-chapter-list a {
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.works-chapter-list a:hover {
+  text-decoration: underline;
+}
+
+.works-chapter-list .chapter-desc {
+  font-size: 13px;
+  color: var(--color-text-light);
+  margin-left: 8px;
+}
+
+.works-hero {
+  text-align: center;
+  padding: 2em 0;
+  margin-bottom: 1em;
+}
+
+.works-hero h1 {
+  font-size: 28px;
+  color: var(--color-accent);
+  margin-bottom: 0.3em;
+}
+
+.works-hero .works-subtitle {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5em;
+}
+
+.works-hero .works-author {
+  font-size: 13px;
+  color: var(--color-text-light);
+}
+
+.works-links {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  margin: 1.5em 0;
+  flex-wrap: wrap;
+}
+
+.works-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border: 1px solid var(--color-border);
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.works-links a:hover {
+  background-color: var(--color-bg-subtle);
+  border-color: var(--color-accent);
+}
+
+@media (prefers-color-scheme: dark) {
+  .story-speaker {
+    color: var(--color-accent);
+  }
+}
+
+@media (max-width: 768px) {
+  .works-hero h1 {
+    font-size: 22px;
+  }
+
+  .chapter-nav {
+    flex-wrap: wrap;
+  }
+
+  .chapter-nav a {
+    font-size: 13px;
+    padding: 6px 12px;
   }
 }

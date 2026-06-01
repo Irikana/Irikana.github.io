@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年5月31日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">2026年5月31日 更新日志</div>
+  </div>
+</header>
+
+<main class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-05-31</div>
+      </div>
+
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-1" class="section-title-text-main">主馆变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>新增「创作作品」栏目</strong></p>
+                <p>- 在 library/ 下新建 works/ 目录，作为创作类作品的独立栏目</p>
+                <p>- 创建 library/works/index.html 目录页，包含5个篇章分组和20话链接</p>
+                <p>- 涉及文件：library/works/index.html</p>
+
+                <p><strong>新增《方块文明》分话独立页面（20页）</strong></p>
+                <p>- 创建 library/works/chapter-01.html 至 chapter-20.html</p>
+                <p>- 统一格式为对话体：角色台词用 story-speaker 标记，旁白用 story-narration 标记（无前缀），场景转换用 story-scene-break</p>
+                <p>- 每页包含：标准 header、article-meta（作者：薛柯道 / 手写文章 / 标签：创作）、故事内容、上下话导航、标准 footer/nav/script</p>
+                <p>- 涉及文件：library/works/chapter-01~20.html</p>
+
+                <p><strong>新增《方块文明》单页长文版</strong></p>
+                <p>- 创建 library/works/full.html，全部20话整合为单页阅读版本</p>
+                <p>- 包含手动目录（5篇×20话锚点链接），按篇章分组</p>
+                <p>- 涉及文件：library/works/full.html</p>
+
+                <p><strong>CSS 新增创作作品样式</strong></p>
+                <p>- 在 css/style.css 末尾新增第17节「创作作品 — Story/Work」样式</p>
+                <p>- 包含：story-work、story-narration、story-scene-break、story-time-place、story-speaker、chapter-nav、works-index-section、works-chapter-list、works-hero、works-links 等类</p>
+                <p>- 含暗色模式和响应式适配</p>
+                <p>- 涉及文件：css/style.css</p>
+
+                <p><strong>图书馆入口页新增「创作作品」板块</strong></p>
+                <p>- 在 library/library.html 的文章区域新增「创作作品」子板块，链接到方块文明</p>
+                <p>- 涉及文件：library/library.html</p>
+
+                <p><strong>导航枢纽新增「创作作品」链接</strong></p>
+                <p>- 在 navigator.html 的文章区域新增创作作品链接</p>
+                <p>- 涉及文件：navigator.html</p>
+
+                <p><strong>隐藏内联目录，悬浮目录按钮改为始终可见</strong></p>
+                <p>- 内联目录（.auto-toc）设置 display:none，不再占用页面空间</p>
+                <p>- 悬浮目录按钮（#sl-toc-float-btn）改为页面加载后始终显示，不再依赖滚动触发</p>
+                <p>- 涉及文件：js/library-dynamic.js、css/style.css</p>
+
+                <p><strong>完善图书馆功能页面</strong></p>
+                <p>- 重写 library/feature.html，移除已弃用的 Notion 相关内容（图标、按钮、嵌套）</p>
+                <p>- 将红色警告框替换为蓝色信息框（符合规范）</p>
+                <p>- 按实际网站功能重新组织为：导航功能、阅读功能、搜索与收藏、知识馆、结构页面</p>
+                <p>- 涉及文件：library/feature.html</p>
+
+                <p><strong>更新视觉组件标准</strong></p>
+                <p>- 更新 .auto-toc 章节说明：标记为「已隐藏」，添加变更说明</p>
+                <p>- 更新悬浮目录按钮章节：交互行为改为「始终可见」</p>
+                <p>- 涉及文件：library/visual-components.html、.trae/rules/visual-components.md</p>
+
+                <p><strong>修复知识馆页面错误</strong></p>
+                <p>- 修复 recallable.html 多余的 &lt;/main&gt; 标签（HTML 结构错误）</p>
+                <p>- 移除知识馆分类页的 border-radius: 4px，符合扁平化设计原则</p>
+                <p>- 为知识馆所有侧边栏导航项添加尾部空格（符合跳转链接图标规范）</p>
+                <p>- 涉及文件：knowledge-hall/categories/phenomenon.html、recallable.html、traceable.html、knowledge-hall/index.html</p>
+
+                <p><strong>创建知识馆词条详情页模板</strong></p>
+                <p>- 新建 template/knowledge-entry.html，作为知识词条的标准页面模板</p>
+                <p>- 包含：返回链接、词条标题、近义词/别称、元数据区（分类/创建日期/最后更新）、概述、详细说明、历史、相关词条列表</p>
+                <p>- 右侧知识关系图谱面板（.kh-graph-panel），含中心节点和关联节点，≤1024px 时隐藏</p>
+                <p>- 版权声明位于图谱面板下方，≤1024px 时切换为内容区底部的 mobile footer</p>
+                <p>- 三栏布局：侧边栏 | 词条内容 | 图谱+版权</p>
+                <p>- 涉及文件：template/knowledge-entry.html</p>
+
+                <p><strong>新增论文页面</strong></p>
+                <p>- 创建 docs/invariance-of-motion-under-symmetry-operations.html</p>
+                <p>- 基于 matr/运动在对称操作下的不变性/ 目录中的手写笔记和文本整理</p>
+                <p>- 修整文本错误：anset→a set、make→makes、happened→happen、times→multiply、who's very like→who very much likes、WenKong Chain→WenKang Chiam（詹文康）</p>
+                <p>- 涉及文件：docs/invariance-of-motion-under-symmetry-operations.html</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">回到<br>顶部</button>
+<button title="导航枢纽" class="float-button nav-hub" onclick="window.open('../navigator.html', '_blank')">导航<br>枢纽</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

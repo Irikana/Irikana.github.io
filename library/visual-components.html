@@ -679,23 +679,21 @@
         <!-- ========== Section 11: 自动目录 — .auto-toc ========== -->
         <section class="gjs-row notice-header section-header page-header-section">
           <div class="gjs-cell">
-            <h2 id="section-11" class="section-title-text-main">11. 自动目录 — .auto-toc（内联式）</h2>
+            <h2 id="section-11" class="section-title-text-main">11. 自动目录 — .auto-toc（已隐藏）</h2>
             <div class="gjs-row content-bg-lightgrey">
               <div class="gjs-cell">
                 <p>用途：文章页内容区顶部的自动生成目录，根据页面 h2~h3 标题构建。由 library-dynamic.js 的 TOC 模块自动生成。
 
-                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
-                <nav class="auto-toc" style="position:relative;">
-                  <div class="auto-toc-header"><span class="auto-toc-title">&#128214; 目录</span><button type="button" class="auto-toc-toggle">&#9660;</button></div>
-                  <div class="auto-toc-list">
-                    <a href="#section-1" class="auto-toc-link auto-toc-level-2">1. 信息提示框</a>
-                    <a href="#section-2" class="auto-toc-link auto-toc-level-2">2. 折叠块</a>
-                    <a href="#section-2-1" class="auto-toc-link auto-toc-level-3">基本折叠块</a>
-                  </div>
-                </nav>
+                <div class="function-box-blue">
+                  <p>内联目录（.auto-toc）现已默认隐藏（display: none），不再占用页面空间。目录功能完全由悬浮目录按钮（#sl-toc-float-btn）提供，点击左侧 📖 按钮即可弹出目录面板。</p>
+                </div>
 
-                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">说明：</p>
-                <p>此组件由 JS 动态生成，无需手写 HTML。页面中只需有 ≥2 个 h2/h3 标题即可自动创建。</p>
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">变更说明：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>内联目录元素仍由 JS 创建（供悬浮按钮克隆目录数据），但视觉上完全隐藏</li>
+                  <li>悬浮目录按钮始终可见，不再依赖滚动位置触发</li>
+                  <li>此变更的目的是减少目录占用过多屏幕空间</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -855,7 +853,7 @@ footer.appendChild(span);</code></pre>
 
                 <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">交互行为：</p>
                 <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
-                  <li>原始 TOC 滚出视口 → 左侧自动出现 📖 按钮</li>
+                  <li>悬浮目录按钮始终可见（内联目录已隐藏）</li>
                   <li>点击按钮 → 面板滑出 + 同步当前活跃章节高亮</li>
                   <li>点击目录项 → 跳转 + 关闭面板</li>
                   <li>IntersectionObserver 联动同步高亮状态</li>

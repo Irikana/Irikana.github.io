@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>运动在对称操作下的不变性</title>
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    svg: { fontCache: 'global' }
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    :root{--accent:#2c3e50;--text:#1a1a1a;--text-sec:#555;--text-light:#888;--bg:#fff;--bg-sub:#f5f5f5;--border:#e0e0e0;--red:#c0392b;--blue:#2980b9;--green:#27ae60;--gold:#b8860b}
+    @media(prefers-color-scheme:dark){:root{--accent:#5d9ccc;--text:#e8e6e3;--text-sec:#a0a0a0;--text-light:#707070;--bg:#1a1a1a;--bg-sub:#222;--border:#333;--red:#e07070;--blue:#7ab8e0;--green:#6fcf97;--gold:#d4a840}}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh;width:100vw}
+    .slide{position:absolute;top:0;left:0;width:100vw;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:36px 70px;opacity:0;transition:opacity .3s ease;pointer-events:none}
+    .slide.active{opacity:1;pointer-events:auto}
+    .st{font-size:42px;font-weight:700;color:var(--accent);text-align:center;line-height:1.3;letter-spacing:1px}
+    .ssub{font-size:17px;color:var(--text-sec);text-align:center;font-style:italic;margin-top:6px;letter-spacing:.5px}
+    .sc{width:100%;max-width:920px}
+    .sc h2{font-size:26px;font-weight:700;color:var(--accent);margin-bottom:14px;padding-bottom:8px;border-bottom:3px solid var(--accent)}
+    .sc p{font-size:17px;line-height:1.7;color:var(--text-sec);margin:5px 0}
+    .hl{color:var(--red);font-weight:600}.bl{color:var(--blue);font-weight:600}.gn{color:var(--green);font-weight:600}.ac{color:var(--accent);font-weight:600}.gd{color:var(--gold);font-weight:600}
+    .en-dim{opacity:.55}.en-dim .hl{color:var(--red)}.en-dim .bl{color:var(--blue)}
+    [data-step]{opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease;pointer-events:none}
+    [data-step].vis{opacity:1;transform:translateY(0);pointer-events:auto}
+    .cbox{background:var(--bg-sub);border:2px solid var(--accent);padding:14px 22px;margin:10px 0;font-size:17px;line-height:1.7;text-align:center}
+    .fbox{background:var(--bg-sub);border:1px solid var(--border);border-left:4px solid var(--accent);padding:12px 20px;margin:8px 0;font-size:16px;text-align:center;font-family:Georgia,"Times New Roman",serif;font-style:italic}
+    .fbox-zh{font-family:'Microsoft YaHei',sans-serif;font-style:normal}
+    .twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:10px 0}
+    .cbox2{background:var(--bg-sub);border:1px solid var(--border);padding:12px}
+    .cbox2 h4{font-size:14px;font-weight:700;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+    .cbox2 p{font-size:14px;line-height:1.6;color:var(--text-sec)}
+    .flow{display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0;font-size:16px;flex-wrap:wrap}
+    .flow .fb{background:var(--bg-sub);border:1px solid var(--border);padding:7px 14px;font-size:15px}
+    .flow .ar{font-size:22px;color:var(--accent)}
+    .choices{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0;max-width:520px;margin-left:auto;margin-right:auto}
+    .ch{background:var(--bg-sub);border:2px solid var(--border);padding:10px;text-align:center;font-size:16px;font-weight:600;transition:all .3s}
+    .ch.ok{border-color:var(--green);color:var(--green);background:#f0faf0}
+    @media(prefers-color-scheme:dark){.ch.ok{background:#1a2a1a}}
+    .sflow{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+    .sflow .s{display:flex;align-items:flex-start;gap:8px}
+    .sflow .sn{background:var(--accent);color:#fff;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+    .sflow .stx{font-size:15px;line-height:1.6;color:var(--text-sec);padding-top:2px}
+    .dcon{display:flex;justify-content:center;margin:8px 0}
+    .timeline{position:relative;padding-left:22px;margin:6px 0}
+    .timeline::before{content:'';position:absolute;left:6px;top:4px;bottom:4px;width:2px;background:var(--border)}
+    .tl-item{position:relative;margin-bottom:8px;padding-left:14px}
+    .tl-item:last-child{margin-bottom:0}
+    .tl-item::before{content:'';position:absolute;left:-20px;top:7px;width:8px;height:8px;background:var(--accent);border:2px solid var(--bg)}
+    .tl-year{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.3px}
+    .tl-text{font-size:13.5px;line-height:1.55;color:var(--text-sec)}
+    .tl-text .hl,.tl-text .bl,.tl-text .gn,.tl-text .ac,.tl-text .gd{font-weight:600}
+    .hist-note{font-size:12px;color:var(--text-light);font-style:italic;margin-top:6px;border-top:1px dashed var(--border);padding-top:6px}
+    .nav{position:fixed;bottom:0;left:0;right:0;height:32px;background:var(--bg-sub);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;font-size:12px;color:var(--text-light);z-index:100}
+    .nav .prog{position:absolute;top:0;left:0;height:3px;background:var(--accent);transition:width .3s ease}
+    .step-dots{display:flex;gap:5px;align-items:center}
+    .step-dot{width:7px;height:7px;background:var(--border);transition:background .2s}
+    .step-dot.done{background:var(--accent)}.step-dot.cur{background:var(--red)}
+    @media(max-width:768px){.slide{padding:20px 16px}.st{font-size:26px}.sc h2{font-size:20px}.sc p{font-size:14px}.twocol{grid-template-columns:1fr}.choices{grid-template-columns:repeat(2,1fr)}.tl-text{font-size:12px}.tl-year{font-size:11px}}
+  </style>
+</head>
+<body>
+
+<div class="slide active" id="s1">
+  <div class="st">运动在对称操作下的不变性</div>
+  <div class="ssub">Invariance of Motion Under Symmetry Operations</div>
+</div>
+
+<div class="slide" id="s2">
+  <div class="sc">
+    <h2>核心猜想</h2>
+    <div class="cbox">
+      <p class="en-dim" style="font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:15px">"One problem could be converted to another problem by taking limited symmetrical operation, which would give me a result <span class="hl">absolutely the same</span> but could appear by <span class="bl">totally different ways</span>."</p>
+      <p style="margin-top:8px">一个问题可以通过有限的对称操作转化为另一个问题，给出<span class="hl">完全相同的结果</span>，但以<span class="bl">完全不同的方式</span>呈现。</p>
+    </div>
+    <p style="margin-top:14px;text-align:center">两个案例展示这一猜想：</p>
+    <div class="twocol" style="margin-top:8px">
+      <div class="cbox2" style="border-left:3px solid var(--blue)">
+        <h4 style="color:var(--blue)">案例一：匀速游动的鱼</h4>
+        <p>对称操作：<span class="ac">惯性系切换</span></p>
+      </div>
+      <div class="cbox2" style="border-left:3px solid var(--green)">
+        <h4 style="color:var(--green)">案例二：凹凸轨道</h4>
+        <p>对称操作：<span class="ac">旋转 + 对称性破缺</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s3">
+  <div class="sc">
+    <h2>案例一：匀速游动的鱼</h2>
+    <p>一条鱼以恒定速度向左游动，水对鱼的作用力方向是？</p>
+    <div class="dcon">
+      <svg width="400" height="90" viewBox="0 0 400 90">
+        <rect x="10" y="5" width="380" height="80" fill="var(--bg-sub)" stroke="var(--border)"/>
+        <ellipse cx="240" cy="45" rx="48" ry="22" fill="var(--accent)" opacity=".1" stroke="var(--accent)" stroke-width="2"/>
+        <circle cx="202" cy="40" r="3.5" fill="var(--accent)"/>
+        <path d="M288 45 L308 30 L308 60 Z" fill="var(--accent)"/>
+        <line x1="160" y1="45" x2="60" y2="45" stroke="#2980b9" stroke-width="2.5" marker-end="url(#aB)"/>
+        <text x="70" y="37" font-size="13" fill="#2980b9" font-weight="600">v (恒定)</text>
+        <defs><marker id="aB" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#2980b9"/></marker><marker id="aR" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c0392b"/></marker></defs>
+      </svg>
+    </div>
+    <div class="choices">
+      <div class="ch" id="chA">(A) ← F</div>
+      <div class="ch" id="chB">(B) ↗ F</div>
+      <div class="ch" id="chC">(C) ↑ F</div>
+      <div class="ch" id="chD">(D) ↖ F</div>
+    </div>
+    <div data-step="1" class="cbox" style="border-color:var(--blue)">
+      <p>牛顿第一定律的深层含义：</p>
+      <p><span class="hl">匀速直线运动与静止在物理上完全等价</span></p>
+      <p style="font-size:14px;color:var(--text-light);margin-top:3px">→ 无法从实验上区分二者</p>
+    </div>
+    <div data-step="2" class="flow">
+      <div class="fb">匀速运动</div><div class="ar">→</div>
+      <div class="fb" style="border-color:var(--green);color:var(--green)">≡ 静止</div><div class="ar">→</div>
+      <div class="fb">水的作用力 = 平衡重力 = <span class="gn">↑</span></div>
+    </div>
+    <div data-step="3" style="text-align:center;margin-top:6px">
+      <p>对称操作：<span class="ac">惯性系切换</span>（伽利略变换）</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s4">
+  <div class="sc">
+    <h2>案例二：凹凸轨道</h2>
+    <p>两个相同的圆弧轨道，一凹一凸，关于水平线对称。相同小球以相同速度释放，无能量损耗。哪个先到？</p>
+    <div class="dcon">
+      <svg width="440" height="280" viewBox="0 0 440 280">
+        <defs>
+          <marker id="aR4" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c0392b"/></marker>
+          <marker id="aB4" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#2980b9"/></marker>
+        </defs>
+        <path d="M70 65 Q220 5 370 65" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+        <text x="160" y="35" font-size="13" fill="var(--accent)" font-weight="600">凸轨道（先上后下）</text>
+        <circle cx="70" cy="57" r="7" fill="#2980b9"/>
+        <line x1="70" y1="57" x2="115" y2="48" stroke="#2980b9" stroke-width="2" marker-end="url(#aB4)"/>
+        <text x="100" y="42" font-size="12" fill="#2980b9" font-weight="600">v₀</text>
+        <line x1="30" y1="140" x2="410" y2="140" stroke="var(--text-light)" stroke-width="1" stroke-dasharray="6,4"/>
+        <text x="415" y="144" font-size="11" fill="var(--text-light)">对称轴</text>
+        <path d="M70 215 Q220 275 370 215" fill="none" stroke="var(--green)" stroke-width="2.5"/>
+        <text x="160" y="265" font-size="13" fill="var(--green)" font-weight="600">凹轨道（先下后上）</text>
+        <circle cx="70" cy="207" r="7" fill="#2980b9"/>
+        <line x1="70" y1="207" x2="115" y2="216" stroke="#2980b9" stroke-width="2" marker-end="url(#aB4)"/>
+        <text x="100" y="224" font-size="12" fill="#2980b9" font-weight="600">v₀</text>
+        <line x1="220" y1="95" x2="220" y2="185" stroke="#c0392b" stroke-width="2" marker-end="url(#aR4)"/>
+        <text x="228" y="148" font-size="14" fill="#c0392b" font-weight="700">g</text>
+      </svg>
+    </div>
+    <div class="choices" style="max-width:480px">
+      <div class="ch" id="chE">(A) 凸轨道先到</div>
+      <div class="ch" id="chF">(B) 凹轨道先到</div>
+      <div class="ch" id="chG">(C) 同时到达</div>
+      <div class="ch" id="chH">(D) 无法确定</div>
+    </div>
+    <div data-step="1" style="text-align:center;margin-top:8px">
+      <p>重力向下 → <span class="hl">破坏了对称性</span> → 两球到达时间不同</p>
+    </div>
+    <div data-step="2" class="cbox" style="border-color:var(--green)">
+      <p>答案：<span class="gn">(B) 凹轨道先到</span></p>
+      <p style="font-size:14px;color:var(--text-sec);margin-top:2px">为什么？→ 用对称操作分析</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s5">
+  <div class="sc">
+    <h2>对称性破缺分析</h2>
+    <div class="dcon">
+      <svg width="420" height="260" viewBox="0 -20 420 300" style="overflow:visible">
+        <defs><marker id="aR5" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#c0392b"/></marker></defs>
+        <g id="apparatus" style="transform-origin:210px 130px;transform-box:view-box;transition:transform .8s cubic-bezier(.4,0,.2,1)">
+          <line x1="20" y1="130" x2="400" y2="130" stroke="var(--text-light)" stroke-width="1" stroke-dasharray="6,4"/>
+          <path id="blueSolid" d="M60 55 Q210 0 360 55" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+          <circle cx="60" cy="48" r="6" fill="#2980b9"/>
+          <path id="greenSolidOrig" d="M60 205 Q210 260 360 205" fill="none" stroke="var(--green)" stroke-width="2.5"/>
+          <circle id="greenBallOrig" cx="60" cy="198" r="6" fill="#2980b9"/>
+          <path id="greenSolidShift" d="M60 215 Q210 270 360 215" fill="none" stroke="var(--green)" stroke-width="2.5" style="opacity:0"/>
+          <circle id="greenBallShift" cx="60" cy="208" r="6" fill="#2980b9" style="opacity:0"/>
+          <path id="greenDashed" d="M60 205 Q210 260 360 205" fill="none" stroke="var(--green)" stroke-width="2" stroke-dasharray="8,4" style="opacity:0"/>
+          <path id="blueDashed" d="M60 45 Q210 -10 360 45" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="8,4" style="opacity:0"/>
+        </g>
+        <line id="fixedGrav" x1="210" y1="75" x2="210" y2="185" stroke="#c0392b" stroke-width="2" marker-end="url(#aR5)"/>
+        <text x="218" y="136" font-size="14" fill="#c0392b" font-weight="700">g</text>
+      </svg>
+    </div>
+    <div data-step="1" class="sflow">
+      <div class="s"><div class="sn">1</div><div class="stx">将装置旋转 90°，使<span class="gn">重力方向与对称轴共线</span></div></div>
+    </div>
+    <div data-step="2" class="sflow">
+      <div class="s"><div class="sn">2</div><div class="stx">绿色实线轨道向左平移，其右侧添加绿色虚线轨道 → 与蓝色实线<span class="ac">对称</span>；蓝色侧同理 → 形成<span class="ac">"双壁"通道</span></div></div>
+    </div>
+    <div data-step="3" class="sflow">
+      <div class="s"><div class="sn">3</div><div class="stx">此时问题<span class="ac">完全对称</span>——两球<span class="gn">同时到达</span></div></div>
+    </div>
+    <div data-step="4" class="sflow">
+      <div class="s"><div class="sn">4</div><div class="stx">旋转回原位 = <span class="hl">旋转力场偏离对称轴</span> = 对称性破缺</div></div>
+    </div>
+    <div data-step="5" class="sflow">
+      <div class="s"><div class="sn">5</div><div class="stx">力场偏向凹轨道 → 凹轨道上的球在运动方向受更多<span class="hl">正功</span> → 平均速度更大 → <span class="gn">凹轨道的球先到达</span></div></div>
+    </div>
+    <div data-step="6" class="cbox" style="border-color:var(--red);padding:10px 18px">
+      <p style="font-size:15px">对称 → 对称结果　<span class="hl">破缺对称性 → 偏离对称结果</span>　偏离方向 = 破缺方向</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s6">
+  <div class="sc">
+    <h2>对称性的物理学史（一）：前诺特时代</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">公元前 5 世纪</div>
+        <div class="tl-text">毕达哥拉斯学派提出<span class="ac">"万物皆数"</span>，认为宇宙的本质是数学和谐</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">公元前 4 世纪</div>
+        <div class="tl-text">柏拉图《蒂迈欧篇》用五种<span class="ac">正多面体</span>与元素对应（正四面体=火、正六面体=土、正八面体=气、正二十面体=水、正十二面体=宇宙），将对称性视为宇宙完美性的体现</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1596 / 1619</div>
+        <div class="tl-text">开普勒试图用五个柏拉图立体嵌套解释行星轨道间距；在《世界的和谐》中将行星角速度比对应<span class="ac">音乐协和音程</span>，行星运动第三定律正是此书的副产品</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1632</div>
+        <div class="tl-text">伽利略在《两大世界体系对话》中通过"船舱"思想实验阐述<span class="bl">相对性原理</span>——物理定律在所有匀速直线运动的参考系中保持不变，这是最早被明确表述的物理学对称性</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1687</div>
+        <div class="tl-text">牛顿在《自然哲学的数学原理》中明确阐述了伽利略相对性原理，其运动方程天然具有<span class="ac">空间平移、旋转和时间平移不变性</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">18–19 世纪</div>
+        <div class="tl-text">拉格朗日与哈密顿建立分析力学，拉格朗日量 $L = T - V$ 的引入使对称性可通过<span class="ac">变分原理</span>来研究</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1864</div>
+        <div class="tl-text">麦克斯韦揭示电磁现象的统一，其方程具有<span class="ac">洛伦兹对称性</span>，为狭义相对论奠定基础</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1899–1905</div>
+        <div class="tl-text">洛伦兹引入变换雏形（1899），庞加莱完善数学形式并命名<span class="ac">"洛伦兹变换"</span>（1905）</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1905 / 1915</div>
+        <div class="tl-text">爱因斯坦：狭义相对论将洛伦兹对称性提升为时空基本属性；广义相对论提出<span class="ac">广义协变性原理</span>——物理定律在任意坐标变换下保持不变，直接催生了诺特定理</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s7">
+  <div class="sc">
+    <h2>对称性的物理学史（二）：诺特定理</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1915</div>
+        <div class="tl-text">广义相对论发表后，<span class="hl">能量守恒定律是否成立</span>成为困扰物理学界的核心问题。希尔伯特和克莱因将此问题交给了艾米·诺特（Emmy Noether）</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">背景</div>
+        <div class="tl-text">诺特是20世纪最伟大的女数学家之一，在哥廷根长期因性别限制无法获得正式教职。希尔伯特以自己的名义开课让她讲授，据说在教授会议上说：<span class="ac">"大学又不是澡堂！"</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1918.7.26</div>
+        <div class="tl-text">因女性身份无法成为哥廷根皇家科学学会成员，论文由<span class="ac">克莱因代为宣读</span>。论文《不变变分问题》仅十几页，却彻底改变了物理学</div>
+      </div>
+    </div>
+    <div class="cbox" style="margin-top:10px;border-color:var(--blue);text-align:left">
+      <p><span class="bl">诺特第一定理</span>：若作用量在具有 $\rho$ 个参数的有限连续李群变换下保持不变，则存在 $\rho$ 个对应的守恒量</p>
+      <p style="margin-top:4px"><span class="bl">诺特第二定理</span>：若作用量在具有无穷多参数的局域变换群下保持不变，则运动方程之间满足一定的微分恒等式</p>
+    </div>
+    <div class="twocol" style="margin-top:8px">
+      <div class="cbox2" style="border-left:3px solid var(--accent)">
+        <h4 style="color:var(--accent)">对称性 → 守恒律</h4>
+        <p>时间平移 → 能量守恒</p>
+        <p>空间平移 → 动量守恒</p>
+        <p>空间旋转 → 角动量守恒</p>
+        <p>U(1) 规范 → 电荷守恒</p>
+      </div>
+      <div class="cbox2" style="border-left:3px solid var(--red)">
+        <h4 style="color:var(--red)">深刻意义</h4>
+        <p>在诺特定理之前，这些守恒律只是独立的实验定律</p>
+        <p>诺特定理揭示了它们的<span class="hl">共同起源</span>：宇宙时空和内在结构的对称性</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s8">
+  <div class="sc">
+    <h2>对称性的物理学史（三）：宇称不守恒</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1927</div>
+        <div class="tl-text">维格纳提出<span class="ac">宇称守恒定律</span>——物理定律在空间反射（镜像）变换下保持不变。此后30年，宇称守恒被视为不可动摇的基本定律</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1950s 初</div>
+        <div class="tl-text"><span class="gd">θ-τ 之谜</span>：两种奇异粒子 θ 和 τ 在质量、寿命、电荷、自旋上完全相同，但 θ 衰变为两个 π 介子（宇称 +1），τ 衰变为三个 π 介子（宇称 -1）。若宇称守恒，它们必须是不同粒子——但性质又完全一致</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1956.4</div>
+        <div class="tl-text">罗切斯特会议上，费曼替马丁·布洛克提问："如果宇称不守恒，那会有什么后果？"——启发了杨振宁和李政道</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1956.10.1</div>
+        <div class="tl-text">杨振宁和李政道在《物理评论》发表论文，系统检查后发现：<span class="hl">在弱相互作用中，宇称守恒从未被实验证实</span>，它只是先入为主的假设</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1956 底</div>
+        <div class="tl-text">吴健雄利用钴-60 原子核的 β 衰变实验，<span class="hl">首次证实弱相互作用中宇称不守恒</span>。她放弃了圣诞假期坚持推进实验</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1957</div>
+        <div class="tl-text">杨振宁和李政道获诺贝尔物理学奖，成为最早获此殊荣的华人科学家</div>
+      </div>
+    </div>
+    <div class="hist-note">泡利在实验结果出来前说："我不相信上帝是一个左撇子。"结果出来后他不得不承认自己错了。</div>
+  </div>
+</div>
+
+<div class="slide" id="s9">
+  <div class="sc">
+    <h2>对称性的物理学史（四）：自发对称破缺</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1957</div>
+        <div class="tl-text">BCS 超导理论提出。重要特征：超导态的基态<span class="hl">破坏了</span>电磁 U(1) 规范对称性，尽管拉格朗日量本身是规范不变的——这种"拉格朗日量对称，但基态不对称"的现象，被称为<span class="ac">自发对称破缺</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1960</div>
+        <div class="tl-text">南部阳一郎将超导中的自发对称破缺推广到粒子物理，与约纳-拉西尼奥建立<span class="ac">NJL 模型</span>，用动力学对称性破缺解释核子质量起源。被誉为"对称性破缺之父"</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1961</div>
+        <div class="tl-text">戈德斯通定理：连续整体对称性自发破缺时，必然产生<span class="ac">无质量的戈德斯通玻色子</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1963</div>
+        <div class="tl-text">安德森指出：在超导中，戈德斯通玻色子被光子<span class="ac">"吃掉"</span>，使光子获得有效质量——这正是希格斯机制在凝聚态物理中的前身</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1964</div>
+        <div class="tl-text">三组物理学家独立将此思想推广到相对论性场论——<span class="bl">希格斯机制</span>：局域规范对称性自发破缺时，戈德斯通玻色子被规范玻色子吃掉使其获得质量，同时产生有质量的<span class="bl">希格斯玻色子</span></div>
+      </div>
+    </div>
+    <div class="hist-note">三组：恩格勒 & 布罗特（8月）、希格斯（7月/9月）、古拉尔尼克 & 哈根 & 基布尔（10月）</div>
+  </div>
+</div>
+
+<div class="slide" id="s10">
+  <div class="sc">
+    <h2>对称性的物理学史（五）：现代发展</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1967 / 1968</div>
+        <div class="tl-text">温伯格（1967）和萨拉姆（1968）独立建立<span class="bl">电弱统一理论</span>，将希格斯机制与杨-米尔斯规范场论结合，预言 W⁺、W⁻、Z⁰ 规范玻色子</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1973</div>
+        <div class="tl-text">小林诚和益川敏英提出三代夸克混合矩阵中的复相位是<span class="hl">CP 破坏的必要且充分条件</span>，为解释宇宙物质-反物质不对称提供关键线索</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1983</div>
+        <div class="tl-text">CERN 发现 W 和 Z 玻色子，证实电弱统一理论</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">标准模型</div>
+        <div class="tl-text">基于 $\mathrm{SU(3) \times SU(2) \times U(1)}$ 规范对称性，描述所有已知基本粒子及其相互作用（除引力外）。所有基本粒子的质量都通过与希格斯场的相互作用获得</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2012.7.4</div>
+        <div class="tl-text">CERN 的 LHC 发现质量约 125 GeV 的新玻色子，与<span class="bl">希格斯玻色子</span>一致——标准模型最后一块拼图完成</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">宇宙学</div>
+        <div class="tl-text">暴胀理论：宇宙早期暴胀由标量场的<span class="ac">自发对称破缺</span>驱动；物质-反物质不对称与<span class="hl">CP 对称破缺</span>密切相关</div>
+      </div>
+    </div>
+    <div class="cbox" style="margin-top:8px;border-color:var(--accent);padding:10px 18px">
+      <p style="font-size:15px">宇宙的<span class="ac">秩序</span>来源于对称性，宇宙的<span class="hl">多样性</span>来源于对称破缺。而这一切，始于1918年诺特写下的那十几页纸。</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s11">
+  <div class="sc">
+    <h2>总结</h2>
+    <div class="twocol">
+      <div class="cbox2" style="border-left:3px solid var(--blue)">
+        <h4 style="color:var(--blue)">案例一：惯性系切换</h4>
+        <p>匀速运动 ≡ 静止</p>
+        <p>问题瞬间简化</p>
+        <p style="margin-top:4px;font-size:13px;color:var(--text-light)">基础：伽利略不变性</p>
+      </div>
+      <div class="cbox2" style="border-left:3px solid var(--green)">
+        <h4 style="color:var(--green)">案例二：对称性破缺</h4>
+        <p>先建立对称 → 再分析破缺</p>
+        <p>定性预测，无需计算</p>
+        <p style="margin-top:4px;font-size:13px;color:var(--text-light)">基础：对称性原理</p>
+      </div>
+    </div>
+    <div class="fbox" style="margin-top:14px;font-size:15px;line-height:1.7">
+      <p class="en-dim" style="font-size:14px">"One problem could be converted to another problem by taking limited symmetrical operation, which would give me a result <span class="hl">absolutely the same</span> but could appear by <span class="bl">totally different ways</span>."</p>
+      <p class="fbox-zh" style="margin-top:6px;font-size:15px;font-style:normal">一个问题可以通过有限的对称操作转化为另一个问题，给出<span class="hl">完全相同的结果</span>，但以<span class="bl">完全不同的方式</span>呈现。</p>
+    </div>
+    <div class="fbox fbox-zh" style="margin-top:6px;font-size:14px;line-height:1.7;font-style:normal">
+      <p>"简单模型拼凑"——所谓"拼凑"，是指将不同物理系统中的简单模型，通过有限的对称操作进行组合与映射，使得一个系统的已知结论可以直接迁移到另一个系统，而无需重新推导。</p>
+    </div>
+    <p style="margin-top:10px;text-align:center;font-size:13px;color:var(--text-light)">html/ppt 由 Trae CN 内置的 GLM-5.1 提供</p>
+  </div>
+</div>
+
+<div class="slide" id="s12">
+  <div class="st">谢谢</div>
+  <div class="ssub">Thank You</div>
+  <p style="text-align:center;color:var(--text-light);margin-top:36px;font-size:18px">Q &amp; A</p>
+</div>
+
+<div class="nav">
+  <div class="prog" id="prog"></div>
+  <span id="counter">1 / 12</span>
+  <div class="step-dots" id="stepDots"></div>
+  <span>← → 翻页 / 步进</span>
+</div>
+
+<script>
+(function(){
+  var slides=document.querySelectorAll('.slide');
+  var total=slides.length;
+  var cur=0,step=0;
+
+  function maxStep(i){
+    var m=0;
+    slides[i].querySelectorAll('[data-step]').forEach(function(el){
+      var s=parseInt(el.getAttribute('data-step'));
+      if(s>m)m=s;
+    });
+    return m;
+  }
+
+  function updSteps(i,s){
+    slides[i].querySelectorAll('[data-step]').forEach(function(el){
+      var ns=parseInt(el.getAttribute('data-step'));
+      if(ns<=s)el.classList.add('vis');
+      else el.classList.remove('vis');
+    });
+
+    if(i===2){
+      var c=document.getElementById('chC');
+      if(c){if(s>=2)c.classList.add('ok');else c.classList.remove('ok');}
+    }
+    if(i===3){
+      var f=document.getElementById('chF');
+      if(f){if(s>=2)f.classList.add('ok');else f.classList.remove('ok');}
+    }
+
+    if(i===4){
+      var app=document.getElementById('apparatus');
+      var gso=document.getElementById('greenSolidOrig');
+      var gbo=document.getElementById('greenBallOrig');
+      var gss=document.getElementById('greenSolidShift');
+      var gbs=document.getElementById('greenBallShift');
+      var gd=document.getElementById('greenDashed');
+      var bd=document.getElementById('blueDashed');
+
+      if(app){
+        if(s>=1&&s<=3)app.style.transform='rotate(90deg)';
+        else app.style.transform='rotate(0deg)';
+      }
+
+      var showMirror=(s>=2&&s<=3);
+      if(gso)gso.style.opacity=showMirror?'0':'1';
+      if(gbo)gbo.style.opacity=showMirror?'0':'1';
+      if(gss)gss.style.opacity=showMirror?'1':'0';
+      if(gbs)gbs.style.opacity=showMirror?'1':'0';
+      if(gd)gd.style.opacity=showMirror?'1':'0';
+      if(bd)bd.style.opacity=showMirror?'1':'0';
+    }
+
+    updDots(i,s);
+  }
+
+  function updDots(i,s){
+    var ms=maxStep(i);
+    var box=document.getElementById('stepDots');
+    box.innerHTML='';
+    if(ms===0)return;
+    for(var d=1;d<=ms;d++){
+      var dot=document.createElement('div');
+      dot.className='step-dot';
+      if(d<s)dot.classList.add('done');
+      if(d===s)dot.classList.add('cur');
+      box.appendChild(dot);
+    }
+  }
+
+  function updUI(){
+    document.getElementById('counter').textContent=(cur+1)+' / '+total;
+    document.getElementById('prog').style.width=((cur+1)/total*100)+'%';
+  }
+
+  function goNext(){
+    var ms=maxStep(cur);
+    if(step<ms){step++;updSteps(cur,step);}
+    else if(cur<total-1){
+      slides[cur].classList.remove('active');
+      cur++;step=0;
+      slides[cur].classList.add('active');
+      updSteps(cur,0);updUI();
+      if(typeof MathJax!=='undefined'&&MathJax.typeset)setTimeout(function(){MathJax.typeset()},100);
+    }
+  }
+
+  function goPrev(){
+    if(step>0){step--;updSteps(cur,step);}
+    else if(cur>0){
+      slides[cur].classList.remove('active');
+      cur--;
+      step=maxStep(cur);
+      slides[cur].classList.add('active');
+      updSteps(cur,step);updUI();
+    }
+  }
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();goNext();}
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();goPrev();}
+    else if(e.key==='Home'){e.preventDefault();slides[cur].classList.remove('active');cur=0;step=0;slides[cur].classList.add('active');updSteps(cur,0);updUI();}
+    else if(e.key==='End'){e.preventDefault();slides[cur].classList.remove('active');cur=total-1;step=0;slides[cur].classList.add('active');updSteps(cur,0);updUI();}
+  });
+
+  updSteps(0,0);updUI();
+  if(typeof MathJax!=='undefined'&&MathJax.typeset)setTimeout(function(){MathJax.typeset()},1500);
+})();
+</script>
+</body>
+</html>

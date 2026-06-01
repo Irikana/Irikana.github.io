@@ -1076,12 +1076,14 @@ details details {
 
 ---
 
-## 11. 自动目录 — `.auto-toc`（内联式）
+## 11. 自动目录 — `.auto-toc`（已隐藏）
 
 **用途**：文章页内容区顶部的自动生成目录，根据页面 `<h2>`~`<h3>` 标题构建。由 `library-dynamic.js` 的 TOC 模块自动生成。
 
+> **变更说明**：内联目录（`.auto-toc`）现已默认隐藏（`display: none`），不再占用页面空间。目录功能完全由悬浮目录按钮（`#sl-toc-float-btn`）提供，点击左侧 📖 按钮即可弹出目录面板。
+
 **核心类名**：
-- `.auto-toc` — 目录容器
+- `.auto-toc` — 目录容器（已隐藏，仅作为数据源供悬浮按钮克隆）
 - `.auto-toc-header` — 标题栏（可点击展开/收起）
 - `.auto-toc-title` — "📖 目录" 文字
 - `.auto-toc-toggle` — 折叠三角按钮
@@ -1092,6 +1094,7 @@ details details {
 
 ```css
 .auto-toc {
+  display: none;
   background: linear-gradient(135deg, var(--color-bg-subtle), var(--color-bg-muted));
   border: 1px solid var(--color-border);
   padding: 14px 18px;
@@ -1138,8 +1141,9 @@ details details {
 
 **注意事项**：
 - 由 JS 自动生成，无需手写 HTML
-- 整个标题栏可点击展开/收起（手机端友好）
-- 点击目录项平滑滚动到对应标题，当前项高亮显示
+- 内联目录已隐藏（`display: none`），仅作为数据源供悬浮目录按钮克隆
+- 悬浮目录按钮始终可见，不再依赖滚动位置触发
+- 点击悬浮目录项平滑滚动到对应标题，当前项高亮显示
 
 ---
 
@@ -1285,13 +1289,13 @@ document.body.appendChild(bar);
 
 ## 16. 悬浮目录按钮 — `#sl-toc-float-btn` / `.sl-toc-float-panel`
 
-**用途**：当用户向下滚动、原始 TOC 目录离开视口时，左侧出现悬浮的 📖 按钮。点击弹出目录面板，无需回到页面顶部即可导航。
+**用途**：页面左侧始终可见的 📖 按钮。点击弹出目录面板，无需回到页面顶部即可导航。内联目录已隐藏，此按钮是访问目录的唯一方式。
 
 **核心组件**：
 
 | 元素 | 类名/ID | 说明 |
 |------|---------|------|
-| 触发按钮 | `#sl-toc-float-btn` | 固定在便携式导航仪右侧（left:44px），垂直居中 |
+| 触发按钮 | `#sl-toc-float-btn` | 固定在便携式导航仪右侧（left:44px），垂直居中，始终可见 |
 | 目录面板 | `#sl-toc-float-panel` | 点击按钮后滑出的浮动面板，含目录克隆 |
 | 面板头部 | `.sl-toc-panel-header` | "目录"标题 + 关闭按钮（×） |
 | 克隆列表 | `#toc-clone-list` | 原始 TOC 列表的深拷贝，独立于原始目录 |
@@ -1299,11 +1303,11 @@ document.body.appendChild(bar);
 **标准样式（style.css）关键要点**：
 
 ```css
-/* 按钮默认隐藏，TOC 离开视口后 .visible 显示 */
+/* 按钮始终可见（内联目录已隐藏） */
 #sl-toc-float-btn {
   position: fixed; left: 44px; top: 50%;
   transform: translateY(-50%) scale(0);
-  opacity: 0; /* 默认不可见 */
+  opacity: 0;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 #sl-toc-float-btn.visible { transform: translateY(-50%) scale(1); opacity: 1; }
@@ -1322,7 +1326,7 @@ document.body.appendChild(bar);
 ```
 
 **交互行为**：
-1. **监听滚动**：当原始 `#auto-toc` 的顶部滚到距视口顶部 60px 以内时（`rect.top < 60`），左侧自动出现 📖 按钮
+1. **始终可见**：悬浮目录按钮在页面加载后始终显示（内联目录已隐藏，不再依赖滚动触发）
 2. **点击按钮**：面板滑出 + 同步当前活跃章节高亮
 3. **点击目录项**：平滑滚动到对应章节 + 关闭面板 + 更新原始 TOC 高亮
 4. **IntersectionObserver 联动**：滚动经过章节时，同时更新原始 TOC 和克隆面板的高亮状态
