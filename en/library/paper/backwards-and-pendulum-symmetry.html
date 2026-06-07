@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shepherd's Library - Backwards and Pendulum Symmetry</title>
+  <meta name="description" content="Shepherd's Library - A Place for All Knowledge">
+  <meta name="keywords" content="library,knowledge,learning,shepherd">
+  <link rel="stylesheet" href="../../../css/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+
+<header class="gjs-row main-container">
+  <div class="gjs-cell logo-align">
+    <div class="logo-header-row">
+      <img src="../../../image/logo.png" alt="Shepherd's Library Logo" class="logo-border logo-container logo-img-custom">
+      <img src="../../../image/logo_text.png" alt="Shepherd's Library" class="logo-size logo-size-custom">
+    </div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left"><span class="slogan-text">A Place for All Knowledge</span><hr class="slogan-line slogan-line-right">
+    </div>
+    <h1 class="section-padding page-title-main">Backwards and Pendulum Symmetry</h1>
+  </div>
+</header>
+
+<main class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-main">
+
+      <div class="article-meta">
+        <div class="article-meta-item">
+          <span class="article-meta-label">Author:</span>
+          <span class="article-meta-value">KeDao Xue</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">Created:</span>
+          <span class="article-meta-value">May 19, 2026</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">Type:</span>
+          <span class="article-meta-value"><span class="article-type-badge">Handwritten Article</span></span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">Tags:</span>
+          <span class="article-meta-value"><span class="article-tag">Physics</span><span class="article-tag">Thinking</span></span>
+        </div>
+      </div>
+
+      <div class="left-align">
+  <p>I used to use a method to solve problems about proving equations or formulas, we call it <strong>"Backwards"</strong>. We use the equation given as conditions to prove back to what we already know by logically calculating. As a sample, for a single pendulum we want to prove $T=2\pi\sqrt{\dfrac{l}{g}}$, by using Backwards, we do this:</p>
+
+  <p>There is an set, so we square both sides of the equation, $(T)^2=(2\pi)^2\cdot\dfrac{l}{g}$ make it more simple, $gT^2=(2\pi)^2\cdot l$. Well, we could see an acceleration on the left side, that make us think about the Newton's second law $F=ma$, now we have an acceleration so we want to see what would happened if we create an $F$ into the equation. To do this, we times a mass on both sides of the equation, $mgT^2=m(2\pi)^2\cdot l$. Write down the second law more perfectly:</p>
+
+  <p style="text-align:center; margin:16px 0;">$$mg = m(2\pi)^2 \cdot l \cdot \dfrac{1}{T^2}$$</p>
+
+  <p>Wait, $\dfrac{(2\pi)^2}{T^2}$ is just the angular velocity $\omega=\dfrac{2\pi}{T}$ for the whole motion circle. Thus we have:</p>
+
+  <p style="text-align:center; margin:16px 0;">$$mg = m\omega^2 l$$</p>
+
+  <p>But it is NOT the correct $F=ma$ for the single pendulum, why is it? I actually found this problem in high school, then I had shown it to my mechanics teacher in university, professor pointed out the mistake out but I have completely forgot.</p>
+
+  <p>I was in high school, I tried to explain this situation, because I think, I believe there is a deep impressive relation between them. What I said was, the equation $mg=m\omega^2 l$ gives a kind of motion like one object doing around another object, created by gravity, see this Figure I.</p>
+
+  <p>Same, what we tried to prove, $T=2\pi\sqrt{\dfrac{l}{g}}$ gives what we know by a little, see Figure II, a single pendulum. I am a person who's very like to say the word "Symmetry", so I would like to say, there is a symmetry between Fig I and Fig II to make them absolutely the same, completely the same in some way so that we could get $mg=m\omega^2 l$ from $T=2\pi\sqrt{\dfrac{l}{g}}$.</p>
+
+  <p>By the day I graduated from my high school, I thought the symmetry is like, they are both doing motion around another object.</p>
+</div>
+
+      <div class="article-footer-meta">
+        <div class="article-footer-meta-item">
+          <span class="article-footer-label">Figure notes:</span>
+          <span class="article-footer-value">Fig I: Circular motion with gravity as centripetal force; Fig II: Simple pendulum motion</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>All Rights Reserved<br>Unauthorized reproduction, modification, or commercial use is prohibited<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">Navigator</div>
+  <div class="mobile-nav-links"><a href="../../index.html" class="mobile-nav-link">Home</a><a href="../intro.html" class="mobile-nav-link">Introduction</a><a href="../rule.html" class="mobile-nav-link">Rules</a><a href="../feature.html" class="mobile-nav-link">Features</a><a href="../../../navigator.html" target="_blank" class="mobile-nav-link">Navigator Hub</a></div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">Navigator</div>
+  <div class="quick-nav-hint">Hover to expand</div>
+  <div class="quick-nav-content"><a href="../../index.html" class="quick-nav-item">Home </a><a href="../intro.html" class="quick-nav-item">Introduction </a><a href="../rule.html" class="quick-nav-item">Rules </a><a href="../feature.html" class="quick-nav-item">Features </a>
+  </div>
+</div>
+
+<button title="Back to top" class="float-button back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  Back<br>to top
+</button>
+
+<button title="Navigator Hub" class="float-button nav-hub" onclick="window.open('../../../navigator.html', '_blank')">
+  Navigator<br>Hub
+</button>
+
+<script>
+const PAGE_DISPLAY_NAME = 'Backwards and Pendulum Symmetry';
+
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+function openNavigator() { window.open('../../../navigator.html', '_blank'); }
+
+function getCurrentPath() {
+  const path = window.location.pathname;
+  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
+  if (formattedPath === '' || formattedPath === 'index') { return 'Home'; }
+  const segments = formattedPath.split('/');
+  formattedPath = segments.map((segment, index) => {
+    const fileNameIndex = segment.lastIndexOf('.');
+    if (fileNameIndex > 0) { segment = segment.substring(0, fileNameIndex); }
+    if (index === segments.length - 1 && PAGE_DISPLAY_NAME) { return PAGE_DISPLAY_NAME; }
+    return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
+  }).join(' → ');
+  return formattedPath;
+}
+
+function scrollToSection(sectionId) { const s = document.getElementById(sectionId); if (s) s.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded'); quickNav.style.width = '32px'; quickNav.style.padding = '8px 4px';
+        const c = quickNav.querySelector('.quick-nav-content'); if (c) c.style.display = 'none';
+        const t = quickNav.querySelector('.quick-nav-title'); if (t) { t.style.writingMode = 'vertical-rl'; t.style.marginBottom = '4px'; t.style.paddingBottom = '0'; t.style.borderBottom = 'none'; }
+        const h = quickNav.querySelector('.quick-nav-hint'); if (h) h.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded'); quickNav.style.width = '180px'; quickNav.style.padding = '16px';
+        const c = quickNav.querySelector('.quick-nav-content'); if (c) c.style.display = 'block';
+        const t = quickNav.querySelector('.quick-nav-title'); if (t) { t.style.writingMode = 'horizontal-tb'; t.style.marginBottom = '16px'; t.style.paddingBottom = '8px'; t.style.borderBottom = '1px solid #e0e0e0'; }
+        const h = quickNav.querySelector('.quick-nav-hint'); if (h) h.style.display = 'none';
+      }
+    });
+  }
+  const currentPathElement = document.getElementById('current-path');
+  if (currentPathElement) { currentPathElement.textContent = getCurrentPath(); }
+  const btt = document.querySelector('.back-to-top'); if (btt) btt.addEventListener('click', scrollToTop);
+  const nh = document.querySelector('.nav-hub'); if (nh) nh.addEventListener('click', openNavigator);
+});
+</script>
+<script src="../../../js/library-dynamic.js"></script>
+</body>
+</html>

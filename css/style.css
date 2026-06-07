@@ -1501,7 +1501,7 @@ img {
   margin-left: 0;
   vertical-align: middle;
   letter-spacing: 0.5px;
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .article-type-badge {
@@ -4110,6 +4110,13 @@ details details {
 .story-work h3 {
   font-size: 17px;
   margin: 1.5em 0 0.8em;
+}
+
+.story-work .story-subtitle {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0.5em 0 0.8em;
+  color: var(--color-text-secondary);
 }
 
 .chapter-nav {

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年6月7日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">2026年6月7日 更新日志</div>
+  </div>
+</header>
+
+<main class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-06-07</div>
+      </div>
+
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-1" class="section-title-text-main">主馆变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>修复 border-radius 违反扁平化设计原则</strong></p>
+                <p>- 修复 css/style.css 中 .article-type-badge / .article-tag 的 border-radius: 2px → 0</p>
+                <p>- 修复 knowledge-hall/categories/phenomenon.html 中 .link-to-page 的 border-radius: 2px → 0</p>
+                <p>- 修复 knowledge-hall/categories/traceable.html 中 .link-to-page 的 border-radius: 2px → 0</p>
+                <p>- 同步修复 .trae/rules/visual-components.md 中4处 border-radius 违规（.function-box-blue、.article-tag、.kh-nav-item、.link-to-page）</p>
+                <p>- 涉及文件：css/style.css、knowledge-hall/categories/phenomenon.html、traceable.html、.trae/rules/visual-components.md</p>
+
+                <p><strong>新增4篇中文文章页面</strong></p>
+                <p>- 创建 library/paper/june-second-diary.html（六月二日，2026年6月2日，手写文章，标签：日记）</p>
+                <p>- 创建 library/paper/backwards-and-pendulum-symmetry.html（逆向法与单摆对称性，2026年5月19日，手写文章，标签：物理/思考）</p>
+                <p>- 创建 library/paper/backwards-sliding-problem.html（逆向法·下滑问题，2026年5月22日，手写文章，标签：物理/思考）</p>
+                <p>- 创建 library/paper/woke-up-late.html（睡过头，2026年4月10日，手写文章，标签：日记）</p>
+                <p>- 涉及文件：library/paper/june-second-diary.html、backwards-and-pendulum-symmetry.html、backwards-sliding-problem.html、woke-up-late.html</p>
+
+                <p><strong>新增4篇英文文章页面</strong></p>
+                <p>- 创建 en/library/paper/june-second-diary.html（June Second）</p>
+                <p>- 创建 en/library/paper/backwards-and-pendulum-symmetry.html（Backwards and Pendulum Symmetry）</p>
+                <p>- 创建 en/library/paper/backwards-sliding-problem.html（Backwards: The Sliding Problem）</p>
+                <p>- 创建 en/library/paper/woke-up-late.html（Woke Up Late）</p>
+                <p>- 英文版使用作者原文，保留作者英文表达风格</p>
+                <p>- 涉及文件：en/library/paper/june-second-diary.html、backwards-and-pendulum-symmetry.html、backwards-sliding-problem.html、woke-up-late.html</p>
+
+                <p><strong>更新新闻列表</strong></p>
+                <p>- 在 index.html 新闻区域添加4条新新闻卡片（六月二日、逆向法·下滑问题、逆向法与单摆对称性、睡过头）</p>
+                <p>- 在 news.html 新闻列表页添加4条新新闻条目</p>
+                <p>- 在 en/index.html 新闻区域添加4条英文新闻卡片</p>
+                <p>- 在 en/news.html 新闻列表页添加4条英文新闻条目</p>
+                <p>- 涉及文件：index.html、news.html、en/index.html、en/news.html</p>
+
+                <p><strong>新增 MathJax 数学公式渲染</strong></p>
+                <p>- 为4篇含数学公式的文章页（中英文各2篇物理文章）添加 MathJax 3 支持</p>
+                <p>- 将所有纯文本/Unicode 数学公式转换为 LaTeX 语法</p>
+                <p>- 行内公式使用 $...$，独立公式使用 $$...$$</p>
+                <p>- 涉及文件：library/paper/backwards-and-pendulum-symmetry.html、backwards-sliding-problem.html、en/library/paper/backwards-and-pendulum-symmetry.html、backwards-sliding-problem.html</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gjs-row notice-header page-header-section">
+        <div class="gjs-cell">
+          <div id="section-2" class="section-title-text-main">规范变更</div>
+          <div class="gjs-row content-bg-lightgrey">
+            <div class="gjs-cell">
+              <div class="left-align">
+
+                <p><strong>新增数学公式渲染规范</strong></p>
+                <p>- 在 .trae/rules/project_rules.md 中新增「数学公式渲染规范（MathJax）」章节</p>
+                <p>- 在 .trae/rules/visual-components.md 中新增第17节「数学公式渲染 — MathJax 3」</p>
+                <p>- 规范要求：全站数学公式统一使用 MathJax 3 渲染，禁止纯文本/Unicode 书写公式</p>
+                <p>- 涉及文件：.trae/rules/project_rules.md、.trae/rules/visual-components.md</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

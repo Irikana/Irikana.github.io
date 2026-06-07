@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 数学练习（一）— 参考解答</title>
+<meta name="description" content="牧羊人图书馆 - 数学练习（一）参考解答：代数与微积分">
+<meta name="keywords" content="图书馆,数学,练习,解答,代数,微积分,物理">
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+  .back-to-exercise {
+    margin: var(--space-md) 0 var(--space-xl) 0;
+    padding: var(--space-sm) var(--space-md);
+    border: var(--line-width) solid var(--color-accent);
+    display: inline-block;
+  }
+  .back-to-exercise a {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .back-to-exercise a:hover {
+    text-decoration: underline;
+  }
+  .solution-section {
+    margin: var(--space-xl) 0;
+    padding: var(--space-lg);
+    border: var(--line-width) solid var(--color-border);
+    background-color: var(--color-bg-subtle);
+  }
+  .solution-section h2 {
+    margin: 0 0 var(--space-md) 0;
+    padding-bottom: var(--space-sm);
+    border-bottom: 2px solid var(--color-accent);
+    font-size: 20px;
+    color: var(--color-accent);
+  }
+  .solution-item {
+    margin: var(--space-md) 0;
+    padding: var(--space-md);
+    border-left: 3px solid var(--color-accent);
+    background-color: var(--color-bg);
+    line-height: 2;
+  }
+  .solution-item .solution-label {
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-right: var(--space-sm);
+  }
+  .solution-item p {
+    margin: var(--space-xs) 0;
+  }
+  .solution-step {
+    margin: var(--space-sm) 0;
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--color-border);
+  }
+  .solution-result {
+    margin: var(--space-sm) 0;
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--color-bg-subtle);
+    border: var(--line-width) solid var(--color-border);
+    font-weight: 600;
+  }
+  .solution-note {
+    font-size: 14px;
+    color: var(--color-text-light);
+    font-style: italic;
+  }
+  .solution-divider {
+    border: none;
+    border-top: 1px dashed var(--color-border);
+    margin: var(--space-lg) 0;
+  }
+  .math-block {
+    overflow-x: auto;
+    padding: var(--space-sm) 0;
+  }
+  @media (prefers-color-scheme: dark) {
+    .solution-section {
+      background-color: var(--color-bg-muted);
+    }
+    .solution-item {
+      background-color: #1e1e1e;
+      border-left-color: #5d9ccc;
+    }
+    .solution-step {
+      border-left-color: #333;
+    }
+    .solution-result {
+      background-color: #222;
+      border-color: #444;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+<div class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../../../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../../../image/logo_text.png" class="logo-size logo-size-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">数学练习（一）— 参考解答</div>
+  </div>
+</div>
+</header>
+
+<main>
+<div class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-main">
+      <div class="article-meta">
+        <div class="article-meta-item">
+          <span class="article-meta-label">创建日期：</span>
+          <span class="article-meta-value">2026年6月7日</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">对应练习：</span>
+          <span class="article-meta-value">数学练习（一）</span>
+        </div>
+      </div>
+
+      <div class="left-align">
+        <p>本页面为数学练习（一）的参考解答。解法力求直接，不绕弯子。如果某步看不懂，回去翻课本——这里默认你基础概念已经会了。</p>
+      </div>
+
+      <div class="back-to-exercise">
+        <a href="exercise-01.html">← 返回练习页</a>
+      </div>
+
+      <!-- ===== 第一部分：线性代数 ===== -->
+      <div class="solution-section" id="linear-algebra">
+        <h2>一、线性代数</h2>
+
+        <!-- 第1题 -->
+        <div class="solution-item" id="sol-1">
+          <span class="solution-label">第 1 题解答</span>
+          <p>直接算特征多项式：</p>
+          <div class="math-block">
+            $$\det(A - \lambda I) = \begin{vmatrix} 2-\lambda & 1 & 0 \\ 0 & 2-\lambda & 1 \\ 0 & 0 & 3-\lambda \end{vmatrix} = (2-\lambda)^2(3-\lambda) = 0$$
+          </div>
+          <p>所以 $\lambda_1 = \lambda_2 = 2$（代数重数 2），$\lambda_3 = 3$。</p>
+
+          <div class="solution-step">
+            <p><strong>对 $\lambda = 2$：</strong></p>
+            <div class="math-block">
+              $$A - 2I = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 1 \end{pmatrix}$$
+            </div>
+            <p>秩为 2，零度为 1。解 $(A-2I)\mathbf{x} = \mathbf{0}$，得 $x_2 = 0,\; x_3 = 0$，$x_1$ 自由。特征向量 $\mathbf{v}_1 = (1, 0, 0)^T$。</p>
+            <p>几何重数 = 1 &lt; 代数重数 = 2。</p>
+          </div>
+
+          <div class="solution-step">
+            <p><strong>对 $\lambda = 3$：</strong></p>
+            <div class="math-block">
+              $$A - 3I = \begin{pmatrix} -1 & 1 & 0 \\ 0 & -1 & 1 \\ 0 & 0 & 0 \end{pmatrix}$$
+            </div>
+            <p>解得 $x_1 = x_2 = x_3$，特征向量 $\mathbf{v}_2 = (1, 1, 1)^T$。</p>
+          </div>
+
+          <div class="solution-result">
+            $\lambda = 2$（二重）对应特征向量 $(1,0,0)^T$；$\lambda = 3$ 对应特征向量 $(1,1,1)^T$。$\lambda = 2$ 的几何重数（1）&lt; 代数重数（2），故 $A$ <strong>不可对角化</strong>。
+          </div>
+        </div>
+
+        <!-- 第2题 -->
+        <div class="solution-item" id="sol-2">
+          <span class="solution-label">第 2 题解答</span>
+
+          <p><strong>(a)</strong> 特征多项式：</p>
+          <div class="math-block">
+            $$\det(B - \lambda I) = \begin{vmatrix} 1-\lambda & 2 & 0 \\ 2 & 1-\lambda & 0 \\ 0 & 0 & -1-\lambda \end{vmatrix} = [(1-\lambda)^2 - 4](-1-\lambda) = 0$$
+          </div>
+          <p>即 $(\lambda^2 - 2\lambda - 3)(-1-\lambda) = -(\lambda-3)(\lambda+1)^2 = 0$，所以 $\lambda_1 = 3$，$\lambda_2 = \lambda_3 = -1$。</p>
+
+          <div class="solution-step">
+            <p>$\lambda = 3$：$B - 3I = \begin{pmatrix} -2 & 2 & 0 \\ 2 & -2 & 0 \\ 0 & 0 & -4 \end{pmatrix}$，解得特征向量 $\propto (1, 1, 0)^T$。</p>
+            <p>$\lambda = -1$：$B + I = \begin{pmatrix} 2 & 2 & 0 \\ 2 & 2 & 0 \\ 0 & 0 & 0 \end{pmatrix}$，解得 $x_1 + x_2 = 0$，$x_3$ 自由。两个线性无关特征向量：$(1, -1, 0)^T$ 和 $(0, 0, 1)^T$。</p>
+          </div>
+
+          <p><strong>(b)</strong> 把三个特征向量归一化：</p>
+          <div class="math-block">
+            $$Q = \begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 \\ 0 & 0 & 1 \end{pmatrix}$$
+          </div>
+          <div class="math-block">
+            $$Q^T B Q = \mathrm{diag}(3,\, -1,\, -1)$$
+          </div>
+
+          <p><strong>(c)</strong> $B$ 是实对称矩阵，$B = Q \Lambda Q^T$，所以 $B^{10} = Q \Lambda^{10} Q^T$。</p>
+          <div class="math-block">
+            $$\Lambda^{10} = \mathrm{diag}(3^{10},\, (-1)^{10},\, (-1)^{10}) = \mathrm{diag}(59049,\, 1,\, 1)$$
+          </div>
+          <p>前两行前两列构成 $2 \times 2$ 块：</p>
+          <div class="math-block">
+            $$\frac{1}{2}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} \begin{pmatrix} 59049 & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 59049+1 & 59049-1 \\ 59049-1 & 59049+1 \end{pmatrix} = \begin{pmatrix} 29525 & 29524 \\ 29524 & 29525 \end{pmatrix}$$
+          </div>
+
+          <div class="solution-result">
+            $$B^{10} = \begin{pmatrix} 29525 & 29524 & 0 \\ 29524 & 29525 & 0 \\ 0 & 0 & 1 \end{pmatrix}$$
+          </div>
+        </div>
+
+        <!-- 第3题 -->
+        <div class="solution-item" id="sol-3">
+          <span class="solution-label">第 3 题解答</span>
+
+          <p><strong>(a)</strong> $G$ 是对角矩阵，对角元 $1, 2, 1, 3$ 全正。用 Sylvester 准则：各阶顺序主子式为 $1,\, 2,\, 2,\, 6$，全正。搞定，$G$ 正定。</p>
+
+          <p><strong>(b)</strong> 令 $\mathbf{v}_1 = \mathbf{e}_1 + \mathbf{e}_2 = (1,1,0,0)^T$，$\mathbf{v}_2 = \mathbf{e}_2 + \mathbf{e}_3 = (0,1,1,0)^T$，$\mathbf{v}_3 = \mathbf{e}_3 + \mathbf{e}_4 = (0,0,1,1)^T$。</p>
+
+          <div class="solution-step">
+            <p><strong>第一步：</strong>$\mathbf{u}_1 = \mathbf{v}_1 = (1,1,0,0)^T$</p>
+            <div class="math-block">
+              $$\langle \mathbf{u}_1, \mathbf{u}_1 \rangle = \mathbf{u}_1^T G \mathbf{u}_1 = 1 \cdot 1 + 2 \cdot 1 = 3$$
+            </div>
+          </div>
+
+          <div class="solution-step">
+            <p><strong>第二步：</strong></p>
+            <div class="math-block">
+              $$\langle \mathbf{v}_2, \mathbf{u}_1 \rangle = \mathbf{v}_2^T G \mathbf{u}_1 = 0 \cdot 1 + 2 \cdot 1 + 1 \cdot 0 = 2$$
+            </div>
+            <div class="math-block">
+              $$\mathbf{u}_2 = \mathbf{v}_2 - \frac{2}{3}\mathbf{u}_1 = (0,1,1,0)^T - \frac{2}{3}(1,1,0,0)^T = \left(-\frac{2}{3},\, \frac{1}{3},\, 1,\, 0\right)^T$$
+            </div>
+            <p>验证：$\langle \mathbf{u}_2, \mathbf{u}_1 \rangle = (-\frac{2}{3}) \cdot 1 + \frac{1}{3} \cdot 2 = 0$ ✓</p>
+            <div class="math-block">
+              $$\langle \mathbf{u}_2, \mathbf{u}_2 \rangle = \frac{4}{9} \cdot 1 + \frac{1}{9} \cdot 2 + 1 \cdot 1 = \frac{5}{3}$$
+            </div>
+          </div>
+
+          <div class="solution-step">
+            <p><strong>第三步：</strong></p>
+            <div class="math-block">
+              $$\langle \mathbf{v}_3, \mathbf{u}_1 \rangle = 0, \quad \langle \mathbf{v}_3, \mathbf{u}_2 \rangle = 0 \cdot \left(-\frac{2}{3}\right) \cdot 1 + 0 \cdot \frac{1}{3} \cdot 2 + 1 \cdot 1 \cdot 1 = 1$$
+            </div>
+            <div class="math-block">
+              $$\mathbf{u}_3 = \mathbf{v}_3 - \frac{1}{5/3}\mathbf{u}_2 = (0,0,1,1)^T - \frac{3}{5}\left(-\frac{2}{3},\, \frac{1}{3},\, 1,\, 0\right)^T = \left(\frac{2}{5},\, -\frac{1}{5},\, \frac{2}{5},\, 1\right)^T$$
+            </div>
+            <p>验证：$\langle \mathbf{u}_3, \mathbf{u}_1 \rangle = \frac{2}{5} - \frac{2}{5} = 0$ ✓，$\langle \mathbf{u}_3, \mathbf{u}_2 \rangle = -\frac{4}{15} - \frac{2}{15} + \frac{6}{15} = 0$ ✓</p>
+          </div>
+
+          <div class="solution-result">
+            <p>正交化结果：</p>
+            $$\mathbf{u}_1 = (1,\, 1,\, 0,\, 0)^T, \quad \mathbf{u}_2 = \left(-\frac{2}{3},\, \frac{1}{3},\, 1,\, 0\right)^T, \quad \mathbf{u}_3 = \left(\frac{2}{5},\, -\frac{1}{5},\, \frac{2}{5},\, 1\right)^T$$
+          </div>
+
+          <p><strong>(c)</strong> $W = \mathrm{span}\{(1,1,0,0)^T,\; (0,0,1,1)^T\}$。求 $W^\perp$：设 $\mathbf{v} = (a,b,c,d)^T$，需要</p>
+          <div class="math-block">
+            $$\langle \mathbf{v}, (1,1,0,0)^T \rangle = a + 2b = 0, \quad \langle \mathbf{v}, (0,0,1,1)^T \rangle = c + 3d = 0$$
+          </div>
+          <p>所以 $b = -a/2$，$d = -c/3$。两个自由变量 $a, c$。</p>
+
+          <div class="solution-result">
+            $$W^\perp = \mathrm{span}\left\{(2,\, -1,\, 0,\, 0)^T,\; (0,\, 0,\, 3,\, -1)^T\right\}$$
+          </div>
+        </div>
+
+        <!-- 第4题 -->
+        <div class="solution-item" id="sol-4">
+          <span class="solution-label">第 4 题解答</span>
+
+          <p><strong>(a)</strong> 直接写：</p>
+          <div class="solution-result">
+            $$C = \begin{pmatrix} 2 & 1 & 1 \\ 1 & 2 & 1 \\ 1 & 1 & 2 \end{pmatrix}$$
+          </div>
+
+          <p><strong>(b)</strong> 求特征值：</p>
+          <div class="math-block">
+            $$\det(C - \lambda I) = \begin{vmatrix} 2-\lambda & 1 & 1 \\ 1 & 2-\lambda & 1 \\ 1 & 1 & 2-\lambda \end{vmatrix} = 0$$
+          </div>
+          <p>令 $\mu = 2 - \lambda$，展开：</p>
+          <div class="math-block">
+            $$\mu^3 + 1 + 1 - \mu - \mu - \mu = \mu^3 - 3\mu + 2 = 0$$
+          </div>
+          <p>因式分解：$\mu^3 - 3\mu + 2 = (\mu - 1)^2(\mu + 2) = 0$，所以 $\mu = 1, 1, -2$，对应 $\lambda = 1, 1, 4$。</p>
+
+          <div class="solution-result">
+            标准形：$f = y_1^2 + y_2^2 + 4y_3^2$
+          </div>
+
+          <p><strong>(c)</strong> 三个特征值 $1, 1, 4$ 全正，所以 $f$ 是<strong>正定</strong>的。这就完了。</p>
+        </div>
+
+        <!-- 第5题 -->
+        <div class="solution-item" id="sol-5">
+          <span class="solution-label">第 5 题解答</span>
+
+          <p><strong>(a)</strong> 基 $\{E_{11}, E_{12}, E_{21}, E_{22}\}$，逐个算 $\mathcal{T}(E_{ij}) = AE_{ij} - E_{ij}A$：</p>
+
+          <div class="solution-step">
+            <p>$\mathcal{T}(E_{11}) = \begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} - \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}\begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix} = \begin{pmatrix} 0 & -2 \\ 0 & 0 \end{pmatrix} = -2E_{12}$</p>
+            <p>坐标：$(0, -2, 0, 0)^T$</p>
+          </div>
+
+          <div class="solution-step">
+            <p>$\mathcal{T}(E_{12}) = \begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix}\begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} - \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}\begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix} = \begin{pmatrix} 0 & -2 \\ 0 & 0 \end{pmatrix} = -2E_{12}$</p>
+            <p>坐标：$(0, -2, 0, 0)^T$</p>
+          </div>
+
+          <div class="solution-step">
+            <p>$\mathcal{T}(E_{21}) = \begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix}\begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix} - \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix} = \begin{pmatrix} 2 & 0 \\ 2 & -2 \end{pmatrix} = 2E_{11} + 2E_{21} - 2E_{22}$</p>
+            <p>坐标：$(2, 0, 2, -2)^T$</p>
+          </div>
+
+          <div class="solution-step">
+            <p>$\mathcal{T}(E_{22}) = \begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix}\begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix} - \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}\begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix} = \begin{pmatrix} 0 & 2 \\ 0 & 0 \end{pmatrix} = 2E_{12}$</p>
+            <p>坐标：$(0, 2, 0, 0)^T$</p>
+          </div>
+
+          <div class="solution-result">
+            $$M = \begin{pmatrix} 0 & 0 & 2 & 0 \\ -2 & -2 & 0 & 2 \\ 0 & 0 & 2 & 0 \\ 0 & 0 & -2 & 0 \end{pmatrix}$$
+          </div>
+
+          <p><strong>(b)</strong> $\ker(\mathcal{T})$：$AX = XA$，即 $X$ 与 $A$ 可交换。$A$ 有两个不同特征值 1 和 3，所以与 $A$ 可交换的矩阵必定是 $A$ 的多项式，即 $X = \alpha I + \beta A$。</p>
+          <div class="solution-result">
+            $$\ker(\mathcal{T}) = \mathrm{span}\left\{\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix},\; \begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix}\right\}, \quad \dim \ker(\mathcal{T}) = 2$$
+          </div>
+          <p>由秩-零度定理，$\dim \mathrm{Im}(\mathcal{T}) = 4 - 2 = 2$。从 $M$ 的列向量中取两个线性无关的即可，比如 $-2E_{12}$ 和 $2E_{11}+2E_{21}-2E_{22}$。</p>
+
+          <p><strong>(c)</strong> $\dim \ker(\mathcal{T}) + \dim \mathrm{Im}(\mathcal{T}) = 2 + 2 = 4 = \dim V$ ✓</p>
+        </div>
+      </div>
+
+      <hr class="solution-divider">
+
+      <!-- ===== 第二部分：多元微积分 ===== -->
+      <div class="solution-section" id="multivariable-calculus">
+        <h2>二、多元微积分</h2>
+
+        <!-- 第6题 -->
+        <div class="solution-item" id="sol-6">
+          <span class="solution-label">第 6 题解答</span>
+
+          <p>$D: x^2 + y^2 \leq 2x$，化极坐标。$x = r\cos\theta$，$y = r\sin\theta$，则 $r^2 \leq 2r\cos\theta$，即 $r \leq 2\cos\theta$，$\theta \in [-\pi/2, \pi/2]$。</p>
+          <div class="math-block">
+            $$\iint_D (x^2+y^2)\,dxdy = \int_{-\pi/2}^{\pi/2} \int_0^{2\cos\theta} r^2 \cdot r\,dr\,d\theta = \int_{-\pi/2}^{\pi/2} \left[\frac{r^4}{4}\right]_0^{2\cos\theta} d\theta = \int_{-\pi/2}^{\pi/2} 4\cos^4\theta\,d\theta$$
+          </div>
+          <p>偶函数，翻倍：</p>
+          <div class="math-block">
+            $$= 8\int_0^{\pi/2} \cos^4\theta\,d\theta$$
+          </div>
+          <p>用递推公式：$\int_0^{\pi/2} \cos^4\theta\,d\theta = \frac{3}{4} \cdot \frac{1}{2} \cdot \frac{\pi}{2} = \frac{3\pi}{16}$</p>
+
+          <div class="solution-result">
+            $$\iint_D (x^2+y^2)\,dxdy = 8 \cdot \frac{3\pi}{16} = \frac{3\pi}{2}$$
+          </div>
+        </div>
+
+        <!-- 第7题 -->
+        <div class="solution-item" id="sol-7">
+          <span class="solution-label">第 7 题解答</span>
+
+          <p>柱坐标，$\Omega$：$r^2 \leq z \leq 1$，$r$ 从 0 到 1，$\theta$ 从 0 到 $2\pi$。</p>
+          <div class="math-block">
+            $$\iiint_\Omega z\,dxdydz = \int_0^{2\pi} \int_0^1 \int_{r^2}^1 z \cdot r\,dz\,dr\,d\theta$$
+          </div>
+          <p>先对 $z$ 积分：</p>
+          <div class="math-block">
+            $$= 2\pi \int_0^1 r \cdot \left[\frac{z^2}{2}\right]_{r^2}^1 dr = 2\pi \int_0^1 r \cdot \frac{1 - r^4}{2}\,dr = \pi \int_0^1 (r - r^5)\,dr$$
+          </div>
+          <div class="math-block">
+            $$= \pi \left[\frac{r^2}{2} - \frac{r^6}{6}\right]_0^1 = \pi\left(\frac{1}{2} - \frac{1}{6}\right) = \frac{\pi}{3}$$
+          </div>
+
+          <div class="solution-result">
+            $$\iiint_\Omega z\,dxdydz = \frac{\pi}{3}$$
+          </div>
+        </div>
+
+        <!-- 第8题 -->
+        <div class="solution-item" id="sol-8">
+          <span class="solution-label">第 8 题解答</span>
+
+          <p>Green 公式：$\oint_C P\,dx + Q\,dy = \iint_D \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right) dxdy$</p>
+          <p>这里 $P = y^2$，$Q = x^2$，所以 $\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} = 2x - 2y$。</p>
+          <div class="math-block">
+            $$\oint_C (y^2\,dx + x^2\,dy) = \iint_D (2x - 2y)\,dxdy$$
+          </div>
+          <p>$D$ 是椭圆 $\frac{x^2}{4} + y^2 \leq 1$，关于 $x$ 轴和 $y$ 轴都对称。$2x$ 关于 $x$ 是奇函数，$2y$ 关于 $y$ 是奇函数，在对称区域上积分都是 0。</p>
+
+          <div class="solution-result">
+            $$\oint_C (y^2\,dx + x^2\,dy) = 0$$
+          </div>
+          <p class="solution-note">对称性秒杀，不用算。</p>
+        </div>
+
+        <!-- 第9题 -->
+        <div class="solution-item" id="sol-9">
+          <span class="solution-label">第 9 题解答</span>
+
+          <p>Gauss 散度定理：$\iint_S \mathbf{F} \cdot d\mathbf{S} = \iiint_\Omega \nabla \cdot \mathbf{F}\,dV$</p>
+          <div class="math-block">
+            $$\nabla \cdot \mathbf{F} = \frac{\partial x^3}{\partial x} + \frac{\partial y^3}{\partial y} + \frac{\partial z^3}{\partial z} = 3(x^2 + y^2 + z^2)$$
+          </div>
+          <p>球坐标代进去，$\Omega$ 是球 $x^2+y^2+z^2 \leq a^2$：</p>
+          <div class="math-block">
+            $$\iiint_\Omega 3(x^2+y^2+z^2)\,dV = 3\int_0^{2\pi}\int_0^\pi\int_0^a \rho^2 \cdot \rho^2 \sin\varphi\,d\rho\,d\varphi\,d\theta$$
+          </div>
+          <div class="math-block">
+            $$= 3 \cdot 2\pi \cdot 2 \cdot \frac{a^5}{5} = \frac{12\pi a^5}{5}$$
+          </div>
+
+          <div class="solution-result">
+            $$\iint_S \mathbf{F} \cdot d\mathbf{S} = \frac{12\pi a^5}{5}$$
+          </div>
+        </div>
+
+        <!-- 第10题 -->
+        <div class="solution-item" id="sol-10">
+          <span class="solution-label">第 10 题解答</span>
+
+          <p><strong>先算旋度：</strong></p>
+          <div class="math-block">
+            $$\nabla \times \mathbf{F} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ y & z & x \end{vmatrix} = (0-1,\, 0-1,\, 0-1) = (-1,\,-1,\,-1)$$
+          </div>
+
+          <p><strong>曲面积分：</strong></p>
+          <p>平面 $x+y+z=1$ 的单位法向量 $\hat{\mathbf{n}} = \frac{1}{\sqrt{3}}(1,1,1)$，三角形面积 $= \frac{\sqrt{3}}{2}$。</p>
+          <div class="math-block">
+            $$\iint_S (\nabla \times \mathbf{F}) \cdot d\mathbf{S} = \iint_S (-1,-1,-1) \cdot \frac{1}{\sqrt{3}}(1,1,1)\,dS = -\frac{3}{\sqrt{3}} \cdot \frac{\sqrt{3}}{2} = -\frac{3}{2}$$
+          </div>
+
+          <p><strong>曲线积分：</strong>$C$ 由三段组成。</p>
+
+          <div class="solution-step">
+            <p>$C_1: (1,0,0) \to (0,1,0)$，参数化 $\mathbf{r}(t) = (1-t,\,t,\,0)$，$d\mathbf{r} = (-1,1,0)\,dt$</p>
+            <div class="math-block">
+              $$\int_{C_1} \mathbf{F} \cdot d\mathbf{r} = \int_0^1 (t,\,0,\,1-t) \cdot (-1,1,0)\,dt = \int_0^1 (-t)\,dt = -\frac{1}{2}$$
+            </div>
+          </div>
+
+          <div class="solution-step">
+            <p>$C_2: (0,1,0) \to (0,0,1)$，参数化 $\mathbf{r}(t) = (0,\,1-t,\,t)$，$d\mathbf{r} = (0,-1,1)\,dt$</p>
+            <div class="math-block">
+              $$\int_{C_2} \mathbf{F} \cdot d\mathbf{r} = \int_0^1 (1-t,\,t,\,0) \cdot (0,-1,1)\,dt = \int_0^1 (-t)\,dt = -\frac{1}{2}$$
+            </div>
+          </div>
+
+          <div class="solution-step">
+            <p>$C_3: (0,0,1) \to (1,0,0)$，参数化 $\mathbf{r}(t) = (t,\,0,\,1-t)$，$d\mathbf{r} = (1,0,-1)\,dt$</p>
+            <div class="math-block">
+              $$\int_{C_3} \mathbf{F} \cdot d\mathbf{r} = \int_0^1 (0,\,1-t,\,t) \cdot (1,0,-1)\,dt = \int_0^1 (-t)\,dt = -\frac{1}{2}$$
+            </div>
+          </div>
+
+          <div class="solution-result">
+            <p>曲线积分：$\oint_C \mathbf{F} \cdot d\mathbf{r} = -\frac{1}{2} - \frac{1}{2} - \frac{1}{2} = -\frac{3}{2}$</p>
+            <p>曲面积分：$\iint_S (\nabla \times \mathbf{F}) \cdot d\mathbf{S} = -\frac{3}{2}$</p>
+            <p>两者相等，Stokes 定理验证完毕 ✓</p>
+          </div>
+        </div>
+
+        <!-- 第11题 -->
+        <div class="solution-item" id="sol-11">
+          <span class="solution-label">第 11 题解答</span>
+
+          <p>求驻点：</p>
+          <div class="math-block">
+            $$f_x = 3x^2 - 3y = 0, \quad f_y = -3x + 3y^2 = 0$$
+          </div>
+          <p>第一式：$y = x^2$。代入第二式：$-3x + 3x^4 = 0$，即 $3x(x^3 - 1) = 0$，所以 $x = 0$ 或 $x = 1$。</p>
+          <p>驻点：$(0, 0)$ 和 $(1, 1)$。</p>
+
+          <p>Hessian：</p>
+          <div class="math-block">
+            $$f_{xx} = 6x,\quad f_{yy} = 6y,\quad f_{xy} = -3$$
+            $$H = f_{xx} f_{yy} - f_{xy}^2 = 36xy - 9$$
+          </div>
+
+          <div class="solution-step">
+            <p>$(0,0)$：$H = 0 - 9 = -9 < 0$，<strong>鞍点</strong>。</p>
+          </div>
+          <div class="solution-step">
+            <p>$(1,1)$：$H = 36 - 9 = 27 > 0$，$f_{xx} = 6 > 0$，<strong>极小值点</strong>，$f(1,1) = -1$。</p>
+          </div>
+
+          <div class="solution-result">
+            $(0,0)$ 是鞍点；$(1,1)$ 是极小值点，$f(1,1) = -1$。
+          </div>
+        </div>
+
+        <!-- 第12题 -->
+        <div class="solution-item" id="sol-12">
+          <span class="solution-label">第 12 题解答</span>
+
+          <p>Lagrange 乘数法：$\nabla f = \lambda \nabla g$，其中 $g = x + y + z - 1$。</p>
+          <div class="math-block">
+            $$yz = \lambda, \quad xz = \lambda, \quad xy = \lambda$$
+          </div>
+          <p>三个方程两两相等：$yz = xz = xy$。假设 $x, y, z \neq 0$，由 $yz = xz$ 得 $y = x$，由 $xz = xy$ 得 $z = y$。所以 $x = y = z$。</p>
+          <p>代入约束 $x + y + z = 1$：$x = y = z = 1/3$。</p>
+
+          <div class="solution-result">
+            极大值 $f(1/3,\, 1/3,\, 1/3) = \dfrac{1}{27}$
+          </div>
+        </div>
+      </div>
+
+      <hr class="solution-divider">
+
+      <!-- ===== 第三部分：常微分方程 ===== -->
+      <div class="solution-section" id="ode">
+        <h2>三、常微分方程</h2>
+
+        <!-- 第13题 -->
+        <div class="solution-item" id="sol-13">
+          <span class="solution-label">第 13 题解答</span>
+
+          <p>特征方程：$r^2 + 4r + 5 = 0$</p>
+          <div class="math-block">
+            $$r = \frac{-4 \pm \sqrt{16 - 20}}{2} = -2 \pm i$$
+          </div>
+
+          <div class="solution-result">
+            $$y = e^{-2x}(C_1 \cos x + C_2 \sin x)$$
+          </div>
+          <p class="solution-note">共轭复根，直接套公式。</p>
+        </div>
+
+        <!-- 第14题 -->
+        <div class="solution-item" id="sol-14">
+          <span class="solution-label">第 14 题解答</span>
+
+          <p><strong>齐次解：</strong>特征方程 $r^2 - 2r + 1 = 0$，$r = 1$（二重根）。</p>
+          <div class="math-block">
+            $$y_h = (C_1 + C_2 x)e^x$$
+          </div>
+
+          <p><strong>特解：</strong>右端 $e^x \sin x$，$e^x$ 部分与齐次解重合但 $\sin x$ 不是齐次解，所以设 $y_p = e^x(A\sin x + B\cos x)$。</p>
+
+          <div class="solution-step">
+            <p>算导数：</p>
+            <div class="math-block">
+              $$y_p' = e^x[(A - B)\sin x + (A + B)\cos x]$$
+            </div>
+            <div class="math-block">
+              $$y_p'' = e^x[-2B\sin x + 2A\cos x]$$
+            </div>
+          </div>
+
+          <div class="solution-step">
+            <p>代入 $y'' - 2y' + y$：</p>
+            <div class="math-block">
+              $$e^x[(-2B - 2(A-B) + A)\sin x + (2A - 2(A+B) + B)\cos x]$$
+            </div>
+            <div class="math-block">
+              $$= e^x[(-A)\sin x + (-B)\cos x]$$
+            </div>
+            <p>令其等于 $e^x \sin x$：$-A = 1$，$-B = 0$，所以 $A = -1$，$B = 0$。</p>
+          </div>
+
+          <div class="solution-result">
+            $$y = (C_1 + C_2 x)e^x - e^x \sin x$$
+          </div>
+        </div>
+
+        <!-- 第15题 -->
+        <div class="solution-item" id="sol-15">
+          <span class="solution-label">第 15 题解答</span>
+
+          <p>Euler 方程，令 $x = e^t$，则 $xy' = Dy$，$x^2 y'' = D(D-1)y$，其中 $D = d/dt$。</p>
+          <p>代入：</p>
+          <div class="math-block">
+            $$D(D-1)y + Dy - y = e^{2t}$$
+            $$D^2 y - y = e^{2t}$$
+          </div>
+
+          <p><strong>齐次解：</strong>$r^2 - 1 = 0$，$r = \pm 1$。</p>
+          <div class="math-block">
+            $$y_h = C_1 e^t + C_2 e^{-t}$$
+          </div>
+
+          <p><strong>特解：</strong>设 $y_p = Ae^{2t}$，代入得 $4Ae^{2t} - Ae^{2t} = e^{2t}$，$3A = 1$，$A = 1/3$。</p>
+
+          <p>换回 $x$：$e^t = x$，$e^{-t} = 1/x$，$e^{2t} = x^2$。</p>
+
+          <div class="solution-result">
+            $$y = C_1 x + \frac{C_2}{x} + \frac{x^2}{3}$$
+          </div>
+        </div>
+
+        <!-- 第16题 -->
+        <div class="solution-item" id="sol-16">
+          <span class="solution-label">第 16 题解答</span>
+
+          <p>写成 $\mathbf{u}' = A\mathbf{u}$，$A = \begin{pmatrix} 2 & 1 \\ -1 & 2 \end{pmatrix}$。</p>
+
+          <p>特征值：$\det(A - \lambda I) = (2-\lambda)^2 + 1 = 0$，$\lambda = 2 \pm i$。</p>
+
+          <p>关键一步：注意到 $(A - 2I)^2 = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}^2 = -I$，所以可以用矩阵指数公式：</p>
+          <div class="math-block">
+            $$e^{At} = e^{2t}\left[I\cos t + (A - 2I)\sin t\right] = e^{2t}\begin{pmatrix} \cos t & \sin t \\ -\sin t & \cos t \end{pmatrix}$$
+          </div>
+
+          <div class="solution-result">
+            $$x(t) = e^{2t}(C_1 \cos t + C_2 \sin t)$$
+            $$y(t) = e^{2t}(-C_1 \sin t + C_2 \cos t)$$
+          </div>
+        </div>
+
+        <!-- 第17题 -->
+        <div class="solution-item" id="sol-17">
+          <span class="solution-label">第 17 题解答</span>
+
+          <p>设 $y = \sum_{n=0}^{\infty} a_n x^n$，则 $y'' = \sum_{n=0}^{\infty} (n+2)(n+1)a_{n+2} x^n$，$xy = \sum_{n=1}^{\infty} a_{n-1} x^n$。</p>
+
+          <p>代入 $y'' - xy = 0$：</p>
+          <div class="math-block">
+            $$2a_2 + \sum_{n=1}^{\infty} [(n+2)(n+1)a_{n+2} - a_{n-1}] x^n = 0$$
+          </div>
+          <p>所以 $a_2 = 0$，递推关系 $a_{n+2} = \dfrac{a_{n-1}}{(n+2)(n+1)}$（$n \geq 1$）。</p>
+
+          <p>$a_0$、$a_1$ 自由，由此得到两个线性无关解。</p>
+
+          <div class="solution-step">
+            <p><strong>解一</strong>（$a_0 = 1$，$a_1 = 0$）：</p>
+            <p>$a_2 = 0$，$a_3 = \frac{a_0}{6} = \frac{1}{6}$，$a_4 = \frac{a_1}{12} = 0$，$a_5 = \frac{a_2}{20} = 0$，$a_6 = \frac{a_3}{42} = \frac{1}{252}$</p>
+            <div class="math-block">
+              $$y_1 = 1 + \frac{x^3}{6} + \frac{x^6}{252} + \cdots$$
+            </div>
+          </div>
+
+          <div class="solution-step">
+            <p><strong>解二</strong>（$a_0 = 0$，$a_1 = 1$）：</p>
+            <p>$a_2 = 0$，$a_3 = \frac{a_0}{6} = 0$，$a_4 = \frac{a_1}{12} = \frac{1}{12}$，$a_5 = \frac{a_2}{20} = 0$，$a_6 = \frac{a_3}{42} = 0$，$a_7 = \frac{a_4}{56} = \frac{1}{672}$</p>
+            <div class="math-block">
+              $$y_2 = x + \frac{x^4}{12} + \frac{x^7}{672} + \cdots$$
+            </div>
+          </div>
+
+          <div class="solution-result">
+            $$y = C_1\left(1 + \frac{x^3}{6} + \frac{x^6}{252} + \cdots\right) + C_2\left(x + \frac{x^4}{12} + \frac{x^7}{672} + \cdots\right)$$
+          </div>
+        </div>
+      </div>
+
+      <hr class="solution-divider">
+
+      <!-- ===== 第四部分：复变函数 ===== -->
+      <div class="solution-section" id="complex-analysis">
+        <h2>四、复变函数</h2>
+
+        <!-- 第18题 -->
+        <div class="solution-item" id="sol-18">
+          <span class="solution-label">第 18 题解答</span>
+
+          <p>$|z|=2$ 内的极点：$z = 0$（一阶），$z = 1$（二阶）。</p>
+
+          <div class="solution-step">
+            <p><strong>$z = 0$：</strong></p>
+            <div class="math-block">
+              $$\mathrm{Res}(f, 0) = \lim_{z \to 0} z \cdot \frac{z^2+1}{z(z-1)^2} = \frac{1}{1} = 1$$
+            </div>
+          </div>
+
+          <div class="solution-step">
+            <p><strong>$z = 1$：</strong>二阶极点，</p>
+            <div class="math-block">
+              $$\mathrm{Res}(f, 1) = \lim_{z \to 1} \frac{d}{dz}\left[\frac{z^2+1}{z}\right] = \lim_{z \to 1}\left(1 - \frac{1}{z^2}\right) = 0$$
+            </div>
+          </div>
+
+          <div class="solution-result">
+            $$\oint_{|z|=2} \frac{z^2+1}{z(z-1)^2}\,dz = 2\pi i(1 + 0) = 2\pi i$$
+          </div>
+          <p class="solution-note">$z=1$ 处留数为 0，有点意外但算出来就是这样。</p>
+        </div>
+
+        <!-- 第19题 -->
+        <div class="solution-item" id="sol-19">
+          <span class="solution-label">第 19 题解答</span>
+
+          <p>极点：$z = i$，$z = -i$，$z = 2$，都在 $|z| = 3$ 内。</p>
+
+          <div class="solution-step">
+            <p><strong>$z = i$：</strong></p>
+            <div class="math-block">
+              $$\mathrm{Res}(f, i) = \frac{1}{(z+i)(z-2)}\bigg|_{z=i} = \frac{1}{2i(i-2)} = \frac{1}{-2-4i} = \frac{-2+4i}{20} = \frac{-1+2i}{10}$$
+            </div>
+          </div>
+
+          <div class="solution-step">
+            <p><strong>$z = -i$：</strong></p>
+            <div class="math-block">
+              $$\mathrm{Res}(f, -i) = \frac{1}{(z-i)(z-2)}\bigg|_{z=-i} = \frac{1}{(-2i)(-i-2)} = \frac{1}{-2+4i} = \frac{-2-4i}{20} = \frac{-1-2i}{10}$$
+            </div>
+          </div>
+
+          <div class="solution-step">
+            <p><strong>$z = 2$：</strong></p>
+            <div class="math-block">
+              $$\mathrm{Res}(f, 2) = \frac{1}{z^2+1}\bigg|_{z=2} = \frac{1}{5}$$
+            </div>
+          </div>
+
+          <p>三个留数之和：</p>
+          <div class="math-block">
+            $$\frac{-1+2i}{10} + \frac{-1-2i}{10} + \frac{1}{5} = \frac{-2}{10} + \frac{1}{5} = 0$$
+          </div>
+
+          <div class="solution-result">
+            $$\oint_{|z|=3} f(z)\,dz = 2\pi i \cdot 0 = 0$$
+          </div>
+          <p class="solution-note">留数之和恰好为零。其实 $f(z) \to 0$ as $z \to \infty$，无穷远处留数为零，有限奇点留数之和必为零。</p>
+        </div>
+
+        <!-- 第20题 -->
+        <div class="solution-item" id="sol-20">
+          <span class="solution-label">第 20 题解答</span>
+
+          <p>令 $z = e^{i\theta}$，则 $\cos\theta = \frac{z + z^{-1}}{2}$，$d\theta = \frac{dz}{iz}$。</p>
+          <div class="math-block">
+            $$\int_0^{2\pi} \frac{d\theta}{2+\cos\theta} = \oint_{|z|=1} \frac{1}{2 + \frac{z+z^{-1}}{2}} \cdot \frac{dz}{iz} = \oint_{|z|=1} \frac{2\,dz}{i(4z + z^2 + 1)}$$
+          </div>
+          <div class="math-block">
+            $$= -2i \oint_{|z|=1} \frac{dz}{z^2 + 4z + 1}$$
+          </div>
+
+          <p>$z^2 + 4z + 1 = 0$ 的根：$z = -2 \pm \sqrt{3}$。</p>
+          <p>$z_1 = -2 + \sqrt{3} \approx -0.268$（在 $|z|=1$ 内），$z_2 = -2 - \sqrt{3} \approx -3.732$（在 $|z|=1$ 外）。</p>
+
+          <div class="solution-step">
+            <div class="math-block">
+              $$\mathrm{Res}(z_1) = \frac{1}{z_1 - z_2} = \frac{1}{2\sqrt{3}}$$
+            </div>
+          </div>
+
+          <div class="math-block">
+            $$\oint_{|z|=1} \frac{dz}{z^2+4z+1} = 2\pi i \cdot \frac{1}{2\sqrt{3}} = \frac{\pi i}{\sqrt{3}}$$
+          </div>
+
+          <div class="solution-result">
+            $$\int_0^{2\pi} \frac{d\theta}{2+\cos\theta} = -2i \cdot \frac{\pi i}{\sqrt{3}} = \frac{2\pi}{\sqrt{3}} = \frac{2\sqrt{3}\pi}{3}$$
+          </div>
+        </div>
+
+        <!-- 第21题 -->
+        <div class="solution-item" id="sol-21">
+          <span class="solution-label">第 21 题解答</span>
+
+          <p>$f(z) = \bar{z}^2 = (x - iy)^2 = x^2 - y^2 - 2ixy$</p>
+          <p>所以 $u = x^2 - y^2$，$v = -2xy$。</p>
+
+          <p>Cauchy-Riemann 方程：</p>
+          <div class="math-block">
+            $$u_x = 2x, \quad v_y = -2x \quad \Rightarrow \quad u_x = v_y \text{ 仅当 } x = 0$$
+            $$u_y = -2y, \quad v_x = -2y \quad \Rightarrow \quad u_y = -v_x \text{ 仅当 } y = 0$$
+          </div>
+          <p>两个条件同时满足，仅当 $z = 0$。</p>
+
+          <p>在 $z = 0$ 处检查可导性：</p>
+          <div class="math-block">
+            $$f'(0) = \lim_{h \to 0} \frac{\bar{h}^2}{h} = \lim_{h \to 0} \frac{|h|^2 \bar{h}}{|h|^2} \cdot \frac{\bar{h}}{h} \cdot h$$
+          </div>
+          <p>更直接地：令 $h = re^{i\theta}$，则 $\bar{h}^2/h = r^2 e^{-2i\theta}/(re^{i\theta}) = re^{-3i\theta} \to 0$（$r \to 0$）。</p>
+          <p>所以 $f'(0) = 0$，在 $z=0$ 处可导。</p>
+
+          <p>但 $f$ 在 $z=0$ 的任何邻域内都不满足 C-R 方程，所以<strong>不解析</strong>。</p>
+
+          <div class="solution-result">
+            $f(z) = \bar{z}^2$ 仅在 $z = 0$ 处满足 C-R 方程且可导（$f'(0) = 0$），但在 $z=0$ 的任何邻域内不可导，故<strong>不解析</strong>。
+          </div>
+          <p class="solution-note">可导 ≠ 解析。解析要求在邻域内处处可导。</p>
+        </div>
+
+        <!-- 第22题 -->
+        <div class="solution-item" id="sol-22">
+          <span class="solution-label">第 22 题解答</span>
+
+          <p>直接展开 $e^z$ 再除以 $z^3$：</p>
+          <div class="math-block">
+            $$e^z = \sum_{n=0}^{\infty} \frac{z^n}{n!} = 1 + z + \frac{z^2}{2} + \frac{z^3}{6} + \frac{z^4}{24} + \cdots$$
+          </div>
+          <div class="math-block">
+            $$f(z) = \frac{e^z}{z^3} = \sum_{n=0}^{\infty} \frac{z^{n-3}}{n!} = \frac{1}{z^3} + \frac{1}{z^2} + \frac{1}{2z} + \frac{1}{6} + \frac{z}{24} + \cdots$$
+          </div>
+
+          <p>主部包含 $z^{-3}$、$z^{-2}$、$z^{-1}$ 三项，最高负幂次为 $z^{-3}$。</p>
+
+          <div class="solution-result">
+            Laurent 展开式：$f(z) = \dfrac{1}{z^3} + \dfrac{1}{z^2} + \dfrac{1}{2z} + \dfrac{1}{6} + \dfrac{z}{24} + \cdots$</p>
+            $z = 0$ 是<strong>三阶极点</strong>。
+          </div>
+        </div>
+      </div>
+
+      <div class="back-to-exercise" style="margin-top: var(--space-xl);">
+        <a href="exercise-01.html">← 返回练习页</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+<div class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../../../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../../intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../../rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../../feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../../../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../../../index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="../../intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="../../rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="../../feature.html" class="quick-nav-item">图书馆功能</a>
+    <div class="quick-nav-divider"></div>
+    <div class="quick-nav-section">本页目录</div>
+    <a href="#linear-algebra" class="quick-nav-item">一、线性代数</a>
+    <a href="#multivariable-calculus" class="quick-nav-item">二、多元微积分</a>
+    <a href="#ode" class="quick-nav-item">三、常微分方程</a>
+    <a href="#complex-analysis" class="quick-nav-item">四、复变函数</a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top" onclick="scrollToTop()">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub" onclick="openNavigator()">
+  导航<br>枢纽
+</button>
+
+<script>
+const PAGE_DISPLAY_NAME = '数学练习（一）— 参考解答';
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openNavigator() {
+  window.open('../../../navigator.html', '_blank');
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded'); quickNav.style.width = '32px'; quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content'); if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title'); if (title) { title.style.writingMode = 'vertical-rl'; title.style.marginBottom = '4px'; title.style.paddingBottom = '0'; title.style.borderBottom = 'none'; }
+        const hint = quickNav.querySelector('.quick-nav-hint'); if (hint) hint.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded'); quickNav.style.width = '180px'; quickNav.style.padding = '16px';
+        const content = quickNav.querySelector('.quick-nav-content'); if (content) content.style.display = 'block';
+        const title = quickNav.querySelector('.quick-nav-title'); if (title) { title.style.writingMode = 'horizontal-tb'; title.style.marginBottom = '16px'; title.style.paddingBottom = '8px'; title.style.borderBottom = '1px solid #e0e0e0'; }
+        const hint = quickNav.querySelector('.quick-nav-hint'); if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      }
+    });
+  }
+
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) { backToTopBtn.addEventListener('click', scrollToTop); }
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) { navHubBtn.addEventListener('click', openNavigator); }
+});
+</script>
+<script src="../../../js/library-dynamic.js"></script>
+</body>
+</html>

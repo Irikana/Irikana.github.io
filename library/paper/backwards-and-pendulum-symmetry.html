@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 逆向法与单摆对称性</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../../css/style.css">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header>
+<div class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../../image/logo_text.png" class="logo-size logo-size-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">逆向法与单摆对称性</div>
+  </div>
+</div>
+</header>
+
+<main>
+<div class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-main">
+      <div class="article-meta">
+        <div class="article-meta-item">
+          <span class="article-meta-label">作者：</span>
+          <span class="article-meta-value">薛柯道</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">创建日期：</span>
+          <span class="article-meta-value">2026年5月19日</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">文章类型：</span>
+          <span class="article-meta-value"><span class="article-type-badge">手写文章</span></span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">标签：</span>
+          <span class="article-meta-value"><span class="article-tag">物理</span><span class="article-tag">思考</span></span>
+        </div>
+      </div>
+
+      <div class="left-align">
+        <p>我过去常用一种方法来解决证明等式或公式的问题，我们称之为<strong>"逆向法"</strong>。我们把待证的等式当作已知条件，通过逻辑推导，反向推回到我们已经熟知的结论。</p>
+
+        <p>举个例子，如果我们要证明单摆的周期公式 $T=2\pi\sqrt{\dfrac{l}{g}}$，用逆向法的话，我们会这么做：</p>
+
+        <p>既然有了这个待证式，我们先把等式两边同时平方，得到 $T^2=(2\pi)^2\cdot\dfrac{l}{g}$，再整理一下，就变成 $gT^2=(2\pi)^2\cdot l$。</p>
+
+        <p>你看，等式左边出现了加速度 $g$，这会让我们想到牛顿第二定律 $F=ma$。既然有了加速度，我们就想试试在等式里引入力 $F$ 会发生什么。于是我们在等式两边同时乘以质量 $m$，得到 $mgT^2=m(2\pi)^2\cdot l$。再把它写成更符合牛顿第二定律的形式：</p>
+
+        <p style="text-align:center; margin:16px 0;">$$mg = m(2\pi)^2 \cdot l \cdot \dfrac{1}{T^2}$$</p>
+
+        <p>等等，$\dfrac{(2\pi)^2}{T^2}$ 不就是圆周运动的角速度 $\omega=\dfrac{2\pi}{T}$ 吗？这样一来我们就得到了：</p>
+
+        <p style="text-align:center; margin:16px 0;">$$mg = m\omega^2 l$$</p>
+
+        <p>但这并不是单摆正确的牛顿第二定律表达式啊，这是为什么呢？我高中时就发现了这个问题，后来上大学还拿给我的力学老师看过，教授当时指出了错误所在，但我现在已经完全记不清了。</p>
+
+        <p>高中时的我，一直试图解释这个现象，因为我坚信它们之间一定存在着某种深刻而奇妙的联系。我当时的想法是：$mg=m\omega^2 l$ 这个等式描述的是一种由重力提供向心力的圆周运动，就像图I里画的那样。</p>
+
+        <p>同样地，我们想要证明的 $T=2\pi\sqrt{\dfrac{l}{g}}$，描述的就是我们熟知的单摆运动，也就是图II。我是一个特别喜欢说"对称性"这个词的人，所以我当时认为：图I和图II之间存在着一种对称性，这种对称性让它们在某种意义上是完全等价的，这就是为什么我们能从单摆周期公式推导出 $mg=m\omega^2 l$。</p>
+
+        <p>直到高中毕业那天，我对这种对称性的理解还停留在：它们都是在绕着另一个物体做圆周运动。</p>
+      </div>
+
+      <div class="article-footer-meta">
+        <div class="article-footer-meta-item">
+          <span class="article-footer-label">图注：</span>
+          <span class="article-footer-value">图I：重力提供向心力的圆周运动；图II：单摆运动</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+<div class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub" onclick="window.open('../../navigator.html', '_blank')">
+  导航<br>枢纽
+</button>
+
+<script>
+const PAGE_DISPLAY_NAME = '逆向法与单摆对称性';
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+function openNavigator() {
+  window.open('../../navigator.html', '_blank');
+}
+
+function getCurrentPath() {
+  const path = window.location.pathname;
+  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
+
+  if (formattedPath === '' || formattedPath === 'index') {
+    return '首页';
+  }
+
+  const segments = formattedPath.split('/');
+  formattedPath = segments.map((segment, index) => {
+    const fileNameIndex = segment.lastIndexOf('.');
+    if (fileNameIndex > 0) {
+      segment = segment.substring(0, fileNameIndex);
+    }
+    if (index === segments.length - 1 && PAGE_DISPLAY_NAME) {
+      return PAGE_DISPLAY_NAME;
+    }
+    return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
+  }).join(' → ');
+
+  return formattedPath;
+}
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) { section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded');
+        quickNav.style.width = '180px';
+        quickNav.style.padding = '16px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'block';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'horizontal-tb';
+          title.style.marginBottom = '16px';
+          title.style.paddingBottom = '8px';
+          title.style.borderBottom = '1px solid #e0e0e0';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      }
+    });
+  }
+
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', scrollToTop);
+  }
+
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) {
+    navHubBtn.addEventListener('click', openNavigator);
+  }
+
+  const currentPathElement = document.getElementById('current-path');
+  if (currentPathElement) { currentPathElement.textContent = getCurrentPath(); }
+});
+</script>
+<script src="../../js/library-dynamic.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shepherd's Library - June Second</title>
+  <meta name="description" content="Shepherd's Library - A Place for All Knowledge">
+  <meta name="keywords" content="library,knowledge,learning,shepherd">
+  <link rel="stylesheet" href="../../../css/style.css">
+</head>
+<body>
+
+<header class="gjs-row main-container">
+  <div class="gjs-cell logo-align">
+    <div class="logo-header-row">
+      <img src="../../../image/logo.png" alt="Shepherd's Library Logo" class="logo-border logo-container logo-img-custom">
+      <img src="../../../image/logo_text.png" alt="Shepherd's Library" class="logo-size logo-size-custom">
+    </div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left"><span class="slogan-text">A Place for All Knowledge</span><hr class="slogan-line slogan-line-right">
+    </div>
+    <h1 class="section-padding page-title-main">June Second</h1>
+  </div>
+</header>
+
+<main class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-main">
+
+      <div class="article-meta">
+        <div class="article-meta-item">
+          <span class="article-meta-label">Author:</span>
+          <span class="article-meta-value">KeDao Xue</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">Created:</span>
+          <span class="article-meta-value">June 2, 2026</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">Type:</span>
+          <span class="article-meta-value"><span class="article-type-badge">Handwritten Article</span></span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">Tags:</span>
+          <span class="article-meta-value"><span class="article-tag">Diary</span></span>
+        </div>
+      </div>
+
+      <div class="left-align">
+        <p>I love my friends, I love to study, I hope things are going well.</p>
+        <p>I know what the most important thing in my life is.</p>
+        <p>I am willing to work hard for what matters most in my life.</p>
+        <p>I think I am a complete person. I have dreams, and I am working on them&mdash;even if it's just a little bit each day, I am living for that.</p>
+        <p>But sometimes, recently, I feel like the world is not prepared for me.</p>
+        <p>I want to have long hair and style it like a girl's. I want to wear girls' clothes, and I truly want to understand girls: curious about what it feels like to be them, and how they think.</p>
+        <p>I used to think this was a kind of love, but then I changed my mind. The love people talk about is boring, and completely different from what I feel. If I had to name it, I'd say it's more like a child's love, but more extreme.</p>
+        <p>It feels a little strange. I think most people around me are strange. Boys like girls, they might fall in love, but they never truly become like each other. Maybe this is just my prejudice; I don't talk much with people.</p>
+        <p>I haven't tried to fall in love. I used to have feelings and emotions, but actually no one talks to me that much.</p>
+        <p>I am sad, I feel pathetic, and anxious. But I am still going. Even if I just write down a few words every day, it is a step forward. And I have been sticking to this, every single day.</p>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>All Rights Reserved<br>Unauthorized reproduction, modification, or commercial use is prohibited<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">Navigator</div>
+  <div class="mobile-nav-links"><a href="../../index.html" class="mobile-nav-link">Home</a><a href="../intro.html" class="mobile-nav-link">Introduction</a><a href="../rule.html" class="mobile-nav-link">Rules</a><a href="../feature.html" class="mobile-nav-link">Features</a><a href="../../../navigator.html" target="_blank" class="mobile-nav-link">Navigator Hub</a></div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">Navigator</div>
+  <div class="quick-nav-hint">Hover to expand</div>
+  <div class="quick-nav-content"><a href="../../index.html" class="quick-nav-item">Home </a><a href="../intro.html" class="quick-nav-item">Introduction </a><a href="../rule.html" class="quick-nav-item">Rules </a><a href="../feature.html" class="quick-nav-item">Features </a>
+  </div>
+</div>
+
+<button title="Back to top" class="float-button back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  Back<br>to top
+</button>
+
+<button title="Navigator Hub" class="float-button nav-hub" onclick="window.open('../../../navigator.html', '_blank')">
+  Navigator<br>Hub
+</button>
+
+<script>
+const PAGE_DISPLAY_NAME = 'June Second';
+
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+function openNavigator() { window.open('../../../navigator.html', '_blank'); }
+
+function getCurrentPath() {
+  const path = window.location.pathname;
+  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
+  if (formattedPath === '' || formattedPath === 'index') { return 'Home'; }
+  const segments = formattedPath.split('/');
+  formattedPath = segments.map((segment, index) => {
+    const fileNameIndex = segment.lastIndexOf('.');
+    if (fileNameIndex > 0) { segment = segment.substring(0, fileNameIndex); }
+    if (index === segments.length - 1 && PAGE_DISPLAY_NAME) { return PAGE_DISPLAY_NAME; }
+    return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
+  }).join(' → ');
+  return formattedPath;
+}
+
+function scrollToSection(sectionId) { const s = document.getElementById(sectionId); if (s) s.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded'); quickNav.style.width = '32px'; quickNav.style.padding = '8px 4px';
+        const c = quickNav.querySelector('.quick-nav-content'); if (c) c.style.display = 'none';
+        const t = quickNav.querySelector('.quick-nav-title'); if (t) { t.style.writingMode = 'vertical-rl'; t.style.marginBottom = '4px'; t.style.paddingBottom = '0'; t.style.borderBottom = 'none'; }
+        const h = quickNav.querySelector('.quick-nav-hint'); if (h) h.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded'); quickNav.style.width = '180px'; quickNav.style.padding = '16px';
+        const c = quickNav.querySelector('.quick-nav-content'); if (c) c.style.display = 'block';
+        const t = quickNav.querySelector('.quick-nav-title'); if (t) { t.style.writingMode = 'horizontal-tb'; t.style.marginBottom = '16px'; t.style.paddingBottom = '8px'; t.style.borderBottom = '1px solid #e0e0e0'; }
+        const h = quickNav.querySelector('.quick-nav-hint'); if (h) h.style.display = 'none';
+      }
+    });
+  }
+  const currentPathElement = document.getElementById('current-path');
+  if (currentPathElement) { currentPathElement.textContent = getCurrentPath(); }
+  const btt = document.querySelector('.back-to-top'); if (btt) btt.addEventListener('click', scrollToTop);
+  const nh = document.querySelector('.nav-hub'); if (nh) nh.addEventListener('click', openNavigator);
+});
+</script>
+<script src="../../../js/library-dynamic.js"></script>
+</body>
+</html>

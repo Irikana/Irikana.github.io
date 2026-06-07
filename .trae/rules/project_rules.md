@@ -107,6 +107,39 @@ updateLog/
 - 保持响应式设计兼容（桌面端 / 平板 / 手机）
 - 支持暗色模式（`@media (prefers-color-scheme: dark)`）
 
+### 数学公式渲染规范（MathJax）
+- **全站数学公式统一使用 MathJax 3 渲染，禁止使用纯文本/Unicode 字符书写公式**
+- 任何页面中出现的数学表达式（变量、方程、公式等）都必须用 LaTeX 语法编写
+- 需要渲染数学公式的页面，在 `<head>` 中添加以下代码（放在 `</head>` 之前）：
+
+```html
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+```
+
+**行内公式**：用 `$...$` 包裹，如 `$F=ma$`、`$T=2\pi\sqrt{\dfrac{l}{g}}$`
+**独立公式**：用 `$$...$$` 包裹并居中显示，如：
+```html
+<p style="text-align:center; margin:16px 0;">$$E = mc^2$$</p>
+```
+
+**规范要求**：
+- 不含数学公式的页面不添加 MathJax（避免不必要的加载）
+- 独立公式段落不设置 `font-size`（由 MathJax 控制渲染尺寸）
+- 变量字母（如 $m$、$v$、$g$）也用 `$...$` 包裹，确保排版一致
+- 使用 `\dfrac` 而非 `\frac` 以保证分数在行内也有足够大小
+
+### 文件命名规范
+- **目录名和文件名一律使用英文**，禁止使用中文命名
+- 目录名使用小写连字符（kebab-case），如 `math-exercises`、`visual-components`
+- 文件名使用小写连字符，如 `exercise-01.html`、`answer-01.html`
+- 页面标题（`<title>` 和显示文本）可以使用中文，但文件路径必须为英文
+
 ### 文件组织
 ```
 Irikana.github.io/
@@ -119,7 +152,10 @@ Irikana.github.io/
 │   ├── rule.html           # 图书馆规则
 │   ├── feature.html        # 图书馆功能
 │   ├── library.html        # 图书馆入口
-│   └── paper/              # 文章
+│   ├── paper/              # 文章
+│   ├── works/              # 创作作品
+│   └── misc/               # 杂物（练习、笔记等）
+│       └── math-exercises/ # 数学练习
 ├── knowledge-hall/         # 知识馆（分馆）
 │   ├── index.html          # 知识馆主页
 │   └── categories/         # 知识分类

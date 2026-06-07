@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 数学练习（一）</title>
+<meta name="description" content="牧羊人图书馆 - 数学练习：代数与微积分">
+<meta name="keywords" content="图书馆,数学,练习,代数,微积分,物理">
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+  .exercise-section {
+    margin: var(--space-xl) 0;
+    padding: var(--space-lg);
+    border: var(--line-width) solid var(--color-border);
+    background-color: var(--color-bg-subtle);
+  }
+  .exercise-section h2 {
+    margin: 0 0 var(--space-md) 0;
+    padding-bottom: var(--space-sm);
+    border-bottom: 2px solid var(--color-accent);
+    font-size: 20px;
+    color: var(--color-accent);
+  }
+  .exercise-item {
+    margin: var(--space-md) 0;
+    padding: var(--space-md);
+    border-left: 3px solid var(--color-border-dark);
+    background-color: var(--color-bg);
+    line-height: 2;
+  }
+  .exercise-item .exercise-label {
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-right: var(--space-sm);
+  }
+  .exercise-item p {
+    margin: var(--space-xs) 0;
+  }
+  .exercise-sub {
+    margin: var(--space-sm) 0 var(--space-sm) var(--space-md);
+    padding-left: var(--space-sm);
+    border-left: 2px solid var(--color-border);
+  }
+  .exercise-hint {
+    font-size: 14px;
+    color: var(--color-text-light);
+    margin-top: var(--space-xs);
+    font-style: italic;
+  }
+  .exercise-divider {
+    border: none;
+    border-top: 1px dashed var(--color-border);
+    margin: var(--space-lg) 0;
+  }
+  .math-block {
+    overflow-x: auto;
+    padding: var(--space-sm) 0;
+  }
+  .answer-link-box {
+    margin: var(--space-xl) 0;
+    padding: var(--space-md);
+    border: var(--line-width) solid var(--color-accent);
+    text-align: center;
+  }
+  .answer-link-box a {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+  .answer-link-box a:hover {
+    text-decoration: underline;
+  }
+  @media (prefers-color-scheme: dark) {
+    .exercise-section {
+      background-color: var(--color-bg-muted);
+    }
+    .exercise-item {
+      background-color: #1e1e1e;
+      border-left-color: #444;
+    }
+    .exercise-sub {
+      border-left-color: #333;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+<div class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../../../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../../../image/logo_text.png" class="logo-size logo-size-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">数学练习（一）</div>
+  </div>
+</div>
+</header>
+
+<main>
+<div class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-main">
+      <div class="article-meta">
+        <div class="article-meta-item">
+          <span class="article-meta-label">创建日期：</span>
+          <span class="article-meta-value">2026年6月7日</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">难度：</span>
+          <span class="article-meta-value">本科二年级物理系</span>
+        </div>
+        <div class="article-meta-item">
+          <span class="article-meta-label">范围：</span>
+          <span class="article-meta-value">线性代数 · 多元微积分 · 微分方程 · 复变函数</span>
+        </div>
+      </div>
+
+      <div class="left-align">
+        <p>本页面为数学练习第一份，涵盖线性代数、多元微积分、常微分方程与复变函数的基础题目，难度面向本科二年级物理系学生。建议先独立完成，再核对答案。</p>
+      </div>
+
+      <!-- ===== 第一部分：线性代数 ===== -->
+      <div class="exercise-section" id="linear-algebra">
+        <h2>一、线性代数</h2>
+
+        <div class="exercise-item">
+          <span class="exercise-label">1.</span>
+          <p>求矩阵 $A$ 的特征值与特征向量，并判断 $A$ 是否可对角化：</p>
+          <div class="math-block">
+            $$A = \begin{pmatrix} 2 & 1 & 0 \\ 0 & 2 & 1 \\ 0 & 0 & 3 \end{pmatrix}$$
+          </div>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">2.</span>
+          <p>设 $\mathbb{R}^3$ 上的线性变换 $T$ 在标准基下的矩阵为：</p>
+          <div class="math-block">
+            $$B = \begin{pmatrix} 1 & 2 & 0 \\ 2 & 1 & 0 \\ 0 & 0 & -1 \end{pmatrix}$$
+          </div>
+          <div class="exercise-sub">
+            <p>(a) 求 $B$ 的全部特征值与对应的特征向量；</p>
+            <p>(b) 求正交矩阵 $Q$，使得 $Q^T B Q$ 为对角矩阵；</p>
+            <p>(c) 计算 $B^{10}$。</p>
+          </div>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">3.</span>
+          <p>在 $\mathbb{R}^4$ 中定义内积 $\langle \mathbf{u}, \mathbf{v} \rangle = \mathbf{u}^T G \mathbf{v}$，其中度量矩阵</p>
+          <div class="math-block">
+            $$G = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 2 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 3 \end{pmatrix}$$
+          </div>
+          <div class="exercise-sub">
+            <p>(a) 验证 $G$ 是正定矩阵；</p>
+            <p>(b) 对向量组 $\{\mathbf{e}_1 + \mathbf{e}_2,\; \mathbf{e}_2 + \mathbf{e}_3,\; \mathbf{e}_3 + \mathbf{e}_4\}$ 施以 Gram-Schmidt 正交化；</p>
+            <p>(c) 求子空间 $W = \mathrm{span}\{\mathbf{e}_1 + \mathbf{e}_2,\; \mathbf{e}_3 + \mathbf{e}_4\}$ 的正交补 $W^\perp$。</p>
+          </div>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">4.</span>
+          <p>设二次型 $f(x_1, x_2, x_3) = 2x_1^2 + 2x_2^2 + 2x_3^2 + 2x_1 x_2 + 2x_1 x_3 + 2x_2 x_3$。</p>
+          <div class="exercise-sub">
+            <p>(a) 写出该二次型的矩阵 $C$；</p>
+            <p>(b) 用正交变换将 $f$ 化为标准形；</p>
+            <p>(c) 判断 $f$ 的正定性。</p>
+          </div>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">5.</span>
+          <p>设 $V$ 为全体 $2 \times 2$ 实矩阵构成的线性空间，定义线性变换 $\mathcal{T}: V \to V$ 为 $\mathcal{T}(X) = AX - XA$，其中</p>
+          <div class="math-block">
+            $$A = \begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix}$$
+          </div>
+          <div class="exercise-sub">
+            <p>(a) 求 $\mathcal{T}$ 在基 $\{E_{11}, E_{12}, E_{21}, E_{22}\}$ 下的矩阵表示；</p>
+            <p>(b) 求 $\mathcal{T}$ 的核 $\ker(\mathcal{T})$ 与像 $\mathrm{Im}(\mathcal{T})$；</p>
+            <p>(c) 验证 $\dim \ker(\mathcal{T}) + \dim \mathrm{Im}(\mathcal{T}) = \dim V$。</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="exercise-divider">
+
+      <!-- ===== 第二部分：多元微积分 ===== -->
+      <div class="exercise-section" id="multivariable-calculus">
+        <h2>二、多元微积分</h2>
+
+        <div class="exercise-item">
+          <span class="exercise-label">6.</span>
+          <p>计算二重积分</p>
+          <div class="math-block">
+            $$\iint_D (x^2 + y^2) \, dx \, dy$$
+          </div>
+          <p>其中 $D$ 由 $x^2 + y^2 \leq 2x$ 所确定。</p>
+          <p class="exercise-hint">提示：化为极坐标。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">7.</span>
+          <p>计算三重积分</p>
+          <div class="math-block">
+            $$\iiint_\Omega z \, dx \, dy \, dz$$
+          </div>
+          <p>其中 $\Omega$ 由 $z = x^2 + y^2$ 与 $z = 1$ 所围成。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">8.</span>
+          <p>计算曲线积分</p>
+          <div class="math-block">
+            $$\oint_C (y^2 \, dx + x^2 \, dy)$$
+          </div>
+          <p>其中 $C$ 为椭圆 $\dfrac{x^2}{4} + y^2 = 1$，取逆时针方向。</p>
+          <p class="exercise-hint">提示：Green 公式。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">9.</span>
+          <p>计算曲面积分</p>
+          <div class="math-block">
+            $$\iint_S \mathbf{F} \cdot d\mathbf{S}, \quad \mathbf{F} = (x^3,\, y^3,\, z^3)$$
+          </div>
+          <p>其中 $S$ 为球面 $x^2 + y^2 + z^2 = a^2$ 的外侧。</p>
+          <p class="exercise-hint">提示：Gauss 散度定理。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">10.</span>
+          <p>验证 Stokes 定理：计算</p>
+          <div class="math-block">
+            $$\oint_C \mathbf{F} \cdot d\mathbf{r} \quad \text{与} \quad \iint_S (\nabla \times \mathbf{F}) \cdot d\mathbf{S}$$
+          </div>
+          <p>其中 $\mathbf{F} = (y,\, z,\, x)$，$S$ 为平面 $x + y + z = 1$ 在第一卦限的部分，$C$ 为其边界，方向与 $S$ 的法向量 $(1,1,1)$ 成右手系。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">11.</span>
+          <p>求函数 $f(x,y) = x^3 - 3xy + y^3$ 的全部驻点，并判断每个驻点的类型（极大值、极小值或鞍点）。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">12.</span>
+          <p>在约束条件 $x + y + z = 1$ 下，求函数 $f(x,y,z) = xyz$ 的极大值。</p>
+        </div>
+      </div>
+
+      <hr class="exercise-divider">
+
+      <!-- ===== 第三部分：常微分方程 ===== -->
+      <div class="exercise-section" id="ode">
+        <h2>三、常微分方程</h2>
+
+        <div class="exercise-item">
+          <span class="exercise-label">13.</span>
+          <p>求解常系数齐次线性方程</p>
+          <div class="math-block">
+            $$y'' + 4y' + 5y = 0$$
+          </div>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">14.</span>
+          <p>求解常系数非齐次线性方程的通解：</p>
+          <div class="math-block">
+            $$y'' - 2y' + y = e^x \sin x$$
+          </div>
+          <p class="exercise-hint">提示：用待定系数法或常数变易法。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">15.</span>
+          <p>用降阶法求解 Euler 方程：</p>
+          <div class="math-block">
+            $$x^2 y'' + xy' - y = x^2$$
+          </div>
+          <p class="exercise-hint">提示：令 $x = e^t$。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">16.</span>
+          <p>求解方程组</p>
+          <div class="math-block">
+            $$\begin{cases} \dfrac{dx}{dt} = 2x + y \\ \dfrac{dy}{dt} = -x + 2y \end{cases}$$
+          </div>
+          <p class="exercise-hint">提示：写成矩阵形式 $\mathbf{u}' = A\mathbf{u}$，对角化 $A$。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">17.</span>
+          <p>用幂级数法求方程 $y'' - xy = 0$ 在 $x=0$ 附近的两个线性无关的幂级数解（写出前四项即可）。</p>
+        </div>
+      </div>
+
+      <hr class="exercise-divider">
+
+      <!-- ===== 第四部分：复变函数 ===== -->
+      <div class="exercise-section" id="complex-analysis">
+        <h2>四、复变函数</h2>
+
+        <div class="exercise-item">
+          <span class="exercise-label">18.</span>
+          <p>计算回路积分</p>
+          <div class="math-block">
+            $$\oint_{|z|=2} \frac{z^2 + 1}{z(z-1)^2} \, dz$$
+          </div>
+          <p>其中积分路径取逆时针方向。</p>
+          <p class="exercise-hint">提示：留数定理。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">19.</span>
+          <p>求函数 $f(z) = \dfrac{1}{(z^2 + 1)(z - 2)}$ 在各极点处的留数，并计算</p>
+          <div class="math-block">
+            $$\oint_{|z|=3} f(z) \, dz$$
+          </div>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">20.</span>
+          <p>利用留数计算实积分：</p>
+          <div class="math-block">
+            $$\int_0^{2\pi} \frac{d\theta}{2 + \cos\theta}$$
+          </div>
+          <p class="exercise-hint">提示：令 $z = e^{i\theta}$，将实积分化为复平面上沿单位圆的回路积分。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">21.</span>
+          <p>判断函数 $f(z) = \bar{z}^2$ 在 $z=0$ 处是否满足 Cauchy-Riemann 方程，并说明 $f(z)$ 在 $z=0$ 处是否可导、是否解析。</p>
+        </div>
+
+        <div class="exercise-item">
+          <span class="exercise-label">22.</span>
+          <p>求函数 $f(z) = \dfrac{e^z}{z^3}$ 在 $z=0$ 处的 Laurent 展开式，并指出该点是何种类型的奇点。</p>
+        </div>
+      </div>
+
+      <div class="answer-link-box">
+        <a href="answer-01.html">查看参考解答</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+<div class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../../../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../../intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../../rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../../feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../../../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../../../index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="../../intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="../../rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="../../feature.html" class="quick-nav-item">图书馆功能</a>
+    <div class="quick-nav-divider"></div>
+    <div class="quick-nav-section">本页目录</div>
+    <a href="#linear-algebra" class="quick-nav-item">一、线性代数</a>
+    <a href="#multivariable-calculus" class="quick-nav-item">二、多元微积分</a>
+    <a href="#ode" class="quick-nav-item">三、常微分方程</a>
+    <a href="#complex-analysis" class="quick-nav-item">四、复变函数</a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top" onclick="scrollToTop()">
+  回到<br>顶部
+</button>
+
+<button title="导航枢纽" class="float-button nav-hub" onclick="openNavigator()">
+  导航<br>枢纽
+</button>
+
+<script>
+const PAGE_DISPLAY_NAME = '数学练习（一）';
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openNavigator() {
+  window.open('../../../navigator.html', '_blank');
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  const quickNav = document.querySelector('.quick-nav');
+  const isMobile = window.innerWidth <= 768;
+
+  if (quickNav && isMobile) {
+    quickNav.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded')) {
+        quickNav.classList.remove('expanded'); quickNav.style.width = '32px'; quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content'); if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title'); if (title) { title.style.writingMode = 'vertical-rl'; title.style.marginBottom = '4px'; title.style.paddingBottom = '0'; title.style.borderBottom = 'none'; }
+        const hint = quickNav.querySelector('.quick-nav-hint'); if (hint) hint.style.display = 'block';
+      } else {
+        quickNav.classList.add('expanded'); quickNav.style.width = '180px'; quickNav.style.padding = '16px';
+        const content = quickNav.querySelector('.quick-nav-content'); if (content) content.style.display = 'block';
+        const title = quickNav.querySelector('.quick-nav-title'); if (title) { title.style.writingMode = 'horizontal-tb'; title.style.marginBottom = '16px'; title.style.paddingBottom = '8px'; title.style.borderBottom = '1px solid #e0e0e0'; }
+        const hint = quickNav.querySelector('.quick-nav-hint'); if (hint) hint.style.display = 'none';
+      }
+    });
+  }
+
+  if (quickNav && isMobile) {
+    document.addEventListener('click', function(event) {
+      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
+        quickNav.classList.remove('expanded');
+        quickNav.style.width = '32px';
+        quickNav.style.padding = '8px 4px';
+        const content = quickNav.querySelector('.quick-nav-content');
+        if (content) content.style.display = 'none';
+        const title = quickNav.querySelector('.quick-nav-title');
+        if (title) {
+          title.style.writingMode = 'vertical-rl';
+          title.style.marginBottom = '4px';
+          title.style.paddingBottom = '0';
+          title.style.borderBottom = 'none';
+        }
+        const hint = quickNav.querySelector('.quick-nav-hint');
+        if (hint) hint.style.display = 'block';
+      }
+    });
+  }
+
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) { backToTopBtn.addEventListener('click', scrollToTop); }
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) { navHubBtn.addEventListener('click', openNavigator); }
+});
+</script>
+<script src="../../../js/library-dynamic.js"></script>
+</body>
+</html>

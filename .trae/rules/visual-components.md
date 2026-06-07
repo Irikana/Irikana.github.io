@@ -33,7 +33,7 @@
   border-left: 4px solid #2980b9;
   background: #f0f7fd;
   padding: 18px 22px;
-  border-radius: 2px;
+  border-radius: 0;
   color: #2980b9;
   font-size: 15px;
   line-height: 1.7;
@@ -475,7 +475,7 @@ details details {
   padding: 2px 8px;
   vertical-align: middle;
   letter-spacing: 0.5px;
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .article-type-badge {
@@ -807,7 +807,7 @@ details details {
   padding: 10px 12px;
   color: #555;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 0;
   margin: 2px 0;
   font-size: 14px;
   transition: all 0.15s;
@@ -944,7 +944,7 @@ details details {
   background: #2c3e50;
   color: #fff;
   text-decoration: none;
-  border-radius: 2px;
+  border-radius: 0;
   font-size: 14px;
   transition: background 0.2s;
   margin-top: 8px;
@@ -1345,6 +1345,45 @@ document.body.appendChild(bar);
 - 仅在页面存在 `#auto-toc`（即有 ≥2 个 h2/h3 标题）时才初始化
 - 面板内的目录是原始 TOC 的 cloneNode(true)，两者独立但通过 href 同步高亮
 - 与便携式导航仪（`.quick-nav`）并排显示，互不遮挡
+
+---
+
+## 17. 数学公式渲染 — MathJax 3
+
+**用途**：全站数学公式统一使用 MathJax 3 渲染，禁止使用纯文本/Unicode 字符书写公式。
+
+**引入方式**：在含数学公式的页面的 `<head>` 中（`</head>` 之前）添加：
+
+```html
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+```
+
+**行内公式**：用 `$...$` 包裹
+
+```html
+<p>牛顿第二定律 $F=ma$ 是经典力学的基础。</p>
+<p>单摆周期公式为 $T=2\pi\sqrt{\dfrac{l}{g}}$。</p>
+```
+
+**独立公式**：用 `$$...$$` 包裹并居中显示
+
+```html
+<p style="text-align:center; margin:16px 0;">$$E = mc^2$$</p>
+<p style="text-align:center; margin:16px 0;">$$\dfrac{1}{2}mv_0^2 + mgh = \dfrac{1}{2}mv^2$$</p>
+```
+
+**规范要求**：
+- 不含数学公式的页面**不添加** MathJax（避免不必要的加载）
+- 独立公式段落**不设置** `font-size`（由 MathJax 控制渲染尺寸）
+- 变量字母（如 $m$、$v$、$g$）也用 `$...$` 包裹，确保排版一致
+- 使用 `\dfrac` 而非 `\frac` 以保证分数在行内也有足够大小
+- 下标用 `_`（如 `$v_0$`），上标用 `^`（如 `$v^2$`），希腊字母用 `\omega`、`\pi` 等
 
 ---
 
