@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 文章元数据注册表</title>
+<meta name="description" content="牧羊人图书馆 - 文章元数据统一管理">
+<meta name="keywords" content="图书馆,文章,元数据,管理">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="main-container logo-align">
+  <div class="logo-header-row">
+    <img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo">
+    <img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆">
+  </div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">文章元数据注册表</div>
+  <div class="page-date">创建于2026年6月14日</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+
+      <div class="function-box-blue">
+        本页面是牧羊人图书馆所有文章元数据的统一管理参考。创建新文章或修改已有文章时，应以此页面的字段定义和标签体系为准。
+      </div>
+
+      <!-- ===== 元数据字段说明 ===== -->
+      <h2>元数据字段说明</h2>
+
+      <h3>文章顶部元数据 — <code>.article-meta</code></h3>
+      <p>每篇文章的 <code>&lt;main&gt;</code> 区域顶部必须包含 <code>.article-meta</code> 区块，按以下固定顺序排列字段：</p>
+
+      <table class="meta-registry-table">
+        <thead>
+          <tr>
+            <th>字段</th>
+            <th>标签类名</th>
+            <th>必填</th>
+            <th>说明</th>
+            <th>示例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>作者</td>
+            <td><code>.article-meta-label</code> + <code>.article-meta-value</code></td>
+            <td>是</td>
+            <td>文章的作者姓名。全站统一填写"薛柯道"</td>
+            <td>薛柯道</td>
+          </tr>
+          <tr>
+            <td>创建日期</td>
+            <td><code>.article-meta-label</code> + <code>.article-meta-value</code></td>
+            <td>是</td>
+            <td>文章首次创建的日期。格式统一为 YYYY年M月D日（不补零）</td>
+            <td>2026年5月19日</td>
+          </tr>
+          <tr>
+            <td>文章类型</td>
+            <td><code>.article-type-badge</code></td>
+            <td>是</td>
+            <td>文章的创作方式，三选一。见下方"文章类型"章节</td>
+            <td><span class="article-type-badge">手写文章</span></td>
+          </tr>
+          <tr>
+            <td>标签</td>
+            <td><code>.article-tag</code></td>
+            <td>是</td>
+            <td>文章的内容属性标签，可多选。见下方"标签体系"章节。无合适标签时填写"无"</td>
+            <td><span class="article-tag">新闻</span> <span class="article-tag tag-ai">包含AI</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>文章页脚元数据 — <code>.article-footer-meta</code></h3>
+      <p>文章正文末尾的可选区域，用于补充说明、脚注、参考链接等。不是每篇文章都需要。</p>
+
+      <table class="meta-registry-table">
+        <thead>
+          <tr>
+            <th>字段</th>
+            <th>必填</th>
+            <th>说明</th>
+            <th>示例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>图注</td>
+            <td>可选</td>
+            <td>正文中图片/公式的说明文字，用 <code>.article-footer-label</code> 标注"图注："</td>
+            <td>图I：重力提供向心力的圆周运动</td>
+          </tr>
+          <tr>
+            <td>脚注</td>
+            <td>可选</td>
+            <td>正文中上标引用的详细说明，用 <code>.article-footer-value</code> 直接填写</td>
+            <td>[1] 且捡起来时都处于非常低的电量状态</td>
+          </tr>
+          <tr>
+            <td>参考链接</td>
+            <td>可选</td>
+            <td>关联的其他文章或外部链接，使用 <code>.ext-link</code> 类</td>
+            <td>查看与AI的完整材料对话</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>页面日期 — <code>.page-date</code></h3>
+      <p>非文章页面（如图书馆入门、规则等）标题下方的创建日期标注。文章页使用 <code>.article-meta</code> 中的"创建日期"字段，不使用 <code>.page-date</code>。</p>
+
+      <!-- ===== 文章类型 ===== -->
+      <h2>文章类型</h2>
+      <p>每篇文章必须标注一种创作方式，使用 <code>.article-type-badge</code> 类：</p>
+
+      <table class="meta-registry-table">
+        <thead>
+          <tr>
+            <th>类型</th>
+            <th>预览</th>
+            <th>含义</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>录音文章</td>
+            <td><span class="article-type-badge">录音文章</span></td>
+            <td>通过录音转文字创作的文章。作者口述录音，再整理为文字</td>
+          </tr>
+          <tr>
+            <td>手写文章</td>
+            <td><span class="article-type-badge">手写文章</span></td>
+            <td>通过手写转文字创作的文章。作者手写草稿，再整理为文字</td>
+          </tr>
+          <tr>
+            <td>信息文章</td>
+            <td><span class="article-type-badge">信息文章</span></td>
+            <td>直接打字创作的文章。包括新闻公告、更新说明等</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ===== 标签体系 ===== -->
+      <h2>标签体系</h2>
+      <p>标签用于标注文章的内容属性。一篇文章可以有零到多个标签。标签分为<strong>通用标签</strong>和<strong>属性标签</strong>两类：</p>
+
+      <h3>通用标签 — <code>.article-tag</code></h3>
+      <p>标注文章的内容主题或用途分类：</p>
+
+      <table class="meta-registry-table">
+        <thead>
+          <tr>
+            <th>标签</th>
+            <th>预览</th>
+            <th>含义</th>
+            <th>适用文章</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>新闻</td>
+            <td><span class="article-tag">新闻</span></td>
+            <td>网站功能更新、版本发布、重要事件公告等新闻性质的文章</td>
+            <td>知识馆上线、视觉组件标准已创建等</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>属性标签 — <code>.article-tag.tag-*</code></h3>
+      <p>标注文章的创作属性或内容状态：</p>
+
+      <table class="meta-registry-table">
+        <thead>
+          <tr>
+            <th>标签</th>
+            <th>预览</th>
+            <th>含义</th>
+            <th>适用文章</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>包含AI</td>
+            <td><span class="article-tag tag-ai">包含AI</span></td>
+            <td>文章内容包含AI生成或AI辅助创作的部分</td>
+            <td>语义化视觉组件更新、坐立不安·材料对话等</td>
+          </tr>
+          <tr>
+            <td>有删减</td>
+            <td><span class="article-tag tag-edited">有删减</span></td>
+            <td>文章原始内容经过删减或修改后发布</td>
+            <td>SOTM I 2026 后记等</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="function-box-blue">
+        <strong>新增标签</strong>：如需新增标签，应先在本页面登记标签名称、含义和适用范围，再在文章中使用。新增通用标签使用 <code>.article-tag</code> 类；新增属性标签需同时在 CSS 中添加对应的 <code>.tag-*</code> 样式类。
+      </div>
+
+      <!-- ===== 文章注册表 ===== -->
+      <h2>文章注册表</h2>
+      <p>以下为当前所有已注册文章的元数据总览：</p>
+
+      <table class="meta-registry-table">
+        <thead>
+          <tr>
+            <th>文章标题</th>
+            <th>类型</th>
+            <th>标签</th>
+            <th>创建日期</th>
+            <th>页脚元数据</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="paper/backwards-and-pendulum-symmetry.html">逆向法与单摆对称性</a></td>
+            <td><span class="article-type-badge">手写文章</span></td>
+            <td>无</td>
+            <td>2026年5月19日</td>
+            <td>图注</td>
+          </tr>
+          <tr>
+            <td><a href="paper/backwards-sliding-problem.html">逆向滑动问题</a></td>
+            <td><span class="article-type-badge">手写文章</span></td>
+            <td>无</td>
+            <td>2026年5月22日</td>
+            <td>图注</td>
+          </tr>
+          <tr>
+            <td><a href="paper/impulse-to-record.html">记录的冲动</a></td>
+            <td><span class="article-type-badge">录音文章</span></td>
+            <td>无</td>
+            <td>2026年5月10日</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><a href="paper/SOTM-I-2026-postscript.html">SOTM I 2026 后记</a></td>
+            <td><span class="article-type-badge">录音文章</span></td>
+            <td><span class="article-tag tag-edited">有删减</span></td>
+            <td>2026年5月11日</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><a href="paper/restless.html">坐立不安</a></td>
+            <td><span class="article-type-badge">信息文章</span></td>
+            <td><span class="article-tag">新闻</span></td>
+            <td>2026年5月14日</td>
+            <td>参考链接</td>
+          </tr>
+          <tr>
+            <td><a href="paper/restless-material-dialog.html">坐立不安·材料对话</a></td>
+            <td><span class="article-type-badge">信息文章</span></td>
+            <td><span class="article-tag tag-ai">包含AI</span></td>
+            <td>2026年5月14日</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><a href="paper/wednesday-frenzy-and-difficult-review.html">周三的疯狂与艰难的复习</a></td>
+            <td><span class="article-type-badge">信息文章</span></td>
+            <td><span class="article-tag">新闻</span></td>
+            <td>2026年5月15日</td>
+            <td>脚注</td>
+          </tr>
+          <tr>
+            <td><a href="paper/visual-component-standards-created.html">视觉组件标准已创建</a></td>
+            <td><span class="article-type-badge">信息文章</span></td>
+            <td><span class="article-tag">新闻</span></td>
+            <td>2026年5月15日</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><a href="paper/semantic-visual-component-update.html">语义化视觉组件更新</a></td>
+            <td><span class="article-type-badge">信息文章</span></td>
+            <td><span class="article-tag">新闻</span> <span class="article-tag tag-ai">包含AI</span></td>
+            <td>2026年5月19日</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><a href="paper/june-second-diary.html">六月二日日记</a></td>
+            <td><span class="article-type-badge">手写文章</span></td>
+            <td>无</td>
+            <td>2026年6月2日</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><a href="paper/woke-up-late.html">起晚了</a></td>
+            <td><span class="article-type-badge">手写文章</span></td>
+            <td>无</td>
+            <td>2026年6月3日</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><a href="paper/library-may-enter-active-development.html">图书馆可能进入活跃开发</a></td>
+            <td><span class="article-type-badge">信息文章</span></td>
+            <td><span class="article-tag">新闻</span></td>
+            <td>2026年5月31日</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><a href="paper/minesia-first-public-test.html">Minesia首次公开测试</a></td>
+            <td><span class="article-type-badge">信息文章</span></td>
+            <td><span class="article-tag">新闻</span></td>
+            <td>2026年6月1日</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><a href="paper/minesia-0.0.16-update.html">Minesia 0.0.16更新</a></td>
+            <td><span class="article-type-badge">信息文章</span></td>
+            <td><span class="article-tag">新闻</span></td>
+            <td>2026年6月2日</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><a href="paper/knowledge-hall-launch.html">知识馆上线</a></td>
+            <td><span class="article-type-badge">信息文章</span></td>
+            <td><span class="article-tag">新闻</span></td>
+            <td>2026年6月7日</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ===== HTML模板 ===== -->
+      <h2>标准 HTML 模板</h2>
+
+      <details>
+        <summary class="summary-large">文章顶部元数据模板</summary>
+        <div>
+          <pre><code>&lt;div class="article-meta"&gt;
+  &lt;div class="article-meta-item"&gt;
+    &lt;span class="article-meta-label"&gt;作者：&lt;/span&gt;
+    &lt;span class="article-meta-value"&gt;薛柯道&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="article-meta-item"&gt;
+    &lt;span class="article-meta-label"&gt;创建日期：&lt;/span&gt;
+    &lt;span class="article-meta-value"&gt;YYYY年M月D日&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="article-meta-item"&gt;
+    &lt;span class="article-meta-label"&gt;文章类型：&lt;/span&gt;
+    &lt;span class="article-meta-value"&gt;&lt;span class="article-type-badge"&gt;录音文章&lt;/span&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="article-meta-item"&gt;
+    &lt;span class="article-meta-label"&gt;标签：&lt;/span&gt;
+    &lt;span class="article-meta-value"&gt;&lt;span class="article-tag"&gt;新闻&lt;/span&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </details>
+
+      <details>
+        <summary class="summary-large">文章页脚元数据模板</summary>
+        <div>
+          <pre><code>&lt;!-- 图注 --&gt;
+&lt;div class="article-footer-meta"&gt;
+  &lt;div class="article-footer-meta-item"&gt;
+    &lt;span class="article-footer-label"&gt;图注：&lt;/span&gt;
+    &lt;span class="article-footer-value"&gt;图I：说明文字&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 脚注 --&gt;
+&lt;div class="article-footer-meta"&gt;
+  &lt;div class="article-footer-meta-item"&gt;
+    &lt;span class="article-footer-value"&gt;[1] 脚注内容&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- 参考链接 --&gt;
+&lt;div class="article-footer-meta"&gt;
+  &lt;div class="article-footer-meta-item"&gt;
+    &lt;span class="article-footer-value"&gt;[1] &lt;a href="..." class="ext-link"&gt;链接文字 &lt;/a&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
+      未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

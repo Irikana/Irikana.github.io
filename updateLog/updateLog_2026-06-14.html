@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年6月14日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年6月14日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-06-14</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">主馆变更</h2>
+        <div class="section-content">
+
+          <p><strong>主馆页面排版精简</strong></p>
+          <p>- 移除 index.html、intro.html、library.html、feature.html、rule.html 中所有冗余的 gjs-row/gjs-cell 多层嵌套</p>
+          <p>- 正文段落从 center-align 改为 left-align（新闻区域保留居中）</p>
+          <p>- 前情提要子板块从 content-bg-white-sub 改为 intro-card 类（带边框和左侧装饰线）</p>
+          <p>- intro.html 中移除 118 行重复内联 JS（功能已由 library-dynamic.js 覆盖）</p>
+          <p>- intro.html 中 6 个 summary 内联样式替换为 summary-large CSS 类</p>
+          <p>- feature.html 中移除内联 flex 样式，改用 link-to-page 自带间距</p>
+          <p>- 涉及文件：index.html、library/intro.html、library/library.html、library/feature.html、library/rule.html</p>
+
+          <p><strong>排版视觉优化（参考 The Wanderers Library）</strong></p>
+          <p>- 板块分隔从厚重边框改为轻量顶部 border-top 分隔线</p>
+          <p>- section-title-text-main 从 28px 左侧竖线改为 22px 底部横线，增加 letter-spacing</p>
+          <p>- section-title-text-sub 从 26px 缩小为 20px，调整间距</p>
+          <p>- subsection-header 从 28px 缩小为 22px</p>
+          <p>- intro-card 增加左侧装饰线和微妙背景色，段落使用次要文本色</p>
+          <p>- 新闻文字卡片增加左侧 border-left 装饰，hover 时变色</p>
+          <p>- slogan-text 改为 italic + 更浅颜色，营造图书馆氛围</p>
+          <p>- content-main 水平内边距从 space-md 增加到 space-lg</p>
+          <p>- 涉及文件：css/style.css</p>
+
+          <p><strong>新增文章元数据注册表页面</strong></p>
+          <p>- 创建 library/article-registry.html，统一管理文章元数据字段定义、文章类型、标签体系、文章注册表</p>
+          <p>- 新增 .meta-registry-table CSS 类（含暗色模式适配）</p>
+          <p>- 涉及文件：library/article-registry.html、css/style.css</p>
+
+          <p><strong>新增 CSS 类</strong></p>
+          <p>- .summary-large：折叠块大标题样式（替代内联 style）</p>
+          <p>- .intro-card：前情提要子板块卡片样式</p>
+          <p>- .section-content：板块正文容器</p>
+          <p>- .meta-registry-table：元数据注册表表格样式</p>
+          <p>- 涉及文件：css/style.css</p>
+
+          <p><strong>删除文章标签</strong></p>
+          <p>- 从 4 篇中文文章中删除"物理""思考""日记"标签，替换为"无"</p>
+          <p>- 从 4 篇英文文章中删除"Physics""Thinking""Diary"标签，替换为"None"</p>
+          <p>- 涉及文件：library/paper/backwards-and-pendulum-symmetry.html、backwards-sliding-problem.html、june-second-diary.html、woke-up-late.html 及对应英文版</p>
+
+        </div>
+      </section>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-2" class="section-title-text-main">规范变更</h2>
+        <div class="section-content">
+
+          <p><strong>更新日志强制规范</strong></p>
+          <p>- 在 .trae/rules/project_rules.md 的"更新日志规则"中新增：每次工作和任务结束时必须撰写更新日志，不可跳过</p>
+          <p>- 涉及文件：.trae/rules/project_rules.md</p>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

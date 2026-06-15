@@ -10,265 +10,169 @@
 </head>
 <body>
 
-  <header class="gjs-row main-container">
-    <div class="gjs-cell logo-align">
-      <div class="logo-header-row">
-        <img src="../image/logo.png" alt="牧羊人图书馆 Logo" class="logo-border logo-container logo-img-custom">
-        <img src="../image/logo_text.png" alt="牧羊人图书馆" class="logo-size logo-size-custom">
-      </div>
-      <div class="slogan-container">
-        <hr class="slogan-line slogan-line-left"><span class="slogan-text">存放所有知识之地</span>
-        <hr class="slogan-line slogan-line-right">
-      </div>
-      <h1 class="section-padding page-title-main">图书馆功能</h1>
+  <header class="main-container logo-align">
+    <div class="logo-header-row">
+      <img src="../image/logo.png" alt="牧羊人图书馆 Logo" class="logo-border logo-container logo-img-custom">
+      <img src="../image/logo_text.png" alt="牧羊人图书馆" class="logo-size logo-size-custom">
     </div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left"><span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <h1 class="section-padding page-title-main">图书馆功能</h1>
   </header>
 
 
-  <main class="gjs-row content-row content-bg-white">
+  <main class="content-row content-bg-white">
     <div class="content-width-limiter">
-      <div class="gjs-cell content-main">
+      <div class="content-main">
 
-        <section class="gjs-row notice-header page-header-section">
-          <div class="gjs-cell">
+        <section>
+          <div class="function-box-blue">
+            本页面介绍牧羊人图书馆网站当前提供的所有功能。部分功能由 JavaScript 动态提供，请确保浏览器已启用 JavaScript。
+          </div>
+        </section>
+
+        <section class="page-header-section">
+          <h2 id="section-1" class="section-title-text-main">导航功能</h2>
+          <div class="section-content">
+            <p>导航功能帮助你快速在图书馆中定位和跳转。</p>
+          </div>
+        </section>
+
+        <section>
+          <h3 id="section-1-1" class="subsection-header">便携式导航仪</h3>
+          <div class="section-content">
+            <p>页面左侧悬浮的导航栏，鼠标悬停时可展开显示快捷链接。在移动端设备上变为点击展开模式。便携式导航仪可拖动调整垂直位置。</p>
+          </div>
+        </section>
+
+        <section>
+          <h3 id="section-1-2" class="subsection-header">导航枢纽</h3>
+          <div class="section-content">
+            <p>集中展示图书馆所有页面入口的导航中心页面，可通过页面右下角的「导航枢纽」浮动按钮快速访问。</p>
+            <a href="../navigator.html" target="_blank" class="link-to-page">前往导航枢纽 </a>
+          </div>
+        </section>
+
+        <section>
+          <h3 id="section-1-3" class="subsection-header">悬浮目录</h3>
+          <div class="section-content">
+            <p>页面左侧的 📖 按钮，点击后弹出当前页面的目录面板，可快速跳转到任意章节。目录会根据当前阅读位置自动高亮对应章节。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2 id="section-2" class="section-title-text-sub">阅读功能</h2>
+          <div class="section-content">
+            <p>阅读功能旨在提升你在图书馆中的阅读体验。</p>
+          </div>
+        </section>
+
+        <section>
+          <h3 id="section-2-1" class="subsection-header">折叠块</h3>
+          <div class="section-content">
+            <p>允许用户折叠或展开某些内容，以提升阅读体验。此功能在网站中有广泛的应用。你当前看到的这个区块就是一个折叠块的示例。</p>
+            <details>
+              <summary>点击展开查看示例内容</summary>
+              <div class="indented">
+                <p>这是被折叠的内容。在牧羊人图书馆的入门页面中，SCP基金会和被放逐者之图书馆的百科介绍就使用了这种折叠形式来组织信息。</p>
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <section>
+          <h3 id="section-2-2" class="subsection-header">阅读工具</h3>
+          <div class="section-content">
+            <p>页面右下角的阅读工具面板，提供以下调节选项：</p>
+            <ul>
+              <li><strong>字号调节</strong> — 放大或缩小页面文字大小</li>
+              <li><strong>行宽调节</strong> — 在窄、标准、宽三种内容宽度之间切换</li>
+              <li><strong>专注模式</strong> — 隐藏页面非必要元素，专注于正文阅读</li>
+              <li><strong>打印</strong> — 快速调用浏览器打印功能</li>
+            </ul>
+            <p>阅读工具的设置会自动保存到浏览器，下次访问时自动恢复。</p>
+          </div>
+        </section>
+
+        <section>
+          <h3 id="section-2-3" class="subsection-header">阅读进度条</h3>
+          <div class="section-content">
+            <p>页面顶部的细长进度条，随滚动实时显示当前阅读进度。</p>
+          </div>
+        </section>
+
+        <section>
+          <h3 id="section-2-4" class="subsection-header">主题切换</h3>
+          <div class="section-content">
+            <p>页面上的主题切换按钮，支持三种模式循环切换：</p>
+            <ul>
+              <li><strong>跟随系统</strong> — 自动适配操作系统的亮色/暗色偏好</li>
+              <li><strong>浅色模式</strong> — 强制使用亮色主题</li>
+              <li><strong>深色模式</strong> — 强制使用暗色主题</li>
+            </ul>
+            <p>主题偏好会自动保存到浏览器。</p>
+          </div>
+        </section>
+
+        <section>
+          <h3 id="section-2-5" class="subsection-header">信息提示框</h3>
+          <div class="section-content">
+            <p>图书馆使用三种类型的信息提示框来组织不同性质的内容：</p>
             <div class="function-box-blue">
-              <div class="left-align">本页面介绍牧羊人图书馆网站当前提供的所有功能。部分功能由 JavaScript 动态提供，请确保浏览器已启用 JavaScript。</div>
+              <p><strong>蓝色信息框</strong> — 一般性信息提示、功能说明、补充说明等中性通知。这是默认首选的信息框类型。</p>
+            </div>
+            <div class="quote-box-grey">
+              <p><strong>灰色引用框</strong> — 引用性说明、参考来源说明、补充背景资料。</p>
+            </div>
+            <div class="notice-box-red">
+              <p><strong>红色警告框</strong> — 仅用于真正需要警示的内容，未经作者许可不得使用。</p>
             </div>
           </div>
         </section>
 
-        <section class="gjs-row notice-header section-header page-header-section">
-          <div class="gjs-cell">
-            <h2 id="section-1" class="section-title-text-main">导航功能</h2>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="center-align">
-                  <p>导航功能帮助你快速在图书馆中定位和跳转。</p>
-                </div>
-              </div>
-            </div>
+        <section>
+          <h2 id="section-3" class="section-title-text-sub-sub">搜索与收藏</h2>
+          <div class="section-content">
+            <p>搜索与收藏功能帮助你快速找到和保存感兴趣的内容。</p>
           </div>
         </section>
 
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h3 id="section-1-1" class="subsection-header">便携式导航仪</h3>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>页面左侧悬浮的导航栏，鼠标悬停时可展开显示快捷链接。在移动端设备上变为点击展开模式。便携式导航仪可拖动调整垂直位置。</p>
-                </div>
-              </div>
-            </div>
+        <section>
+          <h3 id="section-3-1" class="subsection-header">站内搜索</h3>
+          <div class="section-content">
+            <p>点击页面上的 🔍 按钮或按下键盘 <code>/</code> 键即可打开搜索面板，输入关键词搜索图书馆中的页面和文章。搜索结果点击后会自动高亮页面中的匹配关键词。</p>
           </div>
         </section>
 
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h3 id="section-1-2" class="subsection-header">导航枢纽</h3>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>集中展示图书馆所有页面入口的导航中心页面，可通过页面右下角的「导航枢纽」浮动按钮快速访问。</p>
-                  <a href="../navigator.html" target="_blank" class="link-to-page">前往导航枢纽 </a>
-                </div>
-              </div>
-            </div>
+        <section>
+          <h3 id="section-3-2" class="subsection-header">收藏夹</h3>
+          <div class="section-content">
+            <p>每个页面标题旁的 ☆ 按钮可将当前页面添加到收藏夹。收藏的页面可通过右下角的收藏夹面板统一管理和快速访问。收藏数据保存在浏览器本地。</p>
           </div>
         </section>
 
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h3 id="section-1-3" class="subsection-header">悬浮目录</h3>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>页面左侧的 📖 按钮，点击后弹出当前页面的目录面板，可快速跳转到任意章节。目录会根据当前阅读位置自动高亮对应章节。</p>
-                </div>
-              </div>
-            </div>
+        <section>
+          <h2 id="section-4" class="section-title-text-sub">知识馆</h2>
+          <div class="section-content">
+            <p>知识馆是牧羊人图书馆的分馆，存放和查阅知识之地。知识馆采用独立的侧边栏导航设计，包含三种知识分类：</p>
+            <ul>
+              <li><strong>现象</strong> — 被发现或被观察的原始知识</li>
+              <li><strong>可回忆知识</strong> — 稳定的、可随时提出的知识</li>
+              <li><strong>可追溯知识</strong> — 有记录保存、可考察追溯的知识</li>
+            </ul>
+            <a href="../knowledge-hall/index.html" class="link-to-page">进入知识馆 </a>
           </div>
         </section>
 
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h2 id="section-2" class="section-title-text-sub">阅读功能</h2>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="center-align">
-                  <p>阅读功能旨在提升你在图书馆中的阅读体验。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h3 id="section-2-1" class="subsection-header">折叠块</h3>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>允许用户折叠或展开某些内容，以提升阅读体验。此功能在网站中有广泛的应用。你当前看到的这个区块就是一个折叠块的示例。</p>
-                  <details>
-                    <summary>点击展开查看示例内容</summary>
-                    <div class="indented">
-                      <p>这是被折叠的内容。在牧羊人图书馆的入门页面中，SCP基金会和被放逐者之图书馆的百科介绍就使用了这种折叠形式来组织信息。</p>
-                    </div>
-                  </details>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h3 id="section-2-2" class="subsection-header">阅读工具</h3>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>页面右下角的阅读工具面板，提供以下调节选项：</p>
-                  <ul>
-                    <li><strong>字号调节</strong> — 放大或缩小页面文字大小</li>
-                    <li><strong>行宽调节</strong> — 在窄、标准、宽三种内容宽度之间切换</li>
-                    <li><strong>专注模式</strong> — 隐藏页面非必要元素，专注于正文阅读</li>
-                    <li><strong>打印</strong> — 快速调用浏览器打印功能</li>
-                  </ul>
-                  <p>阅读工具的设置会自动保存到浏览器，下次访问时自动恢复。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h3 id="section-2-3" class="subsection-header">阅读进度条</h3>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>页面顶部的细长进度条，随滚动实时显示当前阅读进度。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h3 id="section-2-4" class="subsection-header">主题切换</h3>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>页面上的主题切换按钮，支持三种模式循环切换：</p>
-                  <ul>
-                    <li><strong>跟随系统</strong> — 自动适配操作系统的亮色/暗色偏好</li>
-                    <li><strong>浅色模式</strong> — 强制使用亮色主题</li>
-                    <li><strong>深色模式</strong> — 强制使用暗色主题</li>
-                  </ul>
-                  <p>主题偏好会自动保存到浏览器。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h3 id="section-2-5" class="subsection-header">信息提示框</h3>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>图书馆使用三种类型的信息提示框来组织不同性质的内容：</p>
-                  <div class="function-box-blue">
-                    <p><strong>蓝色信息框</strong> — 一般性信息提示、功能说明、补充说明等中性通知。这是默认首选的信息框类型。</p>
-                  </div>
-                  <div class="quote-box-grey">
-                    <p><strong>灰色引用框</strong> — 引用性说明、参考来源说明、补充背景资料。</p>
-                  </div>
-                  <div class="notice-box-red">
-                    <p><strong>红色警告框</strong> — 仅用于真正需要警示的内容，未经作者许可不得使用。</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h2 id="section-3" class="section-title-text-sub-sub">搜索与收藏</h2>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="center-align">
-                  <p>搜索与收藏功能帮助你快速找到和保存感兴趣的内容。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h3 id="section-3-1" class="subsection-header">站内搜索</h3>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>点击页面上的 🔍 按钮或按下键盘 <code>/</code> 键即可打开搜索面板，输入关键词搜索图书馆中的页面和文章。搜索结果点击后会自动高亮页面中的匹配关键词。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h3 id="section-3-2" class="subsection-header">收藏夹</h3>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>每个页面标题旁的 ☆ 按钮可将当前页面添加到收藏夹。收藏的页面可通过右下角的收藏夹面板统一管理和快速访问。收藏数据保存在浏览器本地。</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h2 id="section-4" class="section-title-text-sub">知识馆</h2>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>知识馆是牧羊人图书馆的分馆，存放和查阅知识之地。知识馆采用独立的侧边栏导航设计，包含三种知识分类：</p>
-                  <ul>
-                    <li><strong>现象</strong> — 被发现或被观察的原始知识</li>
-                    <li><strong>可回忆知识</strong> — 稳定的、可随时提出的知识</li>
-                    <li><strong>可追溯知识</strong> — 有记录保存、可考察追溯的知识</li>
-                  </ul>
-                  <a href="../knowledge-hall/index.html" class="link-to-page">进入知识馆 </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="gjs-row notice-header section-header">
-          <div class="gjs-cell">
-            <h2 id="section-5" class="section-title-text-sub">结构页面</h2>
-            <div class="gjs-row content-bg-lightgrey">
-              <div class="gjs-cell">
-                <div class="left-align">
-                  <p>以下展示的是目前所有起到结构性作用的页面：</p>
-                  <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
-                    <a href="../index.html" class="link-to-page">牧羊人图书馆主页 </a>
-                    <a href="library.html" class="link-to-page">牧羊人图书馆 </a>
-                    <a href="../navigator.html" target="_blank" class="link-to-page">牧羊人图书馆导航枢纽 </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <section>
+          <h2 id="section-5" class="section-title-text-sub">结构页面</h2>
+          <div class="section-content">
+            <p>以下展示的是目前所有起到结构性作用的页面：</p>
+            <a href="../index.html" class="link-to-page">牧羊人图书馆主页 </a>
+            <a href="library.html" class="link-to-page">牧羊人图书馆 </a>
+            <a href="../navigator.html" target="_blank" class="link-to-page">牧羊人图书馆导航枢纽 </a>
           </div>
         </section>
 
@@ -276,8 +180,8 @@
     </div>
   </main>
 
-  <footer class="gjs-row footer-row footer-row-alt footer-gradient">
-    <div class="gjs-cell nav-center">
+  <footer class="footer-row footer-gradient">
+    <div class="nav-center">
       <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利
         未经许可，不得擅自转载、修改或用于商业用途<br></div>
     </div>
