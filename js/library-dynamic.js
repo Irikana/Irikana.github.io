@@ -134,6 +134,46 @@
         }
         if (e.key === 'Escape' && self.isOpen) self.close();
       });
+
+      // 动态补充：从 GitHub 仓库目录自动收录静态数据中缺失的文章（如 App 上传的新文章）
+      this.fetchDynamic();
+    },
+
+    /**
+     * 动态补充搜索条目：列出仓库文章目录，对静态 Search.data 中缺失的 html
+     * 抓取其 <title> 生成条目。异步执行，不阻塞搜索。
+     */
+    fetchDynamic: function() {
+      var self = this;
+      var dirs = ['library/paper', 'library/misc/experimental', 'en/library/paper'];
+      var existing = {};
+      for (var i = 0; i < self.data.length; i++) {
+        var u = self.data[i].u || '';
+        var m = u.match(/library\/(?:paper|misc\/experimental)\/([^\/]+\.html)$/) || u.match(/en\/library\/paper\/([^\/]+\.html)$/);
+        if (m) existing[m[1]] = true;
+      }
+      dirs.forEach(function(dir) {
+        fetch('https://api.github.com/repos/Irikana/Irikana.github.io/contents/' + dir)
+          .then(function(r) { return r.json(); })
+          .then(function(files) {
+            if (!Array.isArray(files)) return;
+            var pending = files.filter(function(f) {
+              return f.type === 'file' && /\.html$/i.test(f.name) && f.name !== 'index.html' && !existing[f.name];
+            });
+            pending.forEach(function(f) {
+              fetch(f.download_url)
+                .then(function(r) { return r.text(); })
+                .then(function(html) {
+                  var t = html.match(/<title>([^<]+)<\/title>/);
+                  if (!t) return;
+                  var title = t[1].replace(/^\s*牧羊人图书馆\s*-\s*/, '').trim();
+                  var name = f.name.replace(/\.html$/, '');
+                  var path = dir.indexOf('en/') === 0 ? 'en/' + dir + '/' + f.name : dir + '/' + f.name;
+                  self.data.push({ t: title, u: toAbs(ROOT + path), k: title + ' ' + name });
+                }).catch(function() {});
+            });
+          }).catch(function() {});
+      });
     },
 
     toggle: function() { this.isOpen ? this.close() : this.open(); },
