@@ -54,7 +54,16 @@
       {t:'知识馆启用',u:toAbs(ROOT+'library/paper/knowledge-hall-launch.html'),k:'知识馆 启用 分馆 分类'},
       {t:'Minesia测试',u:toAbs(ROOT+'library/misc/experimental/minesia-first-public-test.html'),k:'Minesia 测试 公开 第一个'},
       {t:'周三狂热',u:toAbs(ROOT+'library/paper/wednesday-frenzy-and-difficult-review.html'),k:'周三 狂热 复习 困难 新闻'},
-      {t:'语义化更新',u:toAbs(ROOT+'library/paper/semantic-visual-component-update.html'),k:'语义化 视觉组件 更新 标准'}
+      {t:'语义化更新',u:toAbs(ROOT+'library/paper/semantic-visual-component-update.html'),k:'语义化 视觉组件 更新 标准'},
+      {t:'逆向法与单摆对称性',u:toAbs(ROOT+'library/paper/backwards-and-pendulum-symmetry.html'),k:'逆向法 单摆 对称性 物理 手写文章'},
+      {t:'逆向法·下滑问题',u:toAbs(ROOT+'library/paper/backwards-sliding-problem.html'),k:'逆向法 下滑 物理 手写文章'},
+      {t:'六月二日',u:toAbs(ROOT+'library/paper/june-second-diary.html'),k:'六月二日 日记 手写文章'},
+      {t:'坐立不安',u:toAbs(ROOT+'library/paper/restless.html'),k:'坐立不安 信息文章 新闻'},
+      {t:'坐立不安的材料对话',u:toAbs(ROOT+'library/paper/restless-material-dialog.html'),k:'坐立不安 材料 对话 AI'},
+      {t:'睡过头',u:toAbs(ROOT+'library/paper/woke-up-late.html'),k:'睡过头 日记 手写文章'},
+      {t:'测试新闻20260802',u:toAbs(ROOT+'library/paper/Test News on 20260802.html'),k:'测试新闻 20260802 信息文章 新闻'},
+      {t:'测试新闻',u:toAbs(ROOT+'library/paper/testNewsOn20260802.html'),k:'测试新闻 信息文章 新闻'},
+      {t:'测试文章',u:toAbs(ROOT+'library/misc/experimental/test-article.html'),k:'测试文章 实验性文章 移动端 App'}
     ],
     overlay: null,
     isOpen: false,
