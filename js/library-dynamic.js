@@ -38,6 +38,7 @@
   /* ========== 1. SEARCH ========== */
   var Search = {
     data: [
+      {t:'SlyWrite的诞生',u:toAbs(ROOT+'library/paper/The Birth of SlyWrite.html'),k:'SlyWrite的诞生 The Birth of SlyWrite 信息文章 新闻'},
       {t:'牧羊人图书馆主页',u:toAbs(ROOT+'index.html'),k:'主页 图书馆 入门 规则 功能'},
       {t:'图书馆入门',u:toAbs(ROOT+'library/intro.html'),k:'介绍 牧羊人图书馆 存放知识之地'},
       {t:'图书馆规则',u:toAbs(ROOT+'library/rule.html'),k:'规则 使用规范 注意事项'},
