@@ -56,8 +56,16 @@
 
           <p><strong>站内搜索数据补全</strong></p>
           <p>- js/library-dynamic.js 的 Search.data 补入此前未收录的文章：逆向法与单摆对称性、逆向法·下滑问题、六月二日、坐立不安、坐立不安的材料对话、睡过头、测试新闻20260802、测试新闻、测试文章（library/misc/experimental/test-article.html）</p>
-          <p>- 此后 App 上传的文章/新闻会自动写入搜索数据（含隐藏文章），可通过站内搜索（查找按钮）找到</p>
           <p>- 涉及文件：js/library-dynamic.js</p>
+
+          <p><strong>站内搜索动态收录</strong></p>
+          <p>- js/library-dynamic.js 新增 Search.fetchDynamic()：自动列出仓库文章目录（library/paper、library/misc/experimental、en/library/paper），对静态搜索数据缺失的文章抓取 &lt;title&gt; 动态生成搜索条目</p>
+          <p>- 此后无论通过何种方式上传的新文章（含 App 上传与隐藏文章），无需手动维护即可被站内搜索（查找按钮）找到</p>
+          <p>- 涉及文件：js/library-dynamic.js</p>
+
+          <p><strong>SlyWrite 页面版本更新</strong></p>
+          <p>- slywrite/index.html 当前版本更新为 v0.0.5（下载按钮指向 releases/latest，自动跟随最新正式版）</p>
+          <p>- 涉及文件：slywrite/index.html</p>
 
         </div>
       </section>
