@@ -64,10 +64,10 @@
             <td>2026年5月19日</td>
           </tr>
           <tr>
-            <td>文章类型</td>
+            <td>文章性质</td>
             <td><code>.article-type-badge</code></td>
             <td>是</td>
-            <td>文章的创作方式，三选一。见下方"文章类型"章节</td>
+            <td>文章的创作方式，四选一（录音/手写/信息/实验性）。见下方"文章性质"章节。性质不等于分类（分类见 library.html）</td>
             <td><span class="article-type-badge">手写文章</span></td>
           </tr>
           <tr>
@@ -117,14 +117,14 @@
       <h3>页面日期 — <code>.page-date</code></h3>
       <p>非文章页面（如图书馆入门、规则等）标题下方的创建日期标注。文章页使用 <code>.article-meta</code> 中的"创建日期"字段，不使用 <code>.page-date</code>。</p>
 
-      <!-- ===== 文章类型 ===== -->
-      <h2>文章类型</h2>
-      <p>每篇文章必须标注一种创作方式，使用 <code>.article-type-badge</code> 类：</p>
+      <!-- ===== 文章性质 ===== -->
+      <h2>文章性质</h2>
+      <p>每篇文章必须标注一种创作方式（性质），使用 <code>.article-type-badge</code> 类。注意：性质与分类不同，分类指 library/ 下的目录（普通文章/作品文章/杂物文章/测试文章）：</p>
 
       <table class="meta-registry-table">
         <thead>
           <tr>
-            <th>类型</th>
+            <th>性质</th>
             <th>预览</th>
             <th>含义</th>
           </tr>
@@ -144,6 +144,11 @@
             <td>信息文章</td>
             <td><span class="article-type-badge">信息文章</span></td>
             <td>直接打字创作的文章。包括新闻公告、更新说明等</td>
+          </tr>
+          <tr>
+            <td>实验性文章</td>
+            <td><span class="article-type-badge type-experimental">实验性文章</span></td>
+            <td>主要用于测试某些东西的文章，可能具有较少的可读性</td>
           </tr>
         </tbody>
       </table>
@@ -306,8 +311,8 @@
             <td>—</td>
           </tr>
           <tr>
-            <td><a href="paper/minesia-first-public-test.html">Minesia首次公开测试</a></td>
-            <td><span class="article-type-badge">信息文章</span></td>
+            <td><a href="misc/experimental/minesia-first-public-test.html">Minesia首次公开测试</a></td>
+            <td><span class="article-type-badge type-experimental">实验性文章</span></td>
             <td><span class="article-tag">新闻</span></td>
             <td>2026年6月1日</td>
             <td>—</td>
@@ -345,7 +350,7 @@
     &lt;span class="article-meta-value"&gt;YYYY年M月D日&lt;/span&gt;
   &lt;/div&gt;
   &lt;div class="article-meta-item"&gt;
-    &lt;span class="article-meta-label"&gt;文章类型：&lt;/span&gt;
+    &lt;span class="article-meta-label"&gt;文章性质：&lt;/span&gt;
     &lt;span class="article-meta-value"&gt;&lt;span class="article-type-badge"&gt;录音文章&lt;/span&gt;&lt;/span&gt;
   &lt;/div&gt;
   &lt;div class="article-meta-item"&gt;

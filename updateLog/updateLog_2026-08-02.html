@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年8月2日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年8月2日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-08-02 · alpha-018</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">主馆变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>文章分类结构整改（library.html）</strong></p>
+          <p>- library 目录下的每个子目录对应一个文章分类：普通文章（paper/）、作品文章（works/）、杂物文章（misc/）、测试文章（misc/experimental/）</p>
+          <p>- 措辞修正：录音、手写、信息、实验性等为文章性质（创作方式），而非文章类型或分类；library.html 文章区已按此重写说明</p>
+          <p>- library.html 普通文章列表补全 paper/ 下全部文章（此前仅列出部分）</p>
+          <p>- 涉及文件：library/library.html、en/library/library.html</p>
+
+          <p><strong>测试文章目录与实验性文章</strong></p>
+          <p>- 新建 library/misc/experimental/ 目录，用于存放测试文章（主要用于测试某些东西、可读性可能较低的文章）</p>
+          <p>- 《Minesia第一个公开测试》从 library/paper/ 移入 library/misc/experimental/，文章类型标记为「实验性文章」（.article-type-badge.type-experimental 紫色徽标）</p>
+          <p>- 《测试文章》（移动端管理 App 上传的测试文章，2026年8月2日）从 library/paper/ 移入 library/misc/experimental/ 并重命名为英文文件名 test-article.html，标记为「实验性文章」，已加入 library.html 测试文章分类列表</p>
+          <p>- 同步更新所有引用链接：news.html、en/news.html、navigator.html、library/article-registry.html、js/library-dynamic.js 搜索数据</p>
+          <p>- 涉及文件：library/misc/experimental/minesia-first-public-test.html、library/misc/experimental/test-article.html、news.html、en/news.html、navigator.html、library/article-registry.html</p>
+
+          <p><strong>实验性文章徽标样式</strong></p>
+          <p>- css/style.css 新增 .article-type-badge.type-experimental（紫色半透明背景）</p>
+          <p>- 涉及文件：css/style.css</p>
+
+          <p><strong>版本号</strong></p>
+          <p>- 网站版本提升至 alpha-018（js/library-dynamic.js 的 var Ver）</p>
+
+        </div>
+      </section>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-2" class="section-title-text-main">规范变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>分类与性质措辞规范</strong></p>
+          <p>- .trae/rules/project_rules.md：新增「文章分类与性质措辞规范」（分类 = library/ 下子目录：普通/作品/杂物/测试；性质 = 录音/手写/信息/实验性），更新文件组织结构（misc/experimental），版本号更新为 alpha-018</p>
+          <p>- 涉及文件：.trae/rules/project_rules.md</p>
+
+          <p><strong>文章上传规范更新</strong></p>
+          <p>- .trae/skills/sl-article-upload/SKILL.md：文件名改用英文（kebab-case），新增「实验性文章」类型及 type-experimental 徽标样式，新增分类与性质区分说明，新增「禁止使用 emoji」原则</p>
+          <p>- 涉及文件：.trae/skills/sl-article-upload/SKILL.md</p>
+
+          <p><strong>新闻上传技能补充 App 自动发布说明</strong></p>
+          <p>- .trae/skills/sl-news-upload/SKILL.md：新增「SlyWrite App 自动发布」章节，说明 App 新闻发布自动完成的同步操作及更新日志需手动补充</p>
+          <p>- 涉及文件：.trae/skills/sl-news-upload/SKILL.md</p>
+
+          <p><strong>全站开发规范补充</strong></p>
+          <p>- 新增「禁止使用 emoji」原则：开发工作中不自行插入 emoji 字符（既有视觉组件标准中的 emoji 图标除外）</p>
+          <p>- 涉及文件：.trae/rules/project_rules.md</p>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

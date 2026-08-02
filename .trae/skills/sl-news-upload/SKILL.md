@@ -1,6 +1,6 @@
 ---
 name: "sl-news-upload"
-description: "牧羊人图书馆新闻上传规范。在创建新闻、添加新闻卡片、更新新闻轮播时自动调用，确保新闻创建完整流程正确执行。"
+description: "牧羊人图书馆新闻上传规范。在创建新闻、添加新闻卡片、更新新闻区时自动调用，确保新闻创建完整流程正确执行。"
 ---
 
 # 牧羊人图书馆 - 新闻上传规范
@@ -52,71 +52,102 @@ description: "牧羊人图书馆新闻上传规范。在创建新闻、添加新
 
 ---
 
-## 新闻卡片两种类型
+## 主页新闻区结构
 
-### 类型一：文字新闻（无海报）— `.news-card-text-only`
+> **重要**：新闻区现为"左侧海报 + 右侧文字列表"结构（`#news-text-list` / `.news-featured-text-card` / `.news-featured-poster`），旧的轮播容器已废弃。以 `index.html` 实际结构为权威源。
+
+新闻区为"左侧 1 个最新海报新闻 + 右侧 6 个按时间排序的文字新闻"布局：
 
 ```html
-<div class="news-carousel-card" data-date="YYYY-MM-DD">
-  <div class="news-card">
-    <a href="{链接}" target="_blank" class="news-card-text-only">
-      <h3 class="news-card-title">{标题}</h3>
-      <p class="news-card-date">{YYYY年M月D日}</p>
-      <p class="news-card-hint">点击此处了解更多</p>
+<div class="news-featured">
+  <!-- 左侧：最新海报新闻（始终保持 1 个） -->
+  <div class="news-featured-poster">
+    <a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-image">
+      <img src="./image/poster/{路径}/{文件名}.png" alt="{描述}" loading="lazy" width="400" height="300">
     </a>
-  </div>
-</div>
-```
-
-### 类型二：海报新闻（有海报图片）— `.news-card-content`
-
-```html
-<div class="news-carousel-card" data-date="YYYY-MM-DD">
-  <div class="news-card">
-    <div class="news-card-content">
-      <a href="{链接}" target="_blank" class="news-card-image">
-        <img src="./image/poster/{路径}/{文件名}.png" alt="{描述}">
-      </a>
-      <div class="news-card-info">
-        <h3 class="news-card-title">{标题}</h3>
-        <p class="news-card-date">{YYYY年M月D日}</p>
-        <p class="news-card-hint">点击海报了解更多</p>
-      </div>
+    <div class="news-featured-info">
+      <h3 class="news-featured-title">{标题}</h3>
+      <p class="news-featured-date">{YYYY年M月D日}</p>
     </div>
   </div>
+  <!-- 右侧：文字新闻列表（最多 6 条，按 data-date 降序） -->
+  <div class="news-featured-text-list" id="news-text-list">
+    <a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="YYYY-MM-DD">
+      <span class="card-title">{标题}</span>
+      <span class="card-date">{YYYY年M月D日}</span>
+    </a>
+    <!-- ...最多 6 条 -->
+  </div>
 </div>
 ```
+
+### 文字新闻卡片 — `.news-featured-text-card`
+
+```html
+<a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="YYYY-MM-DD">
+  <span class="card-title">{标题}</span>
+  <span class="card-date">{YYYY年M月D日}</span>
+</a>
+```
+
+### 海报新闻 — `.news-featured-poster`
+
+```html
+<div class="news-featured-poster">
+  <a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-image">
+    <img src="./image/poster/{路径}/{文件名}.png" alt="{描述}" loading="lazy" width="400" height="300">
+  </a>
+  <div class="news-featured-info">
+    <h3 class="news-featured-title">{标题}</h3>
+    <p class="news-featured-date">{YYYY年M月D日}</p>
+  </div>
+</div>
+```
+
+### news.html 列表项 — `.news-list-item-text-only`
+
+```html
+<a href="{文章链接}" target="_blank" class="news-list-item-text-only">
+  <h3 class="news-list-item-title">{标题}</h3>
+  <p class="news-list-item-date">{YYYY年M月D日}</p>
+  <p class="news-list-item-hint">点击此处了解更多</p>
+</a>
+```
+
+---
+
+## 新闻区容量与排序规矩
+
+- 左侧海报位始终保持 **1 个**最新海报新闻
+- 右侧文字列表始终保持 **最多 6 条**文字新闻，按 `data-date` 降序排列
+- 新增**文字新闻**：插入到 `#news-text-list`，若已满 6 条则移除最旧一条（`data-date` 最小者），再按 `data-date` 降序重排
+- 新增**海报新闻**：替换左侧 `.news-featured-poster`；被替换的旧海报新闻降级为文字新闻插入右侧列表（若右侧已满 6 条则挤出最旧一条），再按 `data-date` 降序重排
+- 始终按 `data-date` 降序排列右侧列表
 
 ---
 
 ## 新闻卡片关键规则
 
-- `data-date` 属性格式为 `YYYY-MM-DD`，用于轮播排序（按日期降序）
-- `news-card-hint` 固定为短引导语：
-  - 文字新闻 → "点击此处了解更多"
-  - 海报新闻 → "点击海报了解更多"
-- **不得将正文内容放入 hint**，新闻正文内容应放在链接指向的目标页面中
-- 中英文主页的新闻卡片需同步添加，内容对应翻译
-- 新新闻卡片插入到 `#carousel-track` 内的最前面（轮播会自动按 date 排序）
+- `data-date` 属性格式为 `YYYY-MM-DD`，用于排序（按日期降序）
+- 新闻卡片只放标题+日期，**不放正文内容**，正文放在链接指向的独立文章页
 - 海报图片路径：`./image/poster/{路径}/{文件名}.png`
+- 中英文主页的新闻卡片需同步添加，内容对应翻译（英文版仅同步卡片标题+日期，正文不翻译）
 
 ---
 
-## 新闻轮播容器结构
-
-```html
-<div class="news-carousel-container">
-  <div class="news-carousel-wrapper">
-    <div class="news-carousel-track" id="carousel-track">
-      <!-- 新闻卡片插入于此 -->
-    </div>
-  </div>
-  <button class="news-carousel-nav-btn prev">&#8249;</button>
-  <button class="news-carousel-nav-btn next">&#8250;</button>
-</div>
-```
-
 ---
+
+## SlyWrite App 自动发布（补充）
+
+当使用 SlyWrite App（`shepherd-library-app`）的「新闻发布」功能时，App 会自动完成以下操作（无需人工执行本技能的第一步到第三步）：
+
+1. 上传文章到 `library/paper/{英文标题}.html`
+2. 更新 `index.html` 新闻区（文字新闻插入 `#news-text-list` / 海报新闻替换 `.news-featured-poster` 并降级旧海报）
+3. 更新 `news.html` 列表项
+4. 更新 `en/index.html`（英文标题卡片）
+5. 同步 `library.html` 普通文章列表
+
+App 暂不自动写更新日志（本技能的第四步），发布新闻后需手动在当日 updateLog 中补充记录。
 
 ## 更新日志记录
 

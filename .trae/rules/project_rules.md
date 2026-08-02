@@ -1,4 +1,4 @@
-# 牧羊人图书馆 - 开发规范
+﻿# 牧羊人图书馆 - 开发规范
 
 ## 核心原则
 
@@ -67,7 +67,7 @@
 ### 版本号规则
 - 采用 **方案B**：`alpha-{自定义编号}`（如 `alpha-001`、`alpha-004`）
 - 编号完全由作者自主控制，不绑定日期
-- 当前版本：**alpha-017**
+- 当前版本：**alpha-018**
 
 ### 更新日志规则
 - **每次工作和任务结束时必须撰写更新日志**——这是强制流程，不可跳过
@@ -148,15 +148,17 @@ Irikana.github.io/
 ├── navigator.html          # 导航枢纽
 ├── css/style.css           # 全局样式
 ├── image/                  # 图片资源
-├── library/                # 图书馆主馆
+├── library/                # 图书馆主馆（每个子目录 = 一个文章分类）
 │   ├── intro.html          # 图书馆入门
 │   ├── rule.html           # 图书馆规则
 │   ├── feature.html        # 图书馆功能
-│   ├── library.html        # 图书馆入口
-│   ├── paper/              # 文章
-│   ├── works/              # 创作作品
-│   └── misc/               # 杂物（练习、笔记等）
-│       └── math-exercises/ # 数学练习
+│   ├── library.html        # 图书馆入口（文章列表按分类整理）
+│   ├── paper/              # 普通文章
+│   ├── works/              # 作品文章
+│   ├── misc/               # 杂物文章
+│   │   ├── math-exercises/ # 数学练习
+│   │   └── experimental/   # 测试文章（实验性文章）
+│   └── article-registry.html # 文章登记表
 ├── knowledge-hall/         # 知识馆（分馆）
 │   ├── index.html          # 知识馆主页
 │   └── categories/         # 知识分类
@@ -165,6 +167,16 @@ Irikana.github.io/
 └── .trae/rules/            # 开发规范
     └── project_rules.md    # 本文件
 ```
+
+### 文章分类与性质措辞规范
+- **分类（category）**：library/ 目录下每个子目录 = 一个文章分类：普通文章（paper/）、作品文章（works/）、杂物文章（misc/）、测试文章（misc/experimental/）
+- **性质（nature）**：录音文章 / 手写文章 / 信息文章 / 实验性文章 是文章性质（创作方式），不是分类
+- 措辞：涉及这些概念时用「文章分类」与「文章性质」区分，不使用「文章类型」指代分类
+
+### 禁止使用 emoji
+- **所有开发工作中禁止自行插入 emoji 字符**（如 📅、🕐、⚠、✅ 等）
+- 需要图标时使用文字或 CSS/SVG 图标
+- 例外：网站既有视觉组件标准中定义的 emoji 图标（如 callout 的 ℹ️）属于既有内容，保留
 
 ## 页面布局规范
 
@@ -187,47 +199,59 @@ Irikana.github.io/
 
 ### 新闻卡片创建规范
 
-当用户提供时间、标题和内容要求创建新闻时，遵循以下标准：
+当用户提供时间、标题和内容要求创建新闻时，遵循以下标准。
 
-**新闻卡片两种类型：**
+> **重要**：本规范以 `index.html` 实际结构为权威源。新闻区现为"左侧海报 + 右侧文字列表"结构（`#news-text-list` / `.news-featured-text-card` / `.news-featured-poster`），旧的轮播容器已废弃。若发现规范与实际页面不符，以实际页面为准并同步更新本规范。
 
-1. **文字新闻（无海报）** — 使用 `news-card-text-only` 类：
+**主页新闻区结构**（`index.html`）：
+
+新闻区为"左侧 1 个最新海报新闻 + 右侧 6 个按时间排序的文字新闻"布局：
+
 ```html
-<div class="news-carousel-card" data-date="YYYY-MM-DD">
-  <div class="news-card">
-    <a href="{链接}" target="_blank" class="news-card-text-only">
-      <h3 class="news-card-title">{标题}</h3>
-      <p class="news-card-date">{YYYY年M月D日}</p>
-      <p class="news-card-hint">点击此处了解更多</p>
+<div class="news-featured">
+  <!-- 左侧：最新海报新闻（始终保持 1 个） -->
+  <div class="news-featured-poster">
+    <a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-image">
+      <img src="./image/poster/{路径}/{文件名}.png" alt="{描述}" loading="lazy" width="400" height="300">
     </a>
-  </div>
-</div>
-```
-
-2. **海报新闻（有海报图片）** — 使用 `news-card-content` 类：
-```html
-<div class="news-carousel-card" data-date="YYYY-MM-DD">
-  <div class="news-card">
-    <div class="news-card-content">
-      <a href="{链接}" target="_blank" class="news-card-image">
-        <img src="./image/poster/{路径}/{文件名}.png" alt="{描述}">
-      </a>
-      <div class="news-card-info">
-        <h3 class="news-card-title">{标题}</h3>
-        <p class="news-card-date">{YYYY年M月D日}</p>
-        <p class="news-card-hint">点击海报了解更多</p>
-      </div>
+    <div class="news-featured-info">
+      <h3 class="news-featured-title">{标题}</h3>
+      <p class="news-featured-date">{YYYY年M月D日}</p>
     </div>
   </div>
+  <!-- 右侧：文字新闻列表（最多 6 条，按 data-date 降序） -->
+  <div class="news-featured-text-list" id="news-text-list">
+    <a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="YYYY-MM-DD">
+      <span class="card-title">{标题}</span>
+      <span class="card-date">{YYYY年M月D日}</span>
+    </a>
+    <!-- ...最多 6 条 -->
+  </div>
 </div>
 ```
 
-**关键规则：**
-- `data-date` 属性格式为 `YYYY-MM-DD`，用于轮播排序（按日期降序）
-- `news-card-hint` 固定为短引导语："点击此处了解更多"（文字新闻）或"点击海报了解更多"（海报新闻），**不得将正文内容放入 hint**
-- 新闻正文内容应放在链接指向的目标页面中，而非卡片内
-- 中英文主页的新闻卡片需同步添加，内容对应翻译
-- 新新闻卡片插入到 `#carousel-track` 内的最前面（轮播会自动按 date 排序）
+**新闻区容量规矩**：
+- 左侧海报位始终保持 **1 个**最新海报新闻
+- 右侧文字列表始终保持 **最多 6 条**文字新闻，按 `data-date` 降序排列
+- 新增**文字新闻**：插入到 `#news-text-list`，若已满 6 条则移除最旧一条（`data-date` 最小者），再按 `data-date` 降序重排
+- 新增**海报新闻**：替换左侧 `.news-featured-poster`；被替换的旧海报新闻降级为文字新闻插入右侧列表（若右侧已满 6 条则挤出最旧一条），再按 `data-date` 降序重排
+- 始终按 `data-date` 降序排列右侧列表
+
+**news.html 列表项结构**：
+
+```html
+<a href="{文章链接}" target="_blank" class="news-list-item-text-only">
+  <h3 class="news-list-item-title">{标题}</h3>
+  <p class="news-list-item-date">{YYYY年M月D日}</p>
+  <p class="news-list-item-hint">点击此处了解更多</p>
+</a>
+```
+
+**关键规则**：
+- `data-date` 属性格式为 `YYYY-MM-DD`，用于排序（按日期降序）
+- 新闻卡片只放标题+日期，**不放正文内容**；正文放在链接指向的独立文章页
+- 海报图片路径：`./image/poster/{路径}/{文件名}.png`
+- 中英文主页的新闻卡片需同步添加，内容对应翻译（英文版仅同步卡片标题+日期，正文不翻译）
 
 **新闻创建完整流程**：
 
@@ -240,11 +264,11 @@ Irikana.github.io/
    - 正文内容放入 main 区域，使用标准的段落/标题/信息框等组件排版
 
 2. **添加新闻卡片**：在主页（index.html）和英文主页（en/index.html）的新闻区域添加对应卡片
-   - 文字新闻使用 `.news-card-text-only` 类（轮播卡片）
-   - 海报新闻使用 `.news-card-content` 类（轮播卡片）
-   - 卡片只放标题+日期+hint，不放正文内容
+   - 文字新闻 → 插入 `#news-text-list`，维持 6 条上限，按 `data-date` 降序
+   - 海报新闻 → 替换左侧 `.news-featured-poster`，旧海报降级到右侧列表
+   - 卡片只放标题+日期，不放正文内容
 
-3. **同步新闻列表页**：在 news.html 中同步添加该新闻条目
+3. **同步新闻列表页**：在 news.html 中同步添加该新闻条目（`.news-list-item-text-only`）
 
 4. **记录更新日志**：将变更记录到 updateLog 中
 
@@ -373,3 +397,4 @@ Irikana.github.io/
   2. 再修改 `visual-components.md` 中的文档
   3. 最后同步更新 `library-dynamic.js` 中 `StyleEnforcer.init()` 的注入样式字符串
   4. 三处保持一致，StyleEnforcer 作为最终保障
+

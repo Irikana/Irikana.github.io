@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年8月1日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年8月1日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-08-01</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">规范变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>新闻卡片规范对齐实际结构（移动端内容管理 App 前置依赖）</strong></p>
+          <p>- 修正 .trae/rules/project_rules.md「新闻卡片创建规范」章节：将已废弃的轮播结构（#carousel-track / .news-carousel-card / .news-card-text-only / .news-card-content）替换为实际结构 #news-text-list / .news-featured-text-card / .news-featured-poster</p>
+          <p>- 新增「新闻区容量规矩」：左侧 1 个海报 + 右侧最多 6 条文字新闻，按 data-date 降序；新增文字新闻插入右侧列表并维持 6 条上限，新增海报新闻替换左侧 poster 且旧海报降级到右侧列表</p>
+          <p>- 补充 news.html 列表项结构（.news-list-item-text-only）及英文版仅同步卡片标题+日期的说明</p>
+          <p>- 涉及文件：.trae/rules/project_rules.md</p>
+
+          <p><strong>视觉组件标准同步</strong></p>
+          <p>- 修正 .trae/rules/visual-components.md「4. 新闻卡片」章节：同步上述结构更正，新增「容量与排序规矩」小节及 news.html 列表项定义</p>
+          <p>- 涉及文件：.trae/rules/visual-components.md</p>
+
+          <p><strong>新闻上传技能同步</strong></p>
+          <p>- 修正 .trae/skills/sl-news-upload/SKILL.md：同步实际结构、容量规矩、排序规则，更新技能描述措辞（「新闻轮播」→「新闻区」）</p>
+          <p>- 涉及文件：.trae/skills/sl-news-upload/SKILL.md</p>
+
+          <p><strong>本次为纯规范更新</strong></p>
+          <p>- 未修改任何网站页面内容（index.html / en/index.html / news.html 等均未改动）</p>
+          <p>- 规范更新为移动端内容管理 App 开发的前置依赖：App 模板生成器以规范为权威源，规范须先与现实对齐</p>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

@@ -12,6 +12,11 @@ description: "牧羊人图书馆文章上传规范。在创建文章页面、添
 - 仅在用户明确要求修改内容时方可改动文字或图片
 - 提示词中提供的原话可用于开发
 
+### 禁止使用 emoji
+- **所有开发工作中禁止自行插入 emoji 字符**（如 📅、🕐、⚠、✅ 等）
+- 界面、文案、注释中需要图标时使用文字或 CSS/SVG 图标
+- 例外：网站既有视觉组件标准中定义的 emoji 图标（如 callout 的 ℹ️）属于既有内容，保留
+
 ### 设计确认机制
 遇到以下情况应主动向用户确认：
 - 需求存在多种合理实现方式时
@@ -20,8 +25,20 @@ description: "牧羊人图书馆文章上传规范。在创建文章页面、添
 
 ### 元数据保护
 - **不私自增添标签和文章类型**，即不擅自添加 `.article-tag`、`.article-type-badge` 等元数据
-- 文章类型（录音文章/手写文章/信息文章）和属性标签（tag-ai/tag-edited 等）仅在用户明确指示时方可添加
+- 文章性质（录音文章/手写文章/信息文章/实验性文章）和属性标签（tag-ai/tag-edited 等）仅在用户明确指示时方可添加
 - 创建日期、作者等元数据字段也仅在用户提供时填写，不自行编造
+
+---
+
+## 文章分类与文章性质
+
+- **分类（category）**：library/ 目录下的每个子目录对应一个文章分类
+  - `library/paper/` — 普通文章
+  - `library/works/` — 作品文章
+  - `library/misc/` — 杂物文章
+  - `library/misc/experimental/` — 测试文章（实验性文章存放处）
+- **性质（nature/type）**：创作方式，包括 录音文章 / 手写文章 / 信息文章 / 实验性文章，显示为 `.article-type-badge`，**不是**分类
+- 措辞规范：描述这些内容时使用「文章性质」而非「文章类型」或「文章分类」
 
 ---
 
@@ -35,8 +52,8 @@ header + main + footer + mobile-nav + quick-nav + float buttons + JS + article-m
 
 - 正文内容放入 `<main>` 区域
 - 使用标准的段落/标题/信息框等组件排版
-- 文件放在 `library/paper/` 目录下
-- 文件名使用中文标题（如 `视觉组件标准已创建.html`）
+- 文件放在对应分类目录下（普通文章 → `library/paper/`，测试文章 → `library/misc/experimental/`）
+- **文件名使用英文**（kebab-case，如 `a-new-article.html`），页面显示标题可用中文（符合「目录名和文件名一律使用英文」规范）
 
 ---
 
@@ -126,11 +143,12 @@ header + main + footer + mobile-nav + quick-nav + float buttons + JS + article-m
 
 ### 类型标签 — `.article-type-badge`
 
-| 类型 | 含义 |
+| 类型（性质） | 含义 |
 |------|------|
 | 录音文章 | 录音转文字创作 |
 | 手写文章 | 手写转文字创作 |
 | 信息文章 | 打字直接创作 |
+| 实验性文章 | 主要用于测试某些东西，可能可读性较低（使用 `type-experimental` 紫色徽标） |
 
 ```css
 .article-type-badge {
@@ -138,6 +156,9 @@ header + main + footer + mobile-nav + quick-nav + float buttons + JS + article-m
   padding: 2px 8px; vertical-align: middle; letter-spacing: 0.5px;
   border-radius: 0;
   background-color: #e8f4fd; color: #2980b9; border: 1px solid #b3d9f2;
+}
+.article-type-badge.type-experimental {
+  background-color: #f3e8fd; color: #7d3c98; border: 1px solid #d7b8ec;
 }
 ```
 

@@ -52,7 +52,7 @@
       {t:'活跃开发阶段',u:toAbs(ROOT+'library/paper/library-may-enter-active-development.html'),k:'活跃开发 Alpha 更新'},
       {t:'Minesia更新',u:toAbs(ROOT+'library/paper/minesia-0.0.16-update.html'),k:'Minesia 更新 版本 公开测试'},
       {t:'知识馆启用',u:toAbs(ROOT+'library/paper/knowledge-hall-launch.html'),k:'知识馆 启用 分馆 分类'},
-      {t:'Minesia测试',u:toAbs(ROOT+'library/paper/minesia-first-public-test.html'),k:'Minesia 测试 公开 第一个'},
+      {t:'Minesia测试',u:toAbs(ROOT+'library/misc/experimental/minesia-first-public-test.html'),k:'Minesia 测试 公开 第一个'},
       {t:'周三狂热',u:toAbs(ROOT+'library/paper/wednesday-frenzy-and-difficult-review.html'),k:'周三 狂热 复习 困难 新闻'},
       {t:'语义化更新',u:toAbs(ROOT+'library/paper/semantic-visual-component-update.html'),k:'语义化 视觉组件 更新 标准'}
     ],
@@ -490,7 +490,7 @@
   };
 
   /* ========== 8. VERSION ========== */
-  var Ver = { v: 'alpha-017',
+  var Ver = { v: 'alpha-018',
     init: function() {
       var footer = $q('.copyright-color') || $q('footer .copyright-text') || $q('.copyright-text');
       if (!footer || $q('.sl-version')) return;

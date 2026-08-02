@@ -1517,6 +1517,13 @@ img {
   border: 1px solid #b3d9f2;
 }
 
+/* 实验性文章徽标：紫色半透明 */
+.article-type-badge.type-experimental {
+  background-color: #f3e8fd;
+  color: #7d3c98;
+  border: 1px solid #d7b8ec;
+}
+
 .article-tag {
   background-color: #f5f5f5;
   color: #666;

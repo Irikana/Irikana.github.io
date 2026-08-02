@@ -444,17 +444,18 @@ details details {
 
 ---
 
-## 3.7 文章类型标签 & 标签 — `.article-type-badge` / `.article-tag`
+## 3.7 文章性质标签 & 标签 — `.article-type-badge` / `.article-tag`
 
-**用途**：在文章元数据中标注文章类型和属性标签。
+**用途**：在文章元数据中标注文章性质（创作方式）和属性标签。性质不等于分类（library/ 下每个子目录是一个文章分类）。
 
-**类型标签（`.article-type-badge`）**：
+**性质标签（`.article-type-badge`）**：
 
-| 类型 | 含义 |
+| 性质 | 含义 |
 |------|------|
 | 录音文章 | 录音转文字创作 |
 | 手写文章 | 手写转文字创作 |
 | 信息文章 | 打字直接创作 |
+| 实验性文章 | 主要用于测试某些东西，可能可读性较低（`type-experimental` 紫色徽标） |
 
 **属性标签（`.article-tag`）**：
 
@@ -484,6 +485,12 @@ details details {
   border: 1px solid #b3d9f2;
 }
 
+.article-type-badge.type-experimental {
+  background-color: #f3e8fd;
+  color: #7d3c98;
+  border: 1px solid #d7b8ec;
+}
+
 .article-tag {
   background-color: #f5f5f5;
   color: #666;
@@ -507,7 +514,7 @@ details details {
 
 ```html
 <span class="article-meta-item">
-  <span class="article-meta-label">文章类型：</span>
+  <span class="article-meta-label">文章性质：</span>
   <span class="article-meta-value"><span class="article-type-badge">录音文章</span></span>
 </span>
 <span class="article-meta-item">
@@ -524,71 +531,91 @@ details details {
 
 ## 4. 新闻卡片
 
-### 类型一：文字新闻（无海报）
+> **结构说明**：新闻区现为"左侧海报 + 右侧文字列表"结构（`#news-text-list` / `.news-featured-text-card` / `.news-featured-poster`），旧的轮播容器已废弃。以下以 `index.html` 实际结构为权威源。
 
-**类名**：`.news-card-text-only`
+### 主页新闻区整体结构
 
-**完整结构**：
+新闻区为"左侧 1 个最新海报新闻 + 右侧 6 个按时间排序的文字新闻"布局：
 
 ```html
-<div class="news-carousel-card" data-date="YYYY-MM-DD">
-  <div class="news-card">
-    <a href="{链接}" target="_blank" class="news-card-text-only">
-      <h3 class="news-card-title">{标题}</h3>
-      <p class="news-card-date">{YYYY年M月D日}</p>
-      <p class="news-card-hint">点击此处了解更多</p>
+<div class="news-featured">
+  <!-- 左侧：最新海报新闻（始终保持 1 个） -->
+  <div class="news-featured-poster">
+    <a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-image">
+      <img src="./image/poster/{路径}/{文件名}.png" alt="{描述}" loading="lazy" width="400" height="300">
     </a>
-  </div>
-</div>
-```
-
-**关键规则**：
-- `data-date` 格式：`YYYY-MM-DD`，用于轮播排序（按日期降序）
-- `news-card-hint` 固定为："点击此处了解更多"
-- **不得将正文内容放入 hint**
-- 新卡片插入到 `#carousel-track` 最前面
-
-### 类型二：海报新闻（有海报图片）
-
-**类名**：`.news-card-content`
-
-**完整结构**：
-
-```html
-<div class="news-carousel-card" data-date="YYYY-MM-DD">
-  <div class="news-card">
-    <div class="news-card-content">
-      <a href="{链接}" target="_blank" class="news-card-image">
-        <img src="./image/poster/{路径}/{文件名}.png" alt="{描述}">
-      </a>
-      <div class="news-card-info">
-        <h3 class="news-card-title">{标题}</h3>
-        <p class="news-card-date">{YYYY年M月D日}</p>
-        <p class="news-card-hint">点击海报了解更多</p>
-      </div>
+    <div class="news-featured-info">
+      <h3 class="news-featured-title">{标题}</h3>
+      <p class="news-featured-date">{YYYY年M月D日}</p>
     </div>
   </div>
+  <!-- 右侧：文字新闻列表（最多 6 条，按 data-date 降序） -->
+  <div class="news-featured-text-list" id="news-text-list">
+    <a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="YYYY-MM-DD">
+      <span class="card-title">{标题}</span>
+      <span class="card-date">{YYYY年M月D日}</span>
+    </a>
+    <!-- ...最多 6 条 -->
+  </div>
+</div>
+```
+
+### 类型一：文字新闻卡片 — `.news-featured-text-card`
+
+**用途**：右侧文字列表中的单条新闻卡片。
+
+```html
+<a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="YYYY-MM-DD">
+  <span class="card-title">{标题}</span>
+  <span class="card-date">{YYYY年M月D日}</span>
+</a>
+```
+
+**关键规则**：
+- `data-date` 格式：`YYYY-MM-DD`，用于排序（按日期降序）
+- 卡片只放标题+日期，**不放正文内容**
+- 右侧列表最多 6 条，超出时移除最旧一条（`data-date` 最小者）
+
+### 类型二：海报新闻 — `.news-featured-poster`
+
+**用途**：左侧 featured 海报位，始终展示最新 1 个海报新闻。
+
+```html
+<div class="news-featured-poster">
+  <a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-image">
+    <img src="./image/poster/{路径}/{文件名}.png" alt="{描述}" loading="lazy" width="400" height="300">
+  </a>
+  <div class="news-featured-info">
+    <h3 class="news-featured-title">{标题}</h3>
+    <p class="news-featured-date">{YYYY年M月D日}</p>
+  </div>
 </div>
 ```
 
 **关键规则**：
-- `news-card-hint` 固定为："点击海报了解更多"
+- 海报位始终保持 1 个
+- 新增海报新闻时替换左侧 poster；被替换的旧海报新闻降级为文字新闻插入右侧列表（若右侧已满 6 条则挤出最旧一条）
 - 海报图片路径：`./image/poster/{路径}/{文件名}.png`
 - 中英文主页的新闻卡片需同步添加
 
-### 新闻轮播容器结构
+### news.html 列表项 — `.news-list-item-text-only`
+
+**用途**：`news.html` 新闻列表页的单条新闻条目。
 
 ```html
-<div class="news-carousel-container">
-  <div class="news-carousel-wrapper">
-    <div class="news-carousel-track" id="carousel-track">
-      <!-- 新闻卡片插入于此 -->
-    </div>
-  </div>
-  <button class="news-carousel-nav-btn prev">&#8249;</button>
-  <button class="news-carousel-nav-btn next">&#8250;</button>
-</div>
+<a href="{文章链接}" target="_blank" class="news-list-item-text-only">
+  <h3 class="news-list-item-title">{标题}</h3>
+  <p class="news-list-item-date">{YYYY年M月D日}</p>
+  <p class="news-list-item-hint">点击此处了解更多</p>
+</a>
 ```
+
+### 容量与排序规矩
+
+- 左侧海报位 **1 个**，右侧文字列表 **最多 6 条**
+- 始终按 `data-date` 降序排列右侧列表
+- 新增文字新闻 → 插入右侧列表，满 6 条挤出最旧
+- 新增海报新闻 → 替换左侧 poster，旧 poster 降级到右侧列表
 
 ---
 
