@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年8月4日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年8月4日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-08-04 · alpha-020</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">主馆变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>全站移除 GrapesJS 遗留布局类 gjs-row/gjs-cell</strong></p>
+          <p>- 60 余个页面（546 处）的 header/main/footer/section/div 上遗留的 gjs-row、gjs-cell 类全部移除，统一为 content-width-limiter 标准布局结构（gjs-row/gjs-cell 为可视化编辑器导出遗留，均为单子元素包裹，移除无布局影响）</p>
+          <p>- 涉及：navigator.html、news.html、library/visual-components.html、library/paper/、library/works/、library/misc/、en/ 全部页面、updateLog/ 历史日志页，以及 misc/experimental/Test Paper 20260803N1.html（自包含导出版）</p>
+
+          <p><strong>css/style.css 清理 gjs 规则</strong></p>
+          <p>- 删除 .gjs-row/.gjs-cell 定义（桌面 + ≤375px / ≤768px / 769-1024px 三个响应式断点），移动端 section 内边距与根页面（index.html 等）统一</p>
+          <p>- shepherd-library-app/site/css/style.css（同步副本）同步清理，保持一致</p>
+
+          <p><strong>css/style.css 合并重复规则</strong></p>
+          <p>- 合并 13 组声明体完全相同的重复规则为逗号选择器：section-title/yellowgreen-title、grey-bg/darkgrey-bg、nav-padding/content-padding、notice-header/section-header、logo-img-custom/logo-size-custom、title-color/article-meta-value、news-featured-date/news-list-item-date、article-footer-meta-item/article-meta-item、article-footer-label/article-meta-label、auto-toc-title/bookmarks-panel-title、kh-float-header/lang-float-header、kh-float-close/lang-float-close、padding-10/lang-float-body/kh-float-body</p>
+          <p>- 样式表体积约减 2KB，视觉零变化；暗色模式独立覆盖保留</p>
+
+          <p><strong>标题层级修复（向知识馆风格靠拢）</strong></p>
+          <p>- .section-title-text-sub-sub（如 library.html 中「文章」）：22px 灰色虚线底线 → 24px 深色 + 4px 左竖条，不再弱于其子级 .subsection-header（此前移动端 18px vs 22px 明显倒置）</p>
+          <p>- .sub-subsection-header 降级至 20px，形成清晰的标题阶梯：main 22 → sub 20 → sub-sub 24 → subsection 22 → sub-subsection 20（桌面）；移动端 24 → 21 → 20 → 20 → 18</p>
+          <p>- 暗色模式与 768px 断点同步；自包含文件 misc/experimental/Test Paper 20260803N1.html 同步</p>
+
+          <p><strong>移动端排版优化</strong></p>
+          <p>- logo 放大：.logo-img-custom/.logo-img 40px→56px，.logo-size-custom/.logo-size 80px→120px</p>
+          <p>- 标语放大：.slogan-text 11px→13px；页标题放大：.page-title-main 20px→24px</p>
+          <p>- 内容区左右留白：.content-main 及内容容器 8px→16px，手机端不再拥挤</p>
+          <p>- 阅读工具栏（字号）放大：.tools-title 11→13px、.tool-group-label 10→12px、.tool-btn 11→13px，手机端可读性提升</p>
+
+          <p><strong>章节页双箭头修复</strong></p>
+          <p>- library/works/chapter-01 至 chapter-19 的「下一话 →」移除文本箭头（仅保留 CSS 统一注入的 SVG 箭头），消除链接文本箭头与样式箭头叠加的重复标记</p>
+
+        </div>
+      </section>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-2" class="section-title-text-main">知识馆变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>侧边栏当前页高亮</strong></p>
+          <p>- knowledge-hall/ 4 个页面（index 与 3 个分类页）的侧边栏导航项增加当前页高亮状态（.kh-nav-item.active），亮色/暗色/手动主题四套适配</p>
+
+        </div>
+      </section>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-3" class="section-title-text-main">规范变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>版本号更新至 alpha-020</strong></p>
+          <p>- .trae/rules/project_rules.md、.reasonix/skills/sl-website-rules/SKILL.md 中「当前版本」更新为 alpha-020；js/library-dynamic.js 页脚版本同步（alpha-019 内容见同日上文记录）</p>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

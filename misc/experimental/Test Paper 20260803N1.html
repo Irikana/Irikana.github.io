@@ -225,18 +225,6 @@ img {
 
 /* ========== Layout System ========== */
 
-.gjs-row {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  gap: 0;
-}
-
-.gjs-cell {
-  flex: 1;
-  min-width: 0;
-}
-
 .content-row {
   background-color: var(--color-bg);
   padding: var(--space-xl) var(--space-md);
@@ -376,14 +364,15 @@ img {
 }
 
 .section-title-text-sub-sub {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 600;
-  color: var(--color-text-secondary);
+  color: var(--color-text);
   text-align: left;
   background-color: transparent;
-  margin-bottom: var(--space-sm);
-  padding-bottom: var(--space-sm);
-  border-bottom: var(--line-width) dashed var(--color-border);
+  margin: var(--space-lg) 0 var(--space-md) 0;
+  padding: 0 0 var(--space-xs) 0;
+  padding-left: var(--space-md);
+  border-left: 4px solid var(--color-accent);
 }
 
 .subsection-header {
@@ -1657,17 +1646,6 @@ strong {
 /* ========== Responsive Design ========== */
 
 @media (max-width: 768px) {
-  .gjs-row {
-    flex-direction: column;
-    padding: var(--space-sm);
-    gap: var(--space-sm);
-  }
-
-  .gjs-cell {
-    width: 100% !important;
-    flex: 0 0 100%;
-  }
-
   .content-width-limiter {
     width: 100%;
     max-width: 100%;
@@ -2089,11 +2067,11 @@ strong {
   }
 
   .section-title-text-sub-sub {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .subsection-header {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .sub-subsection-header {
@@ -2111,10 +2089,6 @@ strong {
 }
 
 @media (max-width: 375px) {
-  .gjs-row {
-    padding: var(--space-sm);
-  }
-
   .main-container {
     padding: var(--space-md) var(--space-sm);
   }
@@ -2156,10 +2130,6 @@ strong {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .gjs-row {
-    padding: var(--space-md) var(--space-lg);
-  }
-
   .quick-nav {
     width: 32px;
     padding: var(--space-md) var(--space-xs);
@@ -2592,8 +2562,8 @@ details details {
   }
 
   .section-title-text-sub-sub {
-    color: var(--color-text-secondary);
-    border-bottom-color: var(--color-border);
+    color: var(--color-text);
+    border-left-color: var(--color-accent);
   }
 
   .subsection-header {
@@ -4399,8 +4369,8 @@ details details {
 </head>
 <body>
 <header>
-<div class="gjs-row main-container">
-  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../../../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../../../image/logo_text.png" class="logo-size logo-size-custom"></div>
+<div class="main-container">
+  <div class="logo-align"><div class="logo-header-row"><img src="../../../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../../../image/logo_text.png" class="logo-size logo-size-custom"></div>
     <div class="slogan-container">
       <hr class="slogan-line slogan-line-left">
       <span class="slogan-text">存放所有知识之地</span>
@@ -4412,9 +4382,9 @@ details details {
 </header>
 
 <main>
-<div class="gjs-row content-row content-bg-white">
+<div class="content-row content-bg-white">
   <div class="content-width-limiter">
-    <div class="gjs-cell content-main">
+    <div class="content-main">
       <div class="article-meta">
       <div class="article-meta-item">
           <span class="article-meta-label">作者：</span>
@@ -4447,8 +4417,8 @@ details details {
 </main>
 
 <footer>
-<div class="gjs-row footer-row footer-row-alt footer-gradient">
-  <div class="gjs-cell nav-center">
+<div class="footer-row footer-row-alt footer-gradient">
+  <div class="nav-center">
     <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
   </div>
 </footer>
