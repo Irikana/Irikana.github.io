@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年8月3日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年8月3日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-08-03 · alpha-018</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">主馆变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>实验性文章相对路径修复</strong></p>
+          <p>- library/misc/experimental/ 下的两篇文章（minesia-first-public-test.html、test-article.html）位于 3 层目录，此前相对路径为 ../../ 导致 CSS、Logo、脚本全部失效；现全部更正为 ../../../（站点根级资源）与 ../../（library/ 级页面），样式与功能恢复正常</p>
+          <p>- 涉及文件：library/misc/experimental/minesia-first-public-test.html、library/misc/experimental/test-article.html</p>
+
+          <p><strong>数学练习列表条目精简</strong></p>
+          <p>- library.html 杂物文章列表中「数学练习（一）」删除「— 线性代数 · 多元微积分 · 微分方程 · 复变函数」后缀，仅保留标题；英文版同步处理</p>
+          <p>- 涉及文件：library/library.html、en/library/library.html</p>
+
+          <p><strong>小说标签专属样式</strong></p>
+          <p>- css/style.css 新增 .article-tag.tag-novel（紫色半透明背景），「小说」标签在文章页有独立配色</p>
+          <p>- 涉及文件：css/style.css</p>
+
+          <p><strong>站点自定义配置</strong></p>
+          <p>- 新建 slywrite-config.json（仓库根目录）：存放用户自定义的文章分类 / 标签 / 上传目录，由 SlyWrite App 读写，初始为空；App 创建自定义分类时会同步插入 library.html（中英文版）分类章节</p>
+          <p>- 涉及文件：slywrite-config.json</p>
+
+        </div>
+      </section>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-2" class="section-title-text-main">规范变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>跨平台开发上下文说明</strong></p>
+          <p>- .trae/rules/project_rules.md：新增「跨平台开发上下文」说明——因多平台交叉开发，技能文件可能存在信息差，开发前可前往工作区根目录 .reasonix/skills/ 读取对应技能（sl-article-upload、sl-news-upload、sl-website-rules、sl-structural-work、sl-visual-components、sl-layout-design、slywrite-changelog-release）获取最新规范</p>
+          <p>- 涉及文件：.trae/rules/project_rules.md</p>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

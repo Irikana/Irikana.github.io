@@ -1542,6 +1542,13 @@ img {
   border: 1px solid #f8bbd0;
 }
 
+/* 小说标签：紫色半透明 */
+.article-tag.tag-novel {
+  background-color: #f3e8fd;
+  color: #7d3c98;
+  border: 1px solid #d7b8ec;
+}
+
 /* ========== ID Selectors (Legacy Support) ========== */
 
 #content-box-main,
