@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 牧羊人图书馆 动态功能 v1.2
  * 稳定版 - 全面修复
  */
@@ -38,7 +38,7 @@
   /* ========== 1. SEARCH ========== */
   var Search = {
     data: [
-      {t:'INSTLAB CLOUD Mobile或将问世',u:toAbs(ROOT+'paper/INSTLAB CLOUD Mobile Might Come Out Soon.html'),k:'INSTLAB CLOUD Mobile或将问世 INSTLAB CLOUD Mobile Might Come Out Soon 信息文章 新闻 新闻'},
+      {t:'INSTLAB CLOUD Mobile或将问世',u:toAbs(ROOT+'library/paper/INSTLAB CLOUD Mobile Might Come Out Soon.html'),k:'INSTLAB CLOUD Mobile或将问世 INSTLAB CLOUD Mobile Might Come Out Soon 信息文章 新闻 新闻'},
       {t:'测试文章20260803N1',u:toAbs(ROOT+'misc/experimental/Test Paper 20260803N1.html'),k:'测试文章20260803N1 Test Paper 20260803N1 实验性文章'},
       {t:'SlyWrite的诞生',u:toAbs(ROOT+'library/paper/The Birth of SlyWrite.html'),k:'SlyWrite的诞生 The Birth of SlyWrite 信息文章 新闻'},
       {t:'牧羊人图书馆主页',u:toAbs(ROOT+'index.html'),k:'主页 图书馆 入门 规则 功能'},
