@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年8月9日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年8月9日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-08-09 · 项目清理</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">主馆变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>清理仓库冗余与隐私文件</strong></p>
+          <p>- 删除整个 docs/ 目录：移除误入库的第三方 Python 库 docs/pylib/（playwright 等，约 108MB），以及 docs/ 下的论文草稿、演示文稿、生成脚本、对话记录等未发布工作产物</p>
+          <p>- 删除 notionExport/ 目录（Notion 导出中间产物，本已被 .gitignore 忽略，残留于工作区）</p>
+          <p>- 删除根目录 debug.log（Chromium GPU 调试日志）</p>
+          <p>- 删除空目录 .uploads/ 与 .codeartsdoer/（无内容残留）</p>
+          <p>- 涉及文件：docs/（整个目录）、notionExport/（整个目录）、debug.log</p>
+
+        </div>
+      </section>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-2" class="section-title-text-main">规范变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>技能复刻</strong></p>
+          <p>- 将 .reasonix/skills/ 下的 7 个技能（sl-article-upload、sl-layout-design、sl-news-upload、sl-structural-work、sl-visual-components、sl-website-rules、slywrite-changelog-release）复刻至工作区 .zcode/skills/，供当前开发环境调用</p>
+          <p>- 为 slywrite-changelog-release 补充缺失的 frontmatter（name / description），使其可被识别为技能</p>
+
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>
