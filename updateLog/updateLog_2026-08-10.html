@@ -35,6 +35,19 @@
           <p>- 移除 chapter-02 至 chapter-20 作品章节目录中「← 上一话」链接文本内的手动箭头符号（与 CSS 自动箭头重叠显示），改由 CSS 统一控制</p>
           <p>- 移除 math-exercises/answer-01.html 两处「← 返回练习页」的手动箭头符号</p>
 
+          <p><strong>修复手机端便携式导航仪无法展开</strong></p>
+          <p>- 根因：57 个页面的内联脚本与 js/library-dynamic.js 的 MobileNavToggle 模块同时对便携式导航仪（.quick-nav）绑定了点击展开/收起事件，两套处理器互相抵消，导致手机端点击导航仪无法展开</p>
+          <p>- 已修复：移除全部页面的内联 quick-nav 点击绑定（含标准变量名 46 页与压缩变量名 11 页），统一交由 library-dynamic.js 处理；保留各页面内联的回到顶部 / 导航枢纽 / 当前位置逻辑</p>
+
+          <p><strong>整改功能性提示框误用</strong></p>
+          <p>- 方块文明主页作品介绍：由蓝色信息框（.function-box-blue）改为灰色引用框（.quote-box-grey）——介绍性内容非功能性提示</p>
+          <p>- 图书馆入门（中英文）外部百科引用来源说明：蓝色框改为灰色引用框（引用来源应使用灰色框）</p>
+          <p>- Minesia 测试页参考链接：蓝色框改为灰色引用框</p>
+
+          <p><strong>修复脚注链接双重箭头</strong></p>
+          <p>- 根因：正文脚注引用 [n] 与脚注返回链接（↩ 文本箭头）位于内容区，被通用链接箭头规则自动追加 SVG 箭头，导致「正文脚注引用」与「脚注返回」出现双重箭头</p>
+          <p>- 已修复：CSS 为 .article-footnote-ref a 与 .article-footnote-back 添加 ::after { content: none } 排除规则，脚注链接不再叠加通用箭头</p>
+
         </div>
       </section>
 

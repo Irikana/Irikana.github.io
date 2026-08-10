@@ -2391,6 +2391,14 @@ details details {
   opacity: 1;
 }
 
+/* 脚注链接不加跳转箭头：
+   正文脚注引用 [1] 已用上标数字表意，脚注返回 ↩ 已有文本箭头，
+   避免与通用链接箭头叠加成双箭头 */
+.article-footnote-ref a::after,
+.article-footnote-back::after {
+  content: none;
+}
+
 /* ========== Dark Mode ========== */
 
 @media (prefers-color-scheme: dark) {

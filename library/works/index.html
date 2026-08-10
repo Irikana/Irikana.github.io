@@ -38,7 +38,7 @@
         <a href="../library.html">返回图书馆入口</a>
       </div>
 
-      <div class="function-box-blue">
+      <div class="quote-box-grey">
         《方块文明》是一部以 Minecraft 世界观为灵感的原创对话体故事，讲述了腐竹、杰克森、玛丽娜等角色在方块世界中探索下界文明、对抗怪物复苏、追寻真相的冒险旅程。
       </div>
 
@@ -165,49 +165,7 @@ function getCurrentPath() {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  const quickNav = document.querySelector('.quick-nav');
-  const isMobile = window.innerWidth <= 768;
-  if (quickNav && isMobile) {
-    quickNav.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded')) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) { title.style.writingMode = 'vertical-rl'; title.style.marginBottom = '4px'; title.style.paddingBottom = '0'; title.style.borderBottom = 'none'; }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      } else {
-        quickNav.classList.add('expanded');
-        quickNav.style.width = '180px';
-        quickNav.style.padding = '16px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'block';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) { title.style.writingMode = 'horizontal-tb'; title.style.marginBottom = '16px'; title.style.paddingBottom = '8px'; title.style.borderBottom = '1px solid #e0e0e0'; }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'none';
-      }
-    });
-  }
-  if (quickNav && isMobile) {
-    document.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) { title.style.writingMode = 'vertical-rl'; title.style.marginBottom = '4px'; title.style.paddingBottom = '0'; title.style.borderBottom = 'none'; }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      }
-    });
-  }
-  const backToTopBtn = document.querySelector('.back-to-top');
+        const backToTopBtn = document.querySelector('.back-to-top');
   if (backToTopBtn) backToTopBtn.addEventListener('click', scrollToTop);
   const navHubBtn = document.querySelector('.nav-hub');
   if (navHubBtn) navHubBtn.addEventListener('click', openNavigator);

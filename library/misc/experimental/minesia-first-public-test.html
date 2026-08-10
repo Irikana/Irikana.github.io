@@ -48,7 +48,7 @@
         <p>在2月初，我声明了图书馆进入了Alpha 0.0.1，彼时，我开始着手开发《Minesia Journey》，但由于建筑水平低下，以及各种原因叠加，导致进展缓慢，原计划在除夕发布一个公开的demo测试，然而，由于进展实在过于缓慢，而且在尝试使用AI IDE（Trae CN）之后，极大程度上推动了附加包本身的发展而不是地图，再考虑到地图的内容丰富程度有赖于附加包，并且该附加包是我从2021年年底开始有开发Minecraft的想法后，做过的最优质的内容，所以，我打算单独发布《Minesia Journey》所依赖的附加包，作为单独的Addon发布。而2月18日，正是我发布第一个公开的测试版本，Minesia 0.0.1-alpha-1的日子。</p>
       </div>
       
-      <div class="function-box-blue">
+      <div class="quote-box-grey">
         <div class="left-align">
           <strong>相关内容请参阅</strong><br>
           <a href="https://www.curseforge.com/minecraft-bedrock/addons/minesia" target="_blank">https://www.curseforge.com/minecraft-bedrock/addons/minesia</a>
@@ -168,66 +168,9 @@ function scrollToSection(sectionId) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  const quickNav = document.querySelector('.quick-nav');
-  const isMobile = window.innerWidth <= 768;
+    
   
-  if (quickNav && isMobile) {
-    quickNav.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded')) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '4px';
-          title.style.paddingBottom = '0';
-          title.style.borderBottom = 'none';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      } else {
-        quickNav.classList.add('expanded');
-        quickNav.style.width = '180px';
-        quickNav.style.padding = '16px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'block';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'horizontal-tb';
-          title.style.marginBottom = '16px';
-          title.style.paddingBottom = '8px';
-          title.style.borderBottom = '1px solid #e0e0e0';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'none';
-      }
-    });
-  }
-
-  if (quickNav && isMobile) {
-    document.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '4px';
-          title.style.paddingBottom = '0';
-          title.style.borderBottom = 'none';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      }
-    });
-  }
-
+  
   const currentPathElement = document.getElementById('current-path');
   if (currentPathElement) {
     currentPathElement.textContent = getCurrentPath();

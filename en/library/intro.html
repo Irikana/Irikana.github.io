@@ -65,7 +65,7 @@
                     <div class="bg-transparent content-bg-white-text">
                       <div>
                         <div class="center-align">
-                          <div class="function-box-blue">
+                          <div class="quote-box-grey">
                             <div class="left-align">The following content includes quoted text from external encyclopedias (Quark Encyclopedia / Baidu Baike) and the author's personal summary, provided for background reference only.</div>
                           </div>
                           <p>"Shepherd's Library" is the translation of Shepherd's Library. The word "Shepherd" draws inspiration from the artistic concept "False Shepherd" from the video game <em>BioShock Infinite</em>, released on March 23, 2013, which appears throughout the game in posters and character dialogue. The word "Library" comes from the name of SCP Foundation's sister site, The Wanderers' Library.</p>
@@ -238,66 +238,9 @@ function scrollToSection(sectionId) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  const quickNav = document.querySelector('.quick-nav');
-  const isMobile = window.innerWidth <= 768;
-
-  if (quickNav && isMobile) {
-    quickNav.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded')) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '4px';
-          title.style.paddingBottom = '0';
-          title.style.borderBottom = 'none';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      } else {
-        quickNav.classList.add('expanded');
-        quickNav.style.width = '180px';
-        quickNav.style.padding = '16px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'block';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'horizontal-tb';
-          title.style.marginBottom = '16px';
-          title.style.paddingBottom = '8px';
-          title.style.borderBottom = '1px solid #e0e0e0';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'none';
-      }
-    });
-  }
-
-  if (quickNav && isMobile) {
-    document.addEventListener('click', function(event) {
-      if (quickNav.classList.contains('expanded') && !quickNav.contains(event.target)) {
-        quickNav.classList.remove('expanded');
-        quickNav.style.width = '32px';
-        quickNav.style.padding = '8px 4px';
-        const content = quickNav.querySelector('.quick-nav-content');
-        if (content) content.style.display = 'none';
-        const title = quickNav.querySelector('.quick-nav-title');
-        if (title) {
-          title.style.writingMode = 'vertical-rl';
-          title.style.marginBottom = '4px';
-          title.style.paddingBottom = '0';
-          title.style.borderBottom = 'none';
-        }
-        const hint = quickNav.querySelector('.quick-nav-hint');
-        if (hint) hint.style.display = 'block';
-      }
-    });
-  }
-
+  
+  
+  
   const pathElement = document.getElementById('current-path');
   if (pathElement) {
     pathElement.textContent = getCurrentPath();
