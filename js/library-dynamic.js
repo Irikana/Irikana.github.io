@@ -38,6 +38,7 @@
   /* ========== 1. SEARCH ========== */
   var Search = {
     data: [
+      {t:'初次使用Claude Code',u:toAbs(ROOT+'library/paper/The First Time to Claude Code.html'),k:'初次使用Claude Code The First Time to Claude Code 信息文章 新闻 新闻'},
       {t:'最便宜的氛围编程',u:toAbs(ROOT+'library/paper/The Most Cheapest Vibe Coding.html'),k:'最便宜的氛围编程 The Most Cheapest Vibe Coding 信息文章 新闻 新闻'},
       {t:'SlyWrite实现完全软件内获取更新',u:toAbs(ROOT+'library/paper/Absolute In-app Update Download in SlyWrite.html'),k:'SlyWrite实现完全软件内获取更新 Absolute In-app Update Download in SlyWrite 信息文章 新闻 新闻'},
       {t:'肉鸽游戏烘焙中',u:toAbs(ROOT+'library/paper/A rogue-like game.html'),k:'肉鸽游戏烘焙中 A rogue-like game 信息文章 新闻 新闻'},
