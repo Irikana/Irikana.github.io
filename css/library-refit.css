@@ -549,12 +549,14 @@ button.sl-panel-item:hover { background-color: var(--color-bg-subtle); border-le
   .sl-brand-sub { display: none; }
 }
 
-/* 顶栏出现后，原有的浮动按钮/阅读进度条下移避让 */
+/* 顶栏出现后，原有的浮动按钮/侧边栏/阅读进度条下移避让 */
 html.sl-topbar-on #sl-reading-progress { top: var(--sl-topbar-h) !important; }
 html.sl-topbar-on .float-button { margin-top: 0; }
 html.sl-topbar-on .quick-nav { top: calc(var(--sl-topbar-h) + 24px) !important; }
 html.sl-topbar-on .lang-switch-float,
 html.sl-topbar-on .kh-float { top: calc(var(--sl-topbar-h) + 24px) !important; }
+/* 知识馆固定侧边栏：让出顶栏高度，避免被冻结顶栏压住 */
+html.sl-topbar-on .kh-sidebar { top: var(--sl-topbar-h) !important; height: calc(100vh - var(--sl-topbar-h)) !important; }
 
 /* ---------- 4. 页面骨架：宽度与出版节奏 ---------- */
 .content-width-limiter,
