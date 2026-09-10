@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年9月10日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年9月10日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-09-10 · 修复</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">主馆变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>修复全站动态功能瘫痪（站内搜索、阅读工具等失效）</strong></p>
+          <p>- 根因：移动端 App「站内搜索数据同步」向 js/library-dynamic.js 的 Search.data 插入文章「无人值守开启Opus 5的长任务的尝试」的搜索条目时，其英文文件名含撇号（A Test of Opus 5 Long Shot With No One's Watch.html），插入的单引号 JS 字符串中撇号未转义，导致整个 library-dynamic.js 出现语法错误而无法执行——全站所有页面的动态功能（站内搜索、阅读工具、自动目录、阅读进度、书签、主题切换、版本标识等）随之全部失效</p>
+          <p>- 已修复：将该条目 u: 字段中的撇号转义为 \'，library-dynamic.js 语法校验恢复通过；逐页实测（主页、英文版、新闻页、图书馆入口、知识馆、作品章节、文章页、更新日志页）搜索按钮与阅读工具栏均正常渲染，站内搜索可命中新增文章</p>
+          <p>- 关联源头修复：SlyWrite App 0.0.15.9 中 insertSearchEntry 对条目路径同样执行 JS 字符串转义，今后含撇号等特殊字符的文件名不会再触发此问题</p>
+
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页 </a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门 </a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则 </a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能 </a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此出展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

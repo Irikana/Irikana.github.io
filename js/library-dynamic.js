@@ -39,7 +39,7 @@
   var Search = {
     data: [
       {t:'每日编程用量第一部分',u:toAbs(ROOT+'library/misc/Tokens for Every Day Part I.html'),k:'每日编程用量第一部分 Tokens for Every Day Part I 信息文章 动态'},
-      {t:'无人值守开启Opus 5的长任务的尝试',u:toAbs(ROOT+'library/paper/A Test of Opus 5 Long Shot With No One's Watch.html'),k:'无人值守开启Opus 5的长任务的尝试 A Test of Opus 5 Long Shot With No One\'s Watch 信息文章 新闻'},
+      {t:'无人值守开启Opus 5的长任务的尝试',u:toAbs(ROOT+'library/paper/A Test of Opus 5 Long Shot With No One\'s Watch.html'),k:'无人值守开启Opus 5的长任务的尝试 A Test of Opus 5 Long Shot With No One\'s Watch 信息文章 新闻'},
       {t:'初次使用Claude Code',u:toAbs(ROOT+'library/paper/The First Time to Claude Code.html'),k:'初次使用Claude Code The First Time to Claude Code 信息文章 新闻 新闻'},
       {t:'最便宜的氛围编程',u:toAbs(ROOT+'library/paper/The Most Cheapest Vibe Coding.html'),k:'最便宜的氛围编程 The Most Cheapest Vibe Coding 信息文章 新闻 新闻'},
       {t:'SlyWrite实现完全软件内获取更新',u:toAbs(ROOT+'library/paper/Absolute In-app Update Download in SlyWrite.html'),k:'SlyWrite实现完全软件内获取更新 Absolute In-app Update Download in SlyWrite 信息文章 新闻 新闻'},
