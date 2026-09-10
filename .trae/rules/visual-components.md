@@ -1422,3 +1422,77 @@ MathJax = {
 | `≤768px` | 手机/平板竖屏 | 单列布局，侧边栏变顶部，浮动按钮缩小 |
 | `769px–1024px` | 平板横屏 | 导航仪宽度收窄 |
 | `≥1024px` | 桌面端 | 标准布局 |
+
+---
+
+## 九、冻结顶栏与主题构件（alpha-021）
+
+> 实现文件：`css/library-refit.css`（样式）、`js/library-dynamic.js` 的 `TopBar` / `SitePref` 模块（构建与偏好）
+> 属性契约与配色清单的权威说明见 `project_rules.md`「冻结顶栏与主题令牌系统」
+
+### 9.1 冻结顶栏结构（JS 构建，页面源码中不写死）
+```html
+<div class="sl-topbar" id="sl-topbar" data-menu="closed">
+  <a class="sl-brand" href="{root}index.html">
+    <img class="sl-brand-img" src="{root}image/logo.png" alt="牧羊人图书馆">
+    <span class="sl-brand-text">
+      <span class="sl-brand-name">牧羊人图书馆</span>
+      <span class="sl-brand-sub">Shepherd's Library · 存放所有知识之地</span>
+    </span>
+  </a>
+  <button class="sl-burger" type="button" aria-label="菜单"><span></span><span></span><span></span></button>
+  <nav class="sl-nav">
+    <div class="sl-menu" data-open="false">
+      <button class="sl-menu-btn" type="button" aria-expanded="false">…</button>
+      <div class="sl-panel sl-panel-left">
+        <div class="sl-panel-title">在图书馆中移动</div>
+        <a class="sl-panel-item" href="…"><span>图书馆主页</span><span class="sl-panel-item-desc">新闻与前情提要</span></a>
+      </div>
+    </div>
+    <!-- 依次为：导航 / 馆藏 / 主题 / 联系 -->
+  </nav>
+</div>
+```
+- 顶栏固定于顶部（`position: fixed`，高 `--sl-topbar-h`，默认 56px），`<html>` 加 `sl-topbar-on` 后 body 让出等高顶部空间
+- 四个下拉：**导航**（站内主要入口）、**馆藏**（按文章分类进入 library.html 锚点与作品馆）、**主题**（阅读样式配置面板）、**联系**（作者联系方式）
+- 「联系」按钮图标为**代码绘制的内联 SVG**（信封 + 对话气泡，`.sl-menu-icon`），渠道图标由 `channelIcon(key)` 按 key 前缀匹配（qq / wechat|wx / face / mail / 其他回退球形）；**禁止字体图标与 emoji**
+- 面板开合：`data-open="true|false"` + `aria-expanded`；点击空白与 Esc 收起；860px 以下菜单收进汉堡
+- 动效仅为透明度 + 4px 位移 + 180ms 过渡（描边/底色同步过渡），`prefers-reduced-motion` 下全部关闭；**禁止圆角、投影仅用于悬浮面板**
+
+### 9.2 主题配置面板（`.sl-opt-group` / `.sl-chip`）
+```html
+<div class="sl-opt-group">
+  <div class="sl-opt-label">配色</div>
+  <div class="sl-opt-row">
+    <button class="sl-chip sl-swatch" type="button" style="--sl-dot:#2c3e50" aria-pressed="true">经馆</button>
+  </div>
+</div>
+```
+- 选项一律为直角 `.sl-chip`，选中态 `aria-pressed="true"`（主色底 + 反白字）；配色项额外带 `sl-swatch` 小色块
+- 面板底部放 `sl-opt-foot`：左侧「仅影响本机显示」提示，右侧 `sl-link-btn`「恢复默认」
+
+### 9.3 联系方式条目（数据来自 slywrite-config.json 的 contact 数组）
+```html
+<div class="sl-contact-item">
+  <div class="sl-contact-head"><svg class="sl-contact-icon">…</svg><span class="sl-contact-name">QQ</span></div>
+  <button class="sl-contact-value" type="button">点击可复制的值</button>
+  <div class="sl-contact-note">备注（可选）</div>
+</div>
+```
+- `url` 非空时值渲染为 `<a class="sl-contact-value" target="_blank" rel="noopener noreferrer">`；仅有 `value` 时渲染为可复制按钮
+- 未配置任何条目时只显示 `.sl-contact-empty` 提示，**不得由开发者代填个人联系方式**
+
+### 9.4 文章卡片（`ul.article-list` 的呈现升级）
+- 结构不变：`<ul class="article-list"><li><a href="…">标题</a></li></ul>`（App 的 library.html 同步逻辑依赖此结构，禁止改写标签）
+- refit 层将其呈现为等宽卡片网格：`grid-template-columns: repeat(auto-fill, minmax(232px, 1fr))`，560px 以下单列
+- 卡片：底色 `--sl-card-bg`、描边 `--sl-card-edge`、左缘 3px `--color-accent-light` 标记；悬停左缘转主色、上浮 1px、加 0 6px 16px 淡投影；跳转箭头由 `::after` 绘制（沿用跳转链接图标规范，正文中禁止手写 ↗）
+
+### 9.5 标题层级标准（修正原先倒置）
+| 层级 | 类名 | 字号（clamp） | 装饰 |
+|------|------|----------------|------|
+| 页面主标题 | `.page-title-main` | 24 ~ 33px | 居中，字距 3px |
+| 一级 | `.section-title-text-main` | 21 ~ 25px | 下方 2px 主色线 |
+| 二级 | `.section-title-text-sub` | 18 ~ 20.5px | 左 3px 主色竖线 + 下方 1px 灰线 |
+| 三级 | `.section-title-text-sub-sub` | 16.5 ~ 18px | 左 3px 灰色竖线 |
+| 四级 | `.subsection-header` | 15.5 ~ 16.5px | 字距 2.4px + `::after` 横贯细线 |
+| 五级 | `.sub-subsection-header` | 15px | 弱色无竖线 |

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * 牧羊人图书馆 动态功能 v1.2
  * 稳定版 - 全面修复
  */
@@ -548,7 +548,7 @@
   };
 
   /* ========== 8. VERSION ========== */
-  var Ver = { v: 'alpha-020',
+  var Ver = { v: 'alpha-021',
     init: function() {
       var footer = $q('.copyright-color') || $q('footer .copyright-text') || $q('.copyright-text');
       if (!footer || $q('.sl-version')) return;
@@ -917,11 +917,465 @@
     }
   };
 
+  /* ========== 17. SITE PREF (主题 / 字体 / 阅读排版) ========== */
+  /* 偏好存于 localStorage（sl_site-pref），明暗模式与原有 Theme 模块共用 sl_theme 键；
+     配色由 css/library-refit.css 通过 html 的 data-sl-* 属性选择器生效 */
+  var PALETTES = [
+    { key: 'classic', label: '经馆', dot: '#2c3e50', desc: '靛青墨黑，贴近原站' },
+    { key: 'parchment', label: '羊皮纸', dot: '#7a4f22', desc: '旧书暖调，米黄纸色' },
+    { key: 'moonlit', label: '月白', dot: '#2f5d7c', desc: '冷灰学术，克制清爽' },
+    { key: 'forest', label: '林间', dot: '#2e5b3f', desc: '松叶绿，安静耐读' },
+    { key: 'plum', label: '梅雨', dot: '#6a3d7d', desc: '绛紫墨，书斋气质' },
+    { key: 'night', label: '夜读', dot: '#c9a227', desc: '低亮暖黑，深夜护眼' }
+  ];
+  var TYPES = [
+    { key: 'sans', label: '无衬线', font: null, desc: '系统黑体，屏幕默认' },
+    { key: 'songti', label: '系统宋体', font: null, desc: '思源宋体/宋体，本地无需下载' },
+    { key: 'notoserif', label: '思源宋体', font: ['@fontsource/noto-serif-sc@5/400.css', '@fontsource/noto-serif-sc@5/700.css'], desc: 'Noto Serif SC（SIL OFL）' },
+    { key: 'sourceserif', label: 'Source Serif', font: ['@fontsource/source-serif-4@5/400.css', '@fontsource/source-serif-4@5/600.css'], desc: '拉丁文用 Source Serif 4' },
+    { key: 'garamond', label: 'Garamond', font: ['@fontsource/eb-garamond@5/400.css', '@fontsource/eb-garamond@5/600.css'], desc: 'EB Garamond（SIL OFL）老书卷气' }
+  ];
+  var SIZES = [{ key: 'compact', label: '紧凑' }, { key: 'normal', label: '标准' }, { key: 'large', label: '偏大' }, { key: 'xlarge', label: '特大' }];
+  var MEASURES = [{ key: 'narrow', label: '窄栏' }, { key: 'normal', label: '标准' }, { key: 'wide', label: '宽栏' }, { key: 'full', label: '全宽' }];
+  var FONT_CDN = 'https://cdn.jsdelivr.net/npm/';
+
+  var SitePref = {
+    pref: { palette: 'classic', type: 'songti', size: 'normal', measure: 'normal', indent: true },
+    init: function() {
+      var self = this;
+      var saved = storageGet('site-pref', null);
+      if (saved && typeof saved === 'object') {
+        for (var k in this.pref) { if (saved[k] !== undefined) this.pref[k] = saved[k]; }
+      }
+      this.apply();
+      // 跟随系统明暗时，监听系统偏好变化
+      try {
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        var onChange = function() { if (storageGet('theme', 'system') === 'system') self.apply(); };
+        if (mq.addEventListener) mq.addEventListener('change', onChange);
+        else if (mq.addListener) mq.addListener(onChange);
+      } catch (e) {}
+      // 与原主题浮动按钮保持一致：它切换模式后同步刷新 data-sl-variant
+      var origApply = Theme.apply;
+      Theme.apply = function(t) { origApply.call(Theme, t); SitePref.applyVariant(); };
+    },
+    /** 写入偏好并重绘 */
+    set: function(key, val) {
+      this.pref[key] = val;
+      storageSet('site-pref', this.pref);
+      this.apply();
+    },
+    setMode: function(m) {
+      storageSet('theme', m);
+      Theme.cur = m;
+      Theme.apply(m);
+    },
+    /** 明暗变体：由 sl_theme（system/light/dark）推导，夜间调色板由 CSS 变量切换 */
+    applyVariant: function() {
+      var m = storageGet('theme', 'system');
+      var dark = m === 'dark' || (m === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-sl-variant', dark ? 'dark' : 'light');
+    },
+    apply: function() {
+      var h = document.documentElement;
+      h.setAttribute('data-sl-palette', this.pref.palette);
+      h.setAttribute('data-sl-type', this.pref.type);
+      h.setAttribute('data-sl-size', this.pref.size);
+      h.setAttribute('data-sl-measure', this.pref.measure);
+      h.setAttribute('data-sl-indent', this.pref.indent ? 'on' : 'off');
+      this.applyVariant();
+      this.loadFont();
+    },
+    /** 按需加载免版权字体（本地字体方案不联网） */
+    loadFont: function() {
+      var t = null;
+      for (var i = 0; i < TYPES.length; i++) { if (TYPES[i].key === this.pref.type) t = TYPES[i]; }
+      if (!t || !t.font) return;
+      for (var j = 0; j < t.font.length; j++) {
+        var href = FONT_CDN + t.font[j];
+        if ($q('link[data-sl-font="' + href + '"]')) continue;
+        var l = E('link');
+        l.rel = 'stylesheet';
+        l.href = href;
+        l.setAttribute('data-sl-font', href);
+        document.head.appendChild(l);
+      }
+    },
+    reset: function() {
+      this.pref = { palette: 'classic', type: 'songti', size: 'normal', measure: 'normal', indent: true };
+      storageSet('site-pref', this.pref);
+      this.setMode('system');
+      this.apply();
+    }
+  };
+
+  /* ========== 18. TOP BAR（全站冻结顶栏：logo + 文字 + 可下拉菜单） ========== */
+  var CONTACT_ICON_SVG =
+    '<svg class="sl-menu-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+    '<path d="M2.6 7.2h12.2v9.6H2.6z"/>' +
+    '<path d="M2.6 7.2 8.7 12l6.1-4.8"/>' +
+    '<path d="M14.6 3.2h6.8v5.2h-2.4l-2.4 2.1V8.4h-2z"/>' +
+    '<circle cx="18" cy="5.8" r="0.7" class="sl-contact-icon-fill"/>' +
+    '</svg>';
+
+  function channelIcon(key) {
+    var k = String(key || '').toLowerCase();
+    if (k.indexOf('qq') === 0) return '<svg class="sl-contact-icon" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="10.5" rx="6" ry="7.5"/><path d="M8.6 17.2 6.8 20.6M15.4 17.2l1.8 3.4"/><circle cx="9.8" cy="8.8" r="1" class="sl-contact-icon-fill"/><circle cx="14.2" cy="8.8" r="1" class="sl-contact-icon-fill"/></svg>';
+    if (k.indexOf('wechat') > -1 || k.indexOf('wx') > -1) return '<svg class="sl-contact-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.4 3.6c-3.8 0-6.9 2.5-6.9 5.6 0 1.8 1 3.4 2.6 4.4l-.7 2.1 2.4-1.3c.8.2 1.7.4 2.6.4"/><path d="M15.2 8.9c3.4 0 6.1 2.2 6.1 5 0 1.6-.9 3-2.3 3.9l.6 1.8-2-.9c-.7.2-1.5.3-2.4.3-3.4 0-6.1-2.2-6.1-5s2.7-5.1 6.1-5.1z"/></svg>';
+    if (k.indexOf('face') > -1) return '<svg class="sl-contact-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.4" y="3.4" width="17.2" height="17.2"/><path d="M14.8 7.6h-1.6c-1.1 0-1.8.7-1.8 1.8v1.4h3.2l-.4 3h-2.8v6"/></svg>';
+    if (k.indexOf('mail') > -1 || k.indexOf('email') > -1) return '<svg class="sl-contact-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5.4" width="18.4" height="13.2"/><path d="M2.8 5.4 12 13l9.2-7.6"/></svg>';
+    return '<svg class="sl-contact-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6"/><path d="M3.6 12h16.8M12 3.6c2.4 2.3 3.6 5.1 3.6 8.4S14.4 18.1 12 20.4c-2.4-2.3-3.6-5.1-3.6-8.4S9.6 5.9 12 3.6z"/></svg>';
+  }
+
+  var TopBar = {
+    el: null,
+    root: '',
+    contact: null,
+    init: function() {
+      if ($q('#sl-topbar')) return;
+      if ($q('[data-sl-no-topbar]')) return;
+      var script = $q('script[src*="library-dynamic.js"]');
+      if (script && script.src) {
+        this.root = script.src.replace(/js\/library-dynamic\.js(\?.*)?$/, '');
+      } else {
+        this.root = location.origin + (location.pathname.indexOf('/library') > -1 ? '/' : '/');
+      }
+      this.ensureCss();
+      this.build();
+      this.bind();
+      this.loadContact();
+      document.documentElement.classList.add('sl-topbar-on');
+    },
+    /** 少数早期导入页未引用 refit 样式表（无 style.css），运行时补挂，确保全站冻结顶栏与主题可用 */
+    ensureCss: function() {
+      if ($q('link[data-sl-refit]') || $q('link[href*="library-refit.css"]')) return;
+      var l = E('link');
+      l.rel = 'stylesheet';
+      l.href = this.root + 'css/library-refit.css';
+      l.setAttribute('data-sl-refit', '');
+      document.head.appendChild(l);
+    },
+    url: function(p) { return this.root + p; },
+    /** 顶栏内的站内搜索入口：复用既有 Search 模块的浮层 */
+    searchItem: function() {
+      var b = E('button');
+      b.type = 'button';
+      b.className = 'sl-panel-item';
+      b.innerHTML = '<span>站内搜索</span><span class="sl-panel-item-desc">快捷键 Ctrl/Command + K</span>';
+      b.onclick = function(ev) {
+        ev.stopPropagation();
+        TopBar.closeAll();
+        try { Search.toggle(); } catch (e) {}
+      };
+      return b;
+    },
+    item: function(href, label, desc) {
+      var a = E('a');
+      a.className = 'sl-panel-item';
+      a.href = href;
+      a.innerHTML = '<span>' + label + '</span>' + (desc ? '<span class="sl-panel-item-desc">' + desc + '</span>' : '');
+      return a;
+    },
+    menu: function(label, iconSvg, panelCls, buildPanel) {
+      var wrap = E('div');
+      wrap.className = 'sl-menu';
+      wrap.setAttribute('data-open', 'false');
+      var btn = E('button');
+      btn.type = 'button';
+      btn.className = 'sl-menu-btn';
+      btn.innerHTML = (iconSvg || '') + '<span>' + label + '</span>';
+      btn.setAttribute('aria-expanded', 'false');
+      var panel = E('div');
+      panel.className = 'sl-panel ' + (panelCls || '');
+      buildPanel(panel);
+      btn.onclick = function(ev) {
+        ev.stopPropagation();
+        var open = wrap.getAttribute('data-open') === 'true';
+        TopBar.closeAll();
+        if (!open) { wrap.setAttribute('data-open', 'true'); btn.setAttribute('aria-expanded', 'true'); }
+      };
+      panel.onclick = function(ev) { ev.stopPropagation(); };
+      wrap.appendChild(btn);
+      wrap.appendChild(panel);
+      return wrap;
+    },
+    build: function() {
+      var self = this;
+      var bar = E('div');
+      bar.className = 'sl-topbar';
+      bar.id = 'sl-topbar';
+      bar.setAttribute('data-menu', 'closed');
+
+      var brand = E('a');
+      brand.className = 'sl-brand';
+      brand.href = this.url('index.html');
+      brand.innerHTML =
+        '<img class="sl-brand-img" src="' + this.url('image/logo.png') + '" alt="牧羊人图书馆">' +
+        '<span class="sl-brand-text"><span class="sl-brand-name">牧羊人图书馆</span>' +
+        '<span class="sl-brand-sub">Shepherd&#39;s Library &#183; &#23384;&#25918;&#25152;&#26377;&#30693;&#35782;&#20043;&#22320;</span></span>';
+
+      var burger = E('button');
+      burger.type = 'button';
+      burger.className = 'sl-burger';
+      burger.setAttribute('aria-label', '菜单');
+      burger.innerHTML = '<span></span><span></span><span></span>';
+      burger.onclick = function(ev) {
+        ev.stopPropagation();
+        var open = bar.getAttribute('data-menu') === 'open';
+        bar.setAttribute('data-menu', open ? 'closed' : 'open');
+      };
+
+      var nav = E('nav');
+      nav.className = 'sl-nav';
+
+      nav.appendChild(this.menu('导航', '', 'sl-panel-left', function(p) {
+        p.appendChild(self.head('在图书馆中移动'));
+        p.appendChild(self.searchItem());
+        p.appendChild(self.item(self.url('index.html'), '图书馆主页', '新闻与前情提要'));
+        p.appendChild(self.item(self.url('navigator.html'), '导航枢纽', '全站页面索引'));
+        p.appendChild(self.item(self.url('library/library.html'), '文章总目录', '按分类浏览'));
+        p.appendChild(self.item(self.url('news.html'), '新闻栏', '最新动态'));
+        p.appendChild(self.item(self.url('knowledge-hall/index.html'), '知识馆', '现象 / 可回忆 / 可追溯'));
+        p.appendChild(self.item(self.url('library/intro.html'), '图书馆入门', ''));
+        p.appendChild(self.item(self.url('library/rule.html'), '图书馆规则', ''));
+        p.appendChild(self.item(self.url('library/feature.html'), '图书馆功能', ''));
+      }));
+
+      nav.appendChild(this.menu('馆藏', '', '', function(p) {
+        p.appendChild(self.head('按文章分类进入'));
+        p.appendChild(self.item(self.url('library/library.html#section-3-1'), '普通文章', '录音 / 手写 / 信息'));
+        p.appendChild(self.item(self.url('library/works/index.html'), '作品文章', '小说与连载'));
+        p.appendChild(self.item(self.url('library/library.html#section-3-3'), '杂物文章', '练习与笔记'));
+        p.appendChild(self.item(self.url('library/library.html#section-3-4'), '测试文章', '实验性内容'));
+        p.appendChild(self.item(self.url('library/article-registry.html'), '文章登记表', '收录台账'));
+        p.appendChild(self.item(self.url('library/visual-components.html'), '视觉组件标准', '排版构件参考'));
+      }));
+
+      nav.appendChild(this.menu('主题', '', 'sl-panel-wide', function(p) { self.buildThemePanel(p); }));
+      nav.appendChild(this.menu('联系', CONTACT_ICON_SVG, '', function(p) { self.buildContactPanel(p); }));
+
+      bar.appendChild(brand);
+      bar.appendChild(burger);
+      bar.appendChild(nav);
+      document.body.insertBefore(bar, document.body.firstChild);
+      this.el = bar;
+    },
+    head: function(text) {
+      var d = E('div');
+      d.className = 'sl-panel-title';
+      d.innerHTML = text;
+      return d;
+    },
+    group: function(label, items, get, set) {
+      var wrap = E('div');
+      wrap.className = 'sl-opt-group';
+      var lab = E('div');
+      lab.className = 'sl-opt-label';
+      lab.innerHTML = label;
+      wrap.appendChild(lab);
+      var row = E('div');
+      row.className = 'sl-opt-row';
+      for (var i = 0; i < items.length; i++) {
+        (function(it) {
+          var b = E('button');
+          b.type = 'button';
+          b.className = 'sl-chip' + (it.dot ? ' sl-swatch' : '');
+          if (it.dot) b.style.setProperty('--sl-dot', it.dot);
+          b.innerHTML = (it.label || it.key) + (it.desc ? '' : '');
+          b.title = it.desc || '';
+          b.setAttribute('aria-pressed', get() === it.key ? 'true' : 'false');
+          b.onclick = function() {
+            set(it.key);
+            TopBar.refreshPanels();
+          };
+          row.appendChild(b);
+        })(items[i]);
+      }
+      wrap.appendChild(row);
+      return wrap;
+    },
+    buildThemePanel: function(p) {
+      p.appendChild(this.head('阅读样式（保存在本机浏览器）'));
+      var self = this;
+      p.appendChild(this.group('配色', PALETTES, function() { return SitePref.pref.palette; }, function(v) { SitePref.set('palette', v); }));
+      p.appendChild(this.group('明暗', [
+        { key: 'system', label: '跟随系统' }, { key: 'light', label: '浅色' }, { key: 'dark', label: '深色' }
+      ], function() { return storageGet('theme', 'system'); }, function(v) { SitePref.setMode(v); }));
+      p.appendChild(this.group('字体（免版权）', TYPES, function() { return SitePref.pref.type; }, function(v) { SitePref.set('type', v); }));
+      p.appendChild(this.group('字号', SIZES, function() { return SitePref.pref.size; }, function(v) { SitePref.set('size', v); }));
+      p.appendChild(this.group('行宽', MEASURES, function() { return SitePref.pref.measure; }, function(v) { SitePref.set('measure', v); }));
+
+      var indentWrap = E('div');
+      indentWrap.className = 'sl-opt-group';
+      var lab = E('div');
+      lab.className = 'sl-opt-label';
+      lab.innerHTML = '段落';
+      indentWrap.appendChild(lab);
+      var row = E('div');
+      row.className = 'sl-opt-row';
+      var toggle = E('button');
+      toggle.type = 'button';
+      toggle.className = 'sl-chip';
+      toggle.innerHTML = '首行缩进两字';
+      toggle.setAttribute('aria-pressed', SitePref.pref.indent ? 'true' : 'false');
+      toggle.onclick = function() {
+        SitePref.set('indent', !SitePref.pref.indent);
+        TopBar.refreshPanels();
+      };
+      row.appendChild(toggle);
+      indentWrap.appendChild(row);
+      p.appendChild(indentWrap);
+
+      var foot = E('div');
+      foot.className = 'sl-opt-foot';
+      var hint = E('span');
+      hint.className = 'sl-panel-item-desc';
+      hint.innerHTML = '仅影响本机显示';
+      var reset = E('button');
+      reset.type = 'button';
+      reset.className = 'sl-link-btn';
+      reset.innerHTML = '恢复默认';
+      reset.onclick = function() { SitePref.reset(); self.refreshPanels(); };
+      foot.appendChild(hint);
+      foot.appendChild(reset);
+      p.appendChild(foot);
+    },
+    buildContactPanel: function(p) {
+      p.appendChild(this.head('联系作者'));
+      p.setAttribute('data-sl-contact', '');
+      this.renderContact(p);
+    },
+    renderContact: function(p) {
+      var panel = p || $q('#sl-topbar .sl-panel[data-sl-contact]');
+      if (!panel) return;
+      panel.innerHTML = '';
+      panel.appendChild(this.head('联系作者'));
+      var list = this.contact || [];
+      var shown = 0;
+      for (var i = 0; i < list.length; i++) {
+        var c = list[i];
+        if (!c || c.label === undefined) continue;
+        shown++;
+        var item = E('div');
+        item.className = 'sl-contact-item';
+        var head = E('div');
+        head.className = 'sl-contact-head';
+        head.innerHTML = channelIcon(c.key) + '<span class="sl-contact-name"></span>';
+        head.querySelector('.sl-contact-name').innerHTML = c.label || c.key;
+        item.appendChild(head);
+        if (c.url) {
+          var a = E('a');
+          a.className = 'sl-contact-value';
+          a.href = c.url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.innerHTML = c.value || c.url;
+          item.appendChild(a);
+        } else if (c.value) {
+          var b = E('button');
+          b.type = 'button';
+          b.className = 'sl-contact-value';
+          b.innerHTML = c.value;
+          b.title = '点击复制';
+          b.onclick = function(text) {
+            return function() { TopBar.copy(text, this); };
+          }(c.value);
+          item.appendChild(b);
+        }
+        if (c.note) {
+          var n = E('div');
+          n.className = 'sl-contact-note';
+          n.innerHTML = c.note;
+          item.appendChild(n);
+        }
+        panel.appendChild(item);
+      }
+      if (!shown) {
+        var empty = E('div');
+        empty.className = 'sl-contact-empty';
+        empty.innerHTML = '作者尚未在 SlyWrite 中设置联系方式。可在 App「设置 - 站点配置 - 网站联系方式」中填写，约 1-2 分钟后显示在此处。';
+        panel.appendChild(empty);
+      }
+    },
+    copy: function(text, btn) {
+      var done = function() {
+        if (!btn) return;
+        var old = btn.innerHTML;
+        btn.innerHTML = '已复制';
+        setTimeout(function() { btn.innerHTML = old; }, 1400);
+      };
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function() {});
+          return;
+        }
+      } catch (e) {}
+      try {
+        var ta = E('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        done();
+      } catch (e) {}
+    },
+    loadContact: function() {
+      var self = this;
+      try {
+        fetch(this.url('slywrite-config.json') + '?v=' + Ver.v, { cache: 'no-cache' })
+          .then(function(r) { return r.ok ? r.json() : null; })
+          .then(function(json) {
+            if (!json) return;
+            var items = json.sl_contact || json.contact || null;
+            if (items && items.length) { self.contact = items; self.renderContact(null); }
+          })
+          .catch(function() {});
+      } catch (e) {}
+    },
+    closeAll: function() {
+      var open = $qa('#sl-topbar .sl-menu[data-open="true"]');
+      for (var i = 0; i < open.length; i++) {
+        open[i].setAttribute('data-open', 'false');
+        var b = open[i].querySelector('.sl-menu-btn');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      }
+    },
+    refreshPanels: function() {
+      if (!this.el) return;
+      // 重建面板内容，使 aria-pressed 选中态与当前偏好一致
+      var menus = $qa('#sl-topbar .sl-nav .sl-menu', this.el);
+      for (var i = 0; i < menus.length; i++) {
+        var labelEl = menus[i].querySelector('.sl-menu-btn span:last-child');
+        var panel = menus[i].querySelector('.sl-panel');
+        if (!labelEl || !panel) continue;
+        var label = labelEl.innerHTML;
+        panel.innerHTML = '';
+        if (label === '主题') this.buildThemePanel(panel);
+        else if (label === '联系') this.buildContactPanel(panel);
+      }
+    },
+    bind: function() {
+      document.addEventListener('click', function() { TopBar.closeAll(); });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' || e.keyCode === 27) {
+          TopBar.closeAll();
+          if (TopBar.el) TopBar.el.setAttribute('data-menu', 'closed');
+        }
+      });
+    }
+  };
+
   /* ========== START ========== */
   var _started = false;
   function start() {
     if (_started) return;
     _started = true;
+    try { SitePref.init(); } catch(e) { console.warn('[SL] SitePref error:', e.message); }
+    try { TopBar.init(); } catch(e) { console.warn('[SL] TopBar error:', e.message); }
     try { Search.init(); } catch(e) { console.warn('[SL] Search error:', e.message); }
     try { TOC.init(); } catch(e) { console.warn('[SL] TOC error:', e.message); }
     try { RMeta.init(); } catch(e) { console.warn('[SL] Meta error:', e.message); }

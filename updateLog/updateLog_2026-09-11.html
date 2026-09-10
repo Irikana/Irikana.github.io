@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年9月11日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/library-refit.css">
+<script>(function(){var d={};try{d=JSON.parse(localStorage.getItem('sl_site-pref')||'{}')||{}}catch(e){}var h=document.documentElement;function s(k,v){h.setAttribute('data-sl-'+k,d[k]||v)}s('palette','classic');s('type','songti');s('size','normal');s('measure','normal');h.setAttribute('data-sl-indent',d.indent===false?'off':'on');var m='system';try{m=JSON.parse(localStorage.getItem('sl_theme')||'"system"')}catch(e){}var k=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;h.setAttribute('data-sl-variant',(m==='dark'||(m==='system'&&k))?'dark':'light')})();</script>
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年9月11日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-09-11 · alpha-021 · 出版化改版</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">主馆变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>一、图书馆视觉精修（标题层级与内容卡片）</strong></p>
+          <p>- 修正标题层级倒置：原先下级标题（三级 24px、四级 22px）大于一级标题（22px）、二级标题（20px），现改为逐级递减的一至四级阶梯（约 25 / 21 / 18 / 16.5px），一级标题下方保留主色细线，四级标题改为「小标题 + 横贯细线」的期刊式排法</p>
+          <p>- 全站正文字号、行距、段距统一由设计令牌控制；正文两端对齐并启用中文标点挤压，段首可缩进两字（可在顶栏设置中关闭），呈读出版物版式</p>
+          <p>- 阅读栏宽改为可调令牌（窄栏 / 标准 / 宽栏 / 全宽，默认 760px），页眉、页脚、正文同一节奏；文章列表由纯链接列表改为等宽卡片网格（自动换列，移动端单列），卡片左缘带主色标记、悬停有 1px 抬升与投影，配色全部取自主题变量</p>
+          <p>- 页眉页脚收口：页眉下沿线、页脚上沿主色粗线、版权与版本标识字号统一，元数据区（作者 / 日期 / 性质 / 标签）改为上下细线的信息条</p>
+
+          <p><strong>二、全站冻结顶栏（新增）</strong></p>
+          <p>- 顶部冻结一条导航栏：左侧为 Logo 图片 + 「牧羊人图书馆 / Shepherd's Library · 存放所有知识之地」文字部分，右侧为四个可向下展开的按钮：导航、馆藏、主题、联系</p>
+          <p>- 「联系」按钮图标由代码绘制（内联 SVG 信封 + 对话气泡），下拉内容为 QQ、微信、FaceBook 三项；其显示名、号码/ID、链接与备注一律来自站点配置文件 slywrite-config.json 的 contact 字段，作者可在 SlyWrite「设置 - 站点配置 - 网站联系方式」中填写，网站约 1-2 分钟后显示；未填写时该项提示作者尚未设置，不展示任何虚构信息</p>
+          <p>- 号码类条目点击即复制；链接类条目在新标签打开。移动端顶栏折叠为汉堡菜单，Esc 与点击空白处收起面板</p>
+
+          <p><strong>三、多主题与免版权字体（顶栏「主题」下拉配置）</strong></p>
+          <p>- 六套配色：经馆（靛青）、羊皮纸、月白、林间、梅雨、夜读，每套均含明亮与深色两组变量，深色下自动降低对比与亮度</p>
+          <p>- 明暗三态（跟随系统 / 浅色 / 深色）与原右上角主题按钮共用同一开关，互不冲突</p>
+          <p>- 五套字体方案：系统无衬线、系统宋体（默认，无需下载）、思源宋体 Noto Serif SC、Source Serif 4、EB Garamond，均为 SIL OFL 免版权字体，按需从 CDN 加载对应字重与子集，CDN 不可达时回退本地宋体/思源宋体，出版感不丢失</p>
+          <p>- 另可配置字号（紧凑 / 标准 / 偏大 / 特大）、行宽、首行缩进，并提供「恢复默认」；全部偏好仅存于本机浏览器 localStorage，不影响他人与站点内容</p>
+
+          <p><strong>四、版本号</strong></p>
+          <p>- 站点版本 alpha-020 → <strong>alpha-021</strong>（js/library-dynamic.js 的 Ver.v），页脚版本标识与各端读取随之一致</p>
+
+        </div>
+      </section>
+
+      <section class="notice-header">
+        <h2 id="section-2" class="section-title-text-sub">工程变更</h2>
+        <div class="section-content left-align">
+          <p>- 新增 <code>css/library-refit.css</code>：主题变量、字体方案、冻结顶栏样式、标题层级与卡片网格、减少动效适配；置于 css/style.css 之后加载，同名令牌以本文件为准</p>
+          <p>- 90 个引用 css/style.css 的页面在 head 中追加该样式表与一段主题预应用脚本（首屏绘制前把用户偏好写到 &lt;html&gt; 的 data-sl-* 属性，避免切换主题时的白闪）；8 个早期导入页（自带内联样式、不引用 style.css）由脚本运行时补挂样式表，顶栏与主题同样生效</p>
+          <p>- js/library-dynamic.js 新增 SitePref（偏好读写与生效）与 TopBar（顶栏构建、下拉面板、联系方式读取）两个模块，并在启动序列中优先于其他模块执行；原 Theme 模块的切换被 SitePref 挂钩，保证明暗状态单一来源</p>
+          <p>- SlyWrite 端同步：文章与知识馆模板生成时写入同样的样式表引用与预应用脚本；站点配置新增 tagColors（标签颜色）与 contact（联系方式）字段，旧配置文件缺失该字段时按默认处理；App 内容编辑器新增「内容页面」模式，非 library 文章的页面也可撰写式改正文与页面标题</p>
+        </div>
+      </section>
+
+      <section class="notice-header">
+        <h2 id="section-3" class="section-title-text-sub">规范变更</h2>
+        <div class="section-content left-align">
+          <p>- .trae/rules/project_rules.md：当前版本更新为 alpha-021，补充「聚合项目每次开发前先读 . 开头目录」的强制开场与跨平台技能镜像说明</p>
+          <p>- .trae/rules/visual-components.md：新增「冻结顶栏与主题令牌」一章，记录 data-sl-* 属性契约、配色清单、标题层级阶梯与文章卡片标准结构</p>
+          <p>- .zcode/skills 与 .reasonix/skills：新增 aggregated-project-context 技能（聚合项目上下文），网站规范技能同步版本号与新增视觉构件说明</p>
+        </div>
+      </section>
+
+      <div class="function-box-blue">
+        <div class="left-align">本次改版不改写任何既有正文、链接与图片；如需回退，删除页面 head 中的 library-refit.css 引用与预应用脚本两行即可恢复 alpha-020 观感。</div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页 </a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门 </a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则 </a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能 </a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此出展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

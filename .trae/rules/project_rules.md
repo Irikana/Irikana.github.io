@@ -1,4 +1,4 @@
-﻿# 牧羊人图书馆 - 开发规范
+# 牧羊人图书馆 - 开发规范
 
 ## 核心原则
 
@@ -67,7 +67,7 @@
 ### 版本号规则
 - 采用 **方案B**：`alpha-{自定义编号}`（如 `alpha-001`、`alpha-004`）
 - 编号完全由作者自主控制，不绑定日期
-- 当前版本：**alpha-018**
+- 当前版本：**alpha-021**
 
 ### 更新日志规则
 - **每次工作和任务结束时必须撰写更新日志**——这是强制流程，不可跳过
@@ -398,3 +398,39 @@ Irikana.github.io/
   3. 最后同步更新 `library-dynamic.js` 中 `StyleEnforcer.init()` 的注入样式字符串
   4. 三处保持一致，StyleEnforcer 作为最终保障
 
+
+
+## 冻结顶栏与主题令牌系统（alpha-021 起）
+
+### 文件职责
+- `css/style.css`：既有全局样式与设计令牌（`--color-*`），仍为组件的原始定义处
+- `css/library-refit.css`：**出版化精修层**，必须在 style.css 之后加载；承载主题调色板、字体方案、阅读尺度、冻结顶栏样式、标题层级阶梯与文章卡片网格
+- `js/library-dynamic.js`：`SitePref`（偏好读写与生效）、`TopBar`（顶栏构建与下拉面板、联系方式读取）两个模块；`Theme`（原明暗浮动按钮）被 SitePref 挂钩，明暗状态唯一来源为 localStorage 键 `sl_theme`
+- 页面 head 中紧随 style.css 的两行（refit 样式表 + 主题预应用脚本）为**全局必备片段**，新页面模板必须包含（SlyWrite 的文章与知识馆模板已同步）
+
+### data-sl-* 属性契约（写在 `<html>` 上，CSS 据此选择变量集）
+| 属性 | 取值 | 含义 |
+|------|------|------|
+| `data-sl-palette` | classic / parchment / moonlit / forest / plum / night | 配色（每套含明暗两组变量） |
+| `data-sl-variant` | light / dark | 由 `sl_theme`（system/light/dark）推导的明暗变体 |
+| `data-sl-type` | sans / songti / notoserif / sourceserif / garamond | 字体方案；后三者按需从 CDN 加载 SIL OFL 免版权字体，失败时回退本地宋体 |
+| `data-sl-size` | compact / normal / large / xlarge | 正文字号与行距 |
+| `data-sl-measure` | narrow / normal / wide / full | 阅读栏宽（`--sl-measure`） |
+| `data-sl-indent` | on / off | 段落首行缩进两字 |
+| `class="sl-topbar-on"` | 由 JS 添加 | 顶栏已构建，body 让出 `--sl-topbar-h` 顶部空间 |
+
+- 偏好存于 localStorage `sl_site-pref`（**仅影响本机显示，不写入仓库、不影响他人**）
+- 主题变量覆写一律使用 `!important`：需压过 style.css 中 `.force-dark-mode` / `.force-light-mode` 既有的重要声明
+
+### 标题层级阶梯（修正原先下级标题大于上级标题的倒置）
+- 一级 `.section-title-text-main`：clamp(21px, 2.6vw, 25px) / 700 / 字距 2px / 下方 2px 主色线
+- 二级 `.section-title-text-sub`：clamp(18px, 2.1vw, 20.5px) / 700 / 左侧 3px 主色竖线 + 下方 1px 灰线
+- 三级 `.section-title-text-sub-sub`：clamp(16.5px, 1.8vw, 18px) / 700 / 左侧 3px 灰色竖线
+- 四级 `.subsection-header`：clamp(15.5px, 1.6vw, 16.5px) / 700 / 字距 2.4px / 右侧横贯细线（`::after`）
+- 页面主标题 `.page-title-main`：clamp(24px, 4.4vw, 33px) 居中；通用 h1-h4 同阶梯
+- **新增章节层级时禁止自定字号**，必须沿用上述令牌；`prefers-reduced-motion` 下关闭全部过渡动画
+
+### 文章卡片与联系方式
+- `ul.article-list` 在 refit 层呈现为等宽卡片网格（`repeat(auto-fill, minmax(232px, 1fr))`，移动端单列），卡片底色/描边取 `--sl-card-bg`、`--sl-card-edge`，左缘 3px 主色标记；**结构仍是 `<li><a href>`，不得改写为其他标签**
+- 冻结顶栏「联系」面板数据源为站点仓库根 `slywrite-config.json` 的 `contact` 数组（`{key,label,value,url,note}`），由 SlyWrite「设置 - 站点配置 - 网站联系方式」编辑；`value`/`url` 留空时网站只显示名称，未配置时只显示「作者尚未设置」提示，**不得由开发者代填任何个人联系方式**
+- 「联系」按钮图标为内联 SVG（信封 + 对话气泡），各渠道小图标由 `channelIcon(key)` 按 key 前缀匹配（qq / wechat|wx / face / mail），未知 key 回退为通用球形图标；**禁止使用字体图标与 emoji**
