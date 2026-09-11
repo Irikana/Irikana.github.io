@@ -6,5 +6,27 @@
   ],
   "tagColors": {},
   "uploadDirs": [],
-  "contact": []
+  "contact": [
+    {
+      "key": "qq",
+      "label": "QQ",
+      "value": "32662119",
+      "url": "",
+      "note": ""
+    },
+    {
+      "key": "wechat",
+      "label": "微信",
+      "value": "irikana227",
+      "url": "",
+      "note": ""
+    },
+    {
+      "key": "facebook",
+      "label": "FaceBook",
+      "value": "花祺晏",
+      "url": "",
+      "note": ""
+    }
+  ]
 }
