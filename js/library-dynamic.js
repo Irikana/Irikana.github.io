@@ -548,7 +548,7 @@
   };
 
   /* ========== 8. VERSION ========== */
-  var Ver = { v: 'alpha-021',
+  var Ver = { v: 'alpha-022',
     init: function() {
       var footer = $q('.copyright-color') || $q('footer .copyright-text') || $q('.copyright-text');
       if (!footer || $q('.sl-version')) return;

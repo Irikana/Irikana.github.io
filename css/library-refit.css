@@ -536,6 +536,12 @@ button.sl-panel-item:hover { background-color: var(--color-bg-subtle); border-le
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
   }
   .sl-topbar[data-menu="open"] .sl-nav { display: flex; }
+  /* 展开的导航面板在小屏可能超出一屏（主题面板选项最多），限高可滚，避免底部选项点不到 */
+  .sl-nav {
+    max-height: calc(100vh - var(--sl-topbar-h));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   .sl-menu { position: static; }
   .sl-menu-btn { width: 100%; justify-content: space-between; border: none; border-bottom: 1px solid var(--color-border); padding: 12px 16px; }
   .sl-panel {
@@ -552,11 +558,130 @@ button.sl-panel-item:hover { background-color: var(--color-bg-subtle); border-le
 /* 顶栏出现后，原有的浮动按钮/侧边栏/阅读进度条下移避让 */
 html.sl-topbar-on #sl-reading-progress { top: var(--sl-topbar-h) !important; }
 html.sl-topbar-on .float-button { margin-top: 0; }
-html.sl-topbar-on .quick-nav { top: calc(var(--sl-topbar-h) + 24px) !important; }
+/* 便携式导航仪：钉到顶栏下方并取消垂直居中的位移（旧规则只钉 top 没清 translateY，
+   收起态上半截藏进顶栏、展开态头部裁出视口） */
+html.sl-topbar-on .quick-nav {
+  top: calc(var(--sl-topbar-h) + 16px) !important;
+  transform: none !important;
+  max-height: calc(100vh - var(--sl-topbar-h) - 32px);
+  overflow-y: auto;
+}
+/* 知识馆浮窗与语言切换浮窗：让出顶栏（旧规则写的是 .kh-float，页面上真实类名是
+   .knowledge-hall-float，等于从未生效，浮窗连关闭按钮都被顶栏盖住） */
 html.sl-topbar-on .lang-switch-float,
-html.sl-topbar-on .kh-float { top: calc(var(--sl-topbar-h) + 24px) !important; }
+html.sl-topbar-on .knowledge-hall-float { top: calc(var(--sl-topbar-h) + 16px) !important; }
 /* 知识馆固定侧边栏：让出顶栏高度，避免被冻结顶栏压住 */
 html.sl-topbar-on .kh-sidebar { top: var(--sl-topbar-h) !important; height: calc(100vh - var(--sl-topbar-h)) !important; }
+
+/* ---------- 3.1 移动端浮层编排（≤768px）----------
+   问题：移动端只是把 PC 端那一堆动态浮层按比例缩小，彼此同位叠在一起并压在正文上——
+   主题钮与回到顶部坐标完全重合、阅读工具条通栏横在底部盖住最后一行正文、
+   便携式导航仪与悬浮目录挤在正文左缘、目录面板在小屏上铺掉近八成视宽。
+   这里不缩小，而是重新编排：能用顶栏进入的一律从浮层里撤走，剩下的按左右两条竖列错开，
+   面板一律改成贴边抽屉且限高可滚，保证正文阅读区不被任何东西遮挡。 */
+@media (max-width: 768px) {
+  /* 顶栏导航面板里已有「站内搜索」，主题面板已有明暗切换 —— 撤掉这两个重复浮钮 */
+  .search-toggle-btn,
+  .theme-toggle-btn {
+    display: none !important;
+  }
+
+  /* 便携式导航仪与站内旧版移动导航条：功能由冻结顶栏承担，移动端撤走 */
+  .quick-nav,
+  .mobile-nav {
+    display: none !important;
+  }
+
+  /* 知识馆浮窗与语言切换浮窗：按站点规范仍作为浮窗入口存在，但不再叠在右上正文上，
+     一个贴左上、一个贴右上，各自限宽，互不重叠也不盖住阅读区中轴 */
+  .knowledge-hall-float {
+    left: var(--space-sm, 8px) !important;
+    right: auto !important;
+    width: auto !important;
+    max-width: 44vw !important;
+  }
+  .lang-switch-float {
+    left: auto !important;
+    right: var(--space-sm, 8px) !important;
+    width: auto !important;
+    max-width: 44vw !important;
+  }
+  .kh-float-body,
+  .lang-float-body {
+    padding: var(--space-xs, 4px) var(--space-sm, 8px) !important;
+  }
+  .kh-float-desc,
+  .lang-float-desc {
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* 右列浮钮：自上而下错开摆放，杜绝互相重叠（回到顶部此前被主题钮完全盖住而点不到） */
+  .float-button.nav-hub { right: var(--space-sm, 8px); bottom: 16px; }
+  .float-button.back-to-top { right: var(--space-sm, 8px); bottom: 64px; }
+  .bookmarks-trigger-btn { right: var(--space-sm, 8px); bottom: 112px; }
+  .bookmarks-panel {
+    right: var(--space-sm, 8px);
+    left: var(--space-sm, 8px);
+    bottom: 156px;
+    width: auto;
+    max-height: 42vh;
+    overflow-y: auto;
+  }
+
+  /* 阅读工具：由通栏底条改为左下角小卡，收起时不再压住整行正文；展开时限高可滚 */
+  .reading-tools-toolbar {
+    left: var(--space-sm, 8px) !important;
+    right: auto !important;
+    bottom: var(--space-sm, 8px) !important;
+    width: auto !important;
+    max-width: calc(100vw - 72px) !important;
+    max-height: calc(100vh - var(--sl-topbar-h) - 32px) !important;
+    overflow-y: auto !important;
+  }
+
+  /* 悬浮目录按钮：并入右列浮钮（左列留给阅读工具条，二者展开时不再互压）。
+     StyleEnforcer 用 transform: scale(0) 作为隐藏态，这里只换掉 translateY(-50%) 定位位移，
+     必须保留 scale 的收放，否则按钮会长期留下一个看不见的点击热区。 */
+  html #sl-toc-float-btn {
+    left: auto !important;
+    right: var(--space-sm, 8px) !important;
+    top: auto !important;
+    bottom: 160px !important;
+    transform: scale(0) !important;
+  }
+  html #sl-toc-float-btn.visible,
+  html #sl-toc-float-btn:hover,
+  html #sl-toc-float-btn.active { transform: scale(1) !important; }
+
+  /* 悬浮目录面板：小屏改成底部抽屉，满宽限高，不再以 220px 宽压在正文中段。
+     同样只替换 translateY/translateX 位移，保留初始 translateX(-10px) 的滑入感 → 直接归零即可 */
+  html #sl-toc-float-panel {
+    left: var(--space-sm, 8px) !important;
+    right: var(--space-sm, 8px) !important;
+    top: auto !important;
+    bottom: 204px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 40vh !important;
+    transform: none !important;
+  }
+  html #sl-toc-float-panel.visible { transform: none !important; }
+
+  /* 搜索面板高度收敛到视口内 */
+  .search-container { top: var(--space-md, 16px) !important; }
+  .search-results { max-height: 46vh; overflow-y: auto; }
+
+  /* 知识馆：移动端侧栏改回常规文档流，旧规则强设一屏高会把正文整段推到第二屏 */
+  html.sl-topbar-on .kh-sidebar {
+    position: static !important;
+    top: auto !important;
+    height: auto !important;
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
 
 /* ---------- 4. 页面骨架：宽度与出版节奏 ---------- */
 .content-width-limiter,
@@ -567,7 +692,7 @@ html.sl-topbar-on .kh-sidebar { top: var(--sl-topbar-h) !important; height: calc
   margin-right: auto;
 }
 
-.content-row { padding: var(--space-lg) var(--space-md) var(--space-xxl) !important; }
+.content-row { padding: var(--space-lg) var(--space-md, 16px) var(--space-xxl) !important; }
 
 .content-main {
   background-color: transparent !important;
@@ -608,7 +733,7 @@ html[data-sl-indent="on"] .section-content > p:first-child::first-letter {
   text-align: center;
   color: var(--color-text) !important;
   font-family: var(--sl-font-head);
-  margin-top: var(--space-md) !important;
+  margin-top: var(--space-md, 16px) !important;
   margin-bottom: var(--space-xs) !important;
 }
 .page-date {
@@ -646,7 +771,7 @@ html[data-sl-indent="on"] .section-content > p:first-child::first-letter {
   border-left: 3px solid var(--color-accent) !important;
   border-bottom: 1px solid var(--color-border) !important;
   padding: 2px 0 8px 12px !important;
-  margin: var(--space-xl) 0 var(--space-md) 0 !important;
+  margin: var(--space-xl) 0 var(--space-md, 16px) 0 !important;
   background-color: transparent !important;
 }
 
@@ -661,7 +786,7 @@ html[data-sl-indent="on"] .section-content > p:first-child::first-letter {
   border-left: 3px solid var(--color-border-dark) !important;
   border-bottom: none !important;
   padding: 0 0 0 10px !important;
-  margin: var(--space-lg) 0 var(--space-sm) 0 !important;
+  margin: var(--space-lg) 0 var(--space-sm, 8px) 0 !important;
 }
 
 /* 四级（分类名等） */
@@ -675,7 +800,7 @@ html[data-sl-indent="on"] .section-content > p:first-child::first-letter {
   text-align: left !important;
   border-left: none !important;
   padding: 0 0 0 2px !important;
-  margin: var(--space-xl) 0 var(--space-sm) 0 !important;
+  margin: var(--space-xl) 0 var(--space-sm, 8px) 0 !important;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -694,7 +819,7 @@ html[data-sl-indent="on"] .section-content > p:first-child::first-letter {
   color: var(--color-text-light) !important;
   border-left: none !important;
   padding-left: 2px !important;
-  margin: var(--space-lg) 0 var(--space-sm) 0 !important;
+  margin: var(--space-lg) 0 var(--space-sm, 8px) 0 !important;
 }
 
 /* 通用 h1-h4（知识馆等页面）同步阶梯 */
@@ -783,7 +908,7 @@ html[data-sl-indent="on"] .section-content > p:first-child::first-letter {
   padding-bottom: var(--space-lg) !important;
   background-color: var(--color-bg) !important;
 }
-.logo-header-row { gap: var(--space-sm); }
+.logo-header-row { gap: var(--space-sm, 8px); }
 .logo-size { width: 132px; }
 .slogan-text { letter-spacing: 2px; font-style: normal; font-size: 11.5px; }
 .slogan-line { background-color: var(--sl-rule) !important; }
