@@ -1353,9 +1353,16 @@
         var panel = menus[i].querySelector('.sl-panel');
         if (!labelEl || !panel) continue;
         var label = labelEl.innerHTML;
-        panel.innerHTML = '';
-        if (label === '主题') this.buildThemePanel(panel);
-        else if (label === '联系') this.buildContactPanel(panel);
+        // 只重建带构建函数的那两块（主题 / 联系），其余面板的内容由 build() 一次生成，
+        // 之前这里对所有面板无条件清空，导致用户动过一次主题面板后，「导航」「馆藏」
+        // 被清空且无人重建——再点展开只剩一条空白，必须刷新页面才恢复。
+        if (label === '主题') {
+          panel.innerHTML = '';
+          this.buildThemePanel(panel);
+        } else if (label === '联系') {
+          panel.innerHTML = '';
+          this.buildContactPanel(panel);
+        }
       }
     },
     bind: function() {

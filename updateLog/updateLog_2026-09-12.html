@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年9月12日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/library-refit.css">
+<script>(function(){var d={};try{d=JSON.parse(localStorage.getItem('sl_site-pref')||'{}')||{}}catch(e){}var h=document.documentElement;function s(k,v){h.setAttribute('data-sl-'+k,d[k]||v)}s('palette','classic');s('type','songti');s('size','normal');s('measure','normal');h.setAttribute('data-sl-indent',d.indent===false?'off':'on');var m='system';try{m=JSON.parse(localStorage.getItem('sl_theme')||'"system"')}catch(e){}var k=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;h.setAttribute('data-sl-variant',(m==='dark'||(m==='system'&&k))?'dark':'light')})();</script>
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年9月12日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-09-12 · alpha-022 顶栏展开缺陷修复 · SlyWrite Lite 界面独立化与应用内更新</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">主馆变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>一、顶栏下拉面板修复（全站公共脚本 js/library-dynamic.js）</strong></p>
+          <p>- 修复「顶栏点展开却只出来一条空白、刷新页面才恢复」的缺陷：面板刷新函数原先对顶栏四个下拉面板（导航 / 馆藏 / 主题 / 联系）无条件清空内容，但只重建其中的「主题」与「联系」两块；结果只要本次访问里动过一次主题面板（换配色、换字体、切换首行缩进、恢复默认），「导航」与「馆藏」的内容就被清空且无人重建</p>
+          <p>- 此时按钮本身仍工作正常（高亮、箭头旋转、展开属性都切换到位），CSS 也把面板从隐藏切到可见，但面板里已没有任何子节点，只剩下内边距形成的一条空白——这正是「有时点不出内容、刷新就好」的现象：刷新会整体重建顶栏，内容随之回来</p>
+          <p>- 现在清空动作只跟随重建函数走：需要重建的面板各自先清后建，「导航」「馆藏」保持初次构建的内容不动。缺陷属确定性逻辑问题，不是网络或渲染竞态，因此无需清缓存或强制刷新即可复现与验证</p>
+          <p>- 影响面：全站除 SlyWrite 介绍页外的各页面共用同一份动态脚本，本次为脚本内单点修改，页面文件、正文、链接与图片一律未改</p>
+          <p>- 站点版本号维持 alpha-022：本次是既有版本的缺陷修复，按作者自主编号原则不占新版本号；脚本内容变更后由浏览器与 Pages 缓存自然过渡</p>
+
+        </div>
+      </section>
+
+      <section class="notice-header">
+        <h2 id="section-2" class="section-title-text-sub">未处理项与后续可查</h2>
+        <div class="section-content left-align">
+          <p>- 「联系」面板的数据源是仓库根 slywrite-config.json 的 contact 数组，当前为空数组，因此该面板按设计只显示「作者尚未设置联系方式」的提示；其取数失败时是静默吞掉的（无重试），如日后填入联系方式，可顺手补一次重试与失败提示</p>
+          <p>- 全站 script 与 link 引用均未加 ?v= 版本参数，Pages 的 CDN 缓存在部署窗口期可能让新 JS 配旧 CSS（或相反）；若将来出现「按钮完全无反应」类现象，可优先怀疑这一点</p>
+          <p>- 另有数个早期导入的文章页缺少 library-refit.css 的静态引用，靠脚本在运行时补挂，存在窄窗口的样式竞态；这批页面如需继续维护，可一次性补齐 head 中的两行必备片段</p>
+        </div>
+      </section>
+
+      <section class="notice-header">
+        <h2 id="section-3" class="section-title-text-sub">规范与子项目变更</h2>
+        <div class="section-content left-align">
+          <p>- SlyWrite Lite（独立仓库，站点外变更，此处仅备案）：界面品牌标识改为「SlyWrite + 带边框底色的 Lite 徽标」同排呈现；界面文案去除所有与其他应用、发布平台、凭据相关的对照性说明，改为只讲本机存储、备份、排版与更新</p>
+          <p>- SlyWrite Lite 新增「更新与版本」页：匿名读取公开发布信息与应用安装包，在应用内下载并唤起系统安装界面，全流程不携带也不存储任何凭据，笔记数据不出设备</p>
+          <p>- SlyWrite Lite 构建修复已验证通过：原生依赖钉回 Expo SDK 52 版本线，并补齐 Android Release 的 Gradle 兼容补丁，构建产物与首个 Release 已发布</p>
+          <p>- 版本号规则文档同步：Lite 与 SlyWrite 采用同一套四位版本号规则，日常改动不占版本号，仅在作者明确要求发版（添加 tag）时自增第四位并同步三处版本号</p>
+        </div>
+      </section>
+
+      <div class="function-box-blue">
+        <div class="left-align">验证方式：任意页面加载后先在顶栏「主题」面板里改一次配色或缩进，再点「导航」「馆藏」，修复前展开为空白条，修复后应正常列出条目。本次不改写任何既有正文、链接与图片。</div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页 </a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门 </a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则 </a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能 </a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此出展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>
