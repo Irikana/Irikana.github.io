@@ -4,7 +4,9 @@
     "原文英文",
     "动态"
   ],
-  "tagColors": {},
+  "tagColors": {
+    "原文英文": "#2e7d53"
+  },
   "uploadDirs": [],
   "contact": [
     {
