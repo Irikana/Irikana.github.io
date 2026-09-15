@@ -319,6 +319,27 @@ html[data-sl-palette]:not([data-sl-palette="none"]) body {
   white-space: nowrap;
 }
 
+/* 顶栏历史导航：返回上一页 / 前进到刚才那一页（来源由 js 的 NavTrail 模块记录） */
+.sl-trail { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
+.sl-trail-btn {
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+.sl-trail-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+.sl-trail-btn:hover { color: var(--color-accent); border-color: var(--color-accent); background-color: var(--color-bg-subtle); }
+.sl-trail-btn[disabled] { opacity: 0.34; cursor: default; }
+.sl-trail-btn[disabled]:hover { color: var(--color-text-secondary); border-color: var(--color-border); background: none; }
+
 .sl-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
 .sl-menu { position: relative; }
 .sl-menu-btn {
@@ -546,13 +567,21 @@ button.sl-panel-item:hover { background-color: var(--color-bg-subtle); border-le
   .sl-menu-btn { width: 100%; justify-content: space-between; border: none; border-bottom: 1px solid var(--color-border); padding: 12px 16px; }
   .sl-panel {
     position: static;
+    /* 静态流里只靠 visibility 隐藏仍会占位：小屏菜单没点开时就已经撑出展开后的长度，
+       所以这里显式收进 display，点开才占高度 */
+    display: none;
     min-width: 0;
     max-width: none;
     border: none;
     box-shadow: none;
     background-color: var(--color-bg-subtle);
   }
+  .sl-menu[data-open="true"] .sl-panel { display: block; }
   .sl-brand-sub { display: none; }
+  /* 顶栏左侧多出「返回 / 前进」两枚按钮后，小屏要给标识文字让位而不是把按钮挤出去 */
+  .sl-brand { flex: 0 1 auto; min-width: 0; }
+  .sl-brand-name { overflow: hidden; text-overflow: ellipsis; }
+  .sl-trail { margin-right: 2px; }
 }
 
 /* 顶栏出现后，原有的浮动按钮/侧边栏/阅读进度条下移避让 */
@@ -566,14 +595,287 @@ html.sl-topbar-on .quick-nav {
   max-height: calc(100vh - var(--sl-topbar-h) - 32px);
   overflow-y: auto;
 }
-/* 知识馆浮窗与语言切换浮窗：让出顶栏（旧规则写的是 .kh-float，页面上真实类名是
-   .knowledge-hall-float，等于从未生效，浮窗连关闭按钮都被顶栏盖住） */
+/* 分级提示小弹窗（.sl-pop-stack）：让出顶栏高度，避免第一条提示的关闭按钮被顶栏盖住 */
+html.sl-topbar-on .sl-pop-stack { top: calc(var(--sl-topbar-h) + 16px) !important; }
+/* 旧版知识馆浮窗与语言切换浮窗（.knowledge-hall-float / .lang-switch-float）已由
+   .sl-pop-stack 统一接管；此处仅保留给历史页面的兼容避让，新页面不得再使用该构件 */
 html.sl-topbar-on .lang-switch-float,
 html.sl-topbar-on .knowledge-hall-float { top: calc(var(--sl-topbar-h) + 16px) !important; }
 /* 知识馆固定侧边栏：让出顶栏高度，避免被冻结顶栏压住 */
 html.sl-topbar-on .kh-sidebar { top: var(--sl-topbar-h) !important; height: calc(100vh - var(--sl-topbar-h)) !important; }
 
-/* ---------- 3.1 移动端浮层编排（≤768px）----------
+/* ---------- 3.1 知识馆骨架与侧边栏（.kh-sidebar，颜色一律走主题令牌，随配色/明暗变换） ----------
+   旧实现把 #fafafa / #2c3e50 写死在各知识馆页面的内联 style 里，六套配色一律不生效；
+   这里作为唯一权威定义，页面内联样式已删除。收缩态挂在 <html> 的 kh-side-off 上。 */
+.kh-body { display: flex; min-height: 100vh; }
+.kh-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--sl-kh-side, 220px);
+  background-color: var(--color-bg-subtle);
+  border-right: 1px solid var(--color-border);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.kh-main { margin-left: var(--sl-kh-side, 220px); flex: 1; min-width: 0; padding: 40px 48px; max-width: 900px; }
+.kh-logo-area { text-align: center; margin-bottom: 24px; }
+.kh-logo-area img { max-width: 80px; display: block; margin: 0 auto; }
+.kh-site-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 8px;
+  color: var(--color-accent);
+}
+.kh-equality {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin-top: 6px;
+  color: var(--color-text-light);
+}
+.kh-nav-item {
+  display: block;
+  padding: var(--space-sm) var(--space-md);
+  margin: 2px 0;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-text);
+  border-left: 3px solid transparent;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.kh-nav-item:hover {
+  background-color: var(--color-bg-muted);
+  color: var(--color-accent);
+  border-left-color: var(--color-accent-light);
+}
+.kh-nav-item.active,
+.kh-nav-item.active:hover {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  border-left-color: var(--color-accent);
+}
+.kh-nav-divider { height: 1px; background-color: var(--color-border); margin: 12px 0; }
+.kh-nav-section {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 16px 0 8px;
+  padding: 0 12px;
+  color: var(--color-text-light);
+}
+.kh-card {
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  padding: 24px;
+  margin: 20px 0;
+}
+.kh-card-title-link { display: block; text-decoration: none; color: inherit; }
+.kh-card-title-link h3 { margin: 0 0 12px 0; font-size: 18px; font-weight: 600; transition: color 0.15s ease; }
+.kh-card-title-link:hover h3 { color: var(--color-accent); }
+.kh-content h2 {
+  margin: 48px 0 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-accent);
+  color: var(--color-text);
+}
+.kh-content h2:first-child { margin-top: 0; }
+.kh-content h3 { margin: 32px 0 16px; color: var(--color-text-secondary); }
+.kh-content p { margin: 16px 0; color: var(--color-text-secondary); }
+.kh-footer {
+  margin-top: 64px;
+  padding: 24px 16px;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--color-text-light);
+}
+.kh-footer p { margin: 4px 0; }
+
+/* 侧栏收缩开关：侧栏内的「收起」钮 + 收起后贴在左缘的「展开」条 */
+.kh-side-toggle,
+.kh-side-tab {
+  appearance: none;
+  font-family: inherit;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+.kh-side-toggle {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+.kh-side-toggle:hover,
+.kh-side-tab:hover { color: var(--color-accent); border-color: var(--color-accent); }
+.kh-side-tab {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  width: 22px;
+  height: 74px;
+  margin-top: -37px;
+  border-left: none;
+  z-index: 101;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-100%);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+/* 顶栏占了顶部一条，展开把手要在剩下的可视高度里居中 */
+html.sl-topbar-on .kh-side-tab { top: calc(50% + var(--sl-topbar-h) / 2); margin-top: -37px; }
+/* 轻提示落到顶栏下方，别压在顶栏上（隐藏位与到位位一起平移，保留滑入滑出） */
+html.sl-topbar-on .sl-pop-toast { top: calc(var(--sl-topbar-h) - 60px); }
+html.sl-topbar-on .sl-pop-toast.visible { top: calc(var(--sl-topbar-h) + 8px); }
+.kh-side-toggle svg,
+.kh-side-tab svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+html.kh-side-off .kh-sidebar { transform: translateX(-100%); }
+html.kh-side-off .kh-main { margin-left: 0; }
+html.kh-side-off .kh-main-wrapper { margin-left: 0; }
+html.kh-side-off .kh-side-tab { opacity: 1; pointer-events: auto; transform: translateX(0); }
+
+/* 知识词条页（template/knowledge-entry.html 与 App 生成的 knowledge-hall/categories/**）独有构件：
+   同样一律走主题令牌，不得在页面内联写死颜色 */
+.kh-main-wrapper {
+  margin-left: var(--sl-kh-side, 220px);
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: var(--space-xl);
+  padding: 40px 48px;
+  max-width: 1200px;
+}
+.kh-main-wrapper .kh-main { margin-left: 0; padding: 0; max-width: none; }
+.kh-entry-title {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 8px 0;
+  color: var(--color-text);
+}
+.kh-entry-aliases { font-size: 15px; line-height: 1.5; margin-bottom: 4px; color: var(--color-text-light); }
+.kh-entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding: 8px 0;
+  margin-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 13px;
+  color: var(--color-text-light);
+}
+.kh-entry-meta-item { display: inline-flex; align-items: center; gap: 4px; }
+.kh-entry-meta-label { font-weight: 600; color: var(--color-text-secondary); }
+.kh-entry-meta-value { color: var(--color-text-light); }
+.kh-entry-category-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  background-color: var(--color-bg-muted);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-accent);
+}
+.kh-entry-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: var(--space-md);
+  color: var(--color-text-secondary);
+  transition: color 0.15s ease;
+}
+.kh-entry-back:hover { color: var(--color-accent); }
+.kh-entry-back::before { content: '\2190'; }
+.kh-related-list { list-style: none; margin: 0; padding: 0; }
+.kh-related-list li { padding: 8px 0; border-bottom: 1px dashed var(--color-border); }
+.kh-related-list li:last-child { border-bottom: none; }
+.kh-related-list a {
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-accent);
+  transition: color 0.15s ease;
+}
+.kh-related-list a:hover { color: var(--color-accent-hover); }
+.kh-related-relation { display: block; font-size: 13px; margin-top: 2px; color: var(--color-text-light); }
+.kh-graph-panel { width: 260px; flex: 0 0 auto; background-color: transparent; border: 1px solid var(--color-border); padding: 20px; }
+.kh-graph-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0 0 16px 0;
+  color: var(--color-accent);
+}
+.kh-graph-canvas {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  border: 1px dashed var(--color-border-dark);
+  background-color: var(--color-bg-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.kh-graph-node {
+  position: absolute;
+  z-index: 2;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-accent-light);
+  color: var(--color-accent);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.kh-graph-node:hover { background-color: var(--color-accent-light); color: var(--color-bg); transform: scale(1.05); }
+.kh-graph-node.center {
+  z-index: 3;
+  font-size: 13px;
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+}
+.kh-graph-node.center:hover { background-color: var(--color-accent-hover); color: var(--color-bg); transform: none; }
+.kh-graph-edge {
+  position: absolute;
+  z-index: 1;
+  height: 1px;
+  background-color: var(--color-border-dark);
+  transform-origin: left center;
+}
+.kh-graph-hint { font-size: 12px; line-height: 1.5; text-align: center; margin-top: 12px; color: var(--color-text-light); }
+.kh-footer-mobile { display: none; }
+@media (max-width: 1024px) {
+  .kh-graph-panel { display: none; }
+  .kh-footer-mobile { display: block; }
+  .kh-main-wrapper { max-width: 900px; gap: 0; }
+}
+
+/* ---------- 3.2 移动端浮层编排（≤768px）----------
    问题：移动端只是把 PC 端那一堆动态浮层按比例缩小，彼此同位叠在一起并压在正文上——
    主题钮与回到顶部坐标完全重合、阅读工具条通栏横在底部盖住最后一行正文、
    便携式导航仪与悬浮目录挤在正文左缘、目录面板在小屏上铺掉近八成视宽。
@@ -592,28 +894,27 @@ html.sl-topbar-on .kh-sidebar { top: var(--sl-topbar-h) !important; height: calc
     display: none !important;
   }
 
-  /* 知识馆浮窗与语言切换浮窗：按站点规范仍作为浮窗入口存在，但不再叠在右上正文上，
-     一个贴左上、一个贴右上，各自限宽，互不重叠也不盖住阅读区中轴 */
-  .knowledge-hall-float {
-    left: var(--space-sm, 8px) !important;
-    right: auto !important;
-    width: auto !important;
-    max-width: 44vw !important;
-  }
-  .lang-switch-float {
-    left: auto !important;
+  /* 分级提示小弹窗：小屏收窄并限制高度，超出可滚，不压正文中轴 */
+  .sl-pop-stack {
+    top: calc(var(--sl-topbar-h) + 8px) !important;
     right: var(--space-sm, 8px) !important;
-    width: auto !important;
-    max-width: 44vw !important;
+    left: auto !important;
+    width: 200px !important;
+    max-width: 52vw !important;
+    max-height: calc(100vh - var(--sl-topbar-h) - 24px) !important;
   }
-  .kh-float-body,
-  .lang-float-body {
+  .sl-pop-body {
     padding: var(--space-xs, 4px) var(--space-sm, 8px) !important;
   }
-  .kh-float-desc,
-  .lang-float-desc {
-    font-size: 11px !important;
+  .sl-pop-desc {
+    font-size: 11.5px !important;
     line-height: 1.5 !important;
+  }
+  .sl-pop-foot {
+    padding: 5px var(--space-sm, 8px) !important;
+  }
+  .sl-pop-snooze {
+    font-size: 11px !important;
   }
 
   /* 右列浮钮：自上而下错开摆放，杜绝互相重叠（回到顶部此前被主题钮完全盖住而点不到） */
@@ -673,6 +974,8 @@ html.sl-topbar-on .kh-sidebar { top: var(--sl-topbar-h) !important; height: calc
   .search-results { max-height: 46vh; overflow-y: auto; }
 
   /* 知识馆：移动端侧栏改回常规文档流，旧规则强设一屏高会把正文整段推到第二屏 */
+  .kh-body { flex-direction: column; }
+  .kh-sidebar,
   html.sl-topbar-on .kh-sidebar {
     position: static !important;
     top: auto !important;
@@ -681,6 +984,15 @@ html.sl-topbar-on .kh-sidebar { top: var(--sl-topbar-h) !important; height: calc
     border-right: none !important;
     border-bottom: 1px solid var(--color-border);
   }
+  .kh-main,
+  html.kh-side-off .kh-main { margin-left: 0 !important; padding: 24px 16px; }
+  /* 小屏侧栏在文档流里，位移收起会留下一整块空档，改为直接收起不留位 */
+  html.kh-side-off .kh-sidebar { transform: none !important; display: none !important; }
+  .kh-side-toggle { position: absolute; top: 10px; right: 10px; }
+  /* 知识词条页：图形面板已在 1024px 撤走，正文容器回到单列 */
+  .kh-main-wrapper,
+  html.kh-side-off .kh-main-wrapper { margin-left: 0 !important; padding: 24px 16px; flex-direction: column; }
+  .kh-entry-title { font-size: 22px; }
 }
 
 /* ---------- 4. 页面骨架：宽度与出版节奏 ---------- */
@@ -720,6 +1032,22 @@ html[data-sl-indent="on"] .section-content > p:first-child::first-letter {
   font-weight: 700;
   color: var(--color-accent);
   margin-right: 0.12em;
+}
+
+/* 新闻卡片内的文字不参与正文两端对齐与首行缩进
+   （海报新闻的日期是 <p>，被上面的 justify + 缩进规则推离了中轴） */
+.content-main .news-featured-info p,
+.content-main .news-featured-title {
+  text-align: center !important;
+  text-indent: 0 !important;
+}
+.content-main .news-featured-info p { margin-bottom: 0; }
+
+/* 弹窗内的文字保持自身排版，不吃正文的两端对齐与首行缩进 */
+.content-main .sl-pop p,
+.content-main .sl-pop .sl-pop-desc {
+  text-align: left !important;
+  text-indent: 0 !important;
 }
 
 /* ---------- 5. 标题层级修正（上级 > 下级，字号阶梯统一） ---------- */

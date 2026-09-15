@@ -270,9 +270,7 @@ img {
   margin: 0;
 }
 
-.padding-10,
-.lang-float-body,
-.kh-float-body {
+.padding-10 {
   padding: var(--space-md);
 }
 
@@ -803,145 +801,263 @@ img {
   bottom: var(--space-lg);
 }
 
-.knowledge-hall-float {
+/* ==========================================================================
+   分级提示构件（sl-pop）—— 小弹窗 / 模态弹窗 / 轻提示
+   --------------------------------------------------------------------------
+   三种形态共用同一套等级色（提示 tip / 通知 note / 警告 warn）：
+     .sl-pop          右侧竖排小弹窗（可关闭、可拖走、可今日不再提示）
+     .sl-pop-modal    居中模态弹窗（配 .sl-pop-mask 遮罩）
+     .sl-pop-toast    顶部轻提示（自动消失）
+   今日不再提示：勾选页脚复选框后关闭，偏好写入 localStorage（sl_pop-snooze），
+   值记录关闭当天的日期，次日 0 点由 js/library-dynamic.js 的 SlPop 模块自动放行。
+   全站扁平化：border-radius 一律 0。
+   ========================================================================== */
+
+/* 等级色（亮色默认值；暗色在下方按三种切换方式覆写） */
+.sl-pop-tip  { --sl-pop-accent: var(--color-accent); }
+.sl-pop-note { --sl-pop-accent: #2e7d5b; }
+.sl-pop-warn { --sl-pop-accent: #c0392b; }
+
+/* 小弹窗竖排容器：同页多个提示不再各写一个 top 值，交给容器排 */
+.sl-pop-stack {
   position: fixed;
   top: var(--space-lg);
   right: var(--space-lg);
-  width: 200px;
   z-index: 1000;
-  cursor: move;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 1;
-  transform: translateY(0);
+  width: 236px;
+  max-width: calc(100vw - var(--space-md) * 2);
+  max-height: calc(100vh - var(--space-lg) * 2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
-.knowledge-hall-float.hidden {
+.sl-pop {
+  flex: 0 0 auto;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--sl-pop-accent, var(--color-accent));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  font-size: 14px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sl-pop.hidden {
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
 }
 
-.kh-float-header,
-.lang-float-header {
+.sl-pop-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
   background-color: var(--color-bg-subtle);
   border-bottom: 1px solid var(--color-border);
   cursor: grab;
 }
 
-.kh-float-header:active,
-.lang-float-header:active {
+.sl-pop-head:active {
   cursor: grabbing;
 }
 
-.kh-float-title {
+.sl-pop-title {
   font-size: 14px;
   font-weight: 700;
-  color: var(--color-accent);
   letter-spacing: 0.5px;
+  color: var(--sl-pop-accent, var(--color-accent));
 }
 
-.kh-float-close,
-.lang-float-close {
+/* 等级标（模态弹窗页头上那枚小字标签） */
+.sl-pop-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  padding: 1px 6px;
+  color: var(--sl-pop-accent, var(--color-accent));
+  border: 1px solid var(--sl-pop-accent, var(--color-accent));
+}
+
+.sl-pop-close {
   background: none;
   border: none;
   font-size: 18px;
+  line-height: 1;
   color: var(--color-text-light);
   cursor: pointer;
   padding: 0 4px;
-  line-height: 1;
-  transition: color 0.15s;
+  transition: color 0.15s ease;
 }
 
-.kh-float-close:hover {
+.sl-pop-close:hover {
   color: var(--color-text);
 }
 
-/* ========== Language Switch Float ========== */
+.sl-pop-body {
+  padding: var(--space-md);
+}
 
-.lang-switch-float {
+.sl-pop-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.sl-pop-link {
+  display: inline-block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--sl-pop-accent, var(--color-accent));
+  text-decoration: none !important;
+  padding: 5px 12px;
+  border: 1px solid var(--sl-pop-accent, var(--color-accent));
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.sl-pop-link:hover {
+  background-color: var(--sl-pop-accent, var(--color-accent));
+  color: #fff !important;
+}
+
+.sl-pop-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 6px var(--space-md);
+  border-top: 1px dashed var(--color-border);
+}
+
+.sl-pop-snooze {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--color-text-light);
+  cursor: pointer;
+  user-select: none;
+}
+
+.sl-pop-snooze input {
+  width: 13px;
+  height: 13px;
+  margin: 0;
+  accent-color: var(--sl-pop-accent, var(--color-accent));
+  cursor: pointer;
+}
+
+/* 居中模态弹窗 */
+.sl-pop-mask {
   position: fixed;
-  top: calc(var(--space-lg) + 170px);
-  right: var(--space-lg);
-  width: 200px;
-  z-index: 999;
-  cursor: move;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background-color: rgba(15, 15, 15, 0.42);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.sl-pop-mask.visible {
   opacity: 1;
+}
+
+.sl-pop-modal {
+  width: 520px;
+  max-width: 100%;
+  max-height: 82vh;
+  overflow-y: auto;
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border-dark);
+  border-top: 4px solid var(--sl-pop-accent, var(--color-accent));
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.24);
+  font-size: 14px;
+  transform: translateY(8px);
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sl-pop-mask.visible .sl-pop-modal {
   transform: translateY(0);
 }
 
-.lang-switch-float.hidden {
-  opacity: 0;
-  transform: translateY(10px);
+.sl-pop-modal .sl-pop-body {
+  padding: var(--space-lg);
+}
+
+.sl-pop-modal .sl-pop-desc {
+  font-size: 15px;
+  line-height: 1.9;
+  margin: 0;
+}
+
+.sl-pop-modal .sl-pop-foot {
+  justify-content: flex-end;
+  background-color: var(--color-bg-subtle);
+  border-top: 1px solid var(--color-border);
+}
+
+/* 弹窗内动作按钮（扁平直角） */
+.sl-pop-btn {
+  appearance: none;
+  font-family: inherit;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  padding: 7px 18px;
+  color: var(--color-bg);
+  background-color: var(--sl-pop-accent, var(--color-accent));
+  border: 1px solid var(--sl-pop-accent, var(--color-accent));
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.sl-pop-btn:hover {
+  opacity: 0.86;
+}
+
+/* 顶部轻提示 */
+.sl-pop-toast {
+  position: fixed;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10002;
+  max-width: calc(100vw - var(--space-md) * 2);
+  padding: 8px 20px;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  color: var(--color-bg);
+  background-color: var(--sl-pop-accent, #2c3e50);
+  border-left: 4px solid rgba(0, 0, 0, 0.18);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: top 0.3s ease;
   pointer-events: none;
 }
 
-.lang-float-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text);
+.sl-pop-toast.visible {
+  top: 20px;
 }
 
-.lang-float-close:hover {
-  color: var(--color-text);
+/* 暗色下的等级色（系统偏好 / 手动切暗 / 主题令牌三种途径都覆盖） */
+@media (prefers-color-scheme: dark) {
+  .sl-pop-note { --sl-pop-accent: #58b189; }
+  .sl-pop-warn { --sl-pop-accent: #d97b6c; }
 }
 
-.lang-float-desc {
-  font-size: 14px;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-  margin: 0 0 var(--space-sm) 0;
-}
-
-.lang-float-link {
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: opacity 0.15s;
-}
-
-.lang-float-link:hover {
-  opacity: 0.7;
-}
-
-.kh-float-desc {
-  font-size: 14px;
-  color: var(--color-text-secondary);
-  margin: 0 0 var(--space-sm) 0;
-  line-height: 1.6;
-}
-
-.kh-float-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-accent);
-  text-decoration: none !important;
-  padding: 6px 14px;
-  border: 1px solid var(--color-accent);
-  transition: all 0.15s ease;
-}
-
-.kh-float-link:hover {
-  background-color: var(--color-accent);
-  color: #fff !important;
-}
+html.force-dark-mode .sl-pop-note,
+html[data-sl-variant="dark"] .sl-pop-note { --sl-pop-accent: #58b189; }
+html.force-dark-mode .sl-pop-warn,
+html[data-sl-variant="dark"] .sl-pop-warn { --sl-pop-accent: #d97b6c; }
+html.force-dark-mode .sl-pop-toast,
+html[data-sl-variant="dark"] .sl-pop-toast { box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5); }
 
 /* ========== Footer ========== */
 
@@ -1696,19 +1812,8 @@ strong {
     bottom: var(--space-md);
   }
 
-  .knowledge-hall-float {
-    right: var(--space-sm);
-    top: var(--space-sm);
-    width: calc(100% - var(--space-md));
-    max-width: 200px;
-  }
-
-  .lang-switch-float {
-    right: var(--space-sm);
-    top: calc(var(--space-sm) + 180px);
-    width: calc(100% - var(--space-md));
-    max-width: 200px;
-  }
+  /* 分级提示小弹窗的移动端编排（限宽 / 限高 / 顶栏避让）统一由
+     css/library-refit.css 的「3.2 移动端浮层编排」负责，这里不再重复一份尺寸规则 */
 
   .quick-nav {
     left: 0;
@@ -3773,6 +3878,7 @@ details details {
 .focus-mode .bookmarks-trigger-btn,
 .focus-mode .knowledge-hall-float,
 .focus-mode .lang-switch-float,
+.focus-mode .sl-pop-stack,
 .focus-mode .auto-toc,
 .focus-mode .bookmark-btn-wrapper {
   opacity: 0.12;

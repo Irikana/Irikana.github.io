@@ -9,6 +9,14 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/library-refit.css">
   <script>(function(){var d={};try{d=JSON.parse(localStorage.getItem('sl_site-pref')||'{}')||{}}catch(e){}var h=document.documentElement;function s(k,v){h.setAttribute('data-sl-'+k,d[k]||v)}s('palette','classic');s('type','songti');s('size','normal');s('measure','normal');h.setAttribute('data-sl-indent',d.indent===false?'off':'on');var m='system';try{m=JSON.parse(localStorage.getItem('sl_theme')||'"system"')}catch(e){}var k=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;h.setAttribute('data-sl-variant',(m==='dark'||(m==='system'&&k))?'dark':'light')})();</script>
+  <!-- MathJax 3 数学公式渲染（见第 17 节）：本页含公式渲染示例，按标准在 head 末尾引入 -->
+  <script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
 
@@ -36,6 +44,7 @@
             <div class="function-box-blue">
               <p>本文档定义了项目中所有 UI 组件的标准样式。开发新页面或修改现有页面时，应直接复制对应组件的样式代码，以确保全站视觉一致性。</p>
               <p>每个组件下方展示「实际渲染效果」和「对应代码」，方便直观对比参考。</p>
+              <p>本页最后同步：alpha-023（与 .trae/rules/visual-components.md 及 style.css / library-refit.css / library-dynamic.js 实际实现对齐）。</p>
             </div>
           </div>
         </section>
@@ -396,83 +405,264 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
+                <h3 id="section-4-3" class="subsection-header" style="margin-top:32px;">现行结构：主页新闻区 — .news-featured（左海报 + 右文字列表）</h3>
+                <div class="function-box-blue">
+                  <p>结构说明：新闻区现为「左侧海报 + 右侧文字列表」结构（#news-text-list / .news-featured-text-card / .news-featured-poster），旧的轮播容器已废弃。以下以 index.html 实际结构为权威源。</p>
+                </div>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">实际效果（左侧 1 个最新海报新闻 + 右侧按时间排序的文字新闻）：</p>
+                <div class="news-featured" style="max-width:100%;">
+                  <div class="news-featured-poster">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="news-featured-image">
+                      <img src="./image/poster/SOTM_I_2026后记/SOTM_I_2026后记.png" alt="海报新闻示例" loading="lazy" width="400" height="300" onerror="this.style.display='none';this.parentElement.innerHTML='&lt;div style=&quot;width:200px;height:120px;background:#e0e0e0;display:flex;align-items:center;justify-content:center;color:#888;font-size:14px;&quot;&gt;海报占位图&lt;/div&gt;'">
+                    </a>
+                    <div class="news-featured-info">
+                      <h3 class="news-featured-title">SOTM I 2026后记</h3>
+                      <p class="news-featured-date">2026年2月3日</p>
+                    </div>
+                  </div>
+                  <div class="news-featured-text-list">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="2026-05-10">
+                      <span class="card-title">知识馆正式启用</span>
+                      <span class="card-date">2026年5月10日</span>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="2026-04-02">
+                      <span class="card-title">记录的冲动</span>
+                      <span class="card-date">2026年4月2日</span>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="2026-03-15">
+                      <span class="card-title">Minesia第一个公开测试</span>
+                      <span class="card-date">2026年3月15日</span>
+                    </a>
+                  </div>
+                </div>
+                <p style="font-size:12px;color:#888;margin-top:4px;">↑ 示例已省略 id="news-text-list"（真实页面该 id 由排序脚本接管，本页保留会与本节示例冲突）；标题与日期居中即下方「文字对齐」规则生效的样子</p>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码（整体结构）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="news-featured"&gt;
+  &lt;!-- 左侧：最新海报新闻（始终保持 1 个） --&gt;
+  &lt;div class="news-featured-poster"&gt;
+    &lt;a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-image"&gt;
+      &lt;img src="./image/poster/{路径}/{文件名}.png" alt="{描述}" loading="lazy" width="400" height="300"&gt;
+    &lt;/a&gt;
+    &lt;div class="news-featured-info"&gt;
+      &lt;h3 class="news-featured-title"&gt;{标题}&lt;/h3&gt;
+      &lt;p class="news-featured-date"&gt;{YYYY年M月D日}&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- 右侧：文字新闻列表（最多 6 条，按 data-date 降序） --&gt;
+  &lt;div class="news-featured-text-list" id="news-text-list"&gt;
+    &lt;a href="{文章链接}" target="_blank" rel="noopener noreferrer" class="news-featured-text-card" data-date="YYYY-MM-DD"&gt;
+      &lt;span class="card-title"&gt;{标题}&lt;/span&gt;
+      &lt;span class="card-date"&gt;{YYYY年M月D日}&lt;/span&gt;
+    &lt;/a&gt;
+    &lt;!-- ...最多 6 条 --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">关键规则：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>海报位始终保持 <strong>1 个</strong>；新增海报新闻时替换左侧 poster，被替换的旧海报新闻降级为文字新闻插入右侧列表（若右侧已满 6 条则挤出最旧一条）</li>
+                  <li>文字卡片只放标题 + 日期，<strong>不放正文内容</strong>；<code>data-date</code> 格式 <code>YYYY-MM-DD</code>，用于排序（按日期降序）</li>
+                  <li>海报图片路径：<code>./image/poster/{路径}/{文件名}.png</code>；中英文主页的新闻卡片需同步添加</li>
+                  <li><strong>文字对齐</strong>：<code>.news-featured-info</code> 内的标题与日期一律居中，且不参与正文的两端对齐与首行缩进——<code>&lt;p class="news-featured-date"&gt;</code> 会被 refit 的 <code>.content-main p</code>（justify + 缩进 2em）命中而偏出中轴，豁免规则写在 <code>css/library-refit.css</code>「4. 页面骨架」段末尾，StyleEnforcer 有同名兜底</li>
+                </ul>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">容量与排序规矩：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>左侧海报位 <strong>1 个</strong>，右侧文字列表 <strong>最多 6 条</strong>；始终按 <code>data-date</code> 降序排列右侧列表</li>
+                  <li>新增文字新闻 → 插入右侧列表，满 6 条挤出最旧</li>
+                  <li>新增海报新闻 → 替换左侧 poster，旧 poster 降级到右侧列表</li>
+                </ul>
+
+                <h3 id="section-4-4" class="subsection-header" style="margin-top:32px;">news.html 列表项 — .news-list-item-text-only</h3>
+                <p>用途：<code>news.html</code> 新闻列表页的单条新闻条目。</p>
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <a href="#" target="_blank" class="news-list-item-text-only">
+                  <h3 class="news-list-item-title">示例新闻标题</h3>
+                  <p class="news-list-item-date">2026年5月10日</p>
+                  <p class="news-list-item-hint">点击此处了解更多</p>
+                </a>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;a href="{文章链接}" target="_blank" class="news-list-item-text-only"&gt;
+  &lt;h3 class="news-list-item-title"&gt;{标题}&lt;/h3&gt;
+  &lt;p class="news-list-item-date"&gt;{YYYY年M月D日}&lt;/p&gt;
+  &lt;p class="news-list-item-hint"&gt;点击此处了解更多&lt;/p&gt;
+&lt;/a&gt;</code></pre>
+
               </div>
             </div>
           </div>
         </section>
 
-        <!-- ========== Section 5: 浮窗 ========== -->
+        <!-- ========== Section 5: 分级提示构件 ========== -->
         <section class="notice-header section-header">
           <div>
-            <h2 id="section-5" class="section-title-text-main">5. 浮窗</h2>
+            <h2 id="section-5" class="section-title-text-main">5. 分级提示构件（.sl-pop）</h2>
             <div class="content-bg-lightgrey">
               <div>
-                <p>浮窗在正式页面中使用 <code>position: fixed</code> 定位。以下用相对定位模拟其外观效果。
+                <p>用途：站场内所有「要告诉读者一句话，并且允许他关掉」的构件——入口引导、状态提醒、操作反馈。<strong>取代旧的知识馆浮窗 <code>.knowledge-hall-float</code> 与语言切换浮窗 <code>.lang-switch-float</code>。</strong>样式在 <code>css/style.css</code>「分级提示构件」段（StyleEnforcer 有兜底），行为在 <code>js/library-dynamic.js</code> 的 <code>SlPop</code> 模块。</p>
 
-                <h3 id="section-5-1" class="subsection-header">知识馆浮窗 — .knowledge-hall-float</h3>
-                <p>用途：主页右侧悬浮的知识馆入口浮窗。
+                <p><strong>三种形态</strong>（等级类名三形态通用）：</p>
+                <table style="width:100%;border-collapse:collapse;margin:8px 0;font-size:14px;line-height:1.7;">
+                  <thead>
+                    <tr style="background:var(--color-accent);color:#fff;">
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">形态</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">类名</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">场景</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);">小弹窗（右上角竖排）</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.sl-pop（放进 .sl-pop-stack）</td><td style="padding:8px 12px;border:1px solid var(--color-border);">入口引导：知识馆、英文版</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);">模态弹窗（居中带遮罩）</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.sl-pop[data-pop-modal]</td><td style="padding:8px 12px;border:1px solid var(--color-border);">需要读者先看到再开始浏览的提醒：Alpha 建设状态</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);">轻提示（顶部滑入自消）</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.sl-pop-toast</td><td style="padding:8px 12px;border:1px solid var(--color-border);">操作反馈：收藏成功、侧栏已收起</td></tr>
+                  </tbody>
+                </table>
 
-                <p style="font-weight:600;margin-bottom:8px;">外观模拟（relative 定位）：</p>
-                <div style="position:relative;display:inline-block;">
-                  <div class="knowledge-hall-float" style="position:relative;right:auto;top:auto;">
-                    <div class="kh-float-header">
-                      <span class="kh-float-title">知识馆</span>
-                      <button class="kh-float-close">&times;</button>
+                <p><strong>三个等级</strong>：</p>
+                <table style="width:100%;border-collapse:collapse;margin:8px 0;font-size:14px;line-height:1.7;">
+                  <thead>
+                    <tr style="background:var(--color-accent);color:#fff;">
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">等级</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">类名</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">语义</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">边线色</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);">提示</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.sl-pop-tip</td><td style="padding:8px 12px;border:1px solid var(--color-border);">引导、可选入口、中性告知</td><td style="padding:8px 12px;border:1px solid var(--color-border);">var(--color-accent)（随配色变换）</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);">通知</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.sl-pop-note</td><td style="padding:8px 12px;border:1px solid var(--color-border);">事实性通知，不打断阅读</td><td style="padding:8px 12px;border:1px solid var(--color-border);">#2e7d5b（暗色 #58b189）</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);">警告</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.sl-pop-warn</td><td style="padding:8px 12px;border:1px solid var(--color-border);">需要特别注意的建设状态 / 时效提醒</td><td style="padding:8px 12px;border:1px solid var(--color-border);">#c0392b（暗色 #d97b6c）</td></tr>
+                  </tbody>
+                </table>
+
+                <h3 id="section-5-1" class="subsection-header" style="margin-top:32px;">形态一：小弹窗（右上角竖排）— .sl-pop + .sl-pop-stack</h3>
+                <p>页头标题、关闭按钮与页脚「今日不再提示」复选框由 <code>SlPop.wire()</code> 自动补齐，页面只写 <code>.sl-pop-body</code> 主体。同一页面的多个小弹窗共用一个 <code>.sl-pop-stack</code> 容器竖排。</p>
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果（三等级各一枚；示例已静态化放进容器，并省略 data-pop-key 以免被本页真实 SlPop 模块接管）：</p>
+                <div style="background:var(--color-bg-muted);padding:16px;">
+                  <div class="sl-pop-stack" style="position:relative;top:auto !important;right:auto !important;left:auto !important;width:236px;max-height:none;overflow:visible;display:flex;">
+                    <div class="sl-pop sl-pop-tip">
+                      <div class="sl-pop-head">
+                        <span class="sl-pop-title">知识馆</span>
+                        <button type="button" class="sl-pop-close" title="关闭" aria-label="关闭">&times;</button>
+                      </div>
+                      <div class="sl-pop-body">
+                        <p class="sl-pop-desc">牧羊人图书馆的分馆，用于存放和查阅知识</p>
+                        <a href="./knowledge-hall/index.html" target="_blank" rel="noopener noreferrer" class="sl-pop-link">前往知识馆</a>
+                      </div>
+                      <div class="sl-pop-foot">
+                        <label class="sl-pop-snooze"><input type="checkbox"><span>今日不再提示</span></label>
+                      </div>
                     </div>
-                    <div class="kh-float-body">
-                      <p class="kh-float-desc">牧羊人图书馆分馆，存放和查阅知识之地</p>
-                      <a href="#" class="kh-float-link">进入知识馆</a>
+                    <div class="sl-pop sl-pop-note">
+                      <div class="sl-pop-head">
+                        <span class="sl-pop-title">站点动态</span>
+                        <button type="button" class="sl-pop-close" title="关闭" aria-label="关闭">&times;</button>
+                      </div>
+                      <div class="sl-pop-body">
+                        <p class="sl-pop-desc">通知等级示例：事实性提醒，不打断阅读。</p>
+                      </div>
+                      <div class="sl-pop-foot">
+                        <label class="sl-pop-snooze"><input type="checkbox"><span>今日不再提示</span></label>
+                      </div>
                     </div>
-                  </div>
-                </div>
-
-                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 结构：</p>
-                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="knowledge-hall-float" id="kh-float"&gt;
-  &lt;div class="kh-float-header"&gt;
-    &lt;span class="kh-float-title"&gt;知识馆&lt;/span&gt;
-    &lt;button class="kh-float-close"
-      onclick="document.getElementById('kh-float').classList.add('hidden')"&gt;
-      &amp;times;
-    &lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class="kh-float-body"&gt;
-    &lt;p class="kh-float-desc"&gt;牧羊人图书馆分馆，存放和查阅知识之地&lt;/p&gt;
-    &lt;a href="./knowledge-hall/index.html" class="kh-float-link"&gt;进入知识馆&lt;/a&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-
-                <h3 id="section-5-2" class="subsection-header" style="margin-top:32px;">语言切换浮窗 — .lang-switch-float</h3>
-                <p>结构与知识馆浮窗类似，位置在知识馆浮窗下方 140px 处。
-
-                <p style="font-weight:600;margin-bottom:8px;">外观模拟（relative 定位）：</p>
-                <div style="position:relative;display:inline-block;">
-                  <div class="lang-switch-float" style="position:relative;right:auto;top:auto;">
-                    <div class="lang-float-header">
-                      <span class="lang-float-title">语言 / Language</span>
-                      <button class="lang-float-close">&times;</button>
-                    </div>
-                    <div class="lang-float-body">
-                      <p class="lang-float-desc">切换网站显示语言</p>
-                      <div style="display:flex;flex-direction:column;gap:8px;">
-                        <a href="#" class="lang-float-link">中文版</a>
-                        <a href="#" class="lang-float-link">English</a>
+                    <div class="sl-pop sl-pop-warn">
+                      <div class="sl-pop-head">
+                        <span class="sl-pop-title">建设状态</span>
+                        <button type="button" class="sl-pop-close" title="关闭" aria-label="关闭">&times;</button>
+                      </div>
+                      <div class="sl-pop-body">
+                        <p class="sl-pop-desc">警告等级示例：仅限需要特别注意的状态，红色不得滥用。</p>
+                      </div>
+                      <div class="sl-pop-foot">
+                        <label class="sl-pop-snooze"><input type="checkbox"><span>今日不再提示</span></label>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 结构：</p>
-                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="lang-switch-float" id="lang-float"&gt;
-  &lt;div class="lang-float-header"&gt;
-    &lt;span class="lang-float-title"&gt;语言 / Language&lt;/span&gt;
-    &lt;button class="lang-float-close"&gt;&amp;times;&lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class="lang-float-body"&gt;
-    &lt;p class="lang-float-desc"&gt;切换网站显示语言&lt;/p&gt;
-    &lt;a href="../index.html" class="lang-float-link"&gt;中文版&lt;/a&gt;
-    &lt;a href="../en/index.html" class="lang-float-link"&gt;English&lt;/a&gt;
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码（页面只写主体，页脚复选框与关闭按钮由 SlPop.wire() 自动补齐）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="sl-pop-stack" id="sl-pop-stack"&gt;
+  &lt;div class="sl-pop sl-pop-tip" data-pop-key="knowledge-hall" data-pop-title="知识馆"&gt;
+    &lt;div class="sl-pop-body"&gt;
+      &lt;p class="sl-pop-desc"&gt;牧羊人图书馆的分馆，用于存放和查阅知识&lt;/p&gt;
+      &lt;a href="./knowledge-hall/index.html" target="_blank" rel="noopener noreferrer" class="sl-pop-link"&gt;前往知识馆&lt;/a&gt;
+    &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">使用说明：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>小弹窗<strong>必须</strong>放进 <code>.sl-pop-stack</code> 容器（右上角竖排，fixed 定位，宽 236px）；容器缺省时由 JS 补一个。禁止再各写 <code>top</code> 值——旧浮窗靠 <code>top: calc(... + 170px)</code> 手排，新增一个就要改一次样式</li>
+                  <li>整摞可拖走：拖动任一弹窗的页头（<code>.sl-pop-head</code>）生效（<code>SlPop.bindDrag()</code>）</li>
+                  <li>运行期追加小弹窗用 <code>SlPop.card({ key, level, title, desc, href, linkText })</code>，同样接受「今日不再提示」与 0 点刷新</li>
+                  <li>移动端（≤768px）容器钉右上、限宽 52vw、限高可滚，规则见 <code>css/library-refit.css</code>「3.2 移动端浮层编排」</li>
+                  <li>顶栏出现时容器 <code>top</code> 让出 <code>var(--sl-topbar-h)</code>，由 <code>html.sl-topbar-on .sl-pop-stack</code> 负责</li>
+                </ul>
+
+                <h3 id="section-5-2" class="subsection-header" style="margin-top:32px;">形态二：模态弹窗（居中带遮罩）— .sl-pop[data-pop-modal]</h3>
+                <p>写在正文流里，加载时由 <code>SlPop.toModal()</code> 搬进 <code>.sl-pop-mask</code> 遮罩居中显示；关闭时未勾选「今日不再提示」就把原区块放回文档流，无 JS 也可直接阅读。等级由来源区块的等级类名推断。</p>
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果（展开后的模态形态静态模拟；真实运行时页脚「知道了」按钮为 .sl-pop-btn，Esc 与点击遮罩空白处同样可关）：</p>
+                <div class="sl-pop-mask visible" style="position:relative;inset:auto;display:flex;align-items:flex-start;justify-content:center;padding:24px;background-color:rgba(15,15,15,0.42);opacity:1;z-index:auto;">
+                  <div class="sl-pop sl-pop-modal sl-pop-warn">
+                    <div class="sl-pop-head">
+                      <span class="sl-pop-title">Alpha 建设状态</span>
+                      <span class="sl-pop-tag">警告</span>
+                    </div>
+                    <div class="sl-pop-body">
+                      <p class="sl-pop-desc">创建于2026.1.4<br>本站处于 Alpha 阶段，内容与结构仍可能调整。</p>
+                    </div>
+                    <div class="sl-pop-foot">
+                      <label class="sl-pop-snooze"><input type="checkbox"><span>关闭后今日不再提示</span></label>
+                      <button type="button" class="sl-pop-btn">知道了</button>
+                    </div>
+                  </div>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码（区块写在正文流里即可，模态与遮罩由 JS 生成）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="sl-pop sl-pop-warn" data-pop-key="alpha-status" data-pop-modal data-pop-title="Alpha 建设状态"&gt;
+  &lt;div class="sl-pop-body"&gt;
+    &lt;p class="sl-pop-desc"&gt;创建于2026.1.4&lt;br&gt;提醒正文……&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <h3 id="section-5-3" class="subsection-header" style="margin-top:32px;">形态三：轻提示（顶部滑入自消）— .sl-pop-toast</h3>
+                <p>API：<code>SlPop.toast('文字', 'tip' | 'note' | 'warn')</code>。完整结构、行为与时序见第 13 节。</p>
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果（三等级静态模拟，真实运行为 fixed 顶部滑入）：</p>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+                  <div class="sl-pop-toast sl-pop-tip" role="status" style="position:static;top:auto;left:auto;transform:none;display:inline-block;">收藏成功</div>
+                  <div class="sl-pop-toast sl-pop-note" role="status" style="position:static;top:auto;left:auto;transform:none;display:inline-block;">已移除收藏</div>
+                  <div class="sl-pop-toast sl-pop-warn" role="status" style="position:static;top:auto;left:auto;transform:none;display:inline-block;">该内容已下架</div>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">调用代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>SlPop.toast('收藏成功', 'tip');     // 提示（跟随配色）
+SlPop.toast('已移除收藏', 'note');   // 通知（绿）
+SlPop.toast('该内容已下架', 'warn'); // 警告（红）</code></pre>
+
+                <h3 id="section-5-4" class="subsection-header" style="margin-top:32px;">「今日不再提示」存储契约</h3>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>每个带 <code>data-pop-key</code> 的弹窗，页脚自动出现复选框「今日不再提示」；<strong>勾上再关闭</strong>才写入 <code>localStorage</code> 键 <code>sl_pop-snooze</code>，值为 <code>{ 弹窗键: 'YYYY-M-D' }</code>（月/日不补零）</li>
+                  <li>只记<strong>当天</strong>：次日日期不匹配即自动重新展示，无需清理</li>
+                  <li>页面一直开着跨过 0 点时，<code>SlPop</code> 的定时器与 <code>visibilitychange</code> 监听会就地放行（不必刷新）</li>
+                  <li>不想提供该选项的弹窗写 <code>data-pop-snooze="off"</code></li>
+                  <li>弹窗必须可关闭，禁止任何「必须跳转才能关掉」的形态</li>
+                </ul>
+
+                <h3 id="section-5-5" class="subsection-header" style="margin-top:32px;">规范要求与已废弃构件</h3>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>全站扁平化：<code>border-radius</code> 一律 0；等级色只出现在左侧竖条、标题与轻提示底色上</li>
+                  <li>正文里的 <code>.sl-pop p</code> 不参与两端对齐与首行缩进（否则模态弹窗文字会被推歪），豁免规则在 <code>css/library-refit.css</code>「4. 页面骨架」段</li>
+                  <li>红色只用于「警告」级；<strong>不得</strong>为普通通知滥用警告语气（见 project_rules.md 的警告框授权机制）</li>
+                </ul>
+                <div class="notice-box-red">
+                  <p><strong>已废弃</strong>：<code>.knowledge-hall-float</code> / <code>.lang-switch-float</code> 及其 <code>.kh-float-*</code> / <code>.lang-float-*</code> 子件——style.css 中的定义已删除，新页面禁止使用。入口引导一律改用本节的 .sl-pop 小弹窗（语言切换入口对应 data-pop-key="lang-switch"）。</p>
+                </div>
 
               </div>
             </div>
@@ -516,6 +706,76 @@
 
                 <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
                 <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;a href="{URL}" class="ext-link"&gt;链接文本 &lt;/a&gt;</code></pre>
+
+                <h3 id="section-6-4" class="subsection-header" style="margin-top:32px;">知识馆侧边栏导航 — .kh-sidebar + .kh-nav-item</h3>
+                <p>用途：知识馆所有页面的左侧固定侧边栏。</p>
+                <div class="function-box-blue">
+                  <p>权威实现位置：css/library-refit.css 的「3.1 知识馆骨架与侧边栏」段。知识馆页面一律不得再写内联 .kh-* 样式——旧的内联硬编码（#fafafa / #2c3e50 等）会让六套配色完全失效，是 alpha-023 修掉的缺陷；页面只需引用 style.css + library-refit.css。颜色全部走主题令牌（--color-bg-subtle / --color-border / --color-accent / --color-text*），因此随配色与明暗自动变换。StyleEnforcer 另存一份带 !important 的同名兜底规则，用于压制历史页面残留的内联写法。</p>
+                </div>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">实际效果（静态化展示；真实页面中为 position: fixed 通栏侧栏）：</p>
+                <div style="overflow:hidden;">
+                  <aside class="kh-sidebar" style="position:relative !important;inset:auto !important;top:auto !important;height:auto !important;width:220px;border:1px solid var(--color-border);border-right:none;">
+                    <div class="kh-logo-area">
+                      <img src="../image/logo.png" alt="牧羊人图书馆 Logo">
+                      <div class="kh-site-title">知识馆</div>
+                      <div class="kh-equality">所有知识都是平等的</div>
+                    </div>
+
+                    <div class="kh-nav-divider"></div>
+
+                    <a href="#" class="kh-nav-item active">知识馆主页 </a>
+                    <a href="#" class="kh-nav-item">现象 </a>
+                    <a href="#" class="kh-nav-item">可回忆知识 </a>
+                    <a href="#" class="kh-nav-item">可追溯知识 </a>
+
+                    <div class="kh-nav-divider"></div>
+
+                    <a href="../index.html" class="kh-nav-item">图书馆主页 </a>
+                    <a href="library.html" class="kh-nav-item">图书馆入口 </a>
+                  </aside>
+                </div>
+                <p style="font-size:12px;color:#888;margin-top:4px;">↑ 本页的 KhSide 模块把这段示例当作真实侧栏，已自动注入右上角收起钮 .kh-side-toggle 与左缘展开条 .kh-side-tab——点击收起钮可现场预览收缩态（html.kh-side-off），点展开条复原</p>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码（标准结构）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;aside class="kh-sidebar"&gt;
+  &lt;div class="kh-logo-area"&gt;
+    &lt;img src="../image/logo.png" alt="牧羊人图书馆 Logo"&gt;
+    &lt;div class="kh-site-title"&gt;知识馆&lt;/div&gt;
+    &lt;div class="kh-equality"&gt;所有知识都是平等的&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="kh-nav-divider"&gt;&lt;/div&gt;
+
+  &lt;a href="index.html" class="kh-nav-item"&gt;知识馆主页 &lt;/a&gt;
+  &lt;a href="categories/phenomenon.html" class="kh-nav-item"&gt;现象 &lt;/a&gt;
+  &lt;a href="categories/recallable.html" class="kh-nav-item"&gt;可回忆知识 &lt;/a&gt;
+  &lt;a href="categories/traceable.html" class="kh-nav-item"&gt;可追溯知识 &lt;/a&gt;
+
+  &lt;div class="kh-nav-divider"&gt;&lt;/div&gt;
+
+  &lt;a href="../index.html" class="kh-nav-item"&gt;图书馆主页 &lt;/a&gt;
+  &lt;a href="../library/library.html" class="kh-nav-item"&gt;图书馆入口 &lt;/a&gt;
+&lt;/aside&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">收缩开关（无需页面写死）：</p>
+                <p style="font-size:14px;">js/library-dynamic.js 的 <code>KhSide</code> 模块在检测到 <code>.kh-sidebar</code> 时自动注入两枚直角小钮——侧栏右上角的 <code>.kh-side-toggle</code>（收起，absolute 定位 top/right 8px、24x24）与视口左缘的 <code>.kh-side-tab</code>（展开，fixed 贴左缘、22x74，收起态才显现）。收缩态挂在 <code>&lt;html class="kh-side-off"&gt;</code> 上，状态存 <code>sessionStorage</code> 的 <code>sl_kh-side-off</code>（同一标签页内保持，不跨天）。切换反馈走轻提示 <code>SlPop.toast('侧栏已收起'/'侧栏已展开', 'tip')</code>。</p>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">CSS（权威定义节选，library-refit.css）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>/* 权威定义节选（library-refit.css） */
+.kh-sidebar { position: fixed; inset: 0 auto 0 0; width: var(--sl-kh-side, 220px);
+  background-color: var(--color-bg-subtle); border-right: 1px solid var(--color-border); }
+.kh-nav-item.active, .kh-nav-item.active:hover { background-color: var(--color-accent); color: var(--color-bg); }
+html.kh-side-off .kh-sidebar { transform: translateX(-100%); }
+html.kh-side-off .kh-main { margin-left: 0; }
+html.kh-side-off .kh-side-tab { opacity: 1; pointer-events: auto; transform: translateX(0); }</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">使用说明与注意：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li><strong>响应式（≤768px）</strong>：侧栏回到常规文档流（position: static、通栏、下边线），收缩改为 <code>display: none</code> 不留空档</li>
+                  <li>链接文本末尾必须保留<strong>一个空格</strong>（箭头图标由 <code>::after</code> 伪元素自动添加）</li>
+                  <li>禁止在 HTML 中手动写入箭头符号（双重图标缺陷）</li>
+                </ul>
 
               </div>
             </div>
@@ -688,7 +948,7 @@
                 <p>用途：文章页内容区顶部的自动生成目录，根据页面 h2~h3 标题构建。由 library-dynamic.js 的 TOC 模块自动生成。
 
                 <div class="function-box-blue">
-                  <p>内联目录（.auto-toc）现已默认隐藏（display: none），不再占用页面空间。目录功能完全由悬浮目录按钮（#sl-toc-float-btn）提供，点击左侧 📖 按钮即可弹出目录面板。</p>
+                  <p>内联目录（.auto-toc）现已默认隐藏（display: none），不再占用页面空间。目录功能完全由悬浮目录按钮（#sl-toc-float-btn）提供，点击左侧目录按钮即可弹出目录面板。</p>
                 </div>
 
                 <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">变更说明：</p>
@@ -735,39 +995,43 @@ footer.appendChild(span);</code></pre>
           </div>
         </section>
 
-        <!-- ========== Section 13: Toast 提示 — #sl-toast ========== -->
+        <!-- ========== Section 13: 轻提示（Toast）— .sl-pop-toast ========== -->
         <section class="notice-header section-header page-header-section">
           <div>
-            <h2 id="section-13" class="section-title-text-main">13. Toast 提示 — #sl-toast</h2>
+            <h2 id="section-13" class="section-title-text-main">13. 轻提示（Toast）— .sl-pop-toast</h2>
             <div class="content-bg-lightgrey">
               <div>
-                <p>用途：收藏操作（添加/取消/移除）时的浮动提示框，从顶部滑入、1.5秒后自动消失。由 library-dynamic.js 的 BM.showToast() 动态创建。
+                <p>用途：操作反馈（收藏、侧栏收缩等）从顶部滑入、1.5 秒自动消失。<strong>已并入第 5 节分级提示构件</strong>，旧的页内固定节点 + style.cssText 内联样式方案已废弃删除，现为 .sl-pop-toast 标准构件。</p>
 
-                <p style="font-weight:600;margin-bottom:8px;">外观模拟（Toast 使用纯内联样式，JS 动态创建）：</p>
-                <div style="position:relative;display:flex;justify-content:center;">
-                  <div style="display:inline-block;background:#2c3e50;color:#fff;padding:8px 20px;font-size:13px;z-index:10000;box-shadow:0 4px 12px rgba(0,0,0,0.15);letter-spacing:0.3px;">收藏成功</div>
+                <p style="font-weight:600;margin-bottom:8px;">实际效果（三等级，静态模拟；真实运行为 fixed 顶部滑入自消）：</p>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+                  <div class="sl-pop-toast sl-pop-tip" role="status" style="position:static;top:auto;left:auto;transform:none;display:inline-block;">收藏成功</div>
+                  <div class="sl-pop-toast sl-pop-note" role="status" style="position:static;top:auto;left:auto;transform:none;display:inline-block;">已移除收藏</div>
+                  <div class="sl-pop-toast sl-pop-warn" role="status" style="position:static;top:auto;left:auto;transform:none;display:inline-block;">该内容已下架</div>
                 </div>
-                <p style="font-size:12px;color:#888;margin-top:4px;text-align:center;">↑ Toast 外观模拟（实际为 fixed 定位，从顶部滑入/滑出）</p>
+                <p style="font-size:12px;color:#888;margin-top:4px;">↑ 轻提示外观模拟（扁平无圆角，左侧 4px 深色竖条为等级识别；顶栏页面整体下移落到顶栏下方）</p>
 
-                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">内联样式（JS 动态设置）：</p>
-                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>t.style.cssText = 'position:fixed;top:-40px;left:50%;transform:translateX(-50%);'
-  + 'background:#2c3e50;color:#fff;padding:8px 20px;font-size:13px;'
-  + 'z-index:10000;transition:top 0.3s ease;'
-  + 'box-shadow:0 4px 12px rgba(0,0,0,0.15);letter-spacing:0.3px;';</code></pre>
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">调用代码（API 为 SlPop.toast(msg, level)，三等级写法）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>SlPop.toast('收藏成功', 'tip');     // 提示（跟随配色）
+SlPop.toast('已移除收藏', 'note');   // 通知（绿）
+SlPop.toast('该内容已下架', 'warn'); // 警告（红）</code></pre>
 
-                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">动画行为：</p>
-                <ol style="padding-left:20px;font-size:14px;line-height:1.8;">
-                  <li>创建时初始 <code>top: -40px</code>（屏幕外上方）</li>
-                  <li>10ms 后 <code>top: 20px</code>（滑入可视区）</li>
-                  <li>1500ms 后 <code>top: -40px</code>（滑出）</li>
-                  <li>300ms 过渡完成后从 DOM 移除</li>
-                </ol>
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">HTML 结构（由 JS 追加到 body 末尾）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="sl-pop-toast sl-pop-tip" role="status"&gt;收藏成功&lt;/div&gt;</code></pre>
 
-                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">触发场景：</p>
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">结构与行为：</p>
                 <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
-                  <li><code>BM.showToast('收藏成功')</code> — 添加收藏时</li>
-                  <li><code>BM.showToast('已取消收藏')</code> — 取消收藏时</li>
-                  <li><code>BM.showToast('已移除收藏')</code> — 从面板移除时</li>
+                  <li>元素：<code>&lt;div class="sl-pop-toast sl-pop-{等级}" role="status"&gt;文案&lt;/div&gt;</code>，追加到 body 末尾</li>
+                  <li>样式在 <code>css/style.css</code> 的分级提示构件段（含 StyleEnforcer 兜底），不再用 <code>style.cssText</code> 内联</li>
+                  <li>进入：<code>requestAnimationFrame</code> 后加 <code>.visible</code>（<code>top: -60px</code> → <code>top: 20px</code>）；1500ms 后去 <code>.visible</code>，320ms 过渡结束后移除节点</li>
+                  <li>同一时刻只保留一条：新提示会先移除已存在的 <code>.sl-pop-toast</code></li>
+                  <li><code>BM.showToast(msg)</code> 作为兼容别名保留，内部转调 <code>SlPop.toast(msg, 'tip')</code>；<code>BM.showToast('已取消收藏')</code> 等旧调用点即提示等级</li>
+                </ul>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">注意事项：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>提示文案禁止使用 emoji（旧版「收藏成功」文案携带的图钉符号已在 alpha-023 去除）</li>
+                  <li>扁平化：无圆角，左侧 4px 深色竖条作为等级识别</li>
                 </ul>
 
               </div>
@@ -820,7 +1084,7 @@ footer.appendChild(span);</code></pre>
             <h2 id="section-16" class="section-title-text-main">16. 悬浮目录按钮 — #sl-toc-float-btn / .sl-toc-float-panel</h2>
             <div class="content-bg-lightgrey">
               <div>
-                <p>用途：当用户向下滚动、原始 TOC 离开视口时，左侧出现悬浮的 📖 按钮。点击弹出目录面板，无需回到页面顶部即可导航。
+                <p>用途：当用户向下滚动、原始 TOC 离开视口时，左侧出现悬浮的目录按钮。点击弹出目录面板，无需回到页面顶部即可导航。
 
                 <p style="font-weight:600;margin-bottom:8px;">核心组件：</p>
                 <table style="width:100%;border-collapse:collapse;margin:8px 0;font-size:14px;line-height:1.7;">
@@ -861,6 +1125,255 @@ footer.appendChild(span);</code></pre>
                   <li>点击目录项 → 跳转 + 关闭面板</li>
                   <li>IntersectionObserver 联动同步高亮状态</li>
                 </ul>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== Section 17: 数学公式渲染 — MathJax 3 ========== -->
+        <section class="notice-header section-header page-header-section">
+          <div>
+            <h2 id="section-17" class="section-title-text-main">17. 数学公式渲染 — MathJax 3</h2>
+            <div class="content-bg-lightgrey">
+              <div>
+                <p>用途：全站数学公式统一使用 MathJax 3 渲染，禁止使用纯文本/Unicode 字符书写公式。本页已在 head 引入 MathJax，以下示例即渲染后效果。</p>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">实际效果（行内公式）：</p>
+                <p>牛顿第二定律 $F=ma$ 是经典力学的基础。</p>
+                <p>单摆周期公式为 $T=2\pi\sqrt{\dfrac{l}{g}}$。</p>
+
+                <p style="font-weight:600;margin-top:20px;margin-bottom:8px;">实际效果（独立公式，居中）：</p>
+                <p style="text-align:center; margin:16px 0;">$$E = mc^2$$</p>
+                <p style="text-align:center; margin:16px 0;">$$\dfrac{1}{2}mv_0^2 + mgh = \dfrac{1}{2}mv^2$$</p>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码（引入方式：在含数学公式的页面的 &lt;head&gt; 中、&lt;/head&gt; 之前添加）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;script&gt;
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  svg: { fontCache: 'global' }
+};
+&lt;/script&gt;
+&lt;script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"&gt;&lt;/script&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">行内公式：用 $...$ 包裹</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;p&gt;牛顿第二定律 $F=ma$ 是经典力学的基础。&lt;/p&gt;
+&lt;p&gt;单摆周期公式为 $T=2\pi\sqrt{\dfrac{l}{g}}$。&lt;/p&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">独立公式：用 $$...$$ 包裹并居中显示</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;p style="text-align:center; margin:16px 0;"&gt;$$E = mc^2$$&lt;/p&gt;
+&lt;p style="text-align:center; margin:16px 0;"&gt;$$\dfrac{1}{2}mv_0^2 + mgh = \dfrac{1}{2}mv^2$$&lt;/p&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">规范要求：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>不含数学公式的页面<strong>不添加</strong> MathJax（避免不必要的加载）</li>
+                  <li>独立公式段落<strong>不设置</strong> <code>font-size</code>（由 MathJax 控制渲染尺寸）</li>
+                  <li>变量字母（如 $m$、$v$、$g$）也用 <code>$...$</code> 包裹，确保排版一致</li>
+                  <li>使用 <code>\dfrac</code> 而非 <code>\frac</code>，以保证分数在行内也有足够大小</li>
+                  <li>下标用 <code>_</code>（如 <code>$v_0$</code>），上标用 <code>^</code>（如 <code>$v^2$</code>），希腊字母用 <code>\omega</code>、<code>\pi</code> 等</li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== 九、冻结顶栏与主题构件 ========== -->
+        <section class="notice-header section-header page-header-section">
+          <div>
+            <h2 id="section-9-cn" class="section-title-text-main">九、冻结顶栏与主题构件（alpha-021）</h2>
+            <div class="content-bg-lightgrey">
+              <div>
+                <div class="quote-box-grey">
+                  <p>实现文件：css/library-refit.css（样式）、js/library-dynamic.js 的 TopBar / SitePref 模块（构建与偏好）。属性契约与配色清单的权威说明见 project_rules.md「冻结顶栏与主题令牌系统」。本节编号沿用权威源的中文大节号「九」。</p>
+                </div>
+
+                <h3 id="section-9-1" class="subsection-header" style="margin-top:24px;">9.1 冻结顶栏结构（JS 构建，页面源码中不写死）</h3>
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：本页窗口顶部即真实冻结顶栏</p>
+                <p>顶栏由 <code>TopBar</code> 模块在页面加载时构建——本页顶部那条含 Logo、站名与「导航 / 馆藏 / 主题 / 联系」四个下拉的横条就是活示例；把窗口收窄到 860px 以下可看到汉堡收纳与下拉面板的展开收起。</p>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">HTML 代码（构建结果参考，页面源码中不写死）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="sl-topbar" id="sl-topbar" data-menu="closed"&gt;
+  &lt;a class="sl-brand" href="{root}index.html"&gt;
+    &lt;img class="sl-brand-img" src="{root}image/logo.png" alt="牧羊人图书馆"&gt;
+    &lt;span class="sl-brand-text"&gt;
+      &lt;span class="sl-brand-name"&gt;牧羊人图书馆&lt;/span&gt;
+      &lt;span class="sl-brand-sub"&gt;Shepherd's Library · 存放所有知识之地&lt;/span&gt;
+    &lt;/span&gt;
+  &lt;/a&gt;
+  &lt;button class="sl-burger" type="button" aria-label="菜单"&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;/button&gt;
+  &lt;nav class="sl-nav"&gt;
+    &lt;div class="sl-menu" data-open="false"&gt;
+      &lt;button class="sl-menu-btn" type="button" aria-expanded="false"&gt;…&lt;/button&gt;
+      &lt;div class="sl-panel sl-panel-left"&gt;
+        &lt;div class="sl-panel-title"&gt;在图书馆中移动&lt;/div&gt;
+        &lt;a class="sl-panel-item" href="…"&gt;&lt;span&gt;图书馆主页&lt;/span&gt;&lt;span class="sl-panel-item-desc"&gt;新闻与前情提要&lt;/span&gt;&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- 依次为：导航 / 馆藏 / 主题 / 联系 --&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">使用说明：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>顶栏固定于顶部（<code>position: fixed</code>，高 <code>--sl-topbar-h</code>，默认 56px），<code>&lt;html&gt;</code> 加 <code>sl-topbar-on</code> 后 body 让出等高顶部空间</li>
+                  <li>四个下拉：<strong>导航</strong>（站内主要入口）、<strong>馆藏</strong>（按文章分类进入 library.html 锚点与作品馆）、<strong>主题</strong>（阅读样式配置面板）、<strong>联系</strong>（作者联系方式）</li>
+                  <li>「联系」按钮图标为代码绘制的内联 SVG（信封 + 对话气泡，<code>.sl-menu-icon</code>），渠道图标由 <code>channelIcon(key)</code> 按 key 前缀匹配（qq / wechat|wx / face / mail / 其他回退球形）；<strong>禁止字体图标与 emoji</strong></li>
+                  <li>面板开合：<code>data-open="true|false"</code> + <code>aria-expanded</code>；点击空白与 Esc 收起；860px 以下菜单收进汉堡</li>
+                  <li>动效仅为透明度 + 4px 位移 + 180ms 过渡（描边/底色同步过渡），<code>prefers-reduced-motion</code> 下全部关闭；<strong>禁止圆角、投影仅用于悬浮面板</strong></li>
+                </ul>
+
+                <h3 id="section-9-2" class="subsection-header" style="margin-top:32px;">9.2 顶栏历史导航（.sl-trail，alpha-023）</h3>
+                <p>用途：返回上一页，以及返回之后<strong>再前进回刚才那一页</strong>。顶栏是全站唯一承载处（浮层在移动端已被撤走，不再加新浮钮）。</p>
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：本页顶部真实顶栏 Logo 右侧的两枚直角小钮</p>
+                <p>由 <code>NavTrail</code> 模块注入真实顶栏，直接可用：本页若是标签首页，「返回」钮呈 disabled（<code>opacity .34</code> + <code>cursor: default</code>，title 写明「没有可返回的上一页」）；在顶栏菜单里跳一页即可看到钮点亮、前进/后退可用。<strong>本页不再放静态示例</strong>——<code>NavTrail.render()</code> 检测到文档中已有 <code>.sl-trail</code> 就不再注入真实顶栏，示例会把活按钮「吃掉」。</p>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">HTML 代码（JS 注入，页面源码不写；图标为内联 SVG 折角箭头，禁止 emoji/字体图标）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="sl-trail"&gt;
+  &lt;button class="sl-trail-btn" type="button" data-dir="-1"&gt;&lt;svg viewBox="0 0 24 24"&gt;…&lt;/svg&gt;&lt;/button&gt;
+  &lt;button class="sl-trail-btn" type="button" data-dir="1"&gt;&lt;svg viewBox="0 0 24 24"&gt;…&lt;/svg&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">使用说明：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>由 <code>js/library-dynamic.js</code> 的 <code>NavTrail</code> 模块在 <code>#sl-topbar</code> 的 <code>.sl-brand</code> 之后注入，页面源码不写</li>
+                  <li>足迹记在 <code>sessionStorage</code> 的 <code>sl_nav_trail</code>（<code>{ list:[{u,t}], idx }</code>，上限 30 条）；<strong>新标签打开的页面没有浏览器历史</strong>，首条由 <code>document.referrer</code>（同源时）补齐，因此从新闻卡片新开的文章页同样能返回来源页</li>
+                  <li>优先走 <code>history.back()</code> / <code>history.forward()</code>（保留滚动位置与 bfcache）；前进无法确认是否命中时回退为直接导航</li>
+                  <li>无路可走时按钮置 <code>disabled</code>（<code>opacity .34</code> + <code>cursor: default</code>），并在 <code>title</code> 里说明原因；不隐藏，避免位置跳动</li>
+                  <li><code>pageshow</code> 时重记一次足迹（浏览器前后退常走 bfcache，脚本不会重跑）</li>
+                </ul>
+
+                <h3 id="section-9-3" class="subsection-header" style="margin-top:32px;">9.3 移动端顶栏下拉面板（必须用 display 收起）</h3>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>≤860px 时 <code>.sl-panel</code> 改为 <code>position: static</code> 进入文档流，此时<strong>只靠 <code>visibility: hidden</code> 隐藏仍然占位</strong>，会让「导航」「馆藏」还没点开就撑出展开后的长度（alpha-022 的实测缺陷）</li>
+                  <li>规矩：小屏 <code>.sl-panel { display: none }</code>，<code>.sl-menu[data-open="true"] .sl-panel { display: block }</code>；淡入过渡仅在桌面端（面板绝对定位）生效</li>
+                  <li>同类要求适用于一切「在文档流里折叠/展开」的构件：折叠态必须真正不占位（<code>display: none</code> 或 <code>grid-template-rows: 0fr</code>），不得只用 <code>visibility</code>/<code>opacity</code></li>
+                </ul>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">CSS 代码（library-refit.css，860px 媒体查询内）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>@media (max-width: 860px) {
+  .sl-menu { position: static; }
+  .sl-panel {
+    position: static;
+    /* 静态流里只靠 visibility 隐藏仍会占位：小屏菜单没点开时就已经撑出展开后的长度，
+       所以这里显式收进 display，点开才占高度 */
+    display: none;
+    min-width: 0;
+    max-width: none;
+    border: none;
+    box-shadow: none;
+    background-color: var(--color-bg-subtle);
+  }
+  .sl-menu[data-open="true"] .sl-panel { display: block; }
+}</code></pre>
+                <p>实际效果：把本浏览器窗口收窄到 860px 以下，点顶栏汉堡展开「导航」菜单——未点开的下拉不再撑出空白。</p>
+
+                <h3 id="section-9-4" class="subsection-header" style="margin-top:32px;">9.4 主题配置面板（.sl-opt-group / .sl-chip）</h3>
+                <p style="font-weight:600;margin-bottom:8px;">实际效果（静态示例；真实面板在本页顶栏「主题」下拉内，选项点选即生效）：</p>
+                <div style="background:var(--color-bg);border:1px solid var(--color-border);max-width:380px;">
+                  <div class="sl-opt-group">
+                    <div class="sl-opt-label">配色</div>
+                    <div class="sl-opt-row">
+                      <button class="sl-chip sl-swatch" type="button" style="--sl-dot:#2c3e50" aria-pressed="true">经馆</button>
+                      <button class="sl-chip sl-swatch" type="button" style="--sl-dot:#7a4f22" aria-pressed="false">羊皮纸</button>
+                      <button class="sl-chip sl-swatch" type="button" style="--sl-dot:#2f5d7c" aria-pressed="false">月白</button>
+                      <button class="sl-chip sl-swatch" type="button" style="--sl-dot:#2e5b3f" aria-pressed="false">林间</button>
+                      <button class="sl-chip sl-swatch" type="button" style="--sl-dot:#6a3d7d" aria-pressed="false">梅雨</button>
+                      <button class="sl-chip sl-swatch" type="button" style="--sl-dot:#c9a227" aria-pressed="false">夜读</button>
+                    </div>
+                  </div>
+                  <div class="sl-opt-foot">
+                    <span style="font-size:11.5px;color:var(--color-text-light);">仅影响本机显示</span>
+                    <button class="sl-link-btn" type="button">恢复默认</button>
+                  </div>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="sl-opt-group"&gt;
+  &lt;div class="sl-opt-label"&gt;配色&lt;/div&gt;
+  &lt;div class="sl-opt-row"&gt;
+    &lt;button class="sl-chip sl-swatch" type="button" style="--sl-dot:#2c3e50" aria-pressed="true"&gt;经馆&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">使用说明：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>选项一律为直角 <code>.sl-chip</code>，选中态 <code>aria-pressed="true"</code>（主色底 + 反白字）；配色项额外带 <code>sl-swatch</code> 小色块（色值走 <code>--sl-dot</code> 变量）</li>
+                  <li>面板底部放 <code>sl-opt-foot</code>：左侧「仅影响本机显示」提示，右侧 <code>sl-link-btn</code>「恢复默认」</li>
+                </ul>
+
+                <h3 id="section-9-5" class="subsection-header" style="margin-top:32px;">9.5 联系方式条目（数据来自 slywrite-config.json 的 contact 数组）</h3>
+                <p style="font-weight:600;margin-bottom:8px;">实际效果（静态示例；真实数据由顶栏「联系」面板从配置渲染）：</p>
+                <div style="background:var(--color-bg);border:1px solid var(--color-border);max-width:380px;">
+                  <div class="sl-contact-item">
+                    <div class="sl-contact-head"><svg class="sl-contact-icon" viewBox="0 0 24 24" aria-hidden="true"></svg><span class="sl-contact-name">联系渠道名</span></div>
+                    <button class="sl-contact-value" type="button">点击可复制的值</button>
+                    <div class="sl-contact-note">备注（可选）</div>
+                  </div>
+                  <div class="sl-contact-empty">未配置任何条目时只显示这一行提示</div>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="sl-contact-item"&gt;
+  &lt;div class="sl-contact-head"&gt;&lt;svg class="sl-contact-icon"&gt;…&lt;/svg&gt;&lt;span class="sl-contact-name"&gt;QQ&lt;/span&gt;&lt;/div&gt;
+  &lt;button class="sl-contact-value" type="button"&gt;点击可复制的值&lt;/button&gt;
+  &lt;div class="sl-contact-note"&gt;备注（可选）&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">使用说明：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li><code>url</code> 非空时值渲染为 <code>&lt;a class="sl-contact-value" target="_blank" rel="noopener noreferrer"&gt;</code>；仅有 <code>value</code> 时渲染为可复制按钮</li>
+                  <li>未配置任何条目时只显示 <code>.sl-contact-empty</code> 提示，<strong>不得由开发者代填个人联系方式</strong></li>
+                </ul>
+
+                <h3 id="section-9-7" class="subsection-header" style="margin-top:32px;">9.6 文章卡片（ul.article-list 的呈现升级）</h3>
+                <p style="font-weight:600;margin-bottom:8px;">实际效果（结构不变，refit 层网格化渲染）：</p>
+                <ul class="article-list">
+                  <li><a href="#">卡片示例一：等宽网格</a></li>
+                  <li><a href="#">卡片示例二：左缘主色标记</a></li>
+                  <li><a href="#">卡片示例三：悬停上浮</a></li>
+                </ul>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;ul class="article-list"&gt;
+  &lt;li&gt;&lt;a href="…"&gt;标题&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">使用说明：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>结构不变：<code>&lt;ul class="article-list"&gt;&lt;li&gt;&lt;a href="…"&gt;标题&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</code>（App 的 library.html 同步逻辑依赖此结构，禁止改写标签）</li>
+                  <li>refit 层将其呈现为等宽卡片网格：<code>grid-template-columns: repeat(auto-fill, minmax(232px, 1fr))</code>，560px 以下单列</li>
+                  <li>卡片：底色 <code>--sl-card-bg</code>、描边 <code>--sl-card-edge</code>、左缘 3px <code>--color-accent-light</code> 标记；悬停左缘转主色、上浮 1px、加 0 6px 16px 淡投影；跳转箭头由 <code>::after</code> 绘制（沿用跳转链接图标规范，正文中禁止手写箭头符号）</li>
+                </ul>
+
+                <h3 id="section-9-8" class="subsection-header" style="margin-top:32px;">9.7 标题层级标准（修正原先倒置）</h3>
+                <table style="width:100%;border-collapse:collapse;margin:8px 0;font-size:14px;line-height:1.7;">
+                  <thead>
+                    <tr style="background:var(--color-accent);color:#fff;">
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">层级</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">类名</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">字号（clamp）</th>
+                      <th style="padding:8px 12px;text-align:left;border:1px solid var(--color-border);">装饰</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);">页面主标题</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.page-title-main</td><td style="padding:8px 12px;border:1px solid var(--color-border);">24 ~ 33px</td><td style="padding:8px 12px;border:1px solid var(--color-border);">居中，字距 3px</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);">一级</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.section-title-text-main</td><td style="padding:8px 12px;border:1px solid var(--color-border);">21 ~ 25px</td><td style="padding:8px 12px;border:1px solid var(--color-border);">下方 2px 主色线</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);">二级</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.section-title-text-sub</td><td style="padding:8px 12px;border:1px solid var(--color-border);">18 ~ 20.5px</td><td style="padding:8px 12px;border:1px solid var(--color-border);">左 3px 主色竖线 + 下方 1px 灰线</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);">三级</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.section-title-text-sub-sub</td><td style="padding:8px 12px;border:1px solid var(--color-border);">16.5 ~ 18px</td><td style="padding:8px 12px;border:1px solid var(--color-border);">左 3px 灰色竖线</td></tr>
+                    <tr><td style="padding:8px 12px;border:1px solid var(--color-border);">四级</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.subsection-header</td><td style="padding:8px 12px;border:1px solid var(--color-border);">15.5 ~ 16.5px</td><td style="padding:8px 12px;border:1px solid var(--color-border);">字距 2.4px + ::after 横贯细线</td></tr>
+                    <tr style="background:var(--color-bg-subtle);"><td style="padding:8px 12px;border:1px solid var(--color-border);">五级</td><td style="padding:8px 12px;border:1px solid var(--color-border);font-family:monospace;font-size:13px;">.sub-subsection-header</td><td style="padding:8px 12px;border:1px solid var(--color-border);">15px</td><td style="padding:8px 12px;border:1px solid var(--color-border);">弱色无竖线</td></tr>
+                  </tbody>
+                </table>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">实际效果（各级样式直读；页面主标题见本页页首，一级见各节标题）：</p>
+                <div style="background:var(--color-bg);border:1px solid var(--color-border);padding:16px;">
+                  <div class="section-title-text-sub">二级标题示例 — .section-title-text-sub</div>
+                  <div class="section-title-text-sub-sub">三级标题示例 — .section-title-text-sub-sub</div>
+                  <div class="subsection-header">四级标题示例 — .subsection-header</div>
+                  <div class="sub-subsection-header">五级标题示例 — .sub-subsection-header</div>
+                </div>
 
               </div>
             </div>

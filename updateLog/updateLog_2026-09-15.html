@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年9月15日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/library-refit.css">
+<script>(function(){var d={};try{d=JSON.parse(localStorage.getItem('sl_site-pref')||'{}')||{}}catch(e){}var h=document.documentElement;function s(k,v){h.setAttribute('data-sl-'+k,d[k]||v)}s('palette','classic');s('type','songti');s('size','normal');s('measure','normal');h.setAttribute('data-sl-indent',d.indent===false?'off':'on');var m='system';try{m=JSON.parse(localStorage.getItem('sl_theme')||'"system"')}catch(e){}var k=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;h.setAttribute('data-sl-variant',(m==='dark'||(m==='system'&&k))?'dark':'light')})();</script>
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年9月15日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-09-15 · alpha-023 分级提示构件 · 顶栏历史导航 · 知识馆侧栏主题化 · 移动端顶栏间距与海报日期修复 · Minesia 归位</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">主馆变更</h2>
+        <div class="section-content left-align">
+
+          <p><strong>一、分级提示构件（css/style.css + js/library-dynamic.js 的 SlPop 模块）</strong></p>
+          <p>- 新建一套统一构件，三形态共用三个等级：右上角竖排小弹窗（.sl-pop-stack 内的 .sl-pop）、居中模态弹窗（.sl-pop-modal 配 .sl-pop-mask 遮罩）、顶部轻提示（.sl-pop-toast，1.5 秒自消）</p>
+          <p>- 三个等级为提示（.sl-pop-tip，跟随当前配色的强调色）、通知（.sl-pop-note，绿）、警告（.sl-pop-warn，红）；等级色只落在左侧竖条、标题与轻提示底色上，正文颜色仍走主题令牌，六套配色与明暗一律生效</p>
+          <p>- 主页顶部原先那块红色建设状态提示框改为<strong>警告级模态弹窗</strong>：正文仍留在页面文档流里（无脚本时照常可读），加载时由脚本搬进遮罩居中显示；关闭时若未勾选「今日不再提示」，原区块回到文档流，信息不会丢失。英文主页同步</p>
+          <p>- 「关闭后今日不再提示」为统一可选项：页脚复选框由脚本注入，勾选后关闭才写入 localStorage 的 sl_pop-snooze，值形如 { 弹窗键: 'YYYY-M-D' }；只记当天，次日日期不匹配即自动重新展示，页面一直开着跨过 0 点时也由定时器与页面可见性事件就地放行，不必刷新</p>
+          <p>- 收藏、侧栏收缩等操作反馈统一改用轻提示，旧的 #sl-toast 内联样式写法废除（BM.showToast 保留为提示等级的兼容别名）；提示文案去除表情符号</p>
+
+          <p><strong>二、知识馆入口与英文版入口改为提示级小弹窗</strong></p>
+          <p>- 旧的两个浮窗（.knowledge-hall-float、.lang-switch-float 及其 .kh-float-*、.lang-float-* 子件）在 style.css 中的定义已删除，主页与英文主页改用提示级小弹窗；两枚弹窗共用一个竖排容器，不再各自硬写 top 值，容器可整体拖走，各自带关闭钮与「今日不再提示」</p>
+          <p>- 知识馆仍以浮层入口存在（符合站点规范），未降级为正文大板块</p>
+
+          <p><strong>三、顶栏历史导航（js/library-dynamic.js 的 NavTrail 模块）</strong></p>
+          <p>- 顶栏标识右侧新增一对直角按钮：返回上一页、前进到刚才那一页。图标为内联 SVG 折角箭头，无路径可走时置灰并在提示语中说明原因（例如本页是新标签打开、没有可返回的上一页）</p>
+          <p>- 站点大量入口是「新标签打开」，新标签里浏览器历史为空，因此脚本自己记一条足迹（sessionStorage 的 sl_nav_trail，上限 30 条），并用同源来源页补齐首条；能走浏览器历史时优先走，以保留滚动位置与缓存，否则直接导航到记录的那一页。浏览器前进/后退常走 bfcache（脚本不重跑），页面重新显示时补记一次</p>
+
+          <p><strong>四、移动端顶栏展开栏竖间距修复（css/library-refit.css）</strong></p>
+          <p>- 症状：手机上点开汉堡菜单，「导航」「馆藏」还一行都没展开，就已经被撑成展开后的长度</p>
+          <p>- 根因：小屏下下拉面板改为静态流定位，而折叠态此前只用 opacity 与 visibility 隐藏——visibility: hidden 的元素仍然占位，于是每个面板的高度都被预留了出来</p>
+          <p>- 现在小屏折叠一律用 display: none，展开才占位；并把「折叠/隐藏态必须真正不占位」写进规范，杜绝同类问题复发</p>
+
+          <p><strong>五、新闻板块海报新闻的日期居中（css/library-refit.css + StyleEnforcer）</strong></p>
+          <p>- 症状：主页与英文主页左侧海报新闻的标题居中，下面的日期却偏左</p>
+          <p>- 根因：日期是 p 元素，被出版化排版规则「正文段落两端对齐 + 首行缩进两字」命中，居中样式被推离中轴</p>
+          <p>- 现在海报信息块内的标题与日期一律居中并豁免于两端对齐与首行缩进，StyleEnforcer 同步兜底</p>
+
+          <p><strong>六、Minesia 第一个公开测试归位为普通文章</strong></p>
+          <p>- 该文是 addon 公开发布记录，性质上不是测试文章：文件由 library/misc/experimental/minesia-first-public-test.html 移至 library/paper/minesia-first-public-test.html，页面内的相对路径与文章性质标签（实验性文章 改为 信息文章）一并更正，正文一字未改</p>
+          <p>- 引用同步：library/library.html（测试文章列表移入普通文章列表）、en/library/library.html（同处补上原本缺失的测试文章条目）、news.html、en/news.html、navigator.html（并入普通文章，空出的测试文章分组移除）、library/article-registry.html（路径与性质标签）、以及站内搜索索引</p>
+
+        </div>
+      </section>
+
+      <section class="notice-header">
+        <h2 id="section-2" class="section-title-text-sub">知识馆变更</h2>
+        <div class="section-content left-align">
+          <p><strong>侧边栏改为随主题变换，并加入可收缩开关</strong></p>
+          <p>- 症状：知识馆侧边栏一直是灰白的，换配色（羊皮纸 / 月白 / 林间 / 梅雨 / 夜读）不跟着变</p>
+          <p>- 根因：知识馆主页与三个分类页各自内联一整套 .kh-* 样式，颜色写死为 #fafafa、#e0e0e0、#2c3e50 等字面量，只有「系统暗色偏好」与手动明暗两套兜底，完全绕开了配色令牌；四份内联还互相漂移（导航项内边距、字号已不一致）</p>
+          <p>- 现在骨架样式（.kh-body / .kh-sidebar / .kh-main / .kh-nav-item / .kh-card / .kh-footer 等）的唯一实现收进 css/library-refit.css 的「3.1 知识馆骨架与侧边栏」，颜色全部改用主题令牌，六套配色与明暗一律生效；四个页面的内联样式块整体删除，页面只保留结构</p>
+          <p>- StyleEnforcer 增加同名兜底（带 !important），用于压制旧页面与 App 生成页里残留的内联硬编码写法</p>
+          <p>- 收缩开关由脚本（KhSide 模块）注入，无需页面写死：侧栏右上角为收起钮，收起后左缘留一条展开把手；收缩态挂在 html 的 kh-side-off 上，状态记在 sessionStorage（同一标签页内保持）。小屏侧栏回到常规文档流，收缩改为整块收起，不留空档</p>
+        </div>
+      </section>
+
+      <section class="notice-header">
+        <h2 id="section-3" class="section-title-text-sub">规范变更</h2>
+        <div class="section-content left-align">
+          <p>- .trae/rules/visual-components.md：第 5 节「浮窗」整节改写为「分级提示构件」（三形态 × 三等级、今日不再提示的存储契约、0 点刷新规矩，旧浮窗类列为已废弃）；第 6 节知识馆侧边栏改为令牌化写法并补收缩说明；第 13 节 Toast 改为 .sl-pop-toast 与等级参数写法；第 4 节补海报新闻的文字对齐规矩；第九节补 9.2 顶栏历史导航与 9.3「折叠面板必须用 display 收起」两条，其后小节序号顺延</p>
+          <p>- library/visual-components.html：补齐此前落后于实际实现的章节（分级提示构件、顶栏历史导航、知识馆侧栏主题化与收缩、海报新闻文字对齐，以及数学公式渲染与冻结顶栏两大节），示例改为可直接复制的标准结构</p>
+          <p>- .trae/rules/project_rules.md 与 .zcode / .reasonix 两套技能镜像同步：版本号改为 alpha-023，补分级提示构件契约，改写移动端浮层编排中的旧浮窗处置，并新增「文档与实现同步契约」一节</p>
+          <p>- 工作区根 AGENTS.md 新增「组件标准同步（硬性）」一节：视觉组件标准（.trae/rules/visual-components.md）、实际实现（style.css / library-refit.css / library-dynamic.js 含 StyleEnforcer）、站内展示页（library/visual-components.html）、技能副本四处必须与图书馆里实际使用的视觉组件保持同步，任一处落后即视为缺陷；并写入「构件不得在页面内联写死布局与配色」「折叠态必须真正不占位」「改前先 grep 真实类名」三条检查步骤</p>
+        </div>
+      </section>
+
+      <section class="notice-header">
+        <h2 id="section-4" class="section-title-text-sub">版本号</h2>
+        <div class="section-content left-align">
+          <p>- 站点版本号由 alpha-022 提升至 <strong>alpha-023</strong>（js/library-dynamic.js 的 var Ver），页脚版本号显示与「联系」面板取数的缓存参数随之更新</p>
+        </div>
+      </section>
+
+      <section class="notice-header">
+        <h2 id="section-5" class="section-title-text-sub">子项目变更（SlyWrite 0.0.16 · 同日配套发布）</h2>
+        <div class="section-content left-align">
+          <p>- 撰写入口改为「必定新建」：首页点「撰写文章」「撰写知识词条」先清会话表单再生成新的草稿 id，续写只从草稿箱进入；正文编辑器改为纯受控，知识词条的正文不再串写进文章表单（作者反馈：草稿箱已有草稿时无法另起一篇，且词条正文会被文章继承）</p>
+          <p>- 知识词条分节落地：模板按正文二级标题真实渲染到本站权威结构的 #section-summary（概述）/ #section-detail（详细说明）/ #section-history（历史）/ #section-related（相关词条），编辑器加「插入分节」与分节状态条，校验逐节给明确提示（此前要求这些分节却没有编辑处，词条实际发不出去）</p>
+          <p>- 知识并入文章子类型（entryType），删除并行的词条表单；旧草稿读取时自动迁移，不覆写存储</p>
+          <p>- 与本次站点 alpha-023 对齐：App 生成的知识词条页面不再内联知识馆骨架与手写明暗覆写，改由 css/library-refit.css 与主题令牌承担；上传到仓库的页面也不再携带一整份内联 style.css（网站样式只在预览时套上）</p>
+          <p>- 构建流水线按统一版本规则整改：Release 只在推送 vA.B.C 标签时创建（普通 push 只出 artifact），产物名从 package.json 读取；新增 scripts/ci-version.js 注入构建号；版本号收敛为三段 0.0.16</p>
+        </div>
+      </section>
+
+      <div class="function-box-blue">
+        <div class="left-align">验证方式：一、主页首屏应弹出警告级弹窗，勾选「关闭后今日不再提示」后关闭，刷新不再出现，把系统日期改到次日（或等到 0 点）后恢复；二、两枚提示级小弹窗右上角竖排，容器可整体拖走，关闭后当日不再出现；三、顶栏新增的返回 / 前进按钮：从主页新闻卡片新标签打开文章后，返回可回来源页，再前进可回到刚才这篇；四、手机宽度（小于 860px）打开汉堡菜单，未展开的「导航」「馆藏」不再撑出空白；五、知识馆换配色与明暗，侧栏随之变化，收缩钮与展开把手可用；六、主页与英文主页海报新闻的日期居中。本次未改动任何既有正文文字与图片。</div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页 </a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门 </a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则 </a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能 </a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">
+  回到<br>顶部
+</button>
+<button title="导航枢纽" class="float-button nav-hub">
+  导航<br>枢纽
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

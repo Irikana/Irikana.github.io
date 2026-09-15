@@ -597,6 +597,7 @@ details details {
 - 新增海报新闻时替换左侧 poster；被替换的旧海报新闻降级为文字新闻插入右侧列表（若右侧已满 6 条则挤出最旧一条）
 - 海报图片路径：`./image/poster/{路径}/{文件名}.png`
 - 中英文主页的新闻卡片需同步添加
+- **文字对齐**：`.news-featured-info` 内的标题与日期一律居中，且不参与正文的两端对齐与首行缩进——`<p class="news-featured-date">` 会被 refit 的 `.content-main p`（justify + 缩进 2em）命中而偏出中轴，豁免规则写在 `css/library-refit.css`「4. 页面骨架」段末尾，StyleEnforcer 有同名兜底
 
 ### news.html 列表项 — `.news-list-item-text-only`
 
@@ -619,111 +620,68 @@ details details {
 
 ---
 
-## 5. 浮窗
+## 5. 分级提示构件（`.sl-pop`）
 
-### 知识馆浮窗 — `.knowledge-hall-float`
+**用途**：站场内所有"要告诉读者一句话，并且允许他关掉"的构件——入口引导、状态提醒、操作反馈。**取代旧的知识馆浮窗 `.knowledge-hall-float` 与语言切换浮窗 `.lang-switch-float`。**
 
-**用途**：主页右侧悬浮的知识馆入口浮窗。
+**三种形态 + 三个等级**（等级类名三形态通用）：
 
-**标准结构（HTML + CSS）**：
+| 形态 | 类名 | 场景 |
+|------|------|------|
+| 小弹窗（右上角竖排） | `.sl-pop`（放进 `.sl-pop-stack`） | 入口引导：知识馆、英文版 |
+| 模态弹窗（居中带遮罩） | `.sl-pop[data-pop-modal]` | 需要读者先看到再开始浏览的提醒：Alpha 建设状态 |
+| 轻提示（顶部滑入自消） | `.sl-pop-toast` | 操作反馈：收藏成功、侧栏已收起 |
+
+| 等级 | 类名 | 语义 | 边线色 |
+|------|------|------|--------|
+| 提示 | `.sl-pop-tip` | 引导、可选入口、中性告知 | `var(--color-accent)`（随配色变换） |
+| 通知 | `.sl-pop-note` | 事实性通知，不打断阅读 | `#2e7d5b`（暗色 `#58b189`） |
+| 警告 | `.sl-pop-warn` | 需要特别注意的建设状态 / 时效提醒 | `#c0392b`（暗色 `#d97b6c`） |
+
+**小弹窗标准结构**（页脚复选框与关闭按钮由 `SlPop.wire()` 自动补齐，页面只写主体）：
 
 ```html
-<div class="knowledge-hall-float" id="kh-float">
-  <div class="kh-float-header">
-    <span class="kh-float-title">知识馆</span>
-    <button class="kh-float-close" onclick="document.getElementById('kh-float').classList.add('hidden')">&times;</button>
-  </div>
-  <div class="kh-float-body">
-    <p class="kh-float-desc">牧羊人图书馆分馆，存放和查阅知识之地</p>
-    <a href="./knowledge-hall/index.html" class="kh-float-link">进入知识馆</a>
+<div class="sl-pop-stack" id="sl-pop-stack">
+  <div class="sl-pop sl-pop-tip" data-pop-key="knowledge-hall" data-pop-title="知识馆">
+    <div class="sl-pop-body">
+      <p class="sl-pop-desc">牧羊人图书馆的分馆，用于存放和查阅知识</p>
+      <a href="./knowledge-hall/index.html" target="_blank" rel="noopener noreferrer" class="sl-pop-link">前往知识馆</a>
+    </div>
   </div>
 </div>
 ```
 
-**核心样式（style.css）**：
+**模态弹窗标准结构**（写在正文流里，加载时由 `SlPop.toModal()` 搬进遮罩；关闭时未勾选"今日不再提示"就把原区块放回文档流，无 JS 也可直接阅读）：
 
-```css
-.knowledge-hall-float {
-  position: fixed;
-  right: var(--space-lg);
-  top: var(--space-lg);
-  width: 260px;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  z-index: 999;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: move;
-}
-
-.knowledge-hall-float.hidden {
-  opacity: 0;
-  transform: translateY(10px);
-  pointer-events: none;
-}
-
-.kh-float-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-sm) var(--space-md);
-  background-color: var(--color-bg-subtle);
-  border-bottom: 1px solid var(--color-border);
-  cursor: grab;
-}
-
-.kh-float-title {
-  font-size: 14px; font-weight: 700;
-  color: var(--color-accent); letter-spacing: 0.5px;
-}
-
-.kh-float-close {
-  background: none; border: none;
-  font-size: 18px;
-  color: var(--color-text-light);
-  cursor: pointer;
-}
-
-.kh-float-body { padding: var(--space-md); }
-
-.kh-float-desc {
-  font-size: 14px;
-  color: var(--color-text-secondary);
-  margin: 0 0 var(--space-sm) 0;
-  line-height: 1.6;
-}
-
-.kh-float-link {
-  display: inline-flex;
-  align-items: center; gap: 4px;
-  font-size: 14px; font-weight: 600;
-  color: var(--color-accent);
-  text-decoration: none !important;
-  padding: 6px 14px;
-  border: 1px solid var(--color-accent);
-  transition: all 0.15s ease;
-}
-
-.kh-float-link:hover {
-  background-color: var(--color-accent);
-  color: #fff !important;
-}
+```html
+<div class="sl-pop sl-pop-warn" data-pop-key="alpha-status" data-pop-modal data-pop-title="Alpha 建设状态">
+  <div class="sl-pop-body">
+    <p class="sl-pop-desc">创建于2026.1.4<br>提醒正文……</p>
+  </div>
+</div>
 ```
 
-### 语言切换浮窗 — `.lang-switch-float`
+**轻提示 API**：`SlPop.toast('文字', 'tip' | 'note' | 'warn')`。运行期追加小弹窗用 `SlPop.card({ key, level, title, desc, href, linkText })`。`BM.showToast()` 保留为提示等级的别名。
 
-结构与知识馆浮窗类似，位置在知识馆浮窗下方 120px 处。
+**"今日不再提示"规矩**：
 
-```css
-.lang-switch-float {
-  position: fixed;
-  right: var(--space-lg);
-  top: calc(var(--space-lg) + 120px);
-  width: 240px;
-  /* 其余属性同 knowledge-hall-float */
-}
-```
+- 每个带 `data-pop-key` 的弹窗，页脚自动出现复选框「今日不再提示」；勾上再关闭才写入 `localStorage` 的 `sl_pop-snooze`，值为 `{ 弹窗键: 'YYYY-M-D' }`
+- 只记**当天**：次日日期不匹配即自动重新展示，无需清理
+- 页面一直开着跨过 0 点时，`SlPop` 的定时器与 `visibilitychange` 监听会就地放行（不必刷新）
+- 不想提供该选项的弹窗写 `data-pop-snooze="off"`
+- 弹窗必须可关闭，禁止任何"必须跳转才能关掉"的形态
+
+**规范要求**：
+
+- 全站扁平化：`border-radius` 一律 0；等级色只出现在左侧竖条、标题与轻提示底色上
+- 同一页面的小弹窗**必须**共用一个 `.sl-pop-stack`，禁止再各写 `top` 值（旧浮窗靠 `top: calc(... + 170px)` 手排，新增一个就要改一次样式）
+- 容器缺省时由 JS 补一个；整摞可拖走（拖动任一弹窗页头生效）
+- 移动端（≤768px）容器钉右上、限宽 52vw、限高可滚，规则见 `css/library-refit.css`「3.2 移动端浮层编排」
+- 顶栏出现时容器 `top` 让出 `var(--sl-topbar-h)`，由 `html.sl-topbar-on .sl-pop-stack` 负责
+- 正文里的 `.sl-pop p` 不参与两端对齐与首行缩进（否则模态弹窗文字会被推歪）
+- 红色只用于"警告"级；**不得**为普通通知滥用警告语气（见 project_rules.md 的警告框授权机制）
+
+**已废弃**：`.knowledge-hall-float` / `.lang-switch-float` 及其 `.kh-float-*` / `.lang-float-*` 子件（style.css 中的定义已删除）。新页面禁止使用。
 
 ---
 
@@ -786,6 +744,9 @@ details details {
 
 **用途**：知识馆所有页面的左侧固定侧边栏。
 
+**权威实现位置**：`css/library-refit.css` 的「3.1 知识馆骨架与侧边栏」段。
+**知识馆页面一律不得再写内联 `.kh-*` 样式**——旧的内联硬编码（`#fafafa` / `#2c3e50` 等）会让六套配色完全失效，是 alpha-023 修掉的缺陷；页面只需引用 style.css + library-refit.css。颜色全部走主题令牌（`--color-bg-subtle` / `--color-border` / `--color-accent` / `--color-text*`），因此随配色与明暗自动变换。`StyleEnforcer` 另存一份带 `!important` 的同名兜底规则，用于压制历史页面残留的内联写法。
+
 **标准结构**：
 
 ```html
@@ -810,57 +771,24 @@ details details {
 </aside>
 ```
 
-**核心样式（内联，每个知识馆页面均包含）**：
+**收缩开关（无需页面写死）**：`library-dynamic.js` 的 `KhSide` 模块在检测到 `.kh-sidebar` 时自动注入两枚直角小钮——侧栏右上角的 `.kh-side-toggle`（收起）与左缘的 `.kh-side-tab`（展开）。收缩态挂在 `<html class="kh-side-off">` 上，状态存 `sessionStorage` 的 `sl_kh-side-off`（同一标签页内保持，不跨天）。
 
 ```css
-.kh-body { display: flex; min-height: 100vh; }
-
-.kh-sidebar {
-  position: fixed; left: 0; top: 0; bottom: 0;
-  width: 220px; background: #fafafa;
-  border-right: 1px solid #e0e0e0;
-  padding: 24px 16px;
-  display: flex; flex-direction: column;
-  z-index: 100;
-}
-
-.kh-main {
-  margin-left: 220px; flex: 1;
-  padding: 40px 48px; max-width: 900px;
-}
-
-.kh-nav-item {
-  display: block;
-  padding: 10px 12px;
-  color: #555;
-  text-decoration: none;
-  border-radius: 0;
-  margin: 2px 0;
-  font-size: 14px;
-  transition: all 0.15s;
-}
-
-.kh-nav-item:hover { background: #f0f0f0; color: #2c3e50; }
+/* 权威定义节选（library-refit.css） */
+.kh-sidebar { position: fixed; inset: 0 auto 0 0; width: var(--sl-kh-side, 220px);
+  background-color: var(--color-bg-subtle); border-right: 1px solid var(--color-border); }
+.kh-nav-item.active, .kh-nav-item.active:hover { background-color: var(--color-accent); color: var(--color-bg); }
+html.kh-side-off .kh-sidebar { transform: translateX(-100%); }
+html.kh-side-off .kh-main { margin-left: 0; }
+html.kh-side-off .kh-side-tab { opacity: 1; pointer-events: auto; transform: translateX(0); }
 ```
 
-**响应式断点（≤768px）**：
-
-```css
-@media (max-width: 768px) {
-  .kh-sidebar {
-    position: static; width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 16px;
-  }
-  .kh-body { flex-direction: column; }
-  .kh-main { margin-left: 0; padding: 24px 16px; }
-}
-```
+**响应式（≤768px）**：侧栏回到常规文档流（`position: static`、通栏、下边线），收缩改为 `display: none` 不留空档。
 
 **注意**：
 - 链接文本末尾必须保留**一个空格**（箭头图标由 `::after` 伪元素自动添加）
 - 禁止在 HTML 中手动写入 `↗` 或其他箭头符号
+
 
 ### 移动端底部导航 — `.mobile-nav`
 
@@ -1205,34 +1133,26 @@ footer.appendChild(span);
 
 ---
 
-## 13. Toast 提示 — `#sl-toast`
+## 13. 轻提示（Toast）— `.sl-pop-toast`
 
-**用途**：收藏操作（添加/取消/移除）时的浮动提示框，从顶部滑入、1.5秒后自动消失。由 `library-dynamic.js` 的 `BM.showToast()` 动态创建。
-
-**内联样式**（JS 动态设置，无 CSS 类定义）：
+**用途**：操作反馈（收藏、侧栏收缩等）从顶部滑入、1.5 秒自动消失。**已并入第 5 节分级提示构件**，不再是内联样式的 `#sl-toast`。
 
 ```javascript
-t.style.cssText = 'position:fixed;top:-40px;left:50%;transform:translateX(-50%);'
-  + 'background:#2c3e50;color:#fff;padding:8px 20px;font-size:13px;'
-  + 'z-index:10000;transition:top 0.3s ease;'
-  + 'box-shadow:0 4px 12px rgba(0,0,0,0.15);letter-spacing:0.3px;';
+SlPop.toast('收藏成功', 'tip');    // 提示（跟随配色）
+SlPop.toast('已移除收藏', 'note');  // 通知（绿）
+SlPop.toast('该内容已下架', 'warn'); // 警告（红）
 ```
 
-**动画行为**：
-1. 创建时初始 `top: -40px`（屏幕外上方）
-2. 10ms 后 `top: 20px`（滑入可视区）
-3. 1500ms 后 `top: -40px`（滑出）
-4. 300ms 过渡完成后从 DOM 移除
-
-**触发场景**：
-- `BM.showToast('收藏成功')` — 添加收藏时
-- `BM.showToast('已取消收藏')` — 取消收藏时
-- `BM.showToast('已移除收藏')` — 从面板移除时
+**结构与行为**：
+- 元素：`<div class="sl-pop-toast sl-pop-{等级}" role="status">文案</div>`，追加到 body 末尾
+- 样式在 `css/style.css` 的分级提示构件段（含 StyleEnforcer 兜底），不再用 `style.cssText` 内联
+- 进入：`requestAnimationFrame` 后加 `.visible`（`top: -60px` → `top: 20px`）；1500ms 后去 `.visible`，320ms 过渡结束后移除节点
+- 同一时刻只保留一条：新提示会先移除已存在的 `.sl-pop-toast`
+- `BM.showToast(msg)` 作为兼容别名保留，内部转调 `SlPop.toast(msg, 'tip')`
 
 **注意事项**：
-- 每次显示前会先移除已存在的旧 toast（防重叠）
-- 使用纯内联样式，不依赖 CSS 类
-- 扁平化设计（无 border-radius）
+- 提示文案禁止使用 emoji（旧版「📌 收藏成功」已在 alpha-023 去除）
+- 扁平化：无圆角，左侧 4px 深色竖条作为等级识别
 
 ---
 
@@ -1459,7 +1379,30 @@ MathJax = {
 - 面板开合：`data-open="true|false"` + `aria-expanded`；点击空白与 Esc 收起；860px 以下菜单收进汉堡
 - 动效仅为透明度 + 4px 位移 + 180ms 过渡（描边/底色同步过渡），`prefers-reduced-motion` 下全部关闭；**禁止圆角、投影仅用于悬浮面板**
 
-### 9.2 主题配置面板（`.sl-opt-group` / `.sl-chip`）
+### 9.2 顶栏历史导航（`.sl-trail`，alpha-023）
+
+**用途**：返回上一页，以及返回之后**再前进回刚才那一页**。顶栏是全站唯一承载处（浮层在移动端已被撤走，不再加新浮钮）。
+
+```html
+<div class="sl-trail">
+  <button class="sl-trail-btn" type="button" data-dir="-1"><svg viewBox="0 0 24 24">…</svg></button>
+  <button class="sl-trail-btn" type="button" data-dir="1"><svg viewBox="0 0 24 24">…</svg></button>
+</div>
+```
+
+- 由 `js/library-dynamic.js` 的 `NavTrail` 模块在 `#sl-topbar` 的 `.sl-brand` 之后注入，页面源码不写；图标为内联 SVG 折角箭头，禁止 emoji/字体图标
+- 足迹记在 `sessionStorage` 的 `sl_nav_trail`（`{ list:[{u,t}], idx }`，上限 30 条）；**新标签打开的页面没有浏览器历史**，首条由 `document.referrer`（同源时）补齐，因此从新闻卡片新开的文章页同样能返回来源页
+- 优先走 `history.back()` / `history.forward()`（保留滚动位置与 bfcache）；前进无法确认是否命中时回退为直接导航
+- 无路可走时按钮置 `disabled`（`opacity .34` + `cursor: default`），并在 `title` 里说明原因；不隐藏，避免位置跳动
+- `pageshow` 时重记一次足迹（浏览器前后退常走 bfcache，脚本不会重跑）
+
+### 9.3 移动端顶栏下拉面板（必须用 display 收起）
+
+- ≤860px 时 `.sl-panel` 改为 `position: static` 进入文档流，此时**只靠 `visibility: hidden` 隐藏仍然占位**，会让「导航」「馆藏」还没点开就撑出展开后的长度（alpha-022 的实测缺陷）
+- 规矩：小屏 `.sl-panel { display: none }`，`.sl-menu[data-open="true"] .sl-panel { display: block }`；淡入过渡仅在桌面端（面板绝对定位）生效
+- 同类要求适用于一切"在文档流里折叠/展开"的构件：折叠态必须真正不占位（`display: none` 或 `grid-template-rows: 0fr`），不得只用 `visibility`/`opacity`
+
+### 9.4 主题配置面板（`.sl-opt-group` / `.sl-chip`）
 ```html
 <div class="sl-opt-group">
   <div class="sl-opt-label">配色</div>
@@ -1471,7 +1414,7 @@ MathJax = {
 - 选项一律为直角 `.sl-chip`，选中态 `aria-pressed="true"`（主色底 + 反白字）；配色项额外带 `sl-swatch` 小色块
 - 面板底部放 `sl-opt-foot`：左侧「仅影响本机显示」提示，右侧 `sl-link-btn`「恢复默认」
 
-### 9.3 联系方式条目（数据来自 slywrite-config.json 的 contact 数组）
+### 9.5 联系方式条目（数据来自 slywrite-config.json 的 contact 数组）
 ```html
 <div class="sl-contact-item">
   <div class="sl-contact-head"><svg class="sl-contact-icon">…</svg><span class="sl-contact-name">QQ</span></div>
@@ -1482,12 +1425,13 @@ MathJax = {
 - `url` 非空时值渲染为 `<a class="sl-contact-value" target="_blank" rel="noopener noreferrer">`；仅有 `value` 时渲染为可复制按钮
 - 未配置任何条目时只显示 `.sl-contact-empty` 提示，**不得由开发者代填个人联系方式**
 
-### 9.4 文章卡片（`ul.article-list` 的呈现升级）
+### 9.6 文章卡片（`ul.article-list` 的呈现升级）
+
 - 结构不变：`<ul class="article-list"><li><a href="…">标题</a></li></ul>`（App 的 library.html 同步逻辑依赖此结构，禁止改写标签）
 - refit 层将其呈现为等宽卡片网格：`grid-template-columns: repeat(auto-fill, minmax(232px, 1fr))`，560px 以下单列
 - 卡片：底色 `--sl-card-bg`、描边 `--sl-card-edge`、左缘 3px `--color-accent-light` 标记；悬停左缘转主色、上浮 1px、加 0 6px 16px 淡投影；跳转箭头由 `::after` 绘制（沿用跳转链接图标规范，正文中禁止手写 ↗）
 
-### 9.5 标题层级标准（修正原先倒置）
+### 9.7 标题层级标准（修正原先倒置）
 | 层级 | 类名 | 字号（clamp） | 装饰 |
 |------|------|----------------|------|
 | 页面主标题 | `.page-title-main` | 24 ~ 33px | 居中，字距 3px |

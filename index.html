@@ -40,9 +40,11 @@
   <div class="content-width-limiter">
     <div class="content-main">
 
-      <!-- Alpha建设状态提醒 -->
-      <div class="notice-box-red">
-        <div class="left-align">创建于2026.1.4<br>图书馆尚在初期建设中，为保证稳定性以及更新方便，很多应当采用更多自定义内容的地方全都换成了兼容性更强的内容，比如可能使用emoji而不是logo，并且尚处Alpha开发阶段，实质性内容极少，主要处理结构性问题。</div>
+      <!-- Alpha建设状态提醒：警告级弹窗（关闭前可勾选今日不再提示，次日 0 点自动恢复） -->
+      <div class="sl-pop sl-pop-warn" data-pop-key="alpha-status" data-pop-modal data-pop-title="Alpha 建设状态">
+        <div class="sl-pop-body">
+          <p class="sl-pop-desc">创建于2026.1.4<br>图书馆尚在初期建设中，为保证稳定性以及更新方便，很多应当采用更多自定义内容的地方全都换成了兼容性更强的内容，比如可能使用emoji而不是logo，并且尚处Alpha开发阶段，实质性内容极少，主要处理结构性问题。</p>
+        </div>
       </div>
 
       <!-- 大板块 1：新闻 -->
@@ -160,29 +162,22 @@
   回到<br>顶部
 </button>
 
-<div class="knowledge-hall-float" id="knowledge-hall-float">
-  <div class="kh-float-header">
-    <span class="kh-float-title">知识馆</span>
-    <button class="kh-float-close" title="关闭" aria-label="关闭">&times;</button>
-  </div>
-  <div class="kh-float-body">
-    <p class="kh-float-desc">牧羊人图书馆的分馆，用于存放和查阅知识</p>
-    <a href="./knowledge-hall/index.html" target="_blank" rel="noopener noreferrer" class="kh-float-link">前往知识馆</a>
-  </div>
-</div>
-
 <button title="导航枢纽" class="float-button nav-hub">
   导航<br>枢纽
 </button>
 
-<div class="lang-switch-float" id="lang-switch-float">
-  <div class="lang-float-header">
-    <span class="lang-float-title">English</span>
-    <button class="lang-float-close" title="关闭" aria-label="关闭">&times;</button>
+<div class="sl-pop-stack" id="sl-pop-stack">
+  <div class="sl-pop sl-pop-tip" data-pop-key="knowledge-hall" data-pop-title="知识馆">
+    <div class="sl-pop-body">
+      <p class="sl-pop-desc">牧羊人图书馆的分馆，用于存放和查阅知识</p>
+      <a href="./knowledge-hall/index.html" target="_blank" rel="noopener noreferrer" class="sl-pop-link">前往知识馆</a>
+    </div>
   </div>
-  <div class="lang-float-body">
-    <p class="lang-float-desc">Looking for the English version?</p>
-    <a href="./en/index.html" class="lang-float-link">前往英文版 Go to EN →</a>
+  <div class="sl-pop sl-pop-tip" data-pop-key="lang-switch" data-pop-title="English">
+    <div class="sl-pop-body">
+      <p class="sl-pop-desc">Looking for the English version?</p>
+      <a href="./en/index.html" class="sl-pop-link">前往英文版 Go to EN →</a>
+    </div>
   </div>
 </div>
 

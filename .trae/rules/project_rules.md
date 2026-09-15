@@ -67,7 +67,7 @@
 ### 版本号规则
 - 采用 **方案B**：`alpha-{自定义编号}`（如 `alpha-001`、`alpha-004`）
 - 编号完全由作者自主控制，不绑定日期
-- 当前版本：**alpha-022**
+- 当前版本：**alpha-023**
 
 ### 更新日志规则
 - **每次工作和任务结束时必须撰写更新日志**——这是强制流程，不可跳过
@@ -182,14 +182,14 @@ Irikana.github.io/
 
 ### 主页（index.html）板块结构
 主页的大板块为三级：
-1. **新闻** — 轮播展示最新动态
+1. **新闻** — 左侧海报新闻 + 右侧文字新闻列表展示最新动态（旧轮播容器已废弃，结构以「新闻卡片创建规范」为准）
 2. **前情提要** — 包含子板块：
    - 图书馆入门
    - 图书馆规则
    - 图书馆功能
 3. **入口** — 图书馆入口
 
-知识馆以浮窗/浮动按钮形式出现，不作为大板块占据主内容区。
+知识馆以分级提示小弹窗（`.sl-pop-stack` 内的 `.sl-pop`，alpha-023 起取代旧知识馆浮窗）形式出现，不作为大板块占据主内容区。
 
 ### 知识馆风格规范
 - 整洁、简约的设计
@@ -449,8 +449,7 @@ Irikana.github.io/
 | 站内搜索浮钮 .search-toggle-btn | 撤走 | 顶栏「导航」→ 站内搜索 |
 | 明暗切换浮钮 .theme-toggle-btn | 撤走 | 顶栏「主题」面板 |
 | 便携式导航仪 .quick-nav / .mobile-nav | 撤走 | 冻结顶栏 |
-| 知识馆浮窗 .knowledge-hall-float | 保留，钉左上角并限宽 44vw（站点规范要求知识馆以浮窗形式出现，不得移除） | 顶栏「导航」→ 知识馆 |
-| 语言切换浮窗 .lang-switch-float | 保留，钉右上角并限宽 44vw，与知识馆浮窗同行、互不重叠 | 页面内英文入口链接 |
+| 分级提示小弹窗 .sl-pop-stack（原知识馆浮窗 .knowledge-hall-float、语言切换浮窗 .lang-switch-float 自 alpha-023 起并入此构件，两旧构件已废弃禁用） | 保留，容器钉右上（right 8px）、限宽 52vw、限高 100vh 减顶栏高再减 24px 超出可滚，top 让出顶栏（--sl-topbar-h + 8px 避让） | 顶栏「导航」→ 知识馆；页面内英文入口链接 |
 | 导航枢纽 / 回到顶部 / 收藏 / 目录按钮 | 保留，右列 bottom 16 / 64 / 112 / 160 错开 | 无替代，必须留在浮层 |
 | 阅读工具条 .reading-tools-toolbar | 保留，改左下角自适应宽度小卡（不再通栏横贯底部） | 无替代 |
 | 目录面板 #sl-toc-float-panel | 保留，改底部抽屉（满宽、max-height 40vh） | 同上 |
@@ -459,3 +458,50 @@ Irikana.github.io/
 ### 两条技术注意事项
 - **顶栏避让选择器必须写真实类名**：`.kh-float` 一度是死选择器（真实类名 `.knowledge-hall-float`），避让规则静默失效三个月无人察觉；改避让前先 Grep 页面确认真实类名
 - **改 `#sl-toc-float-*` 的定位必须提特异性或同步 StyleEnforcer**：StyleEnforcer 注入的 `<style>` 追加在 head 末尾，同特异性源序必胜；本契约采用 `html #id` 前缀提特异性（不改 JS 字符串，规避历史上撇号打瘫全站的风险）。用 `transform` 做隐藏动画的构件，覆写定位时**只能替换位移分量、保留缩放分量**，否则隐藏态会留下看不见的点击热区
+
+### alpha-023 起补充的两条硬性规矩
+- **知识馆浮窗、语言切换浮窗已并入 `.sl-pop-stack`**：旧构件 `.knowledge-hall-float` / `.lang-switch-float` 自 alpha-023 起废弃禁用，知识馆与英文版两个入口统一改为分级提示小弹窗（定义见下方「分级提示构件」节）；移动端处置即上表改写后的规则——容器钉右上、限宽 52vw、限高可滚、top 让出顶栏避让
+- **折叠面板必须用 display 收起，不得只用 visibility/opacity 占位隐藏**：≤860px 时顶栏 `.sl-panel` 改为 static 定位进入文档流，只靠 `visibility: hidden` 隐藏仍会占位——alpha-022 的实测缺陷正是「导航」「馆藏」还没点开就撑出展开后的整段竖间距。规矩：小屏 `.sl-panel { display: none }`，`.sl-menu[data-open="true"] .sl-panel { display: block }`；一切「在文档流里折叠/展开」的构件同此，折叠态必须真正不占位（`display: none` 或 `grid-template-rows: 0fr`）
+
+## 分级提示构件（.sl-pop，alpha-023 起）
+
+组件定义的权威源是 `.trae/rules/visual-components.md` 第 5 节；实现位于 `css/style.css` 分级提示构件节与 `js/library-dynamic.js` 的 `SlPop` 模块（`StyleEnforcer` 有同名兜底）。本节只记规矩要点。
+
+### 三形态 × 三等级
+- **小弹窗**（右上角竖排）：`.sl-pop` 放进 `.sl-pop-stack` 容器，用于入口引导（知识馆、英文版）；同页多个**必须**共用一个容器，禁止各写 `top` 值，容器缺省时由 JS 补一个，整摞可拖走（拖动任一弹窗页头生效）
+- **模态弹窗**（居中带遮罩）：`.sl-pop[data-pop-modal]`，用于需要读者先看到再开始浏览的提醒（Alpha 建设状态）；区块写在正文流里，加载时由 `SlPop.toModal()` 搬进遮罩，关闭时未勾选「今日不再提示」就把原区块放回文档流——无 JS 也可直接阅读，信息不丢
+- **轻提示**（顶部滑入自消）：`.sl-pop-toast`，用于操作反馈；API 为 `SlPop.toast('文字', 'tip' | 'note' | 'warn')`，运行期追加小弹窗用 `SlPop.card({...})`；`BM.showToast()` 保留为提示等级的兼容别名
+- 等级类名三形态通用：`.sl-pop-tip` 提示（跟随配色）/ `.sl-pop-note` 通知（绿）/ `.sl-pop-warn` 警告（红）；**红色只用于「警告」级**，不得为普通通知滥用警告语气（见上文警告框授权机制）
+- 全站扁平化：`border-radius` 一律 0；等级色只出现在左侧竖条、标题与轻提示底色上
+
+### 「今日不再提示」存储契约
+- 带 `data-pop-key` 的弹窗页脚自动出现「今日不再提示」复选框；**勾上再关闭**才写入 localStorage 键 `sl_pop-snooze`，值为 `{ 弹窗键: 'YYYY-M-D' }`
+- 只记**当天**：存储日期不等于当天即自动重新展示，无需清理
+- 0 点刷新：页面一直开着跨过 0 点时，`SlPop` 的就地定时器（0 点 + 500ms 触发）与 `visibilitychange` 监听会自动放行，不必刷新页面
+- 不提供该选项的弹窗写 `data-pop-snooze="off"`；弹窗必须可关闭，禁止任何「必须跳转才能关掉」的形态
+
+### 旧浮窗废弃与主页警告框改造
+- `.knowledge-hall-float` / `.lang-switch-float` 及其 `.kh-float-*` / `.lang-float-*` 子件在 style.css 中的定义**已删除**，新页面禁止使用；主页与英文主页的知识馆、语言切换入口已改用 `.sl-pop-stack` 小弹窗
+- 主页与英文主页原红色警告框（`.notice-box-red`，Alpha 建设状态提醒）已改为**警告级模态弹窗**（`.sl-pop sl-pop-warn` + `data-pop-modal`）
+
+## 文档与实现同步契约（alpha-023 起）
+
+**视觉组件标准必须与站点实际使用的组件保持同步**——标准写的就是代码在跑的，代码跑的就是标准定的。下列四处任一处落后即视为缺陷，发现即补齐，不允许留「下次再同步」：
+
+| 序 | 位置 | 角色 |
+|----|------|------|
+| 1 | `.trae/rules/visual-components.md` | 权威源（人读） |
+| 2 | `css/style.css`、`css/library-refit.css`、`js/library-dynamic.js`（含 `StyleEnforcer` 兜底段） | 实际实现（行为权威源） |
+| 3 | `library/visual-components.html` | 站内组件展示页（渲染示例 + 模板 + 说明，逐节对齐 1） |
+| 4 | `.zcode/skills/sl-visual-components/SKILL.md` ↔ `.reasonix/skills/sl-visual-components/SKILL.md`（互为镜像） | 技能副本 |
+
+- 网站总规范同受本契约约束：本文件与 `.zcode/skills/sl-website-rules/SKILL.md` ↔ `.reasonix/skills/sl-website-rules/SKILL.md`（互为镜像）三处必须口径一致
+- **任何一条被违反都算缺陷**：代码新增了构件而标准没写、标准写了而类名与代码不符、展示页或技能副本还在演示已废弃的构件——发现即修，不得搁置
+
+### 检查步骤（构件改动前后）
+1. **改之前**：先 Grep 真实类名、存储键与现有规则，确认现状再动手（历史教训：`.kh-float` 是死选择器，页面实际类名是 `.knowledge-hall-float`，避让规则静默失效三个月无人察觉）
+2. **改完 CSS/JS**：立即回写权威源（1），再同步展示页（3）与两份技能镜像（4）；构件废弃时在标准里保留「已废弃」条目并注明替代构件，禁止悄悄删除
+3. **收笔**：再 Grep 旧类名验证已清除（排除 `updateLog/` 历史日志页），刷新主页、一篇知识馆页、一篇文章页目视核对
+4. **文档与代码不符时以代码为准**（行为权威源是代码实际运行），就地修正文档；若核实结果是代码本身有缺陷，则修代码并同步各文档
+5. 新建/重写页面或 App 生成器模板（SlyWrite `src/templates/*.ts` 生成的页面同样属于「图书馆实际用的构件」）时，以上述四处为准做同步
+6. **App 生成的页面不得内联站点骨架与配色**：`src/templates/*.ts` 只输出结构与该页独有构件，骨架样式（如知识馆 `.kh-body/.kh-sidebar/.kh-main/.kh-nav-item/.kh-card/.kh-footer`）一律由站点 `css/style.css` + `css/library-refit.css` 经 `<link>` 承担，独有构件的颜色必须写 `var(--color-*)` 主题令牌；更不得输出预览用的内联整份 style.css、也不得再手写 `prefers-color-scheme` / `force-dark-mode` / `force-light-mode` 三套明暗覆写（alpha-023 已废除这种写法，它会让六套配色失效）

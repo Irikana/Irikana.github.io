@@ -61,7 +61,7 @@
       {t:'活跃开发阶段',u:toAbs(ROOT+'library/paper/library-may-enter-active-development.html'),k:'活跃开发 Alpha 更新'},
       {t:'Minesia更新',u:toAbs(ROOT+'library/paper/minesia-0.0.16-update.html'),k:'Minesia 更新 版本 公开测试'},
       {t:'知识馆启用',u:toAbs(ROOT+'library/paper/knowledge-hall-launch.html'),k:'知识馆 启用 分馆 分类'},
-      {t:'Minesia测试',u:toAbs(ROOT+'library/misc/experimental/minesia-first-public-test.html'),k:'Minesia 测试 公开 第一个'},
+      {t:'Minesia公开测试',u:toAbs(ROOT+'library/paper/minesia-first-public-test.html'),k:'Minesia 创世 公开测试 addon 普通文章'},
       {t:'周三狂热',u:toAbs(ROOT+'library/paper/wednesday-frenzy-and-difficult-review.html'),k:'周三 狂热 复习 困难 新闻'},
       {t:'语义化更新',u:toAbs(ROOT+'library/paper/semantic-visual-component-update.html'),k:'语义化 视觉组件 更新 标准'},
       {t:'逆向法与单摆对称性',u:toAbs(ROOT+'library/paper/backwards-and-pendulum-symmetry.html'),k:'逆向法 单摆 对称性 物理 手写文章'},
@@ -401,12 +401,13 @@
       this.refreshPanel(); this.refreshTrigger();
     },
     showToast: function(msg) {
-      var ex = $('sl-toast'); if (ex && ex.parentNode) ex.parentNode.removeChild(ex);
-      var t = E('div'); t.id = 'sl-toast'; t.textContent = msg;
-      t.style.cssText = 'position:fixed;top:-40px;left:50%;transform:translateX(-50%);background:rgba(44,62,80,0.92);color:#fff;padding:8px 20px;font-size:13px;z-index:10000;transition:top 0.3s ease;box-shadow:0 4px 12px rgba(0,0,0,0.2);letter-spacing:0.3px;';
-      document.body.appendChild(t);
-      setTimeout(function() { t.style.top = '20px'; }, 10);
-      setTimeout(function() { t.style.top = '-40px'; setTimeout(function() { if (t.parentNode) t.parentNode.removeChild(t); }, 300); }, 1500);
+      /* 统一走分级提示构件（默认「提示」等级），保留旧调用签名 */
+      try { SlPop.toast(msg, 'tip'); } catch (e) {
+        var ex = $('sl-toast'); if (ex && ex.parentNode) ex.parentNode.removeChild(ex);
+        var t = E('div'); t.id = 'sl-toast'; t.textContent = msg;
+        t.className = 'sl-pop-toast sl-pop-tip';
+        document.body.appendChild(t);
+      }
     },
     makePanel: function() {
       var panel = E('div'); panel.className = 'bookmarks-panel'; panel.id = 'bookmarks-panel';
@@ -543,12 +544,12 @@
       var targetUrl = isEn ? (ROOT + 'index.html') : (ROOT + 'en/index.html');
       var targetLabel = isEn ? '\u4e2d\u6587\u7248' : 'English';
       sw.innerHTML = '<span class="i18n-current-lang">'+(isEn?'EN':'\u4e2d\u6587')+'</span><a class="i18n-switch-link" href="'+targetUrl+'">'+targetLabel+'</a>';
-      if (!$q('.lang-switch-float')) { var t=$q('.kh-sidebar')||$q('header'); if(t&&t.parentNode)t.parentNode.insertBefore(sw,t.nextSibling); else document.body.appendChild(sw); }
+      if (!$q('.lang-switch-float') && !$q('[data-pop-key="lang-switch"]')) { var t=$q('.kh-sidebar')||$q('header'); if(t&&t.parentNode)t.parentNode.insertBefore(sw,t.nextSibling); else document.body.appendChild(sw); }
     }
   };
 
   /* ========== 8. VERSION ========== */
-  var Ver = { v: 'alpha-022',
+  var Ver = { v: 'alpha-023',
     init: function() {
       var footer = $q('.copyright-color') || $q('footer .copyright-text') || $q('.copyright-text');
       if (!footer || $q('.sl-version')) return;
@@ -639,7 +640,36 @@
         '.sl-toc-panel-close:hover{color:#e74c3c;}' +
         '#toc-clone-list{padding:8px 0;}' +
         '@media (prefers-color-scheme: dark){#sl-toc-float-panel{background:#1a1a1a;border-color:#333;}.sl-toc-panel-header{background:#1a1a1a;color:#c8d6e5;border-color:#333;}}' +
-        '.force-dark-mode #sl-toc-float-panel{background:#1a1a1a;border-color:#333;}.force-dark-mode .sl-toc-panel-header{background:#1a1a1a;color:#c8d6e5;border-color:#333;}';
+        '.force-dark-mode #sl-toc-float-panel{background:#1a1a1a;border-color:#333;}.force-dark-mode .sl-toc-panel-header{background:#1a1a1a;color:#c8d6e5;border-color:#333;}' +
+        /* 分级提示构件：小弹窗 / 模态弹窗 / 轻提示（颜色一律走主题令牌，随配色与明暗变换） */
+        '.sl-pop-stack{position:fixed;top:24px;right:24px;z-index:1000;width:236px;max-width:calc(100vw - 32px);max-height:calc(100vh - 48px);display:flex;flex-direction:column;gap:8px;overflow-y:auto;}' +
+        '.sl-pop{background-color:var(--color-bg);border:1px solid var(--color-border);border-left:4px solid var(--sl-pop-accent,var(--color-accent));box-shadow:0 4px 20px rgba(0,0,0,0.08);}' +
+        '.sl-pop-tip{--sl-pop-accent:var(--color-accent);}.sl-pop-note{--sl-pop-accent:#2e7d5b;}.sl-pop-warn{--sl-pop-accent:#c0392b;}' +
+        '.sl-pop-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 16px;background-color:var(--color-bg-subtle);border-bottom:1px solid var(--color-border);}' +
+        '.sl-pop-title{font-size:14px;font-weight:700;letter-spacing:0.5px;color:var(--sl-pop-accent,var(--color-accent));}' +
+        '.sl-pop-tag{font-size:10px;letter-spacing:1px;color:var(--color-text-light);}' +
+        '.sl-pop-close{background:none;border:none;font-size:18px;line-height:1;color:var(--color-text-light);cursor:pointer;padding:0 4px;}' +
+        '.sl-pop-body{padding:16px;}.sl-pop-desc{font-size:13.5px;line-height:1.6;color:var(--color-text-secondary);margin:0 0 8px 0;}' +
+        '.sl-pop-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 16px;border-top:1px dashed var(--color-border);}' +
+        '.sl-pop-snooze{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-light);cursor:pointer;}' +
+        '.sl-pop-mask{position:fixed;inset:0;z-index:10001;display:flex;align-items:center;justify-content:center;padding:16px;background-color:rgba(15,15,15,0.42);}' +
+        '.sl-pop-modal{width:520px;max-width:100%;max-height:82vh;overflow-y:auto;border-top:4px solid var(--sl-pop-accent,var(--color-accent));}' +
+        '.sl-pop-btn{font-size:13px;padding:7px 18px;color:var(--color-bg);background-color:var(--sl-pop-accent,var(--color-accent));border:1px solid var(--sl-pop-accent,var(--color-accent));cursor:pointer;border-radius:0;}' +
+        '.sl-pop-toast{position:fixed;top:-60px;left:50%;transform:translateX(-50%);z-index:10002;padding:8px 20px;font-size:13px;color:#fff;background-color:var(--sl-pop-accent,#2c3e50);border-left:4px solid rgba(0,0,0,0.18);transition:top 0.3s ease;}' +
+        '.sl-pop-toast.visible{top:20px;}' +
+        /* 知识馆侧栏与卡片：旧页面内联写死的颜色在此统一改由主题令牌驱动 */
+        '.kh-sidebar{background-color:var(--color-bg-subtle)!important;border-right:1px solid var(--color-border)!important;}' +
+        '.kh-site-title{color:var(--color-accent)!important;}.kh-equality{color:var(--color-text-light)!important;}' +
+        '.kh-nav-item{color:var(--color-text)!important;border-radius:0!important;}' +
+        '.kh-nav-item:hover{background-color:var(--color-bg-muted)!important;color:var(--color-accent)!important;}' +
+        '.kh-nav-item.active,.kh-nav-item.active:hover{background-color:var(--color-accent)!important;color:var(--color-bg)!important;}' +
+        '.kh-nav-divider{background-color:var(--color-border)!important;}.kh-nav-section{color:var(--color-text-light)!important;}' +
+        '.kh-card{background-color:transparent!important;border:1px solid var(--color-border)!important;border-radius:0!important;}' +
+        '.kh-footer{border-top:1px solid var(--color-border)!important;color:var(--color-text-light)!important;}' +
+        '.kh-content h2{color:var(--color-text)!important;border-bottom:2px solid var(--color-accent)!important;}' +
+        '.kh-content h3{color:var(--color-text-secondary)!important;}.kh-content p{color:var(--color-text-secondary)!important;}' +
+        /* 海报新闻的文字不参与正文两端对齐，日期回到中轴 */
+        '.news-featured-info .news-featured-date,.news-featured-info .news-featured-title{text-align:center!important;text-indent:0!important;}';
       document.head.appendChild(style);
     }
   };
@@ -691,47 +721,475 @@
   };
 
   /* ========== FLOAT CLOSE BUTTONS ========== */
-  var FloatClose = {
-    init: function() {
-      var khClose = $q('.kh-float-close');
-      if (khClose) khClose.addEventListener('click', function() {
-        var f = $('knowledge-hall-float'); if (f) f.classList.add('hidden');
-      });
-      var langClose = $q('.lang-float-close');
-      if (langClose) langClose.addEventListener('click', function() {
-        var f = $('lang-switch-float'); if (f) f.classList.add('hidden');
-      });
-    }
-  };
+  /* 旧版知识馆浮窗 / 语言切换浮窗（.kh-float-close / .lang-float-close）已并入
+     分级提示构件 SlPop（见本文件 19 节），此处不再单独绑定关闭事件。 */
 
-  /* ========== FLOAT DRAG (kh-float / lang-switch-float) ========== */
-  var FloatDrag = {
-    init: function() {
-      this.makeDraggable($('knowledge-hall-float'), '.kh-float-header');
-      this.makeDraggable($('lang-switch-float'), '.lang-float-header');
+  /* ==========================================================================
+     19. SlPop —— 分级提示构件（小弹窗 / 模态弹窗 / 轻提示）
+     --------------------------------------------------------------------------
+     等级：tip 提示（跟随配色）/ note 通知（绿）/ warn 警告（红）
+     用法一（小弹窗，写在页面里）：
+       <div class="sl-pop-stack"><div class="sl-pop sl-pop-tip" data-pop-key="kh">…</div></div>
+       页脚「今日不再提示」复选框与关闭逻辑由本模块注入，容器缺省时自动补一个。
+     用法二（模态弹窗）：给正文里的一块 .sl-pop 加 data-pop-modal，加载时搬进遮罩居中显示；
+       未勾选「今日不再提示」而关闭时，原区块回到文档流，信息不丢（无 JS 时也直接可读）。
+     用法三（轻提示）：SlPop.toast('文字', 'tip' | 'note' | 'warn')
+     今日不再提示：localStorage 键 sl_pop-snooze = { 弹窗键: 'YYYY-M-D' }，
+       只记当天，跨天自然失效；页面一直开到 0 点时由定时器就地放行。
+     ========================================================================== */
+  var SlPop = {
+    LABEL: { tip: '提示', note: '通知', warn: '警告' },
+    stack: null,
+    day: '',
+    /** 文案随页面语言切换（en/ 目录下的页面 lang="en"） */
+    txt: function(zh, en) {
+      var l = (document.documentElement.getAttribute('lang') || '').toLowerCase();
+      return l.indexOf('en') === 0 ? en : zh;
     },
-    makeDraggable: function(el, headerSel) {
-      if (!el) return;
-      var hdr = $q(headerSel, el);
-      if (!hdr) return;
+    init: function() {
+      var self = this;
+      this.day = this.today();
+      var cards = $qa('.sl-pop[data-pop-key]');
+      var floats = [];
+      for (var i = 0; i < cards.length; i++) {
+        if (cards[i].getAttribute('data-pop-modal') !== null) continue;
+        floats.push(cards[i]);
+      }
+      for (var f = 0; f < floats.length; f++) this.wire(floats[f]);
+      // 所有小弹窗一律收进同一个竖排容器（页面没写容器就补一个），避免各写 top 值互相压
+      if (floats.length) {
+        var st = this.ensureStack();
+        for (var k = 0; k < floats.length; k++) {
+          var c = floats[k];
+          if (!c.closest('.sl-pop-stack') && !c.classList.contains('sl-pop-modal') && !c.classList.contains('sl-pop-toast')) st.appendChild(c);
+        }
+        this.bindDrag(st);
+      }
+      for (var m = 0; m < cards.length; m++) {
+        if (cards[m].getAttribute('data-pop-modal') !== null) this.toModal(cards[m]);
+      }
+      this.refresh();
+      // 0 点就地放行：不必刷新页面
+      setTimeout(function() { self.rollDay(); }, this.msToMidnight() + 500);
+      try {
+        document.addEventListener('visibilitychange', function() { if (!document.hidden) self.rollDay(); });
+      } catch (e) {}
+    },
+    /** 运行期追加一枚小弹窗（如交互反馈），同样接受「今日不再提示」与 0 点刷新 */
+    card: function(opts) {
+      var o = opts || {};
+      if (!o.key) return null;
+      var st = this.ensureStack();
+      if ($q('.sl-pop[data-pop-key="' + o.key + '"]', st)) return null;
+      var el = E('div');
+      el.className = 'sl-pop sl-pop-' + (o.level || 'tip');
+      el.setAttribute('data-pop-key', o.key);
+      el.setAttribute('data-pop-title', o.title || '');
+      el.innerHTML = '<div class="sl-pop-head"><span class="sl-pop-title"></span></div><div class="sl-pop-body"><p class="sl-pop-desc"></p></div>';
+      el.querySelector('.sl-pop-title').textContent = o.title || this.LABEL[o.level] || '提示';
+      el.querySelector('.sl-pop-desc').textContent = o.desc || '';
+      if (o.href) {
+        var a = E('a');
+        a.className = 'sl-pop-link';
+        a.href = o.href;
+        a.textContent = o.linkText || '查看';
+        el.querySelector('.sl-pop-body').appendChild(a);
+      }
+      st.appendChild(el);
+      this.wire(el);
+      this.stack.style.display = '';
+      el.style.display = '';
+      return el;
+    },
+    today: function() {
+      var d = new Date();
+      return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    },
+    msToMidnight: function() {
+      var n = new Date();
+      var t = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1, 0, 0, 0);
+      return t.getTime() - n.getTime();
+    },
+    rollDay: function() {
+      var t = this.today();
+      if (t === this.day) return;
+      this.day = t;
+      this.refresh();
+      /* 跨过 0 点：模态弹窗也重新放行一次（昨天的「今日不再提示」不该继续管今天） */
+      var mods = $qa('.sl-pop[data-pop-modal]');
+      for (var i = 0; i < mods.length; i++) {
+        var k = mods[i].getAttribute('data-pop-key');
+        if (!k || this.snoozed(k)) continue;
+        if ($q('.sl-pop-mask')) continue; /* 已经有一块弹窗开着就不重复弹 */
+        mods[i].removeAttribute('data-pop-modal-opened');
+        this.toModal(mods[i]);
+      }
+    },
+    /** 该弹窗今天是否已被「今日不再提示」关掉 */
+    snoozed: function(key) {
+      var map = storageGet('pop-snooze', null);
+      return !!(map && map[key] === this.day);
+    },
+    snooze: function(key) {
+      var map = storageGet('pop-snooze', null) || {};
+      map[key] = this.today();
+      storageSet('pop-snooze', map);
+    },
+    unsnooze: function(key) {
+      var map = storageGet('pop-snooze', null) || {};
+      delete map[key];
+      storageSet('pop-snooze', map);
+    },
+    ensureStack: function() {
+      if (this.stack) return this.stack;
+      var st = $q('.sl-pop-stack');
+      if (!st) {
+        st = E('div');
+        st.className = 'sl-pop-stack';
+        st.id = 'sl-pop-stack';
+        document.body.appendChild(st);
+      }
+      this.stack = st;
+      return st;
+    },
+    /** 绑定关闭按钮 + 注入「今日不再提示」页脚 */
+    wire: function(card) {
+      var self = this;
+      var key = card.getAttribute('data-pop-key');
+      if (!key || card.getAttribute('data-pop-wired') === 'true') return;
+      card.setAttribute('data-pop-wired', 'true');
+      var close = $q('.sl-pop-close', card);
+      if (!close) {
+        var head = $q('.sl-pop-head', card);
+        if (!head) {
+          head = E('div');
+          head.className = 'sl-pop-head';
+          var span = E('span');
+          span.className = 'sl-pop-title';
+          span.innerHTML = card.getAttribute('data-pop-title') || '提示';
+          head.appendChild(span);
+          card.insertBefore(head, card.firstChild);
+        }
+        close = E('button');
+        close.type = 'button';
+        close.className = 'sl-pop-close';
+        close.title = '关闭';
+        close.setAttribute('aria-label', '关闭');
+        close.innerHTML = '&times;';
+        head.appendChild(close);
+      }
+      var label = null;
+      if (card.getAttribute('data-pop-snooze') !== 'off') {
+        var foot = $q('.sl-pop-foot', card);
+        if (!foot) {
+          foot = E('div');
+          foot.className = 'sl-pop-foot';
+          card.appendChild(foot);
+        }
+        label = E('label');
+        label.className = 'sl-pop-snooze';
+        var box = E('input');
+        box.type = 'checkbox';
+        var txt = E('span');
+        txt.innerHTML = this.txt('今日不再提示', "Don't show again today");
+        label.appendChild(box);
+        label.appendChild(txt);
+        foot.appendChild(label);
+      }
+      close.addEventListener('click', function() {
+        if (label && label.querySelector('input').checked) self.snooze(key);
+        self.dismiss(card);
+      });
+    },
+    /** 隐藏一个弹窗：小弹窗淡出后收起，模态弹窗连遮罩一起收 */
+    dismiss: function(card) {
+      card.classList.add('hidden');
+      var wrap = card.closest('.sl-pop-mask');
+      setTimeout(function() {
+        card.style.display = 'none';
+        if (wrap) { wrap.classList.remove('visible'); setTimeout(function() { if (wrap.parentNode) wrap.parentNode.removeChild(wrap); }, 240); }
+      }, 260);
+    },
+    /** 按今日不再提示状态决定放行还是压住（模态来源块交给 toModal 自己管，不在这里显隐） */
+    refresh: function() {
+      var cards = $qa('.sl-pop[data-pop-key]');
+      for (var i = 0; i < cards.length; i++) {
+        var c = cards[i], key = c.getAttribute('data-pop-key');
+        if (c.classList.contains('sl-pop-modal')) continue;
+        if (c.getAttribute('data-pop-modal') !== null) {
+          if (this.snoozed(key)) c.style.display = 'none';
+          continue;
+        }
+        if (this.snoozed(key)) {
+          if (!c.classList.contains('hidden')) { c.classList.add('hidden'); c.style.display = 'none'; }
+        } else {
+          c.classList.remove('hidden');
+          c.style.display = '';
+        }
+      }
+      var stack = $q('.sl-pop-stack');
+      if (stack) {
+        var live = $qa('.sl-pop:not(.hidden)', stack);
+        stack.style.display = live.length ? '' : 'none';
+      }
+    },
+    /** 把文档流里的一块 .sl-pop 搬进居中模态弹窗 */
+    toModal: function(card) {
+      var self = this;
+      var key = card.getAttribute('data-pop-key');
+      if (!key || card.getAttribute('data-pop-modal-opened') === 'true') return;
+      if (this.snoozed(key)) { card.style.display = 'none'; return; }
+      card.setAttribute('data-pop-modal-opened', 'true');
+      var level = 'tip';
+      if (card.classList.contains('sl-pop-warn')) level = 'warn';
+      else if (card.classList.contains('sl-pop-note')) level = 'note';
+      var mask = E('div');
+      mask.className = 'sl-pop-mask';
+      var modal = E('div');
+      modal.className = 'sl-pop sl-pop-modal sl-pop-' + level;
+      modal.setAttribute('data-pop-key', key + '-modal');
+      modal.setAttribute('role', 'dialog');
+      modal.setAttribute('aria-modal', 'true');
+      var head = E('div');
+      head.className = 'sl-pop-head';
+      head.innerHTML = '<span class="sl-pop-title">' + (card.getAttribute('data-pop-title') || this.LABEL[level]) + '</span>' +
+        '<span class="sl-pop-tag">' + this.LABEL[level] + '</span>';
+      modal.appendChild(head);
+      var body = E('div');
+      body.className = 'sl-pop-body';
+      var srcBody = $q('.sl-pop-body', card) || $q('.sl-pop-desc', card);
+      body.innerHTML = srcBody ? srcBody.innerHTML : card.innerHTML;
+      modal.appendChild(body);
+      var foot = E('div');
+      foot.className = 'sl-pop-foot';
+      foot.innerHTML = '<label class="sl-pop-snooze"><input type="checkbox"><span></span></label><button type="button" class="sl-pop-btn"></button>';
+      foot.querySelector('.sl-pop-snooze span').innerHTML = self.txt('关闭后今日不再提示', "Don't show again today");
+      foot.querySelector('.sl-pop-btn').innerHTML = self.txt('知道了', 'Got it');
+      modal.appendChild(foot);
+      mask.appendChild(modal);
+      document.body.appendChild(mask);
+      requestAnimationFrame(function() { mask.classList.add('visible'); });
+      var closeBtn = foot.querySelector('.sl-pop-btn');
+      var checkBox = foot.querySelector('input');
+      var shut = function() {
+        if (checkBox.checked) self.snooze(key);
+        mask.classList.remove('visible');
+        card.style.display = checkBox.checked ? 'none' : '';
+        setTimeout(function() { if (mask.parentNode) mask.parentNode.removeChild(mask); }, 240);
+        document.removeEventListener('keydown', onKey);
+      };
+      var onKey = function(e) { if (e.key === 'Escape' || e.keyCode === 27) shut(); };
+      closeBtn.addEventListener('click', shut);
+      mask.addEventListener('click', function(e) { if (e.target === mask) shut(); });
+      document.addEventListener('keydown', onKey);
+      card.style.display = 'none';
+    },
+    /** 整摞小弹窗可拖走（拖动任一弹窗的页头生效） */
+    bindDrag: function(stack) {
       var dragging = false, sx, sy, ix, iy;
-      hdr.addEventListener('mousedown', function(e) {
-        dragging = true; sx = e.clientX; sy = e.clientY;
-        var r = el.getBoundingClientRect(); ix = r.left; iy = r.top;
-        el.style.transition = 'none';
-        el.style.right = 'auto'; el.style.bottom = 'auto';
-        el.style.left = ix + 'px'; el.style.top = iy + 'px';
+      stack.addEventListener('mousedown', function(e) {
+        var head = e.target.closest ? e.target.closest('.sl-pop-head') : null;
+        if (!head) return;
+        if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL' || e.target.tagName === 'A') return;
+        var r = stack.getBoundingClientRect();
+        dragging = true; sx = e.clientX; sy = e.clientY; ix = r.left; iy = r.top;
+        stack.style.transition = 'none';
+        stack.style.right = 'auto';
+        stack.style.left = ix + 'px';
+        stack.style.top = iy + 'px';
         e.preventDefault();
       });
       document.addEventListener('mousemove', function(e) {
         if (!dragging) return;
-        el.style.left = (ix + e.clientX - sx) + 'px';
-        el.style.top = (iy + e.clientY - sy) + 'px';
+        var w = stack.offsetWidth, h = stack.offsetHeight;
+        var x = Math.max(0, Math.min(window.innerWidth - w, ix + e.clientX - sx));
+        var y = Math.max(0, Math.min(window.innerHeight - Math.min(h, 80), iy + e.clientY - sy));
+        stack.style.left = x + 'px';
+        stack.style.top = y + 'px';
       });
       document.addEventListener('mouseup', function() {
         if (!dragging) return;
-        dragging = false; el.style.transition = '';
+        dragging = false;
+        stack.style.transition = '';
       });
+    },
+    /** 轻提示：三等级通用，1.5 秒自动收 */
+    toast: function(msg, level) {
+      var lv = this.LABEL[level] ? level : 'tip';
+      var ex = $q('.sl-pop-toast');
+      if (ex && ex.parentNode) ex.parentNode.removeChild(ex);
+      var t = E('div');
+      t.className = 'sl-pop-toast sl-pop-' + lv;
+      t.setAttribute('role', 'status');
+      t.textContent = msg;
+      document.body.appendChild(t);
+      requestAnimationFrame(function() { t.classList.add('visible'); });
+      setTimeout(function() {
+        t.classList.remove('visible');
+        setTimeout(function() { if (t.parentNode) t.parentNode.removeChild(t); }, 320);
+      }, 1500);
+    }
+  };
+
+  /* ========== 20. NavTrail —— 顶栏返回上一页 / 前进到刚才那一页 ==========
+     站点大量链接以新标签打开，浏览器历史在新标签里是空的，所以自己记一条足迹：
+     sessionStorage 存 { list:[{u,t}], idx }，新标签的首条由 document.referrer 补齐。
+     能走浏览器历史时优先走（滚动位置与缓存都在），否则直接导航到记录的那一页。 */
+  var NavTrail = {
+    t: null,
+    url: function() { return location.pathname + location.search; },
+    short: function(s) { return String(s || '').replace(/^\s*牧羊人图书馆\s*-\s*/, '').replace(/^Shepherd's Library\s*-\s*/, ''); },
+    read: function() {
+      try { return JSON.parse(sessionStorage.getItem('sl_nav_trail') || 'null'); } catch (e) { return null; }
+    },
+    write: function(v) {
+      try { sessionStorage.setItem('sl_nav_trail', JSON.stringify(v)); } catch (e) {}
+    },
+    currentTitle: function() { return this.short(document.title); },
+    init: function() {
+      var cur = this.url();
+      var t = this.read();
+      if (!t || !t.list || !t.list.length) {
+        t = { list: [], idx: -1 };
+        var ref = '';
+        try {
+          if (document.referrer) {
+            var r = document.createElement('a');
+            r.href = document.referrer;
+            if (r.origin === location.origin && r.pathname + r.search !== cur) ref = r.pathname + r.search;
+          }
+        } catch (e) {}
+        if (ref) { t.list.push({ u: ref, t: '' }); t.idx = 0; }
+        t.list.push({ u: cur, t: this.currentTitle() });
+        t.idx = t.list.length - 1;
+      } else {
+        if (t.idx > 0 && t.list[t.idx - 1] && t.list[t.idx - 1].u === cur) {
+          t.idx -= 1;
+        } else if (t.list[t.idx + 1] && t.list[t.idx + 1].u === cur) {
+          t.idx += 1;
+        } else if (t.list[t.idx] && t.list[t.idx].u === cur) {
+          /* 同页刷新 */
+        } else {
+          t.list = t.list.slice(0, t.idx + 1);
+          t.list.push({ u: cur, t: this.currentTitle() });
+          if (t.list.length > 30) t.list.shift();
+          t.idx = t.list.length - 1;
+        }
+      }
+      this.write(t);
+      this.t = t;
+      // 浏览器前进/后退常走 bfcache，脚本不会重跑：页面重新显示时补记一次足迹
+      if (!NavTrail._bound) {
+        NavTrail._bound = true;
+        window.addEventListener('pageshow', function() {
+          try { NavTrail.init(); NavTrail.sync(); } catch (e) {}
+        });
+      }
+    },
+    target: function(delta) {
+      if (!this.t) return null;
+      var i = this.t.idx + delta;
+      if (i < 0 || i >= this.t.list.length) return null;
+      return this.t.list[i];
+    },
+    go: function(delta) {
+      var to = this.target(delta);
+      if (!to) return;
+      if (delta < 0 && history.length > 1) {
+        history.back();
+        return;
+      }
+      if (delta > 0 && history.length > 1) {
+        /* 浏览器历史里未必还有前进位（用户可能手工改过地址），探一次不中就直接导航 */
+        var from = location.href;
+        history.forward();
+        setTimeout(function() {
+          if (location.href === from) location.href = to.u;
+        }, 320);
+        return;
+      }
+      location.href = to.u;
+    },
+    render: function() {
+      var bar = $q('#sl-topbar');
+      if (!bar || $q('.sl-trail')) return;
+      var self = this;
+      var wrap = E('div');
+      wrap.className = 'sl-trail';
+      var mk = function(delta, label, svg) {
+        var b = E('button');
+        b.type = 'button';
+        b.className = 'sl-trail-btn';
+        b.innerHTML = svg;
+        b.setAttribute('data-dir', String(delta));
+        b.onclick = function(ev) { if (ev) ev.stopPropagation(); self.go(delta); };
+        return b;
+      };
+      var backSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>';
+      var fwdSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>';
+      var back = mk(-1, '返回上一页', backSvg);
+      var fwd = mk(1, '前进', fwdSvg);
+      wrap.appendChild(back);
+      wrap.appendChild(fwd);
+      var brand = $q('.sl-brand', bar);
+      if (brand && brand.nextSibling) bar.insertBefore(wrap, brand.nextSibling);
+      else if (brand) bar.appendChild(wrap);
+      this.sync();
+    },
+    sync: function() {
+      var bar = $q('#sl-topbar');
+      if (!bar) return;
+      var btns = $qa('.sl-trail-btn', bar);
+      for (var i = 0; i < btns.length; i++) {
+        var d = parseInt(btns[i].getAttribute('data-dir'), 10);
+        var to = this.target(d);
+        if (to) {
+          btns[i].removeAttribute('disabled');
+          var nm = to.t || to.u.replace(/^.*\//, '').replace(/\.html$/, '');
+          btns[i].title = (d < 0 ? '返回上一页：' : '前进到刚才的页面：') + nm;
+        } else {
+          btns[i].setAttribute('disabled', 'disabled');
+          btns[i].title = d < 0 ? '没有可返回的上一页（本页在新标签中打开）' : '没有可前进的页面';
+        }
+      }
+    }
+  };
+
+  /* ========== 21. KhSide —— 知识馆侧边栏收缩 ========== */
+  var KhSide = {
+    KEY: 'sl_kh-side-off',
+    init: function() {
+      var side = $q('.kh-sidebar');
+      if (!side) return;
+      var self = this;
+      var off = false;
+      try { off = sessionStorage.getItem(this.KEY) === '1'; } catch (e) {}
+      this.set(off, true);
+      var tog = E('button');
+      tog.type = 'button';
+      tog.className = 'kh-side-toggle';
+      tog.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>';
+      tog.onclick = function(ev) { if (ev) ev.stopPropagation(); self.set(!document.documentElement.classList.contains('kh-side-off')); };
+      side.appendChild(tog);
+      var tab = E('button');
+      tab.type = 'button';
+      tab.className = 'kh-side-tab';
+      tab.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>';
+      tab.title = '展开侧栏';
+      tab.onclick = function(ev) { if (ev) ev.stopPropagation(); self.set(false); };
+      document.body.appendChild(tab);
+    },
+    set: function(off, silent) {
+      document.documentElement.classList.toggle('kh-side-off', !!off);
+      try { sessionStorage.setItem(this.KEY, off ? '1' : '0'); } catch (e) {}
+      var tog = $q('.kh-side-toggle');
+      if (tog) {
+        tog.title = off ? '展开侧栏' : '收起侧栏';
+        tog.setAttribute('aria-label', off ? '展开侧栏' : '收起侧栏');
+      }
+      if (!silent) {
+        try { SlPop.toast(off ? '侧栏已收起' : '侧栏已展开', 'tip'); } catch (e) {}
+      }
     }
   };
 
@@ -1395,8 +1853,11 @@
     try { StyleEnforcer.init(); } catch(e) { console.warn('[SL] StyleEnforcer error:', e.message); }
     try { FloatFix.init(); } catch(e) { console.warn('[SL] FloatFix error:', e.message); }
     try { MobileNavToggle.init(); } catch(e) { console.warn('[SL] MobileNavToggle error:', e.message); }
-    try { FloatClose.init(); } catch(e) { console.warn('[SL] FloatClose error:', e.message); }
-    try { FloatDrag.init(); } catch(e) { console.warn('[SL] FloatDrag error:', e.message); }
+    try { SlPop.init(); } catch(e) { console.warn('[SL] SlPop error:', e.message); }
+    try { NavTrail.init(); NavTrail.render(); } catch(e) { console.warn('[SL] NavTrail error:', e.message); }
+    try { KhSide.init(); } catch(e) { console.warn('[SL] KhSide error:', e.message); }
+    /* 对外暴露：页面脚本可用 SLPop.toast / SLPop.card / SLNav */
+    try { window.SLPop = SlPop; window.SLNav = NavTrail; window.SLKhSide = KhSide; } catch(e) {}
     try { NewsSorter.init(); } catch(e) { console.warn('[SL] NewsSorter error:', e.message); }
     try { ReadingProgress.init(); } catch(e) { console.warn('[SL] ReadingProgress error:', e.message); }
     try { SearchHighlight.init(); } catch(e) { console.warn('[SL] SearchHighlight error:', e.message); }
