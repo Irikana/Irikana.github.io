@@ -196,7 +196,7 @@ description: "牧羊人图书馆排版与视觉设计规范。在修改样式、
 **HTML 模板**：
 ```html
 <div class="callout">
-  <span class="icon">ℹ️</span>
+  <span class="icon">※</span>
   <p>此处为 callout 提示内容。</p>
 </div>
 ```

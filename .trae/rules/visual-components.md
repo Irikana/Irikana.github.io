@@ -214,10 +214,14 @@
 
 ```html
 <div class="callout">
-  <span class="icon">ℹ️</span>
+  <span class="icon">※</span>
   <p>此处为 callout 提示内容。</p>
 </div>
 ```
+
+**规范要求**：
+- 图标位一律用排版符号 **※**（U+203B 参考记号，属文字记号）；**禁止**放 emoji（历史上这里是 ℹ️，站点 alpha-023 起全站替换为 ※，含已发布文章与 App 的插入片段）
+- `.icon` 槽位宽 20px，放单个记号即可；需要更复杂图标时改用 CSS/SVG，不放图片表情
 
 ---
 
