@@ -61,6 +61,11 @@
           <p>- 该文是 addon 公开发布记录，性质上不是测试文章：文件由 library/misc/experimental/minesia-first-public-test.html 移至 library/paper/minesia-first-public-test.html，页面内的相对路径与文章性质标签（实验性文章 改为 信息文章）一并更正，正文一字未改</p>
           <p>- 引用同步：library/library.html（测试文章列表移入普通文章列表）、en/library/library.html（同处补上原本缺失的测试文章条目）、news.html、en/news.html、navigator.html（并入普通文章，空出的测试文章分组移除）、library/article-registry.html（路径与性质标签）、以及站内搜索索引</p>
 
+          <p><strong>七、Callout 图标位取消表情例外，统一用排版符号 ※</strong></p>
+          <p>- 按作者指令，Callout 的图标位不再使用表情符号，网站里已经用到的一并替换：全站 span.icon 槽位统一为 ※（U+203B 参考记号，属文字记号），落在 en/library/feature.html、library/paper/A Test of Opus 5 Long Shot With No One's Watch.html（1 处）、library/paper/restless-material-dialog.html（6 处）与组件标准展示页；只换图标槽位，正文文字、结构与图片未动</p>
+          <p>- 同步废除规范中的「既有 emoji 图标属于既有内容可保留」例外条款：.trae/rules/project_rules.md 与 .trae/skills、.zcode、.reasonix 各技能副本改为明确禁止，.trae/rules/visual-components.md 的通用 Callout 一节补「规范要求」（图标位一律 ※，需要更复杂图标改用 CSS/SVG）；updateLog 历史日志页中作为反例记录的表情符号按「日志不回改」原则保留</p>
+          <p>- 原先按语义区分的 💡 想法、📌 口诀、🔗 串联、📋 总结、🎯 结论等标记统一收敛为 ※；如需继续区分，可改用文字短标签（如「思」「诀」「链」「结」）填入同一图标槽位，规范允许文字记号，只是不允许表情符号</p>
+
         </div>
       </section>
 
@@ -101,6 +106,8 @@
           <p>- 知识并入文章子类型（entryType），删除并行的词条表单；旧草稿读取时自动迁移，不覆写存储</p>
           <p>- 与本次站点 alpha-023 对齐：App 生成的知识词条页面不再内联知识馆骨架与手写明暗覆写，改由 css/library-refit.css 与主题令牌承担；上传到仓库的页面也不再携带一整份内联 style.css（网站样式只在预览时套上）</p>
           <p>- 构建流水线按统一版本规则整改：Release 只在推送 vA.B.C 标签时创建（普通 push 只出 artifact），产物名从 package.json 读取；新增 scripts/ci-version.js 注入构建号；版本号收敛为三段 0.0.16</p>
+          <p>- 修掉一次 CI 中断：android-actions/setup-android@v3 写死的 commandline-tools 下载地址已被 Google 清理，2026-09-15 起该步骤直接 404，构建在 npm ci 之前 11 秒内即失败；现升 @v4，setup-java 一并升到不再弃用的 v5，SlyWrite Lite 的同源 CI 同步修</p>
+          <p>- 词条「关联词条」改为可在 App 里手工管理：元数据表单词条块新增多行输入，每行「标题|站内相对路径.html|关系说明（可选）」，渲染成本站权威结构的 ul.kh-related-list 与 span.kh-related-relation；手工条目优先，正文里的站内链接去重后自动补齐，图谱节点共用同一份合并结果</p>
         </div>
       </section>
 
