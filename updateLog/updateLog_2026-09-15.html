@@ -128,7 +128,14 @@
           <p>- en/library/paper/knowledge-hall-launch.html 的资源与导航前缀整体少一级：样式表指向不存在的 en/css/，动态脚本指向仓库之外，等于该页一直没有样式与动态功能；按同级页面写法逐项校正</p>
           <p>- updateLog_2026-06-14.html 的导航链接指向 updateLog/ 下不存在的 intro.html 等，改为 ../library/ 前缀（历史日志正文未改）</p>
           <p>- navigator.html 的文章区此前只列 4 条，与 library.html 的收录严重脱节；现按 library.html 的分类与顺序重建（普通文章、作品文章、杂物文章、测试文章四组），并把标题里的"前三个"改为"下列"（实际列出四组）</p>
-          <p>- 复核：站内本地引用（排除更新日志页与组件示例页里的代码样例）已无可解析性失败</p>
+          <p>- 复核：站内本地引用（排除更新日志页与组件示例页里的代码样例）已无可解析性失败。此条复核结论当时并不成立，实情与修复见第十二条</p>
+
+          <p><strong>十二、修复批量剥离内联样式时被吞掉的属性引号（本次回归）</strong></p>
+          <p>- 症状：第十条里剥掉内联 style.css 副本用的批量脚本吞掉了属性结束引号，8 个页面共 72 处写成 <code>&lt;a href="../../index.html class="mobile-nav-link"&gt;</code>。这使便携式导航（.mobile-nav-links）与快捷导航（.quick-nav-content）的全部链接都解析成不存在的路径，导航失效；带 target 的属性同样受损</p>
+          <p>- 处理：按属性边界逐处补回结束引号（只插入引号，不改任何文字、路径与结构），8 个文件 72 处，改动量与命中数完全一致；涉及 library/misc/Tokens for Every Day Part I.html、library/paper 下六篇（A rogue-like game、A Test of Opus 5 Long Shot With No One's Watch、Absolute In-app Update Download in SlyWrite、INSTLAB CLOUD Mobile Might Come Out Soon、The First Time to Claude Code、The Most Cheapest Vibe Coding）、misc/experimental/Test Paper 20260803N1.html</p>
+          <p>- 同类复核升级为可重复执行：新增站内相对引用全量校验（103 个页面、1705 处本地引用逐条解析为真实路径），并补一道「属性值内混入下一个属性名」的形态检测，防止此类损伤再次静默通过</p>
+          <p>- 顺带修掉复核中发现的另外两处真实失效引用：组件标准展示页的海报示例图指向不存在的 library/image/poster/SOTM_I_2026后记/（现改为 ../image/poster/SOTM/2026/SOTM-I-2026.png，与 news.html 实际使用的一致），以及该页知识馆小弹窗实际示例的链接少了上一级（现改为 ../knowledge-hall/index.html；同页代码块中的模板样例按根页语境保留 ./ 前缀）</p>
+          <p>- 现状：站内 1705 处本地引用中，真实失效为 0；剩余未被解析的均为模板占位符（{链接}、path/to/article.html 等）、template/ 下的参考模板与组件示例页代码块里的样例</p>
         </div>
       </section>
 
