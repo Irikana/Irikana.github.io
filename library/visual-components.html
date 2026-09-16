@@ -279,6 +279,62 @@
           </div>
         </section>
 
+        <!-- ========== Section 3.6b: 脚注 ========== -->
+        <section class="notice-header section-header page-header-section">
+          <div>
+            <h2 id="section-3-6b" class="section-title-text-main">3.6b 脚注 — .article-footnote-ref / .article-footnote-item / .article-footnote-back</h2>
+            <div class="content-bg-lightgrey">
+              <div>
+                <p>用途：正文用上标 <code>[n]</code> 引用、页脚元数据区列出脚注内容，点脚注可跳回正文原处。由 SlyWrite 撰写表单的「脚注」字段生成（正文写 <code>[^n]</code>），站点自产文章同样适用此结构。
+
+                <p style="font-weight:600;margin-bottom:8px;">实际效果：</p>
+                <p>……然而我并不是为了提交实验报告<sup class="article-footnote-ref" id="demo-fnref-1"><a href="#demo-fn-1">[1]</a></sup>尝试完成登录操作……</p>
+                <div class="article-footer-meta">
+                  <div class="article-footer-meta-item">
+                    <span class="article-footer-label">脚注：</span>
+                    <span class="article-footer-value article-footnote-list">
+                      <span class="article-footnote-item" id="demo-fn-1">[1] 脚注内容 <a href="#demo-fnref-1" class="article-footnote-back" title="返回正文">↩</a></span>
+                    </span>
+                  </div>
+                </div>
+
+                <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 模板（标准结构）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;!-- 正文引用处（嵌在段落里） --&gt;
+&lt;p&gt;……然而我并不是为了提交实验报告&lt;sup class="article-footnote-ref" id="article-fnref-1"&gt;&lt;a href="#article-fn-1"&gt;[1]&lt;/a&gt;&lt;/sup&gt;尝试完成登录操作……&lt;/p&gt;
+
+&lt;!-- 页脚元数据区（与补充说明同级） --&gt;
+&lt;div class="article-footer-meta"&gt;
+  &lt;div class="article-footer-meta-item"&gt;
+    &lt;span class="article-footer-label"&gt;脚注：&lt;/span&gt;
+    &lt;span class="article-footer-value article-footnote-list"&gt;
+      &lt;span class="article-footnote-item" id="article-fn-1"&gt;[1] 脚注内容 &lt;a href="#article-fnref-1" class="article-footnote-back" title="返回正文"&gt;↩&lt;/a&gt;&lt;/span&gt;
+    &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">配套样式（由生成器随页输出，颜色一律走主题令牌）：</p>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>.article-footnote-ref a { text-decoration: none; color: var(--color-accent); font-weight: 600; }
+.article-footnote-ref { line-height: 0; }               /* 上标不撑高行距 */
+.article-footnote-ref a { padding: 0 1px; white-space: nowrap; }
+.article-footnote-list { font-style: normal; }
+.article-footnote-item { display: block; margin: 3px 0; line-height: 1.7; font-style: normal; }
+.article-footnote-back { text-decoration: none; color: var(--color-accent); margin-left: 4px; font-weight: 600; }</code></pre>
+
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">规范要求（alpha-023 补，两条都是实测缺陷）：</p>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li><strong>脚注两类链接一律不加通用跳转箭头，且豁免必须写 <code>content: none !important</code></strong>：豁免规则为 <code>.article-footnote-ref a::after, .article-footnote-back::after { content: none !important; }</code>。通用箭头规则写作 <code>.content-bg-white a:not(.news-card-text-only):not(.news-card-image):not(.link-to-page):not([class*="nav-"]):not([class*="float"])::after</code> —— <code>:not()</code> 里每个类都计入特异性，所以它远高于 <code>.article-footnote-ref a::after</code>，不加 <code>!important</code> 豁免根本不生效。表现就是正文 <code>[1]</code> 后面拖着一枚 12px 箭头，箭头与文字之间那截空白一起变成可点击区域（观感即"链接太宽"）。<code>StyleEnforcer</code> 有同一条兜底。</li>
+                  <li><strong>返回链接只保留文本 <code>↩</code> 一枚箭头</strong>：<code>.article-footnote-back</code> 的文本已是 <code>↩</code>，再被通用规则加一枚 SVG 就是双箭头，故并入上一条豁免。</li>
+                  <li>锚点 id 必须成对：<code>article-fnref-{n}</code>（正文）与 <code>article-fn-{n}</code>（脚注条目），缺一边即悬空；正文引用的编号超出脚注条数时保留字面 <code>[^n]</code> 不生成链接。</li>
+                  <li>脚注内容必须过 <code>escapeHtml</code>；页内锚点不得写成 <code>href="#"</code> 占位。</li>
+                </ul>
+
+                <p style="margin-top:16px;font-size:13px;color:var(--color-text-light);">本节的渲染效果即真实构件，豁免规则已写在 style.css 与 StyleEnforcer 中。</p>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- ========== Section 3.7: 文章性质标签 & 标签 ========== -->
         <section class="notice-header section-header page-header-section">
           <div>

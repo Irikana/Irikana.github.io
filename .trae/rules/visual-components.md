@@ -12,44 +12,35 @@
 
 **用途**：一般性信息提示、功能说明、补充说明、"暂无条目"等中性通知。默认首选的信息框类型。
 
-**主馆标准（style.css）**：
+**标准样式（style.css）**——颜色一律走令牌，**不得再写死十六进制**：
 
 ```css
+:root {
+  --sl-box-info-bg: rgba(44, 62, 80, 0.07);
+  --sl-box-info-edge: var(--color-accent);
+  --sl-box-info-ink: #1a3a5c;
+}
+
 .function-box-blue {
-  background-color: #f8faff;
+  background-color: var(--sl-box-info-bg);
   padding: var(--space-md);
   margin: var(--space-sm) 0;
   position: relative;
   overflow: hidden;
-  border: var(--line-width) solid #d0dce8;
-  border-left: 4px solid var(--color-accent);
-}
-```
-
-**知识馆内联等效写法**（用于 knowledge-hall/ 页面，因不依赖 CSS 变量）：
-
-```css
-.function-box-blue {
-  border-left: 4px solid #2980b9;
-  background: #f0f7fd;
-  padding: 18px 22px;
-  border-radius: 0;
-  color: #2980b9;
+  border: var(--line-width) solid var(--color-border);
+  border-left: 4px solid var(--sl-box-info-edge);
+  color: var(--sl-box-info-ink);
   font-size: 15px;
   line-height: 1.7;
 }
 ```
 
-**暗色模式覆盖**（知识馆页面内联）：
+**暗色覆写**（同一组令牌，按三条明暗途径各写一次；不再按构件重复写色）：
 
 ```css
-@media (prefers-color-scheme: dark) {
-  .function-box-blue {
-    background: #1a1e24;
-    border-left-color: #2a3544;
-    color: #7ab8e0;
-  }
-}
+@media (prefers-color-scheme: dark) { :root { --sl-box-info-bg: rgba(122,184,224,0.12); --sl-box-info-edge:#5d9ccc; --sl-box-info-ink:#c8d6e5; } }
+html.force-dark-mode, html[data-sl-variant="dark"] { --sl-box-info-bg: rgba(122,184,224,0.12); --sl-box-info-edge:#5d9ccc; --sl-box-info-ink:#c8d6e5; }
+html.force-light-mode, html[data-sl-variant="light"] { --sl-box-info-bg: rgba(44,62,80,0.07); --sl-box-info-edge: var(--color-accent); --sl-box-info-ink:#1a3a5c; }
 ```
 
 **HTML 模板**：
@@ -63,8 +54,8 @@
 **规范要求**：
 - font-size 必须为 **15px**
 - line-height 必须为 **1.7**
-- 知识馆页面必须使用内联写法（硬编码颜色值），不可依赖 CSS 变量
-- 主馆页面使用 style.css 中的变量版本
+- 底色必须是半透明令牌（`--sl-box-info-bg`），这样六套配色换底色时框体跟着变；alpha-023 之前写作近白色 `#f8faff` / `rgba(248,250,255,0.85)`，导致「换配色只有线条变、背景不变」
+- **知识馆页面不再写内联等效样式**：骨架与配色由 `css/style.css` + `css/library-refit.css` 承担，`StyleEnforcer` 有同名兜底（旧"知识馆必须内联硬编码"的写法已随 alpha-023 废除）
 
 ---
 
@@ -115,47 +106,24 @@
 
 **用途**：仅用于真正需要警示的内容（Alpha/Beta 阶段重要建设状态提醒、内容时效性警示、需要读者特别注意的约束条件）。**未经作者明确许可不得使用。**
 
-**主馆标准（style.css）**：
+**标准样式（style.css）**——同样只走令牌（`--sl-box-warn-*`，定义在 `:root`，暗色由三条明暗途径覆写）：
 
 ```css
 .notice-box-red {
-  background-color: #fef9f9;
+  background-color: var(--sl-box-warn-bg);
   padding: var(--space-md);
   margin: var(--space-md) 0;
   position: relative;
   overflow: hidden;
-  border: var(--line-width) solid #f5c6c6;
-  border-left: 4px solid #e74c3c;
-  color: #a93226;
+  border: var(--line-width) solid var(--color-border);
+  border-left: 4px solid var(--sl-box-warn-edge);
+  color: var(--sl-box-warn-ink);
   font-size: 15px;
   line-height: 1.8;
 }
 ```
 
-**知识馆内联等效写法**：
-
-```css
-.notice-box-red {
-  border-left: 4px solid #c0392b;
-  background: #fdf2f2;
-  padding: 18px 22px;
-  color: #c0392b;
-  font-size: 17px;
-  line-height: 1.8;
-}
-```
-
-**暗色模式覆盖**（知识馆页面内联）：
-
-```css
-@media (prefers-color-scheme: dark) {
-  .notice-box-red {
-    background: #2a1a1a;
-    border-left-color: #5c3030;
-    color: #e0a0a0;
-  }
-}
-```
+`:root { --sl-box-warn-bg: rgba(192, 57, 43, 0.07); --sl-box-warn-edge: #c0392b; --sl-box-warn-ink: #a04030; }`，暗色覆写为 `rgba(231,76,60,0.12)` / `#e0a0a0`（三条途径各写一次，与蓝框同一套机制）。
 
 **HTML 模板**：
 
@@ -445,6 +413,52 @@ details details {
   </div>
 </div>
 ```
+
+---
+
+## 3.6b 脚注 — `.article-footnote-ref` / `.article-footnote-item` / `.article-footnote-back`
+
+**用途**：正文用上标 `[n]` 引用、页脚元数据区列出脚注内容，点脚注可跳回正文原处。由 SlyWrite 撰写表单的「脚注」字段生成（正文写 `[^n]`），站点自产文章同样适用此结构。
+
+**标准结构**：
+
+```html
+<!-- 正文引用处（嵌在段落里） -->
+<p>……然而我并不是为了提交实验报告<sup class="article-footnote-ref" id="article-fnref-1"><a href="#article-fn-1">[1]</a></sup>尝试完成登录操作……</p>
+
+<!-- 页脚元数据区（与补充说明同级） -->
+<div class="article-footer-meta">
+  <div class="article-footer-meta-item">
+    <span class="article-footer-label">脚注：</span>
+    <span class="article-footer-value article-footnote-list">
+      <span class="article-footnote-item" id="article-fn-1">[1] 脚注内容 <a href="#article-fnref-1" class="article-footnote-back" title="返回正文">↩</a></span>
+    </span>
+  </div>
+</div>
+```
+
+**配套样式**（由生成器随页输出，颜色一律走主题令牌）：
+
+```css
+.article-footnote-ref a { text-decoration: none; color: var(--color-accent); font-weight: 600; }
+.article-footnote-ref { line-height: 0; }               /* 上标不撑高行距 */
+.article-footnote-ref a { padding: 0 1px; white-space: nowrap; }
+.article-footnote-list { font-style: normal; }
+.article-footnote-item { display: block; margin: 3px 0; line-height: 1.7; font-style: normal; }
+.article-footnote-back { text-decoration: none; color: var(--color-accent); margin-left: 4px; font-weight: 600; }
+```
+
+**规范要求（alpha-023 补，两条都是实测缺陷）**：
+
+- **脚注两类链接一律不加通用跳转箭头，且豁免必须写 `content: none !important`**：
+  ```css
+  .article-footnote-ref a::after,
+  .article-footnote-back::after { content: none !important; }
+  ```
+  通用箭头规则写作 `.content-bg-white a:not(.news-card-text-only):not(.news-card-image):not(.link-to-page):not([class*="nav-"]):not([class*="float"])::after` —— `:not()` 里每个类都计入特异性，所以它远高于 `.article-footnote-ref a::after`，不加 `!important` 豁免根本不生效。表现就是正文 `[1]` 后面拖着一枚 12px 箭头，箭头与文字之间那截空白一起变成可点击区域（观感即"链接太宽"）。`StyleEnforcer` 有同一条兜底。
+- **返回链接只保留文本 `↩` 一枚箭头**：`.article-footnote-back` 的文本已是 `↩`，再被通用规则加一枚 SVG 就是双箭头，故并入上一条豁免。
+- 锚点 id 必须成对：`article-fnref-{n}`（正文）与 `article-fn-{n}`（脚注条目），缺一边即悬空；正文引用的编号超出脚注条数时保留字面 `[^n]` 不生成链接。
+- 脚注内容必须过 `escapeHtml`；页内锚点不得写成 `href="#"` 占位。
 
 ---
 

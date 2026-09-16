@@ -15,6 +15,14 @@
   --color-accent-light: #34495e;
   --color-accent-hover: #1a252f;
   --line-width: 1px;
+  /* 提示框语义色：底色用半透明，换配色时会透出当前主题的背景，
+     不再像旧写法那样在近白 rgba 上钉死一块白斑（换配色只有描边变、背景不变） */
+  --sl-box-info-bg: rgba(44, 62, 80, 0.07);
+  --sl-box-info-edge: var(--color-accent);
+  --sl-box-info-ink: #1a3a5c;
+  --sl-box-warn-bg: rgba(192, 57, 43, 0.07);
+  --sl-box-warn-edge: #c0392b;
+  --sl-box-warn-ink: #a04030;
   --radius-sm: 0px;
   --radius-md: 0px;
   --space-xs: 4px;
@@ -450,14 +458,16 @@ img {
 }
 
 .notice-box-red {
-  background-color: rgba(254, 249, 249, 0.85);
+  /* 半透明底色 + 令牌描边：换配色时底色会透出当前主题的背景，
+     旧写法是写死的近白 rgba(254,249,249,0.85)，在羊皮纸 / 夜读下永远是一块白斑 */
+  background-color: var(--sl-box-warn-bg);
   padding: var(--space-md);
   margin: var(--space-md) 0;
   position: relative;
   overflow: hidden;
-  border: var(--line-width) solid rgba(245, 198, 198, 0.8);
-  border-left: 4px solid #e74c3c;
-  color: #a04030;
+  border: var(--line-width) solid var(--color-border);
+  border-left: 4px solid var(--sl-box-warn-edge);
+  color: var(--sl-box-warn-ink);
   font-size: 15px;
   line-height: 1.8;
 }
@@ -469,14 +479,14 @@ img {
 }
 
 .function-box-blue {
-  background-color: rgba(248, 250, 255, 0.85);
+  background-color: var(--sl-box-info-bg);
   padding: var(--space-md);
   margin: var(--space-sm) 0;
   position: relative;
   overflow: hidden;
-  border: var(--line-width) solid rgba(208, 220, 232, 0.8);
-  border-left: 4px solid var(--color-accent);
-  color: #1a3a5c;
+  border: var(--line-width) solid var(--color-border);
+  border-left: 4px solid var(--sl-box-info-edge);
+  color: var(--sl-box-info-ink);
   font-size: 15px;
   line-height: 1.7;
 }
@@ -1639,9 +1649,10 @@ strong {
   display: inline-block;
   font-size: 11px;
   font-weight: 600;
-  color: #e74c3c;
-  background-color: #fef9f9;
-  border: 1px solid #f5c6c6;
+  /* 与提示框同一套语义令牌：底色半透明、描边走主题，换配色时不会留一块写死的白斑 */
+  color: var(--sl-box-warn-edge);
+  background-color: var(--sl-box-warn-bg);
+  border: 1px solid var(--color-border);
   padding: 2px 8px;
   margin-left: 8px;
   vertical-align: middle;
@@ -2498,10 +2509,24 @@ details details {
 
 /* 脚注链接不加跳转箭头：
    正文脚注引用 [1] 已用上标数字表意，脚注返回 ↩ 已有文本箭头，
-   避免与通用链接箭头叠加成双箭头 */
+   避免与通用链接箭头叠加成双箭头。
+   注意必须带 !important：上面的通用规则是 .content-bg-white a:not(...):not(...) 一长串，
+   特异性远高于本条，不加 !important 会被压过去（alpha-023 实测：脚注引用后面拖着一截
+   可点击的空白箭头，脚注返回处出现两个箭头）。 */
 .article-footnote-ref a::after,
 .article-footnote-back::after {
-  content: none;
+  content: none !important;
+  margin: 0 !important;
+}
+
+/* 上标脚注引用本身收紧：链接区只包住 [n]，不留额外间距 */
+.article-footnote-ref {
+  line-height: 0;
+}
+
+.article-footnote-ref a {
+  padding: 0 1px;
+  white-space: nowrap;
 }
 
 /* ========== Dark Mode ========== */
@@ -3324,6 +3349,28 @@ details details {
   line-height: 1.5;
 }
 
+/* 正文层命中结果的小标记 */
+.search-result-kind {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 4px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border);
+  vertical-align: 1px;
+}
+
+/* 正文检索进行中的提示行 */
+.search-ft-hint {
+  margin-top: var(--space-sm);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  opacity: 0.8;
+}
+
 .search-highlight {
   background-color: #fff3cd;
   color: inherit;
@@ -3492,53 +3539,38 @@ details details {
   background-color: #ffffff !important;
 }
 
-/* 提示框 - 暗色模式适配（半透明浅色） */
-.force-dark-mode .function-box-blue {
-  background-color: rgba(44, 62, 80, 0.15);
-  border-color: rgba(93, 156, 204, 0.3);
-  border-left-color: #5d9ccc;
-  color: #c8d6e5;
-}
-
-.force-dark-mode .notice-box-red {
-  background-color: rgba(80, 30, 30, 0.15);
-  border-color: rgba(200, 100, 100, 0.2);
-  border-left-color: #c0392b;
-  color: #e0a0a0;
-}
-
+/* 提示框语义色 - 暗色覆写（三条途径都要覆盖：系统偏好、手动切暗、主题令牌变体）
+   只有这三组令牌随明暗变，构件本体不再各写一份 rgba —— 这是换配色时背景跟着变的关键 */
 @media (prefers-color-scheme: dark) {
-  .function-box-blue {
-    background-color: rgba(44, 62, 80, 0.15);
-    border-color: rgba(93, 156, 204, 0.3);
-    border-left-color: #5d9ccc;
-    color: #c8d6e5;
+  :root {
+    --sl-box-info-bg: rgba(122, 184, 224, 0.12);
+    --sl-box-info-edge: #5d9ccc;
+    --sl-box-info-ink: #c8d6e5;
+    --sl-box-warn-bg: rgba(231, 76, 60, 0.12);
+    --sl-box-warn-edge: #c0392b;
+    --sl-box-warn-ink: #e0a0a0;
   }
 }
 
-.force-dark-mode .quote-box-grey {
-  background-color: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
-  border-left-color: rgba(255, 255, 255, 0.25);
-  color: #a0a0a0;
+html.force-dark-mode,
+html[data-sl-variant="dark"] {
+  --sl-box-info-bg: rgba(122, 184, 224, 0.12);
+  --sl-box-info-edge: #5d9ccc;
+  --sl-box-info-ink: #c8d6e5;
+  --sl-box-warn-bg: rgba(231, 76, 60, 0.12);
+  --sl-box-warn-edge: #c0392b;
+  --sl-box-warn-ink: #e0a0a0;
 }
 
-@media (prefers-color-scheme: dark) {
-  .quote-box-grey {
-    background-color: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.1);
-    border-left-color: rgba(255, 255, 255, 0.25);
-    color: #a0a0a0;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .notice-box-red {
-    background-color: rgba(80, 30, 30, 0.15);
-    border-color: rgba(200, 100, 100, 0.2);
-    border-left-color: #c0392b;
-    color: #e0a0a0;
-  }
+/* 手动切亮色要能压回亮色值（系统处于暗色偏好时同样成立） */
+html.force-light-mode,
+html[data-sl-variant="light"] {
+  --sl-box-info-bg: rgba(44, 62, 80, 0.07);
+  --sl-box-info-edge: var(--color-accent);
+  --sl-box-info-ink: #1a3a5c;
+  --sl-box-warn-bg: rgba(192, 57, 43, 0.07);
+  --sl-box-warn-edge: #c0392b;
+  --sl-box-warn-ink: #a04030;
 }
 
 /* 版本号显示 */

@@ -198,6 +198,8 @@
       if (!this.overlay) return;
       this.overlay.classList.remove('active');
       this.isOpen = false;
+      this.query = '';
+      this.results = [];
       var inp = $('sl-si');
       var res = $('sl-sr');
       if (inp) inp.value = '';
@@ -207,22 +209,166 @@
     doSearch: function(q) {
       var box = $('sl-sr');
       if (!box) return;
-      if (!q || !q.trim()) { box.innerHTML = '<div class="search-help">\u8f93\u5165\u5173\u952e\u8bcd\u5f00\u59cb\u641c\u7d22</div>'; return; }
+      if (!q || !q.trim()) { box.innerHTML = '<div class="search-help">\u8f93\u5165\u5173\u952e\u8bcd\u5f00\u59cb\u641c\u7d22</div>'; this.query = ''; return; }
       q = q.toLowerCase().trim();
+      this.query = q;
       var results = [];
       for (var i = 0; i < this.data.length; i++) {
-        if (this.data[i].k.indexOf(q) > -1 || this.data[i].t.toLowerCase().indexOf(q) > -1) results.push(this.data[i]);
+        /* 关键词与标题一律转小写比对：原先直接 k.indexOf(q)，而 k 里存的是 Tokens / Claude /
+           Minesia 这类首字母大写的词，搜 token 永远命不中（中文没有大小写，所以现象是"只有英文搜不到"） */
+        var k = (this.data[i].k || '').toLowerCase();
+        var t = (this.data[i].t || '').toLowerCase();
+        if (k.indexOf(q) > -1 || t.indexOf(q) > -1) results.push({ e: this.data[i], at: '', body: false });
         if (results.length >= 10) break;
       }
-      if (!results.length) { box.innerHTML = '<div class="search-no-results">\u672a\u627e\u5230 "' + q + '" \u76f8\u5173\u7ed3\u679c</div>'; return; }
+      this.results = results;
+      this.render();
+      /* 正文层：标题与关键词索引之外，再按页面正文兜一遍（异步、结果里标注「正文」） */
+      if (q.length >= 2) this.ft.collect(q);
+    },
+
+    render: function() {
+      var box = $('sl-sr');
+      if (!box) return;
+      var q = this.query, results = this.results || [];
+      if (!results.length) {
+        box.innerHTML = '<div class="search-no-results">\u672a\u627e\u5230 "' + q + '" \u76f8\u5173\u7ed3\u679c' +
+          (this.ft.running ? '<div class="search-ft-hint">\u6b63\u5728\u68c0\u7d22\u5404\u9875\u6b63\u6587\u2026</div>' : '') + '</div>';
+        return;
+      }
       var h = '';
       for (var j = 0; j < results.length; j++) {
-        h += '<a href="' + results[j].u + (results[j].u.indexOf('?') > -1 ? '&' : '?') + 'q=' + encodeURIComponent(q) + '" class="search-result-item">';
-        h += '<span class="search-result-title">' + results[j].t + '</span>';
-        h += '<span class="search-result-excerpt">' + results[j].k.substring(0, 70) + '</span></a>';
+        var it = results[j];
+        h += '<a href="' + it.e.u + (it.e.u.indexOf('?') > -1 ? '&' : '?') + 'q=' + encodeURIComponent(q) + '" class="search-result-item">';
+        h += '<span class="search-result-title">' + it.e.t + (it.body ? '<span class="search-result-kind">\u6b63\u6587</span>' : '') + '</span>';
+        h += '<span class="search-result-excerpt">' + (it.body ? it.at : it.e.k.substring(0, 70)) + '</span></a>';
       }
       box.innerHTML = h;
-    }
+      if (this.ft.running && !this.ftDone) {
+        var hint = E('div');
+        hint.className = 'search-ft-hint';
+        hint.innerHTML = '\u6b63\u5728\u8865\u5145\u68c0\u7d22\u5404\u9875\u6b63\u6587\u2026';
+        box.appendChild(hint);
+      }
+    },
+
+    /* ========== 1b. 正文检索层 ==========
+       Search.data 的 k 是人工/上传时写入的关键词，正文内容从来不参与检索，
+       所以"文章里出现过的词"搜不到。站点是纯静态、没有构建流水线，
+       提交一份预生成索引必然过期，因此这里在浏览器里现建：
+       首次需要时按需抓取已登记页面的可见文字，转小写后匹配，
+       结果缓存在 localStorage（sl_search-text，默认 7 天有效），本次会话内不再重复抓。
+       抓取失败静默跳过，标题层结果照常显示。 */
+    ft: {
+      KEY: 'search-text',
+      TTL: 7 * 24 * 3600 * 1000,
+      CAP: 20000,       // 单页最多收录字符数
+      MAX: 80,          // 单轮最多处理页面数
+      CONC: 4,          // 并发抓取数
+      running: false,
+      startedAt: 0,
+      cache: null,
+      read: function() {
+        if (this.cache) return this.cache;
+        this.cache = storageGet(this.KEY, null) || {};
+        return this.cache;
+      },
+      save: function() {
+        var cache = this.read();
+        var keys = Object.keys(cache);
+        if (keys.length > 300) {
+          // 只保留最近用过的 300 页，避免 localStorage 越写越大
+          keys.sort(function(a, b) { return ((cache[a] && cache[a].t) | 0) - ((cache[b] && cache[b].t) | 0); });
+          for (var i = 0; i < keys.length - 300; i++) delete cache[keys[i]];
+        }
+        storageSet(this.KEY, cache);
+      },
+      plain: function(html) {
+        return String(html || '')
+          .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+          .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+          .replace(/<noscript[\s\S]*?<\/noscript>/gi, ' ')
+          .replace(/<!--[\s\S]*?-->/g, ' ')
+          .replace(/<[^>]+>/g, ' ')
+          .replace(/&nbsp;/gi, ' ')
+          .replace(/&amp;/gi, '&')
+          .replace(/&lt;/gi, '<')
+          .replace(/&gt;/gi, '>')
+          .replace(/&quot;/gi, '"')
+          .replace(/&#\d+;/g, ' ')
+          .replace(/\s+/g, ' ')
+          .toLowerCase()
+          .substring(0, this.CAP);
+      },
+      textOf: function(entry, cb) {
+        var cache = this.read();
+        var rec = cache[entry.u];
+        if (rec && rec.x !== undefined && (Date.now() - (rec.t || 0)) < this.TTL) { cb(rec.x); return; }
+        var self = this;
+        try {
+          fetch(entry.u).then(function(r) { return r.ok ? r.text() : ''; }).then(function(html) {
+            var txt = self.plain(html);
+            cache[entry.u] = { t: Date.now(), x: txt };
+            self.save();
+            cb(txt);
+          }).catch(function() { cb(''); });
+        } catch (e) { cb(''); }
+      },
+      excerpt: function(text, q) {
+        var at = text.indexOf(q);
+        if (at < 0) return '';
+        var from = Math.max(0, at - 24);
+        var piece = text.substring(from, Math.min(text.length, at + q.length + 52))
+          .replace(/^\s+/, '').replace(/[<>&]/g, ' ');
+        return (from > 0 ? '\u2026' : '') + piece + '\u2026';
+      },
+      collect: function(q) {
+        var S = Search, self = this;
+        /* 卡死兜底：一轮最多 25 秒，超时允许重开，避免某个 fetch 挂住后正文层再也不跑 */
+        if (this.running && Date.now() - this.startedAt < 25000) return;
+        if (S.query !== q) return;
+        this.running = true;
+        this.startedAt = Date.now();
+
+        var have = {};
+        for (var i = 0; i < S.results.length; i++) have[S.results[i].e.u] = true;
+        var queue = [];
+        for (var j = 0; j < S.data.length && queue.length < this.MAX; j++) {
+          var e = S.data[j];
+          if (!e || !e.u || have[e.u]) continue;
+          if (/^(https?:|file:)/i.test(e.u) && e.u.indexOf(location.host) < 0) continue;
+          if (e.u.indexOf('api.github.com') > -1) continue;
+          queue.push(e);
+        }
+
+        var idx = 0, pending = 0;
+        function lane() {
+          if (S.query !== q) { self.running = false; return; }
+          if (idx >= queue.length) {
+            if (pending === 0) { self.running = false; S.ftDone = true; S.render(); }
+            return;
+          }
+          var entry = queue[idx++];
+          pending++;
+          self.textOf(entry, function(text) {
+            pending--;
+            if (text && text.indexOf(q) > -1 && S.query === q) {
+              var dup = false;
+              for (var n = 0; n < S.results.length; n++) { if (S.results[n].e.u === entry.u) { dup = true; break; } }
+              if (!dup) {
+                S.results.push({ e: entry, at: self.excerpt(text, q), body: true });
+                if (S.results.length > 20) S.results.length = 20;
+                S.render();
+              }
+            }
+            lane();
+          });
+        }
+        var lanes = Math.max(1, Math.min(this.CONC, queue.length));
+        for (var w = 0; w < lanes; w++) lane();
+        if (!queue.length) { this.running = false; S.render(); }
+      }
+    },
   };
 
   /* ========== 2. TOC (内联式，不挤内容) ========== */
@@ -599,24 +745,13 @@
       var style = E('style');
       style.id = 'sl-style-enforcer';
       style.textContent =
-        /* 亮色模式（默认） */
-        '.function-box-blue{background-color:rgba(248,250,255,0.85)!important;border:1px solid rgba(208,220,232,0.8)!important;border-left:4px solid #2c3e50!important;color:#1a3a5c!important;font-size:15px!important;line-height:1.7!important;padding:16px!important;margin:8px 0!important;}' +
-        '.notice-box-red{background-color:rgba(254,249,249,0.85)!important;border:1px solid rgba(245,198,198,0.8)!important;border-left:4px solid #e74c3c!important;color:#a04030!important;font-size:15px!important;line-height:1.8!important;padding:16px!important;margin:16px 0!important;}' +
+        /* 提示框：颜色一律走令牌。定义与明暗覆写在 css/style.css（--sl-box-info-* / --sl-box-warn-*，
+           系统暗色偏好、手动切暗、主题令牌变体三条途径都由令牌承担）。
+           这里只兜底尺寸与描边，绝不再写死一份 rgba 副本——本 <style> 注入在 head 末尾，
+           带 !important 的旧副本会把提示框底色钉回近白色，正是「换配色只有线条变、背景不变」的成因。 */
+        '.function-box-blue{background-color:var(--sl-box-info-bg)!important;border:1px solid var(--color-border)!important;border-left:4px solid var(--sl-box-info-edge)!important;color:var(--sl-box-info-ink)!important;font-size:15px!important;line-height:1.7!important;padding:16px!important;margin:8px 0!important;}' +
+        '.notice-box-red{background-color:var(--sl-box-warn-bg)!important;border:1px solid var(--color-border)!important;border-left:4px solid var(--sl-box-warn-edge)!important;color:var(--sl-box-warn-ink)!important;font-size:15px!important;line-height:1.8!important;padding:16px!important;margin:16px 0!important;}' +
         '.quote-box-grey{background-color:var(--color-bg-subtle)!important;border:1px solid var(--color-border)!important;border-left:3px solid var(--color-text-light)!important;font-style:italic!important;color:var(--color-text-secondary)!important;padding:16px!important;margin:8px 0!important;}' +
-        /* force-dark-mode 手动切换暗色 */
-        '.force-dark-mode .function-box-blue{background-color:rgba(44,62,80,0.15)!important;border-color:rgba(93,156,204,0.3)!important;border-left-color:#5d9ccc!important;color:#c8d6e5!important;}' +
-        '.force-dark-mode .notice-box-red{background-color:rgba(80,30,30,0.15)!important;border-color:rgba(200,100,100,0.2)!important;border-left-color:#c0392b!important;color:#e0a0a0!important;}' +
-        '.force-dark-mode .quote-box-grey{background-color:rgba(255,255,255,0.04)!important;border-color:rgba(255,255,255,0.1)!important;border-left-color:rgba(255,255,255,0.25)!important;color:#a0a0a0!important;}' +
-        /* 系统偏好暗色模式 (@media prefers-color-scheme: dark) */
-        '@media (prefers-color-scheme: dark){' +
-          '.function-box-blue{background-color:rgba(44,62,80,0.15)!important;border-color:rgba(93,156,204,0.3)!important;border-left-color:#5d9ccc!important;color:#c8d6e5!important;}' +
-          '.notice-box-red{background-color:rgba(80,30,30,0.15)!important;border-color:rgba(200,100,100,0.2)!important;border-left-color:#c0392b!important;color:#e0a0a0!important;}' +
-          '.quote-box-grey{background-color:rgba(255,255,255,0.04)!important;border-color:rgba(255,255,255,0.1)!important;border-left-color:rgba(255,255,255,0.25)!important;color:#a0a0a0!important;}' +
-        '}' +
-        /* force-light-mode 手动切换亮色（覆盖系统暗色偏好） */
-        '.force-light-mode .function-box-blue{background-color:rgba(248,250,255,0.85)!important;border:1px solid rgba(208,220,232,0.8)!important;border-left:4px solid #2c3e50!important;color:#1a3a5c!important;}' +
-        '.force-light-mode .notice-box-red{background-color:rgba(254,249,249,0.85)!important;border:1px solid rgba(245,198,198,0.8)!important;border-left:4px solid #e74c3c!important;color:#a04030!important;}' +
-        '.force-light-mode .quote-box-grey{background-color:#f5f5f5!important;border:1px solid #e0e0e0!important;border-left:3px solid #888!important;font-style:italic!important;color:#555!important;}' +
         /* 阅读进度条 */
         '#sl-reading-progress{position:fixed;top:0;left:0;height:6px;background:#7fb3d5;z-index:9999;transition:width 0.1s ease-out;width:0;pointer-events:none;}' +
         /* 隐藏内联目录 */
@@ -657,6 +792,8 @@
         '.sl-pop-btn{font-size:13px;padding:7px 18px;color:var(--color-bg);background-color:var(--sl-pop-accent,var(--color-accent));border:1px solid var(--sl-pop-accent,var(--color-accent));cursor:pointer;border-radius:0;}' +
         '.sl-pop-toast{position:fixed;top:-60px;left:50%;transform:translateX(-50%);z-index:10002;padding:8px 20px;font-size:13px;color:#fff;background-color:var(--sl-pop-accent,#2c3e50);border-left:4px solid rgba(0,0,0,0.18);transition:top 0.3s ease;}' +
         '.sl-pop-toast.visible{top:20px;}' +
+        /* 脚注引用与返回链接不吃通用链接箭头（通用规则串长、特异性高，这里必须带 !important） */
+        '.article-footnote-ref a::after,.article-footnote-back::after{content:none!important;}' +
         /* 知识馆侧栏与卡片：旧页面内联写死的颜色在此统一改由主题令牌驱动 */
         '.kh-sidebar{background-color:var(--color-bg-subtle)!important;border-right:1px solid var(--color-border)!important;}' +
         '.kh-site-title{color:var(--color-accent)!important;}.kh-equality{color:var(--color-text-light)!important;}' +

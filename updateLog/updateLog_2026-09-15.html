@@ -108,6 +108,27 @@
           <p>- 构建流水线按统一版本规则整改：Release 只在推送 vA.B.C 标签时创建（普通 push 只出 artifact），产物名从 package.json 读取；新增 scripts/ci-version.js 注入构建号；版本号收敛为三段 0.0.16</p>
           <p>- 修掉一次 CI 中断：android-actions/setup-android@v3 写死的 commandline-tools 下载地址已被 Google 清理，2026-09-15 起该步骤直接 404，构建在 npm ci 之前 11 秒内即失败；现升 @v4，setup-java 一并升到不再弃用的 v5，SlyWrite Lite 的同源 CI 同步修</p>
           <p>- 词条「关联词条」改为可在 App 里手工管理：元数据表单词条块新增多行输入，每行「标题|站内相对路径.html|关系说明（可选）」，渲染成本站权威结构的 ul.kh-related-list 与 span.kh-related-relation；手工条目优先，正文里的站内链接去重后自动补齐，图谱节点共用同一份合并结果</p>
+          <p><strong>八、站内搜索修正（js/library-dynamic.js 的 Search 模块）</strong></p>
+          <p>- 根因一：关键词比对写的是 k.indexOf(q)，而索引里的关键词是 Tokens、Claude、Minesia 这类首字母大写的词，q 已转小写，于是<strong>任何英文词都搜不到</strong>（中文没有大小写，所以现象看起来像"只有英文搜不到"）。现在标题与关键词双方一律转小写</p>
+          <p>- 根因二：索引只有标题与人工关键词，正文从不参与检索，所以"文章里出现过的词"搜不到。新增正文检索层：标题层之后按需抓取已登记页面的可见文字（去标签、转小写、四路并发、单轮上限 80 页、单页上限 2 万字符），命中结果显示「正文」标记与命中片段；正文缓存在 localStorage 的 sl_search_text（默认 7 天有效），单轮超过 25 秒自动放行，抓取失败静默跳过不影响标题层</p>
+          <p>- 新增两个构件类：.search-result-kind（正文命中标记）与 .search-ft-hint（检索进行中的提示行），扁平直角；点击结果仍带 ?q= ，落地页由 SearchHighlight 高亮并滚到第一处命中</p>
+
+          <p><strong>九、脚注的两处观感缺陷</strong></p>
+          <p>- 正文脚注引用 [1] 后面拖着一整段可点击空白：通用链接箭头规则写作 .content-bg-white a:not(...):not(...)...::after，:not() 里每个类都计入特异性，远高于脚注的豁免选择器，因此豁免从未生效，12px 箭头被塞进上标，箭头与文字之间那截空白一起成了链接区。豁免现改为 content: none !important，并收紧上标（line-height 归零、链接只包住 [n]）</p>
+          <p>- 元数据脚注区出现两个箭头：返回链接文本本来就有 ↩，又被通用规则加一枚 SVG 箭头；同样并入豁免。两条兜底也写进 StyleEnforcer，历史页面的内联样式同样压得住</p>
+          <p>- 标准补第 3.6b 节「脚注」（此前这套构件只活在生成器与已发布页面里，标准从未记录），四处同步：权威源、两份技能镜像、组件标准展示页</p>
+
+          <p><strong>十、剥掉 App 上传页面里的内联 style.css 副本，并修好"换配色背景不变"</strong></p>
+          <p>- 8 个由 SlyWrite 上传的文章页各自内联了一整份<strong>过时的</strong> style.css 快照（单页 90KB 以上），而且既没有 css/library-refit.css 引用，也没有主题预应用脚本——配色系统对这些页面根本没生效：走令牌的线条会随主题变，被内联快照钉住的背景不会变。这就是"主题变得不太有用"的成因</p>
+          <p>- 现在这 8 个页面统一改为引用 style.css + library-refit.css + 主题预应用脚本（脚本逐字取自现有标准页），整块内联副本删除；单页由约 97KB 降到 6-7KB。逐页比对 main 内可见文字，与改前<strong>完全一致</strong>，正文一字未动</p>
+          <p>- 顺带修掉站点自身的同类问题：三个提示框（蓝信息框、红警告框、灰引用框）的底色原本写死为近白色 rgba，StyleEnforcer 又带 !important 钉在 head 末尾，因此换任何配色它们都不跟着变。现改为语义令牌 --sl-box-info-bg / --sl-box-info-edge / --sl-box-info-ink 与 --sl-box-warn-*（底色半透明、描边走主题令牌），暗色由「系统偏好、手动切暗、主题令牌变体」三条途径各覆写一次，构件本体不再各写一份写死副本；.deprecated-badge 同类问题一并收敛</p>
+          <p>- 根因在 App 侧已修：上传内容不再携带预览用的内联样式（generatedHtml 只存规范 HTML，网站样式只在预览时套上）</p>
+
+          <p><strong>十一、失效链接与清单同步</strong></p>
+          <p>- en/library/paper/knowledge-hall-launch.html 的资源与导航前缀整体少一级：样式表指向不存在的 en/css/，动态脚本指向仓库之外，等于该页一直没有样式与动态功能；按同级页面写法逐项校正</p>
+          <p>- updateLog_2026-06-14.html 的导航链接指向 updateLog/ 下不存在的 intro.html 等，改为 ../library/ 前缀（历史日志正文未改）</p>
+          <p>- navigator.html 的文章区此前只列 4 条，与 library.html 的收录严重脱节；现按 library.html 的分类与顺序重建（普通文章、作品文章、杂物文章、测试文章四组），并把标题里的"前三个"改为"下列"（实际列出四组）</p>
+          <p>- 复核：站内本地引用（排除更新日志页与组件示例页里的代码样例）已无可解析性失败</p>
         </div>
       </section>
 
