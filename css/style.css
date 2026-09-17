@@ -2527,6 +2527,31 @@ details details {
 .article-footnote-ref a {
   padding: 0 1px;
   white-space: nowrap;
+  text-decoration: none;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* 脚注构件的页脚部分（条目列表与返回链接）。
+   这套构件的唯一实现就在本文件：App 生成的文章页与站点自产页面一律只写结构，
+   不得在页面内联 <style> 里再抄一份——内联副本会随标准与配色演进漂移（组件标准 3.6b）。
+   旧页面里残留的内联副本与此处逐条同值，因此并存不会改变观感。 */
+.article-footnote-list {
+  font-style: normal;
+}
+
+.article-footnote-item {
+  display: block;
+  margin: 3px 0;
+  font-style: normal;
+  line-height: 1.7;
+}
+
+.article-footnote-back {
+  text-decoration: none;
+  color: var(--color-accent);
+  margin-left: 4px;
+  font-weight: 600;
 }
 
 /* ========== Dark Mode ========== */

@@ -437,7 +437,7 @@ details details {
 </div>
 ```
 
-**配套样式**（由生成器随页输出，颜色一律走主题令牌）：
+**配套样式**（唯一实现：`css/style.css`；颜色一律走主题令牌，**页面与生成器都不得内联副本**）：
 
 ```css
 .article-footnote-ref a { text-decoration: none; color: var(--color-accent); font-weight: 600; }
@@ -447,6 +447,8 @@ details details {
 .article-footnote-item { display: block; margin: 3px 0; line-height: 1.7; font-style: normal; }
 .article-footnote-back { text-decoration: none; color: var(--color-accent); margin-left: 4px; font-weight: 600; }
 ```
+
+- **样式收归全局，页面只写结构**：早期版本由生成器随页注入一份内联 `<style>` 副本，现已废止——内联副本不随配色与标准演进，正是工作区硬规则禁止「构件在页面内联写样式」的原因（同知识馆旧内联硬编码令六套配色失效的成因）。生成器 `src/templates/article.ts` 与再保存路径 `src/lib/article-parser.ts` 的 `updateArticleHtml` 都不再输出该块，后者还会把历史页面里残留的这份内联副本清掉；站点侧两处残留（INSTLAB CLOUD Mobile Might Come Out Soon.html、The Birth of SlyWrite.html）已一并剥除。
 
 **规范要求（alpha-023 补，两条都是实测缺陷）**：
 

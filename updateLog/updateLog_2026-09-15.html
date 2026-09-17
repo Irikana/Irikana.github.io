@@ -106,7 +106,7 @@
           <p>- 知识并入文章子类型（entryType），删除并行的词条表单；旧草稿读取时自动迁移，不覆写存储</p>
           <p>- 与本次站点 alpha-023 对齐：App 生成的知识词条页面不再内联知识馆骨架与手写明暗覆写，改由 css/library-refit.css 与主题令牌承担；上传到仓库的页面也不再携带一整份内联 style.css（网站样式只在预览时套上）</p>
           <p>- 构建流水线按统一版本规则整改：Release 只在推送 vA.B.C 标签时创建（普通 push 只出 artifact），产物名从 package.json 读取；新增 scripts/ci-version.js 注入构建号；版本号收敛为三段 0.0.16</p>
-          <p>- 修掉一次 CI 中断：android-actions/setup-android@v3 写死的 commandline-tools 下载地址已被 Google 清理，2026-09-15 起该步骤直接 404，构建在 npm ci 之前 11 秒内即失败；现升 @v4，setup-java 一并升到不再弃用的 v5，SlyWrite Lite 的同源 CI 同步修</p>
+          <p>- 修掉一次 CI 中断：android-actions/setup-android@v3 写死的 commandline-tools 下载地址已被 Google 清理，2026-09-15 起该步骤直接 404，构建在 npm ci 之前约 12 秒内即失败。<strong>先升 @v4 仍然失败</strong>——本仓库 run 35035978640 为 v3、run 35054440736 为 v4，两次都断在同一步，因为 v4 在镜像预装的 cmdline-tools 版本与它写死的版本不一致时同样会去下载固定构建号的包。最终改为不依赖该 action：直接使用 ubuntu runner 镜像自带的 Android SDK 与 sdkmanager，确认许可后按 --list_installed 补装缺失的 platform-tools / build-tools / platforms，全程无写死下载地址；setup-java 一并升到不再弃用的 v5，SlyWrite Lite 的同源 CI 同步整改（其 build-pc.yml 不涉及 Android SDK，未改）</p>
           <p>- 词条「关联词条」改为可在 App 里手工管理：元数据表单词条块新增多行输入，每行「标题|站内相对路径.html|关系说明（可选）」，渲染成本站权威结构的 ul.kh-related-list 与 span.kh-related-relation；手工条目优先，正文里的站内链接去重后自动补齐，图谱节点共用同一份合并结果</p>
           <p><strong>八、站内搜索修正（js/library-dynamic.js 的 Search 模块）</strong></p>
           <p>- 根因一：关键词比对写的是 k.indexOf(q)，而索引里的关键词是 Tokens、Claude、Minesia 这类首字母大写的词，q 已转小写，于是<strong>任何英文词都搜不到</strong>（中文没有大小写，所以现象看起来像"只有英文搜不到"）。现在标题与关键词双方一律转小写</p>
@@ -131,11 +131,21 @@
           <p>- 复核：站内本地引用（排除更新日志页与组件示例页里的代码样例）已无可解析性失败。此条复核结论当时并不成立，实情与修复见第十二条</p>
 
           <p><strong>十二、修复批量剥离内联样式时被吞掉的属性引号（本次回归）</strong></p>
-          <p>- 症状：第十条里剥掉内联 style.css 副本用的批量脚本吞掉了属性结束引号，8 个页面共 72 处写成 <code>&lt;a href="../../index.html class="mobile-nav-link"&gt;</code>。这使便携式导航（.mobile-nav-links）与快捷导航（.quick-nav-content）的全部链接都解析成不存在的路径，导航失效；带 target 的属性同样受损</p>
+          <p>- 症状：第十条里剥掉内联 style.css 副本用的批量脚本吞掉了属性结束引号，8 个页面共 72 处的 <code>&lt;a&gt;</code> 标签里，href 的值一路连写进了下一个属性名（值末尾直接跟 class 或 target 属性名，中间没有结束引号）。这使便携式导航（.mobile-nav-links）与快捷导航（.quick-nav-content）的全部链接都解析成不存在的路径，导航失效</p>
           <p>- 处理：按属性边界逐处补回结束引号（只插入引号，不改任何文字、路径与结构），8 个文件 72 处，改动量与命中数完全一致；涉及 library/misc/Tokens for Every Day Part I.html、library/paper 下六篇（A rogue-like game、A Test of Opus 5 Long Shot With No One's Watch、Absolute In-app Update Download in SlyWrite、INSTLAB CLOUD Mobile Might Come Out Soon、The First Time to Claude Code、The Most Cheapest Vibe Coding）、misc/experimental/Test Paper 20260803N1.html</p>
-          <p>- 同类复核升级为可重复执行：新增站内相对引用全量校验（103 个页面、1705 处本地引用逐条解析为真实路径），并补一道「属性值内混入下一个属性名」的形态检测，防止此类损伤再次静默通过</p>
+          <p>- 同类复核升级为可重复执行：新增站内相对引用全量校验（103 个页面、1700 余处本地引用逐条解析为真实路径），并补一道「属性值内混入下一个属性名」的形态检测，防止此类损伤再次静默通过</p>
           <p>- 顺带修掉复核中发现的另外两处真实失效引用：组件标准展示页的海报示例图指向不存在的 library/image/poster/SOTM_I_2026后记/（现改为 ../image/poster/SOTM/2026/SOTM-I-2026.png，与 news.html 实际使用的一致），以及该页知识馆小弹窗实际示例的链接少了上一级（现改为 ../knowledge-hall/index.html；同页代码块中的模板样例按根页语境保留 ./ 前缀）</p>
           <p>- 现状：站内 1705 处本地引用中，真实失效为 0；剩余未被解析的均为模板占位符（{链接}、path/to/article.html 等）、template/ 下的参考模板与组件示例页代码块里的样例</p>
+
+          <p><strong>十三、脚注构件的样式收归全局（构件标准同步）</strong></p>
+          <p>- 此前的写法是「配套样式由生成器随页输出」：App 生成文章时把一小份脚注 CSS 内联进页面。这与工作区硬规则「构件不得在页面内联写死布局与配色」相冲突，内联副本也不随标准与配色演进（知识馆旧内联硬编码令六套配色失效的同类问题）</p>
+          <p>- 现在脚注构件的样式唯一实现收进 css/style.css（补上 .article-footnote-list / .article-footnote-item / .article-footnote-back 与上标链接的颜色字重，全部走主题令牌）；站内两处残留副本（library/paper/INSTLAB CLOUD Mobile Might Come Out Soon.html、library/paper/The Birth of SlyWrite.html）已剥除，剥除前后观感一致（副本与全局样式逐条同值）</p>
+          <p>- App 侧同步：生成器 templates/article.ts 不再输出该内联块，再保存路径 lib/article-parser.ts 的 updateArticleHtml 还会把历史页面里残留的这份副本清掉（编辑任意旧文章即自动收敛）</p>
+          <p>- 四处标准同步：权威源 .trae/rules/visual-components.md 第 3.6b 节改写「配套样式」的归属并补禁止内联条款；站内展示页 library/visual-components.html 同节同步；.zcode 与 .reasonix 两份技能镜像同文改写（两份该节已核对逐字一致）；App 生成页属于本构件的实际使用者，一并按新规矩生成</p>
+
+          <p><strong>十四、导航枢纽与 library.html 的清单同步（App 侧）</strong></p>
+          <p>- navigator.html 的文章清单此前只靠手工维护，与 library.html 长期脱节（曾出现枢纽 4 条、馆藏 25 条）。现在 SlyWrite 发布文章（含隐藏与取消隐藏）时一并同步该页对应分类，条目句式与站点现有写法逐字一致，且可重复执行不产生重复条目</p>
+          <p>- 顺带修掉一处连带缺陷：内容编辑器里切换「隐藏」时使用的分类对象没有锚点文本，导致取消隐藏后文章再也插不回 library.html（只提示找不到分类锚点）；现按目录映射到已知分类，隐藏与取消隐藏两条路径都完整生效</p>
         </div>
       </section>
 

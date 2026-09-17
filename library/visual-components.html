@@ -312,13 +312,17 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
-                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">配套样式（由生成器随页输出，颜色一律走主题令牌）：</p>
+                <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">配套样式（唯一实现：<code>css/style.css</code>，颜色一律走主题令牌；页面与生成器都不得内联副本）：</p>
                 <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>.article-footnote-ref a { text-decoration: none; color: var(--color-accent); font-weight: 600; }
 .article-footnote-ref { line-height: 0; }               /* 上标不撑高行距 */
 .article-footnote-ref a { padding: 0 1px; white-space: nowrap; }
 .article-footnote-list { font-style: normal; }
 .article-footnote-item { display: block; margin: 3px 0; line-height: 1.7; font-style: normal; }
 .article-footnote-back { text-decoration: none; color: var(--color-accent); margin-left: 4px; font-weight: 600; }</code></pre>
+                <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
+                  <li>这套样式<strong>只存在于 <code>css/style.css</code></strong>：早期版本由生成器随页注入一份内联 <code>&lt;style&gt;</code> 副本，已废止——内联副本不随配色与标准演进，正是「构件不得在页面内联写样式」这条硬规则要防的写法</li>
+                  <li>生成器与再保存路径都不再输出该块，且再保存时会把历史页面里残留的这份内联副本清掉</li>
+                </ul>
 
                 <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">规范要求（alpha-023 补，两条都是实测缺陷）：</p>
                 <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
