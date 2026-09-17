@@ -38,6 +38,7 @@
   /* ========== 1. SEARCH ========== */
   var Search = {
     data: [
+      {t:'Token均价新史低',u:toAbs(ROOT+'library/paper/A Record Low of Token Average Price.html'),k:'Token均价新史低 A Record Low of Token Average Price 信息文章 新闻 新闻'},
       {t:'每日编程用量第一部分',u:toAbs(ROOT+'library/misc/Tokens for Every Day Part I.html'),k:'每日编程用量第一部分 Tokens for Every Day Part I 信息文章 动态'},
       {t:'无人值守开启Opus 5的长任务的尝试',u:toAbs(ROOT+'library/paper/A Test of Opus 5 Long Shot With No One\'s Watch.html'),k:'无人值守开启Opus 5的长任务的尝试 A Test of Opus 5 Long Shot With No One\'s Watch 信息文章 新闻'},
       {t:'初次使用Claude Code',u:toAbs(ROOT+'library/paper/The First Time to Claude Code.html'),k:'初次使用Claude Code The First Time to Claude Code 信息文章 新闻 新闻'},
