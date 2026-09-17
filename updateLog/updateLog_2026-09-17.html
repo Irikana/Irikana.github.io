@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年9月17日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/library-refit.css">
+<script>(function(){var d={};try{d=JSON.parse(localStorage.getItem('sl_site-pref')||'{}')||{}}catch(e){}var h=document.documentElement;function s(k,v){h.setAttribute('data-sl-'+k,d[k]||v)}s('palette','classic');s('type','songti');s('size','normal');s('measure','normal');h.setAttribute('data-sl-indent',d.indent===false?'off':'on');var m='system';try{m=JSON.parse(localStorage.getItem('sl_theme')||'"system"')}catch(e){}var k=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;h.setAttribute('data-sl-variant',(m==='dark'||(m==='system'&&k))?'dark':'light')})();</script>
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年9月17日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-09-17 · alpha-023 深层路径修复 · 测试文章归位 · 读者操作构件 · SlyWrite 词条模板修复</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">站点变更</h2>
+        <div class="section-content left-align">
+          <p><strong>一、测试文章归位并同步清单</strong></p>
+          <p>- `misc/experimental/Test Paper 20260803N1.html` 移入标准测试文章目录 `library/misc/experimental/`，页面样式、图片、导航与动态脚本的相对路径按新深度同步修正</p>
+          <p>- 中文馆藏、英文馆藏、导航枢纽、文章元数据注册表与站内搜索索引一并补齐，历史更新日志不回改</p>
+
+          <p><strong>二、动态脚本的站点根路径改为按目录深度计算</strong></p>
+          <p>- 原先按少数固定路径硬编码，导致 `library/misc/`、更深的测试文章目录与知识馆分类页算错根前缀，英文文章路径还会先被中文规则截获。现在从 `library`、`knowledge-hall`、`en`、`updateLog` 四个根级目录中识别首段并按真实层级生成 `../`</p>
+          <p>- 动态搜索补录英文文章时不再重复拼出 `en/en/library/...`</p>
+
+          <p><strong>三、新增读者操作构件</strong></p>
+          <p>- 文章页与知识词条页正文末尾自动加入「复制链接」「复制引用条目」；永久链接会去掉 query 与 hash，引用格式为「作者：《标题》，牧羊人图书馆，URL（访问日期：YYYY年M月D日）。」</p>
+          <p>- 剪贴板权限拒绝时继续走 textarea 回退，成功与失败都有明确反馈；样式为直角、主题令牌驱动并适配窄屏</p>
+          <p>- 组件标准四处同步：权威文档、`css/style.css` / `js/library-dynamic.js` 实现、站内展示页与 `.zcode` / `.reasonix` 两份技能镜像</p>
+        </div>
+      </section>
+
+      <section class="notice-header">
+        <h2 id="section-2" class="section-title-text-sub">SlyWrite 0.0.16 配套修复</h2>
+        <div class="section-content left-align">
+          <p>- 知识词条实际上传到 `knowledge-hall/categories/{分类}/{文件}.html`，模板此前按「与分类页同层」生成地址，导致样式、脚本、Logo 与全部知识馆导航失效；现按真实目录深度修正</p>
+          <p>- 生成的知识词条元数据补上经过转义的作者字段，站点读者操作构件可据此生成完整引用条目</p>
+          <p>- `CHANGELOG-0.0.16.md` 改为记录最终实现：Android CI 使用 runner 自带 SDK 并按需补组件，不再写成升级 `setup-android@v4`；App 内置更新日志数据同步再生成</p>
+        </div>
+      </section>
+
+      <div class="function-box-blue">
+        <div class="left-align">站点版本仍为 alpha-023：本批次属于当前 alpha-023 的继续收尾，不单独提升版本号。</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页 </a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门 </a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则 </a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能 </a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">回到<br>顶部</button>
+<button title="导航枢纽" class="float-button nav-hub">导航<br>枢纽</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

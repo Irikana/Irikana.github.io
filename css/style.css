@@ -1561,6 +1561,49 @@ html[data-sl-variant="dark"] .sl-pop-toast { box-shadow: 0 4px 14px rgba(0, 0, 0
   font-style: italic;
 }
 
+/* ========== Reader Actions ========== */
+.reader-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm) var(--space-md);
+  margin-top: var(--space-xl);
+  padding: var(--space-md) 0;
+  border-top: var(--line-width) solid var(--color-border);
+}
+
+.reader-actions-label {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.reader-actions-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.reader-action-btn {
+  min-height: 34px;
+  padding: 6px 12px;
+  border: var(--line-width) solid var(--color-border-dark);
+  border-radius: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text-secondary);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.reader-action-btn:hover,
+.reader-action-btn:focus-visible {
+  border-color: var(--color-accent);
+  background-color: var(--color-bg-subtle);
+  color: var(--color-accent);
+}
+
 /* ========== Article Tags & Type ========== */
 .article-type-badge,
 .article-tag {
@@ -1697,6 +1740,19 @@ strong {
 /* ========== Responsive Design ========== */
 
 @media (max-width: 768px) {
+  .reader-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .reader-actions-buttons {
+    width: 100%;
+  }
+
+  .reader-action-btn {
+    flex: 1 1 120px;
+  }
+
   .content-width-limiter {
     width: 100%;
     max-width: 100%;

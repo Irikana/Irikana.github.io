@@ -17,22 +17,57 @@
 
   var E = document.createElement.bind(document);
   var ROOT = (function() {
-    var p = location.pathname;
-    if (p.indexOf('/library/paper/') > -1) return '../../';
-    if (p.indexOf('/library/') > -1) return '../';
-    if (p.indexOf('/knowledge-hall/categories/') > -1) return '../../../';
-    if (p.indexOf('/knowledge-hall/') > -1) return '../';
-    if (p.indexOf('/en/library/paper/') > -1) return '../../../';
-    if (p.indexOf('/en/library/') > -1) return '../../';
-    if (p.indexOf('/en/') > -1) return '../';
-    if (p.indexOf('/updateLog/') > -1) return '../';
-    return './';
+    var p = location.pathname || '/';
+    var segments = p.split('/').filter(function(seg) { return !!seg; });
+    var roots = { library: true, 'knowledge-hall': true, en: true, updateLog: true };
+    var rootIndex = -1;
+    for (var i = 0; i < segments.length; i++) {
+      if (roots[segments[i]]) { rootIndex = i; break; }
+    }
+    if (rootIndex < 0) return './';
+    var hasFile = /\.[^/]+$/.test(p);
+    var depth = segments.length - rootIndex - (hasFile ? 1 : 0);
+    if (depth < 1) depth = 1;
+    return new Array(depth + 1).join('../');
   })();
 
   function toAbs(url) {
     var a = E('a');
     a.href = url;
     return a.href;
+  }
+
+  function copyText(text, done, fail) {
+    var value = String(text == null ? '' : text);
+    var onDone = typeof done === 'function' ? done : function() {};
+    var onFail = typeof fail === 'function' ? fail : function() {};
+    var fallback = function() {
+      var ta = null;
+      try {
+        ta = E('textarea');
+        ta.value = value;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        ta.style.top = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        if (!document.execCommand('copy')) throw new Error('copy command failed');
+        onDone();
+      } catch (e) {
+        onFail(e);
+      } finally {
+        if (ta && ta.parentNode) ta.parentNode.removeChild(ta);
+      }
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(onDone, fallback);
+        return;
+      }
+    } catch (e) {}
+    fallback();
   }
 
   /* ========== 1. SEARCH ========== */
@@ -45,7 +80,7 @@
       {t:'SlyWrite实现完全软件内获取更新',u:toAbs(ROOT+'library/paper/Absolute In-app Update Download in SlyWrite.html'),k:'SlyWrite实现完全软件内获取更新 Absolute In-app Update Download in SlyWrite 信息文章 新闻 新闻'},
       {t:'肉鸽游戏烘焙中',u:toAbs(ROOT+'library/paper/A rogue-like game.html'),k:'肉鸽游戏烘焙中 A rogue-like game 信息文章 新闻 新闻'},
       {t:'INSTLAB CLOUD Mobile或将问世',u:toAbs(ROOT+'library/paper/INSTLAB CLOUD Mobile Might Come Out Soon.html'),k:'INSTLAB CLOUD Mobile或将问世 INSTLAB CLOUD Mobile Might Come Out Soon 信息文章 新闻 新闻'},
-      {t:'测试文章20260803N1',u:toAbs(ROOT+'misc/experimental/Test Paper 20260803N1.html'),k:'测试文章20260803N1 Test Paper 20260803N1 实验性文章'},
+      {t:'测试文章20260803N1',u:toAbs(ROOT+'library/misc/experimental/Test Paper 20260803N1.html'),k:'测试文章20260803N1 Test Paper 20260803N1 实验性文章'},
       {t:'SlyWrite的诞生',u:toAbs(ROOT+'library/paper/The Birth of SlyWrite.html'),k:'SlyWrite的诞生 The Birth of SlyWrite 信息文章 新闻'},
       {t:'牧羊人图书馆主页',u:toAbs(ROOT+'index.html'),k:'主页 图书馆 入门 规则 功能'},
       {t:'图书馆入门',u:toAbs(ROOT+'library/intro.html'),k:'介绍 牧羊人图书馆 存放知识之地'},
@@ -177,7 +212,7 @@
                   if (!t) return;
                   var title = t[1].replace(/^\s*牧羊人图书馆\s*-\s*/, '').trim();
                   var name = f.name.replace(/\.html$/, '');
-                  var path = dir.indexOf('en/') === 0 ? 'en/' + dir + '/' + f.name : dir + '/' + f.name;
+                  var path = dir + '/' + f.name;
                   self.data.push({ t: title, u: toAbs(ROOT + path), k: title + ' ' + name });
                 }).catch(function() {});
             });
@@ -462,6 +497,104 @@
       item.className = 'article-meta-item';
       item.innerHTML = '<span class="article-meta-label">&#128214; \u9605\u8bfb\uff1a</span><span class="article-meta-value">' + mins + ' \u5206\u949f \u00b7 ' + (cn + en).toLocaleString() + ' \u5b57</span>';
       meta.appendChild(item);
+    }
+  };
+
+  /* ========== 3.5 READER ACTIONS ========== */
+  var ReaderActions = {
+    init: function() {
+      var demos = $qa('.reader-actions[data-reader-actions-demo]');
+      for (var i = 0; i < demos.length; i++) this.bind(demos[i]);
+
+      var articleMeta = $q('.article-meta');
+      var knowledgeMeta = $q('.kh-entry-meta');
+      if (!articleMeta && !knowledgeMeta) return;
+      if ($q('.reader-actions:not([data-reader-actions-demo])')) return;
+
+      var box = E('div');
+      box.className = 'reader-actions';
+      box.setAttribute('aria-label', '读者操作');
+
+      var label = E('div');
+      label.className = 'reader-actions-label';
+      label.textContent = '读者操作';
+      box.appendChild(label);
+
+      var buttons = E('div');
+      buttons.className = 'reader-actions-buttons';
+      buttons.appendChild(this.button('link', '复制链接'));
+      buttons.appendChild(this.button('citation', '复制引用条目'));
+      box.appendChild(buttons);
+      this.bind(box);
+
+      if (knowledgeMeta) {
+        var main = $q('.kh-main');
+        if (!main) return;
+        var footer = $q('.kh-footer-mobile', main);
+        main.insertBefore(box, footer || null);
+      } else {
+        var content = $q('.content-main');
+        if (content) content.appendChild(box);
+      }
+    },
+    button: function(action, label) {
+      var btn = E('button');
+      btn.type = 'button';
+      btn.className = 'reader-action-btn';
+      btn.setAttribute('data-reader-action', action);
+      btn.textContent = label;
+      return btn;
+    },
+    bind: function(box) {
+      if (!box || box.getAttribute('data-reader-actions-bound') === 'true') return;
+      box.setAttribute('data-reader-actions-bound', 'true');
+      var self = this;
+      var buttons = $qa('[data-reader-action]', box);
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function() {
+          var action = this.getAttribute('data-reader-action');
+          var value = action === 'citation' ? self.citation() : self.url();
+          var btn = this;
+          copyText(value, function() { self.feedback(btn, true); }, function() { self.feedback(btn, false); });
+        });
+      }
+    },
+    url: function() {
+      return location.href.replace(/[?#].*$/, '');
+    },
+    title: function() {
+      var el = $q('.page-title-main') || $q('.kh-entry-title');
+      if (el && el.textContent.trim()) return el.textContent.trim();
+      return (document.title || '')
+        .replace(/^\s*牧羊人图书馆\s*[-|]\s*/, '')
+        .replace(/^\s*知识馆\s*[-|]\s*/, '')
+        .replace(/\s*[-|]\s*牧羊人图书馆\s*$/, '')
+        .trim();
+    },
+    author: function() {
+      var items = $qa('.article-meta-item, .kh-entry-meta-item');
+      for (var i = 0; i < items.length; i++) {
+        var label = $q('.article-meta-label, .kh-entry-meta-label', items[i]);
+        var value = $q('.article-meta-value, .kh-entry-meta-value', items[i]);
+        if (label && value && /^作者[:：]?$/.test(label.textContent.replace(/\s/g, ''))) {
+          var author = value.textContent.trim();
+          if (author) return author;
+        }
+      }
+      return '薛柯道';
+    },
+    citation: function() {
+      var d = new Date();
+      var date = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
+      return this.author() + '：《' + this.title() + '》，牧羊人图书馆，' + this.url() + '（访问日期：' + date + '）。';
+    },
+    feedback: function(btn, ok) {
+      if (!btn) return;
+      var original = btn.getAttribute('data-reader-label') || btn.textContent;
+      btn.setAttribute('data-reader-label', original);
+      btn.textContent = ok ? '已复制' : '复制失败';
+      setTimeout(function() { btn.textContent = original; }, 1400);
+      if (!ok) SlPop.toast('复制失败，请手动选择内容', 'warn');
     }
   };
 
@@ -1899,24 +2032,15 @@
         btn.innerHTML = '已复制';
         setTimeout(function() { btn.innerHTML = old; }, 1400);
       };
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(done, function() {});
-          return;
+      var failed = function() {
+        if (btn) {
+          var old = btn.innerHTML;
+          btn.innerHTML = '复制失败';
+          setTimeout(function() { btn.innerHTML = old; }, 1400);
         }
-      } catch (e) {}
-      try {
-        var ta = E('textarea');
-        ta.value = text;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'fixed';
-        ta.style.left = '-9999px';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        done();
-      } catch (e) {}
+        SlPop.toast('复制失败，请手动选择内容', 'warn');
+      };
+      copyText(text, done, failed);
     },
     loadContact: function() {
       var self = this;
@@ -1991,6 +2115,7 @@
     try { FloatFix.init(); } catch(e) { console.warn('[SL] FloatFix error:', e.message); }
     try { MobileNavToggle.init(); } catch(e) { console.warn('[SL] MobileNavToggle error:', e.message); }
     try { SlPop.init(); } catch(e) { console.warn('[SL] SlPop error:', e.message); }
+    try { ReaderActions.init(); } catch(e) { console.warn('[SL] ReaderActions error:', e.message); }
     try { NavTrail.init(); NavTrail.render(); } catch(e) { console.warn('[SL] NavTrail error:', e.message); }
     try { KhSide.init(); } catch(e) { console.warn('[SL] KhSide error:', e.message); }
     /* 对外暴露：页面脚本可用 SLPop.toast / SLPop.card / SLNav */

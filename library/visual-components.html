@@ -339,6 +339,43 @@
           </div>
         </section>
 
+        <!-- ========== Section 3.6c: 读者操作 ========== -->
+        <section class="notice-header section-header page-header-section">
+          <div>
+            <h2 id="section-3-6c" class="section-title-text-main">3.6c 读者操作 — .reader-actions / .reader-action-btn</h2>
+            <div class="content-bg-lightgrey">
+              <div>
+                <p>用途：在文章页与知识词条页正文末尾提供「复制链接」「复制引用条目」两项明确命令，便于在 QQ、微信等不支持 Web Share 的环境中分享。真实页面由 <code>library-dynamic.js</code> 动态注入，页面模板不重复写结构或样式。</p>
+
+                <p><strong>实际效果：</strong></p>
+                <div class="reader-actions" data-reader-actions-demo aria-label="读者操作">
+                  <div class="reader-actions-label">读者操作</div>
+                  <div class="reader-actions-buttons">
+                    <button type="button" class="reader-action-btn" data-reader-action="link">复制链接</button>
+                    <button type="button" class="reader-action-btn" data-reader-action="citation">复制引用条目</button>
+                  </div>
+                </div>
+
+                <p><strong>HTML 模板（由脚本生成）：</strong></p>
+                <pre><code>&lt;div class="reader-actions" aria-label="读者操作"&gt;
+  &lt;div class="reader-actions-label"&gt;读者操作&lt;/div&gt;
+  &lt;div class="reader-actions-buttons"&gt;
+    &lt;button type="button" class="reader-action-btn" data-reader-action="link"&gt;复制链接&lt;/button&gt;
+    &lt;button type="button" class="reader-action-btn" data-reader-action="citation"&gt;复制引用条目&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <ul>
+                  <li>只在存在 <code>.article-meta</code> 或 <code>.kh-entry-meta</code> 的页面生成；文章页放在正文末尾，知识词条页放在移动页脚之前。</li>
+                  <li>链接会移除 query 与 hash；引用条目格式为「作者：《标题》，牧羊人图书馆，URL（访问日期：YYYY年M月D日）。」</li>
+                  <li>剪贴板权限失败时继续走 textarea 回退；成功与失败都在按钮上反馈，失败另发警告级轻提示。</li>
+                  <li>样式唯一实现位于 <code>css/style.css</code>，直角、主题令牌配色、窄屏可换行；页面与生成器不得内联副本。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- ========== Section 3.7: 文章性质标签 & 标签 ========== -->
         <section class="notice-header section-header page-header-section">
           <div>

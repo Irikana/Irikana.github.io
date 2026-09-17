@@ -464,6 +464,33 @@ details details {
 
 ---
 
+## 3.6c 读者操作 — `.reader-actions` / `.reader-action-btn`
+
+**用途**：在文章页与知识词条页正文末尾提供「复制链接」「复制引用条目」两项明确命令，便于在 QQ、微信等不支持 Web Share 的环境中分享。构件由 `js/library-dynamic.js` 的 `ReaderActions` 模块动态注入，页面与 App 模板不得手写重复实例或内联样式。
+
+**标准结构**：
+
+```html
+<div class="reader-actions" aria-label="读者操作">
+  <div class="reader-actions-label">读者操作</div>
+  <div class="reader-actions-buttons">
+    <button type="button" class="reader-action-btn" data-reader-action="link">复制链接</button>
+    <button type="button" class="reader-action-btn" data-reader-action="citation">复制引用条目</button>
+  </div>
+</div>
+```
+
+**行为契约**：
+
+- 只在页面存在 `.article-meta` 或 `.kh-entry-meta` 时生成；普通功能页、列表页、更新日志页不生成。
+- 文章页追加在 `.content-main` 末尾；知识词条页插入 `.kh-main` 内、`.kh-footer-mobile` 之前。隐藏态不存在，不得预留空白占位。
+- 「复制链接」使用去掉 query 与 hash 的当前永久地址。
+- 「复制引用条目」格式固定为 `作者：《标题》，牧羊人图书馆，URL（访问日期：YYYY年M月D日）。`。标题依次取 `.page-title-main`、`.kh-entry-title`、清理后的 `document.title`；作者从元数据的「作者：」字段取值，缺失时回退为「薛柯道」。
+- 剪贴板优先使用 `navigator.clipboard.writeText`；权限拒绝或 Promise 失败时必须继续回退到临时 textarea + `document.execCommand('copy')`，不得静默中止。成功与失败都要在按钮文字上反馈，失败时另发警告级轻提示。
+- 唯一样式实现位于 `css/style.css`。按钮为直角、主题令牌配色，窄屏允许换行并平均分配宽度；页面与生成器不得内联 `.reader-actions*` 样式。
+
+---
+
 ## 3.7 文章性质标签 & 标签 — `.article-type-badge` / `.article-tag`
 
 **用途**：在文章元数据中标注文章性质（创作方式）和属性标签。性质不等于分类（library/ 下每个子目录是一个文章分类）。
