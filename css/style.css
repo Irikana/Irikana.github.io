@@ -3593,6 +3593,17 @@ details details {
 /* Force dark mode */
 .force-dark-mode body,
 .force-dark-mode {
+  color: #e8e6e3 !important;
+  background-color: #1a1a1a !important;
+}
+/* 令牌只写在 html 上，绝不带 body 选择器。
+   自定义属性只在命中同一元素的声明之间竞争：一旦在 body 上重抄一遍通用明暗色，
+   html 上的调色板令牌就只是「可被继承的值」，会被彻底遮掉——所有 var(--color-bg) 背景
+   会在 JS 加类的瞬间闪回默认色，而 --sl-card-bg / --sl-rule / --sl-font-body 这些
+   force 类没有重抄的令牌仍跟着配色走，表现为「只有线条和字体生效，背景换回默认」。
+   有调色板时由 library-refit.css 的 html[data-sl-palette][data-sl-variant] 以更高的
+   (0,2,1) 特异性胜出；无调色板（无 JS）时这里才是明暗令牌的来源。 */
+.force-dark-mode {
   --color-text: #e8e6e3 !important;
   --color-text-secondary: #a0a0a0 !important;
   --color-text-light: #707070 !important;
@@ -3601,12 +3612,14 @@ details details {
   --color-bg-subtle: #222222 !important;
   --color-bg-muted: #2a2a2a !important;
   --color-accent: #5d9ccc !important;
-  color: #e8e6e3 !important;
-  background-color: #1a1a1a !important;
 }
 
 /* Force light mode */
 .force-light-mode body,
+.force-light-mode {
+  color: #1a1a1a !important;
+  background-color: #ffffff !important;
+}
 .force-light-mode {
   --color-text: #1a1a1a !important;
   --color-text-secondary: #555555 !important;
@@ -3616,8 +3629,6 @@ details details {
   --color-bg-subtle: #fafafa !important;
   --color-bg-muted: #f5f5f5 !important;
   --color-accent: #2c3e50 !important;
-  color: #1a1a1a !important;
-  background-color: #ffffff !important;
 }
 
 /* 提示框语义色 - 暗色覆写（三条途径都要覆盖：系统偏好、手动切暗、主题令牌变体）

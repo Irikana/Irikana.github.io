@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年9月19日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/library-refit.css">
+<script>(function(){var d={};try{d=JSON.parse(localStorage.getItem('sl_site-pref')||'{}')||{}}catch(e){}var h=document.documentElement;function s(k,v){h.setAttribute('data-sl-'+k,d[k]||v)}s('palette','classic');s('type','songti');s('size','normal');s('measure','normal');h.setAttribute('data-sl-indent',d.indent===false?'off':'on');var m='system';try{m=JSON.parse(localStorage.getItem('sl_theme')||'"system"')}catch(e){}var k=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;h.setAttribute('data-sl-variant',(m==='dark'||(m==='system'&&k))?'dark':'light')})();</script>
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年9月19日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-09-19 · 主题偶尔闪回默认配色的根因修复 · 明暗令牌书写位置约束</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">站点变更</h2>
+        <div class="section-content left-align">
+          <p><strong>一、修掉「加载瞬间配色生效、随即背景换回默认色」</strong></p>
+          <p>- 症状：部分读者打开页面时主题先生效一瞬间，随后背景一类的填充色退回默认明暗色，而线条、边框与字体仍跟着配色走；跟随系统明暗的读者看不到，手动选过「浅色 / 深色」的读者必现</p>
+          <p>- 根因在 `css/style.css` 的明暗开关：`.force-dark-mode body` / `.force-light-mode body` 除了元素级颜色，还在 `body` 上重抄了一遍 `--color-text` / `--color-bg` / `--color-bg-subtle` 等八项通用明暗令牌。自定义属性只在命中同一元素的声明之间竞争，`<html>` 上 `html[data-sl-palette][data-sl-variant]` 写的那套调色板值对 `body` 而言只是「可被继承的值」，于是被整片遮掉；`body` 以下所有 `var(--color-bg)` 一类的背景全部改用默认色</p>
+          <p>- 之所以只有背景回退：`--sl-card-bg` / `--sl-card-edge` / `--sl-rule` 与字体令牌 `--sl-font-body` 不在 force 类重抄的名单里，仍由调色板驱动，所以线条、边框、字体看起来是好的</p>
+          <p>- 之所以「一瞬间之后」才坏：head 里的主题预应用脚本在首屏前写好 `data-sl-*`，首帧是对的；`js/library-dynamic.js` 挂在 body 末尾，`Theme.apply()` 要等首帧后的下一帧才给 `<html>` 补上 force 类，`.theme-transitioning` 的 350ms 过渡又把这次回退做成肉眼可见的渐变</p>
+          <p>- 处置：把两组令牌声明从 `.force-* body, .force-*` 的共用块里拆出来，只留在 `<html>` 上（`.force-dark-mode` / `.force-light-mode` 单独成块）；元素级的 `color` / `background-color` 保持原样，仍由 `library-refit.css` 的调色板接管块以更高特异性压过。有调色板时调色板令牌胜出，无 JS（无 `data-sl-palette`）时 force 类照旧提供明暗令牌，行为不变</p>
+          <p>- 验证：本地起服务，在 `sl_theme` 分别为 dark / light 且配色为羊皮纸的页面上取计算样式——`body` 的 `--color-bg` 为 `#241f18` / `#f8f2e4`（调色板值），正文区背景为 `#2d261d` / `#f2e9d6`；把旧写法临时注回 `<head>` 末尾，同一组数值立刻变成 `#1a1a1a` / `#ffffff` 与 `#222222` / `#fafafa`（默认色），删除后恢复，确认因果</p>
+
+          <p><strong>二、涉及文件</strong></p>
+          <p>- `css/style.css`（明暗令牌块拆分，附成因注释）</p>
+          <p>- 页面 HTML、`js/library-dynamic.js`、`css/library-refit.css` 与 `library-dynamic.js` 的 `StyleEnforcer` 均未改动；本次不涉及构件增删，视觉组件标准第 5 节及展示页无需同步</p>
+        </div>
+      </section>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-2" class="section-title-text-main">规范变更</h2>
+        <div class="section-content left-align">
+          <p><strong>新增一条主题令牌书写硬约束（四处同步）</strong></p>
+          <p>- 明暗令牌只能写在 `<html>` 上，选择器不得命中 `body`；命中 `body` 即等于在继承链上重抄一份默认色，会把该元素以下所有调色板令牌遮掉</p>
+          <p>- 已写入 `Irikana.github.io/.trae/rules/project_rules.md`（权威源）与 `.zcode/skills/sl-website-rules/SKILL.md`、`.reasonix/skills/sl-website-rules/SKILL.md`（互为镜像的两份技能副本）</p>
+        </div>
+      </section>
+
+      <div class="function-box-blue">
+        <div class="left-align">站点版本仍为 alpha-023：本次属于主题令牌机制的缺陷修复，不新增构件，不单独提升版本号。</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页 </a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门 </a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则 </a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能 </a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" class="float-button back-to-top">回到<br>顶部</button>
+<button title="导航枢纽" class="float-button nav-hub">导航<br>枢纽</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

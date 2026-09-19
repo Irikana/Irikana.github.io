@@ -421,6 +421,7 @@ Irikana.github.io/
 
 - 偏好存于 localStorage `sl_site-pref`（**仅影响本机显示，不写入仓库、不影响他人**）
 - 主题变量覆写一律使用 `!important`：需压过 style.css 中 `.force-dark-mode` / `.force-light-mode` 既有的重要声明
+- **明暗令牌只能写在 `<html>` 上，选择器不得命中 `body`**：自定义属性只在命中同一元素的声明之间竞争，一旦 `.force-dark-mode body` 这类写法在 body 上重抄一遍通用明暗色，`<html>` 上的调色板令牌就只是「可被继承的值」，会被整片遮掉。表现是「加载瞬间配色生效、随即背景换回默认色，而线条边框字体仍跟着配色走」——因为 `--sl-card-bg` / `--sl-rule` / `--sl-font-body` 这些 force 类没重抄的令牌不受影响；且只在读者手动指定过明暗（`sl_theme` 为 light/dark，JS 补上 force 类）时出现，跟随系统的访问者看不到
 
 ### 标题层级阶梯（修正原先下级标题大于上级标题的倒置）
 - 一级 `.section-title-text-main`：clamp(21px, 2.6vw, 25px) / 700 / 字距 2px / 下方 2px 主色线
