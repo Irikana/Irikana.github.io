@@ -73,6 +73,7 @@
   /* ========== 1. SEARCH ========== */
   var Search = {
     data: [
+      {t:'转向Gemini',u:toAbs(ROOT+'library/paper/Turn to Gemini.html'),k:'转向Gemini Turn to Gemini 信息文章 新闻 新闻'},
       {t:'IC惊现课程表接口',u:toAbs(ROOT+'library/paper/Schedule API Might Be In INSTLAB Cloud.html'),k:'IC惊现课程表接口 Schedule API Might Be In INSTLAB Cloud 信息文章 新闻 新闻'},
       {t:'Token均价新史低',u:toAbs(ROOT+'library/paper/A Record Low of Token Average Price.html'),k:'Token均价新史低 A Record Low of Token Average Price 信息文章 新闻 新闻'},
       {t:'每日编程用量第一部分',u:toAbs(ROOT+'library/misc/Tokens for Every Day Part I.html'),k:'每日编程用量第一部分 Tokens for Every Day Part I 信息文章 动态'},
