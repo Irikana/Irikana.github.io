@@ -51,6 +51,18 @@
         </div>
       </section>
 
+      <section class="notice-header page-header-section">
+        <h2 id="section-3" class="section-title-text-main">三、新闻板块排序规则升级</h2>
+        <div class="section-content left-align">
+          <p><strong>1. 新闻排序按发布时间为基准</strong></p>
+          <p>- 牧羊人图书馆主页文字新闻卡片（<code>#news-text-list</code>）及新闻全量列表（<code>news.html</code>）调整为优先按「发布时间」降序排列。</p>
+          <p><strong>2. 存量文章自动平滑降级</strong></p>
+          <p>- 对于尚无发布时间的存量历史文章，排序逻辑自动以其「创建时间」为基准参与排序，确保新旧文章时间线衔接平滑顺畅。</p>
+          <p><strong>3. 动态排序模块鲁棒性提升</strong></p>
+          <p>- <code>js/library-dynamic.js</code> 中的 <code>NewsSorter</code> 升级：支持分钟级精度（<code>YYYY/MM/DD/HH/mm</code>）、ISO 格式与中文字符串日期的多格式鲁棒时间戳解析，避免标准 <code>Date</code> 解析因格式差异返回无效值。</p>
+        </div>
+      </section>
+
       <div class="function-box-blue">
         <div class="left-align">站点版本正式升级至 <strong>alpha-024</strong>；全站动态脚本与核心样式已同步更新。</div>
       </div>

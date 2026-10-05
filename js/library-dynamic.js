@@ -1493,14 +1493,66 @@
 
   /* ========== NEWS SORTER ========== */
   var NewsSorter = {
+    parseDate: function(str) {
+      if (!str) return 0;
+      str = String(str).trim();
+      var m = str.match(/^(\d{4})[/-](\d{1,2})[/-](\d{1,2})[/-](\d{1,2})[:/](\d{1,2})$/);
+      if (m) return new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10), parseInt(m[4], 10), parseInt(m[5], 10)).getTime();
+      m = str.match(/^(\d{4})[/-](\d{1,2})[/-](\d{1,2})\s+(\d{1,2}):(\d{1,2})$/);
+      if (m) return new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10), parseInt(m[4], 10), parseInt(m[5], 10)).getTime();
+      m = str.match(/^(\d{4})年(\d{1,2})月(\d{1,2})日(?:\s*(\d{1,2})(?:时|:)(\d{1,2})分?)?$/);
+      if (m) {
+        var h = m[4] ? parseInt(m[4], 10) : 0;
+        var min = m[5] ? parseInt(m[5], 10) : 0;
+        return new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10), h, min).getTime();
+      }
+      m = str.match(/^(\d{4})[/-](\d{1,2})[/-](\d{1,2})$/);
+      if (m) return new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10)).getTime();
+      var t = new Date(str).getTime();
+      return isNaN(t) ? 0 : t;
+    },
+    getItemTime: function(el) {
+      // 优先获取发布时间；若为旧文章无发布时间，以创建时间为准
+      var pub = el.getAttribute('data-publish-date');
+      if (pub) {
+        var tPub = this.parseDate(pub);
+        if (tPub) return tPub;
+      }
+      var create = el.getAttribute('data-create-date') || el.getAttribute('data-date');
+      if (create) {
+        var tCreate = this.parseDate(create);
+        if (tCreate) return tCreate;
+      }
+      var dateSpan = el.querySelector('.card-date, .news-list-item-date');
+      if (dateSpan && dateSpan.textContent) {
+        return this.parseDate(dateSpan.textContent);
+      }
+      return 0;
+    },
     init: function() {
+      var self = this;
       var list = $('news-text-list');
-      if (!list) return;
-      var cards = Array.from(list.querySelectorAll('.news-featured-text-card[data-date]'));
-      cards.sort(function(a, b) {
-        return new Date(b.getAttribute('data-date')).getTime() - new Date(a.getAttribute('data-date')).getTime();
-      });
-      cards.forEach(function(c) { list.appendChild(c); });
+      if (list) {
+        var cards = Array.from(list.querySelectorAll('.news-featured-text-card'));
+        if (cards.length > 1) {
+          cards.sort(function(a, b) {
+            return self.getItemTime(b) - self.getItemTime(a);
+          });
+          cards.forEach(function(c) { list.appendChild(c); });
+        }
+      }
+
+      var newsItems = Array.from(document.querySelectorAll('.news-list-item-text-only, .news-list-item'));
+      if (newsItems.length > 1 && newsItems[0].parentElement) {
+        var parent = newsItems[0].parentElement;
+        var sameParent = newsItems.every(function(it) { return it.parentElement === parent; });
+        if (sameParent) {
+          newsItems.sort(function(a, b) {
+            return self.getItemTime(b) - self.getItemTime(a);
+          });
+          newsItems.forEach(function(it) { parent.appendChild(it); });
+        }
+      }
     }
   };
 
