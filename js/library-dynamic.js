@@ -832,7 +832,7 @@
   };
 
   /* ========== 8. VERSION ========== */
-  var Ver = { v: 'alpha-023',
+  var Ver = { v: 'alpha-024',
     init: function() {
       var footer = $q('.copyright-color') || $q('footer .copyright-text') || $q('.copyright-text');
       if (!footer || $q('.sl-version')) return;
@@ -950,11 +950,35 @@
 
   /* ========== FLOAT BUTTON FIX ========== */
   var FloatFix = {
+    SVG_BTT: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
+    SVG_NAV: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>',
     init: function() {
-      var btt = $q('.float-button.back-to-top:not([style*="relative"])');
-      var nh = $q('.float-button.nav-hub:not([style*="relative"])');
-      if (btt && !btt.onclick) btt.onclick = function() { window.scrollTo({top:0,behavior:'smooth'}); };
-      if (nh && !nh.onclick) nh.onclick = function() { window.open(ROOT + 'navigator.html','_blank'); };
+      var btts = document.querySelectorAll('.float-button.back-to-top');
+      for (var i = 0; i < btts.length; i++) {
+        var btt = btts[i];
+        if (!btt.querySelector('svg')) {
+          if (!btt.getAttribute('aria-label')) btt.setAttribute('aria-label', '回到顶部');
+          if (!btt.getAttribute('title')) btt.setAttribute('title', '回到顶部');
+          btt.innerHTML = FloatFix.SVG_BTT;
+        }
+        var bttStyle = btt.getAttribute('style') || '';
+        if (!btt.onclick && bttStyle.indexOf('relative') === -1) {
+          btt.onclick = function() { window.scrollTo({top:0,behavior:'smooth'}); };
+        }
+      }
+      var nhs = document.querySelectorAll('.float-button.nav-hub');
+      for (var j = 0; j < nhs.length; j++) {
+        var nh = nhs[j];
+        if (!nh.querySelector('svg')) {
+          if (!nh.getAttribute('aria-label')) nh.setAttribute('aria-label', '导航枢纽');
+          if (!nh.getAttribute('title')) nh.setAttribute('title', '导航枢纽');
+          nh.innerHTML = FloatFix.SVG_NAV;
+        }
+        var nhStyle = nh.getAttribute('style') || '';
+        if (!nh.onclick && nhStyle.indexOf('relative') === -1) {
+          nh.onclick = function() { window.open(ROOT + 'navigator.html','_blank'); };
+        }
+      }
     }
   };
 

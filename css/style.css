@@ -803,6 +803,14 @@ img {
   outline-offset: 2px;
 }
 
+.float-button svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  display: block;
+  pointer-events: none;
+}
+
 .back-to-top {
   bottom: calc(var(--space-lg) + 52px);
 }
@@ -1871,6 +1879,11 @@ strong {
     font-size: 10px;
   }
 
+  .float-button svg {
+    width: 18px;
+    height: 18px;
+  }
+
   .back-to-top {
     bottom: 68px;
   }
@@ -2214,6 +2227,11 @@ strong {
     height: 36px;
     font-size: 9px;
     right: var(--space-xs);
+  }
+
+  .float-button svg {
+    width: 16px;
+    height: 16px;
   }
 
   .back-to-top {

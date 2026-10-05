@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年10月5日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/library-refit.css">
+<script>(function(){var d={};try{d=JSON.parse(localStorage.getItem('sl_site-pref')||'{}')||{}}catch(e){}var h=document.documentElement;function s(k,v){h.setAttribute('data-sl-'+k,d[k]||v)}s('palette','classic');s('type','songti');s('size','normal');s('measure','normal');h.setAttribute('data-sl-indent',d.indent===false?'off':'on');var m='system';try{m=JSON.parse(localStorage.getItem('sl_theme')||'"system"')}catch(e){}var k=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;h.setAttribute('data-sl-variant',(m==='dark'||(m==='system'&&k))?'dark':'light')})();</script>
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年10月5日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-10-05 · 文章元数据新增「发布日期」与分钟级精度 · 浮动交互构件矢量图形化升级 · alpha-024</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">一、文章元数据升级</h2>
+        <div class="section-content left-align">
+          <p><strong>1. 新增「发布日期」元数据</strong></p>
+          <p>- 针对文章撰写可能跨越数日的场景，在文章元数据区（<code>.article-meta</code>）新增「发布日期」字段，与「创建日期」同级并列。</p>
+          <p>- 创建日期标记起草开始时间，发布日期标记最终上传至图书馆发布的时刻。</p>
+          <p><strong>2. 全局时间精度提升至分钟级</strong></p>
+          <p>- 元数据及写作管理体系中的所有时间记录提升至分钟级精度（格式规范：<code>YYYY年M月D日 HH:mm</code> 或 <code>YYYY/MM/DD/HH/mm</code>）。</p>
+        </div>
+      </section>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-2" class="section-title-text-main">二、交互构件矢量图形化升级</h2>
+        <div class="section-content left-align">
+          <p><strong>1. 浮动按钮全面 SVG 图标化</strong></p>
+          <p>- 全站「回到顶部」（<code>.back-to-top</code>）与「导航枢纽」（<code>.nav-hub</code>）浮动按钮从原有的双行文字升级为标准矢量图形（SVG 箭头与罗盘枢纽图标），扁平直角，配色自动契合主题。</p>
+          <p>- <code>js/library-dynamic.js</code> 的 <code>FloatFix</code> 模块增强：对站内所有存量页面自动进行 SVG 图标注入与无障碍标签（<code>aria-label</code> / <code>title</code>）补齐，保证全站历史文章无缝升级。</p>
+          <p>- <code>css/style.css</code> 补全 <code>.float-button svg</code> 在桌面端、平板端及移动端的响应式尺寸控制。</p>
+          <p><strong>2. 视觉组件标准四处严格同步</strong></p>
+          <p>- 权威源 <code>visual-components.md</code>、站内展示页 <code>library/visual-components.html</code> 以及技能镜像（<code>.zcode</code> 与 <code>.reasonix</code>）均已完成同步，新增发布日期与 SVG 图标规范。</p>
+        </div>
+      </section>
+
+      <div class="function-box-blue">
+        <div class="left-align">站点版本正式升级至 <strong>alpha-024</strong>；全站动态脚本与核心样式已同步更新。</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页 </a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门 </a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则 </a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能 </a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页 </a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门 </a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则 </a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能 </a>
+  </div>
+</div>
+
+<button title="回到顶部" aria-label="回到顶部" class="float-button back-to-top">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+<button title="导航枢纽" aria-label="导航枢纽" class="float-button nav-hub">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

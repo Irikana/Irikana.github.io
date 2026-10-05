@@ -332,11 +332,15 @@ details details {
   </span>
   <span class="article-meta-item">
     <span class="article-meta-label">创建日期：</span>
-    <span class="article-meta-value">2026年5月10日</span>
+    <span class="article-meta-value">2026年5月10日 14:30</span>
+  </span>
+  <span class="article-meta-item">
+    <span class="article-meta-label">发布日期：</span>
+    <span class="article-meta-value">2026年5月10日 18:00</span>
   </span>
   <span class="article-meta-item">
     <span class="article-meta-label">最后更新：</span>
-    <span class="article-meta-value">2026年5月11日</span>
+    <span class="article-meta-value">2026年5月11日 09:15</span>
   </span>
 </div>
 ```
@@ -866,7 +870,7 @@ html.kh-side-off .kh-side-tab { opacity: 1; pointer-events: auto; transform: tra
 
 ### 浮动按钮 — `.float-button`
 
-**用途**：回到顶部、导航枢纽等固定位置的圆形按钮。
+**用途**：回到顶部、导航枢纽等固定位置的圆形按钮。内嵌矢量图标（SVG），扁平无圆角，响应式避让侧边栏。
 
 ```css
 .float-button {
@@ -888,6 +892,14 @@ html.kh-side-off .kh-side-tab { opacity: 1; pointer-events: auto; transform: tra
   letter-spacing: 0.5px;
 }
 
+.float-button svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  display: block;
+  pointer-events: none;
+}
+
 .float-button:hover {
   background-color: var(--color-accent);
   color: var(--color-bg);
@@ -903,9 +915,14 @@ html.kh-side-off .kh-side-tab { opacity: 1; pointer-events: auto; transform: tra
 **HTML 模板**：
 
 ```html
-<button title="回到顶部" class="float-button back-to-top"
+<button title="回到顶部" aria-label="回到顶部" class="float-button back-to-top"
   onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-  回到<br>顶部
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<button title="导航枢纽" aria-label="导航枢纽" class="float-button nav-hub"
+  onclick="window.open('../navigator.html', '_blank')">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
 </button>
 ```
 
