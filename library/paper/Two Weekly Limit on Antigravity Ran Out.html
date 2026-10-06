@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - Antigravity两周额度耗尽</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/library-refit.css">
+  <script>(function(){var d={};try{d=JSON.parse(localStorage.getItem('sl_site-pref')||'{}')||{}}catch(e){}var h=document.documentElement;function s(k,v){h.setAttribute('data-sl-'+k,d[k]||v)}s('palette','classic');s('type','songti');s('size','normal');s('measure','normal');h.setAttribute('data-sl-indent',d.indent===false?'off':'on');var m='system';try{m=JSON.parse(localStorage.getItem('sl_theme')||'"system"')}catch(e){}var k=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;h.setAttribute('data-sl-variant',(m==='dark'||(m==='system'&&k))?'dark':'light')})();</script>
+
+</head>
+<body>
+<header>
+<div class="gjs-row main-container">
+  <div class="gjs-cell logo-align"><div class="logo-header-row"><img src="../../image/logo.png" class="logo-border logo-container logo-img-custom"><img src="../../image/logo_text.png" class="logo-size logo-size-custom"></div>
+    <div class="slogan-container">
+      <hr class="slogan-line slogan-line-left">
+      <span class="slogan-text">存放所有知识之地</span>
+      <hr class="slogan-line slogan-line-right">
+    </div>
+    <div class="section-padding page-title-main">Antigravity两周额度耗尽</div>
+  </div>
+</div>
+</header>
+
+<main>
+<div class="gjs-row content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="gjs-cell content-main">
+      <div class="article-meta">
+      <div class="article-meta-item">
+          <span class="article-meta-label">作者：</span>
+          <span class="article-meta-value">薛柯道</span>
+        </div>
+      <div class="article-meta-item">
+          <span class="article-meta-label">创建日期：</span>
+          <span class="article-meta-value">2026年10月6日 13:49</span>
+        </div>
+      <div class="article-meta-item">
+          <span class="article-meta-label">发布日期：</span>
+          <span class="article-meta-value">2026年10月6日 15:23</span>
+        </div>
+      <div class="article-meta-item">
+          <span class="article-meta-label">文章性质：</span>
+          <span class="article-meta-value"><span class="article-type-badge">信息文章</span></span>
+        </div>
+      <div class="article-meta-item">
+          <span class="article-meta-label">标签：</span>
+          <span class="article-meta-value">
+        <span class="article-tag">新闻</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="left-align">
+        <p>自2026年9月27日15:17分到2026年10月5日晚上20:50分，我的两个Google AI Pro账号在反重力的周额度全部用完，也就是说，一共200%的Pro周额度我平均用了8天5小时33分钟。让我们来平均一下，200÷(8×(24×60)+5×60+33)=0.016873365392727579%，这是我平均每分钟消耗的额度，而0.016873365392727579×60×24=24.29764616552771376%则是我平均每天消耗的额度，这与预期的用量一致：</p>
+<div class="quote-box-grey">
+  而根据我今天的高强度使用后再次预估，我每两天能用40%周额度，也就是高强度使用一天我就能用20%周额度，而200%/7=28.57142857%，刚好可以满足我！
+——我的文章《转向Gemini》
+</div>
+考虑到这几天经常高强度的使用gemini-3.8-flash，额度消耗会比上学期间正常上课时要多得多，所以，我的预测是正确的，两个Pro正好可以满足我。它为我剩下了多少钱呢，上次我们仅仅只是凭直觉和经验随口说了一句5毛钱每天，我们今天就来看看在使用反重力之前，我每天平均花费多少钱在AI上。
+
+<p>在A6API中，由于统计查询时间跨度不能超过一个月，所以我们把搜索条件设置成2026-09-07 00:00:00到2026-10-06 15:15:53<sup class="article-footnote-ref" id="article-fnref-1"><a href="#article-fn-1">[1]</a></sup>，时间粒度为周（它其实是无关紧要的），我们得到了</p>
+<table>
+<thead>
+<tr>
+<th>统计次数</th>
+<th>统计额度</th>
+<th>统计Tokens</th>
+<th>平均RPM（Requests Per Second）</th>
+<th>平均TPM（Tokens Per Second）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>7581</td>
+<td>$2.16</td>
+<td>1,417,984,834</td>
+<td>0.178</td>
+<td>33226.842</td>
+</tr>
+</tbody></table>
+<p>我们感兴趣的是额度和Token量，拿它们与搜索条件相结合，对于额度，我们有$2.16<em>7/(30+15/24+16/(24</em>60))=0.4935352253元，结果非常惊人，与我们凭借经验和直觉猜测的0.5元/天的相对误差仅为(0.5-0.4935352253)/0.5%=1.29295494%！这说明我们的直觉是非常准确的。而对于Token量，1417984834/(30+15/24+16/(24*60))=46284752.95Tokens则是我们平均每天会消耗的Token数量，它是4600多万。接下来取上一张表的时间跨度的补集，把搜索条件改成2026-08-31 00:00:00<sup class="article-footnote-ref" id="article-fnref-2"><a href="#article-fn-2">[2]</a></sup>到2026-09-06 23:59:59，我们有</p>
+<table>
+<thead>
+<tr>
+<th>统计次数</th>
+<th>统计额度</th>
+<th>统计Tokens</th>
+<th>平均RPM（Requests Per Second）</th>
+<th>平均TPM（Tokens Per Second）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>6071</td>
+<td>$1.91</td>
+<td>1,279,602,707</td>
+<td>0.602</td>
+<td>126944.923</td>
+</tr>
+</tbody></table>
+<p>同样的，$1.91<em>7/(30+15/24+16/(24</em>60))=0.4364130928元，相对误差也只有(0.5-0.4364130928)/0.5%=12.71738144%，完全可以接受。1279602707/(30+15/24+16/(24*60))=41767791.69Tokens是这段时间每天我消耗的Token量，大概4200万。</p>
+<p>这两个表格于是告诉我们，0.5元每天的消费预测是可靠的，如果仅考虑时间和金钱，那么要粗略的算出我大概省了多少钱是能做到的，0.5*(8+5/24+33/(60*24))=4.115625元，这是我预期的使用A6API的这几天的用量，那么现在问题来了，在Antigravity中，我们的明眼数据只有额度，它既不代表金钱，也不代表Token，怎么办，虽然我没有试过，但是我有一个实验思路，用固定的提示词让固定的模型进行多次实验，固定的模型包括透明用量的模型和Antigravity，进行多次实验，再求个平均然后对比，如果对不同提示词的平均值都相差不大的话，就说明数据是可靠的，然而这个实验是如此耗费时间，我从来没做过也不想做，更何况我还没有考虑模型的吞吐速度（这几天我让gemini-3.8-flash干的活绝对不是在A6API中4元对应的时间和token量能干完的），所以，或许我已经省下比这多得多的钱了。</p>
+
+      </div>
+
+      <div class="article-footer-meta">
+        <div class="article-footer-meta-item">
+          <span class="article-footer-label">脚注：</span>
+          <span class="article-footer-value article-footnote-list"><span class="article-footnote-item" id="article-fn-1">[1] 直到前两天我还在从A6API调用一些模型，所以截止日期算到了这个时间，也就是今天。 <a href="#article-fnref-1" class="article-footnote-back" title="返回正文">↩</a></span>
+          <span class="article-footnote-item" id="article-fn-2">[2] 根据账单，首次充值时间应为2026-08-31 00:17分，但17分钟对于一个月而言是如此的短暂，以至于我们可以忽略它，这仅仅会导致我们算得的平均用量少那么一点点。 <a href="#article-fnref-2" class="article-footnote-back" title="返回正文">↩</a></span></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+<div class="gjs-row footer-row footer-row-alt footer-gradient">
+  <div class="gjs-cell nav-center">
+    <div class="padding-10 copyright-color copyright-text">&copy; 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../../index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="../intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="../rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="../feature.html" class="quick-nav-item">图书馆功能</a>
+  </div>
+</div>
+
+<button title="回到顶部" aria-label="回到顶部" class="float-button back-to-top" onclick="scrollToTop()">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<button title="导航枢纽" aria-label="导航枢纽" class="float-button nav-hub" onclick="openNavigator()">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+</button>
+
+<script>
+const PAGE_DISPLAY_NAME = 'Antigravity两周额度耗尽';
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openNavigator() {
+  window.open('../../navigator.html', '_blank');
+}
+
+function getCurrentPath() {
+  const path = window.location.pathname;
+  let formattedPath = path.replace(/^\//, '').replace(/\.html$/, '').replace(/\.htm$/, '');
+
+  if (formattedPath === '' || formattedPath === 'index') {
+    return '首页';
+  }
+
+  const segments = formattedPath.split('/');
+  formattedPath = segments.map((segment, index) => {
+    const fileNameIndex = segment.lastIndexOf('.');
+    if (fileNameIndex > 0) {
+      segment = segment.substring(0, fileNameIndex);
+    }
+    if (index === segments.length - 1 && PAGE_DISPLAY_NAME) {
+      return PAGE_DISPLAY_NAME;
+    }
+    return segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase();
+  }).join(' → ');
+
+  return formattedPath;
+}
+
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) { section.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  // 手机端便携式导航仪展开由 library-dynamic.js 的 MobileNavToggle 统一处理，
+  // 此处不再重复绑定 click（双重绑定会互相抵消，导致手机端无法展开）
+
+  const currentPathElement = document.getElementById('current-path');
+  if (currentPathElement) { currentPathElement.textContent = getCurrentPath(); }
+
+  const backToTopBtn = document.querySelector('.back-to-top');
+  if (backToTopBtn) { backToTopBtn.addEventListener('click', scrollToTop); }
+  const navHubBtn = document.querySelector('.nav-hub');
+  if (navHubBtn) { navHubBtn.addEventListener('click', openNavigator); }
+});
+</script>
+<script src="../../js/library-dynamic.js"></script>
+</body>
+</html>
