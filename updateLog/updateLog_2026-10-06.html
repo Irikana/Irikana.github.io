@@ -25,37 +25,36 @@
   <div class="content-width-limiter">
     <div class="content-main">
       <div class="quote-box-grey">
-        <div class="left-align">2026-10-06 · 正文标准表格与代码构件落地 · 段落字间距异常拉伸排版修复 · 算式防斜体与公式符号保护 · alpha-025</div>
+        <div class="left-align">2026-10-06 · 移动端表格响应式容器落地 · 杜绝撑破纸皮与视口缩小 · 正文两端对齐长算式拉伸彻底根治 · 视觉组件四处同步 · alpha-026</div>
       </div>
 
       <section class="notice-header page-header-section">
         <h2 id="section-1" class="section-title-text-main">一、主馆变更</h2>
         <div class="section-content left-align">
-          <p><strong>1. 正文标准表格排版规范与样式落地（解决表格无框线问题）</strong></p>
-          <p>- 补齐 <code>css/style.css</code> 中对正文表格（<code>.content-main table</code>、<code>.left-align table</code>、<code>.kh-content table</code>、<code>table.sl-table</code>）的标准样式定义，实现折叠边框（<code>border-collapse: collapse</code>）、全宽容器自适应以及扁平直角（<code>border-radius: 0</code>）。</p>
-          <p>- 单元格（<code>th</code> / <code>td</code>）统一使用主题边框令牌 <code>var(--line-width) solid var(--color-border)</code> 与内边距，表头自动使用浅灰底色 <code>var(--color-bg-subtle)</code> 加粗呈现，偶数行自带极微弱斑马纹，明暗双色通道无缝自适应。</p>
-          <p>- <code>js/library-dynamic.js</code> 的 <code>StyleEnforcer</code> 模块同步注入表格兜底防护网。</p>
-          <p><strong>2. 行内代码与代码块视觉组件补齐（解决 code 仅变字体无修饰问题）</strong></p>
-          <p>- <code>css/style.css</code> 为行内代码（<code>code</code>）配置专属样式：采用强调色文字（<code>var(--color-accent)</code>）、微底色（<code>var(--color-bg-subtle)</code>）与边框（<code>1px solid var(--color-border)</code>），外加适度内边距与直角边缘，提升正文辨识度。</p>
-          <p>- 为多行代码块（<code>pre</code> / <code>pre code</code>）配置卡片容器、4px 强调色左侧重点边线以及横向溢出滚动（<code>overflow-x: auto</code>）。</p>
-          <p>- <code>StyleEnforcer</code> 安全网同步补齐行内代码与代码块防护规则。</p>
-          <p><strong>3. 正文排版与换行优化（解决特定行字间距异常过宽问题）</strong></p>
-          <p>- 深入排查发现：<code>css/library-refit.css</code> 中对正文段落启用了 <code>text-align: justify</code>（两端对齐）与 <code>text-justify: inter-ideograph</code>。当段落内遇到未折行的较长字符序列（如算式 <code>15+15+5=35*31*2=2170元</code>、长英文单词或公式）被整体推至下一行时，上一行因剩余汉字较少，两端对齐算法强行将空白分配至各个汉字之间，诱发「字间距突然变宽」的视觉现象。</p>
-          <p>- 在 <code>css/library-refit.css</code> 的正文段落规则中补充 <code>overflow-wrap: break-word</code> 与 <code>word-break: normal</code>，允许长算式与英文词安全断行，消除空白空洞与字间距异常拉伸问题。</p>
-          <p><strong>4. 存量文章排版与算式标记修复</strong></p>
-          <p>- 修复最新新闻《计算生活费记录》（<code>Calculate The Allowance Record.html</code>）中因 Markdown 解析将算式星号误认为斜体标记而产生的残留 <code>&lt;em&gt;</code> 标签，恢复为字面算式。</p>
+          <p><strong>1. 移动端表格响应式容器（<code>.sl-table-wrapper</code>）落地与撑破纸皮根治</strong></p>
+          <p>- 深入排查用户报告的「手机端浏览文章时表格超出图书馆纸皮，且视口缩小」现象：原生 <code>table</code> 默认属于 <code>display: table</code>，受限于多列内容最小宽度（如 RPM、TPM、大整数 Token），在手机小屏（≤768px）下自身无法收缩，导致整个表格向右溢出纸皮边界约 200px；移动端浏览器（Safari / Chrome）为了容纳溢出元素，被迫触发自适应缩放（缩小视口），使得整张纸皮、顶栏及正文文字整体缩小变形。</p>
+          <p>- 在 <code>css/style.css</code> 与 <code>css/library-refit.css</code> 中确立响应式容器规范 <code>.sl-table-wrapper</code>（具有 <code>width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;</code>），内嵌表格自适应或平滑横向滚动，彻底杜绝撑破纸皮。</p>
+          <p>- 针对存量或手写裸 <code>table</code>，在 CSS 层提供 <code>display: block; max-width: 100%; overflow-x: auto;</code> 兜底防护；并在 <code>js/library-dynamic.js</code> 中新增 <code>ResponsiveTable</code> 模块，自动为文章正文中未包裹的表格补齐 <code>.sl-table-wrapper</code> 容器。</p>
+          <p>- 针对 ≤768px 窄屏微调单元格内边距至 <code>padding: 6px 10px; font-size: 13px;</code>，提升紧凑型屏幕上的表格可读性。</p>
+          <p><strong>2. 正文特定行文字间距异常过宽现象彻底根除</strong></p>
+          <p>- 根因定位：在包含长无空格连续算式（如 <code>1279602707/(30+15/24+16/(24*60))=41767791.69Tokens</code>）时，受 <code>word-break: normal</code> 限制，浏览器无法在数字与算式内部断行，被迫将整个 50 余字符的长算式推到下一行，导致上一行仅剩小半行汉字；加之旧规则设置了 <code>text-justify: inter-ideograph</code>，浏览器为强制两端对齐，将多达数十像素的巨大空白均分到了仅有的几个汉字之间（例如「完全可以接受」每个字间距被撑开数厘米）。</p>
+          <p>- 解决方案：彻底废除过时且容易破坏方块字结构的 <code>text-justify: inter-ideograph</code>；将正文断行规则升级为 <code>word-break: break-all</code>，允许长算式与英文字符串在行尾平滑折行填满整行；显式添加 <code>text-align-last: left</code> 保证段尾与末行始终靠左自然对齐，从根本上消除了汉字被过度拉扯出大间隙的视觉缺陷。</p>
+          <p><strong>3. 存量新闻页面修复</strong></p>
+          <p>- 修复最新发布新闻《Antigravity两周额度耗尽》（<code>Two Weekly Limit on Antigravity Ran Out.html</code>）中误生成的 <code>&lt;em&gt;</code> 算式乘号，将统计表规范包裹进 <code>.sl-table-wrapper</code> 响应式容器，在手机端不再溢出纸皮。</p>
+          <p><strong>4. 正文标准表格与代码构件落地</strong></p>
+          <p>- 补齐 <code>css/style.css</code> 与 <code>StyleEnforcer</code> 中正文标准表格与代码块基础样式（扁平直角、主题令牌配色、斑马纹、行内代码与引用块）。</p>
           <p><strong>5. 视觉组件展示页同步</strong></p>
-          <p>- <code>library/visual-components.html</code> 逐节新增「18. 正文表格 — table / .sl-table」与「19. 代码与代码块 — code / pre」的实际效果预览、HTML 与 Markdown 模板，并同步更新版本说明至 alpha-025。</p>
+          <p>- <code>library/visual-components.html</code> 逐节新增第 18 节（正文表格与 <code>.sl-table-wrapper</code> 响应式外层）与第 19 节（代码与代码块）的实际渲染效果与使用说明，同步升级至 alpha-026。</p>
           <p><strong>6. 全局版本号递增</strong></p>
-          <p>- <code>js/library-dynamic.js</code> 中的 <code>var Ver</code> 升级至 <code>alpha-025</code>。</p>
+          <p>- <code>js/library-dynamic.js</code> 中的 <code>var Ver</code> 升级至 <code>alpha-026</code>，通过 <code>node --check</code> 校验。</p>
         </div>
       </section>
 
       <section class="notice-header page-header-section">
         <h2 id="section-2" class="section-title-text-main">二、知识馆变更</h2>
         <div class="section-content left-align">
-          <p><strong>1. 表格与代码样式继承</strong></p>
-          <p>- 知识馆正文（<code>.kh-content</code>）全面继承本次新增的表格与代码样式规则，词条内包含结构化对比表或代码片段时自动获得完整框线与卡片底色。</p>
+          <p><strong>1. 表格响应式与断行规则同步生效</strong></p>
+          <p>- 知识馆正文（<code>.kh-content</code>）全面继承本次 <code>.sl-table-wrapper</code> 响应式外层容器与 <code>word-break: break-all</code> 紧凑断行排版规则，词条内长公式与宽表格在移动端表现完全一致。</p>
         </div>
       </section>
 
@@ -63,9 +62,7 @@
         <h2 id="section-3" class="section-title-text-main">三、规范变更</h2>
         <div class="section-content left-align">
           <p><strong>1. 视觉组件标准四处严格同步</strong></p>
-          <p>- 权威源 <code>.trae/rules/visual-components.md</code> 新增「18. 正文表格」与「19. 代码与代码块」章节。</p>
-          <p>- 项目技能副本 <code>.zcode/skills/sl-visual-components/SKILL.md</code> 与 <code>.reasonix/skills/sl-visual-components/SKILL.md</code> 完成镜像同步。</p>
-          <p>- 明确规定：提示框（<code>.quote-box-grey</code>、<code>.function-box-blue</code> 等）内部书写 Markdown 表格时，标签与内容之间必须留有空行以确保解析。</p>
+          <p>- 权威源 <code>.trae/rules/visual-components.md</code>、站内展示页 <code>library/visual-components.html</code>、技能镜像 <code>.zcode/skills/sl-visual-components/SKILL.md</code> 与 <code>.reasonix/skills/sl-visual-components/SKILL.md</code> 全部同步更新「18. 正文表格」规范，确立 <code>.sl-table-wrapper</code> 容器与移动端横向平滑滚动契约。</p>
         </div>
       </section>
 

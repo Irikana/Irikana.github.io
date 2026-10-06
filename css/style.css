@@ -2307,18 +2307,41 @@ details summary.summary-large {
 
 /* ========== Content Table (正文标准表格) ========== */
 
+.sl-table-wrapper,
+.table-container,
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: var(--space-md) 0;
+}
+
 .content-main table,
 .left-align table,
 .kh-content table,
 .section-content table,
 table.sl-table {
+  display: block;
   width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border-collapse: collapse;
   margin: var(--space-md) 0;
   font-size: 14px;
   line-height: 1.6;
   border: var(--line-width) solid var(--color-border);
   border-radius: 0;
+}
+
+.sl-table-wrapper table,
+.table-container table,
+.table-responsive table {
+  display: table;
+  width: 100%;
+  min-width: 100%;
+  margin: 0;
 }
 
 .content-main th,
@@ -2376,6 +2399,22 @@ html[data-sl-variant="dark"] .kh-content tr:nth-child(even),
 html[data-sl-variant="dark"] .section-content tr:nth-child(even),
 html[data-sl-variant="dark"] table.sl-table tr:nth-child(even) {
   background-color: rgba(255, 255, 255, 0.025);
+}
+
+@media (max-width: 768px) {
+  .content-main th,
+  .content-main td,
+  .left-align th,
+  .left-align td,
+  .kh-content th,
+  .kh-content td,
+  .section-content th,
+  .section-content td,
+  table.sl-table th,
+  table.sl-table td {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
 }
 
 /* ========== Inline Code & Code Block (代码与代码块) ========== */

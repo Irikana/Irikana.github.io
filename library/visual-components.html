@@ -1286,54 +1286,58 @@ MathJax = {
         <!-- ========== Section 18: 正文表格 ========== -->
         <section class="notice-header section-header page-header-section">
           <div>
-            <h2 id="section-18" class="section-title-text-main">18. 正文表格 — table / .sl-table</h2>
+            <h2 id="section-18" class="section-title-text-main">18. 正文表格 — table / .sl-table / .sl-table-wrapper</h2>
             <div class="content-bg-lightgrey">
               <div>
-                <p>用途：文章与知识词条中的结构化数据展示。支持 Markdown 表格语法 <code>| 表头 |</code> 渲染输出的原始 <code>&lt;table&gt;</code> 以及带有 <code>.sl-table</code> 类名的表格。</p>
+                <p>用途：文章与知识词条中的结构化数据展示。支持 Markdown 表格语法 <code>| 表头 |</code> 渲染输出的原始 <code>&lt;table&gt;</code> 以及带有 <code>.sl-table</code> 类名的表格。移动端下表格置入 <code>.sl-table-wrapper</code> 容器实现横向平滑滚动，杜绝因宽表格撑破文章纸皮而触发移动浏览器整体视口缩小变形。</p>
 
-                <p style="font-weight:600;margin-bottom:8px;">实际效果（标准正文表格，扁平直角，自适应主题色）：</p>
-                <table class="sl-table">
-                  <thead>
-                    <tr>
-                      <th>项目类别</th>
-                      <th>基准定额</th>
-                      <th>说明事项</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>第一周生活费</td>
-                      <td>200.00 元</td>
-                      <td>正常生活支出与工具使用</td>
-                    </tr>
-                    <tr>
-                      <td>第二周生活费</td>
-                      <td>200.00 元</td>
-                      <td>考教资与零食消耗结余追踪</td>
-                    </tr>
-                    <tr>
-                      <td>第三周生活费</td>
-                      <td>200.00 元</td>
-                      <td>正常三餐支出均值预测</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <p style="font-weight:600;margin-bottom:8px;">实际效果（标准正文表格，扁平直角，响应式包裹，自适应主题色）：</p>
+                <div class="sl-table-wrapper">
+                  <table class="sl-table">
+                    <thead>
+                      <tr>
+                        <th>项目类别</th>
+                        <th>基准定额</th>
+                        <th>说明事项</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>第一周生活费</td>
+                        <td>200.00 元</td>
+                        <td>正常生活支出与工具使用</td>
+                      </tr>
+                      <tr>
+                        <td>第二周生活费</td>
+                        <td>200.00 元</td>
+                        <td>考教资与零食消耗结余追踪</td>
+                      </tr>
+                      <tr>
+                        <td>第三周生活费</td>
+                        <td>200.00 元</td>
+                        <td>正常三餐支出均值预测</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
 
                 <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">HTML 代码：</p>
-                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;table class="sl-table"&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;表头一&lt;/th&gt;
-      &lt;th&gt;表头二&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;数据一&lt;/td&gt;
-      &lt;td&gt;数据二&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</code></pre>
+                <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>&lt;div class="sl-table-wrapper"&gt;
+  &lt;table class="sl-table"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;表头一&lt;/th&gt;
+        &lt;th&gt;表头二&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;数据一&lt;/td&gt;
+        &lt;td&gt;数据二&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
 
                 <p style="font-weight:600;margin-top:24px;margin-bottom:8px;">Markdown 代码：</p>
                 <pre style="background:#f5f5f5;padding:16px;border-radius:0;overflow-x:auto;font-size:13px;line-height:1.6;color:#333;border:1px solid #e0e0e0;"><code>| 表头一 | 表头二 |
@@ -1344,6 +1348,7 @@ MathJax = {
                 <ul style="padding-left:20px;font-size:14px;line-height:1.8;">
                   <li>正文中的 <code>table</code> 默认具备边框折叠（<code>border-collapse: collapse</code>）、主题线框（<code>var(--color-border)</code>）与交替浅色背景</li>
                   <li>全站统一扁平化设计，严格禁用圆角（<code>border-radius: 0</code>）</li>
+                  <li>移动端响应式：表格统一通过 <code>.sl-table-wrapper</code> 外层容器支持横向平滑滚动（<code>overflow-x: auto; -webkit-overflow-scrolling: touch;</code>）。<code>library-dynamic.js</code> 会自动为正文未包裹的表格补齐容器；纯 CSS 亦具备 <code>display: block; max-width: 100%;</code> 兜底，避免撑破版心纸皮</li>
                   <li>若在信息提示框（如 <code>.quote-box-grey</code>、<code>.function-box-blue</code>）内部书写 Markdown 表格，<code>&lt;div&gt;</code> 与表格内容之间必须留有<strong>空行</strong>，避免解析引擎当作原生未格式化块处理</li>
                 </ul>
 

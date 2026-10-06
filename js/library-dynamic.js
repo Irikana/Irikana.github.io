@@ -833,7 +833,7 @@
   };
 
   /* ========== 8. VERSION ========== */
-  var Ver = { v: 'alpha-025',
+  var Ver = { v: 'alpha-026',
     init: function() {
       var footer = $q('.copyright-color') || $q('footer .copyright-text') || $q('.copyright-text');
       if (!footer || $q('.sl-version')) return;
@@ -890,10 +890,13 @@
         '.function-box-blue{background-color:var(--sl-box-info-bg)!important;border:1px solid var(--color-border)!important;border-left:4px solid var(--sl-box-info-edge)!important;color:var(--sl-box-info-ink)!important;font-size:15px!important;line-height:1.7!important;padding:16px!important;margin:8px 0!important;}' +
         '.notice-box-red{background-color:var(--sl-box-warn-bg)!important;border:1px solid var(--color-border)!important;border-left:4px solid var(--sl-box-warn-edge)!important;color:var(--sl-box-warn-ink)!important;font-size:15px!important;line-height:1.8!important;padding:16px!important;margin:16px 0!important;}' +
         '.quote-box-grey{background-color:var(--color-bg-subtle)!important;border:1px solid var(--color-border)!important;border-left:3px solid var(--color-text-light)!important;font-style:italic!important;color:var(--color-text-secondary)!important;padding:16px!important;margin:8px 0!important;}' +
-        /* 正文表格与代码构件安全网兜底 */
-        '.content-main table,.left-align table,.kh-content table,.section-content table,table.sl-table{border-collapse:collapse!important;width:100%!important;border:1px solid var(--color-border)!important;margin:16px 0!important;font-size:14px!important;line-height:1.6!important;border-radius:0!important;}' +
+        /* 正文表格与代码构件安全网兜底：包含移动端自适应容器与滚动回退 */
+        '.sl-table-wrapper,.table-container,.table-responsive{width:100%!important;max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;margin:16px 0!important;}' +
+        '.sl-table-wrapper table,.table-container table,.table-responsive table{display:table!important;width:100%!important;min-width:100%!important;margin:0!important;border-collapse:collapse!important;border:1px solid var(--color-border)!important;font-size:14px!important;line-height:1.6!important;border-radius:0!important;}' +
+        '.content-main table:not(.sl-table-wrapper table),.left-align table:not(.sl-table-wrapper table),.kh-content table:not(.sl-table-wrapper table),.section-content table:not(.sl-table-wrapper table),table.sl-table:not(.sl-table-wrapper table){display:block!important;max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch!important;border-collapse:collapse!important;width:100%!important;border:1px solid var(--color-border)!important;margin:16px 0!important;font-size:14px!important;line-height:1.6!important;border-radius:0!important;}' +
         '.content-main th,.content-main td,.left-align th,.left-align td,.kh-content th,.kh-content td,.section-content th,.section-content td,table.sl-table th,table.sl-table td{border:1px solid var(--color-border)!important;padding:8px 12px!important;}' +
         '.content-main th,.left-align th,.kh-content th,.section-content th,table.sl-table th{background-color:var(--color-bg-subtle)!important;font-weight:600!important;border-bottom:2px solid var(--color-border)!important;}' +
+        '@media (max-width:768px){.content-main th,.content-main td,.left-align th,.left-align td,.kh-content th,.kh-content td,.section-content th,.section-content td,table.sl-table th,table.sl-table td{padding:6px 10px!important;font-size:13px!important;}}' +
         '.content-main :not(pre)>code,.left-align :not(pre)>code,.kh-content :not(pre)>code,.section-content :not(pre)>code,code.sl-inline-code{font-family:var(--sl-font-code,monospace)!important;background-color:var(--color-bg-subtle)!important;color:var(--color-accent)!important;padding:2px 6px!important;margin:0 2px!important;border:1px solid var(--color-border)!important;border-radius:0!important;font-size:0.88em!important;}' +
         '.content-main pre,.left-align pre,.kh-content pre,.section-content pre,pre.sl-code-block{background-color:var(--color-bg-subtle)!important;border:1px solid var(--color-border)!important;border-left:4px solid var(--color-accent)!important;padding:16px!important;margin:16px 0!important;overflow-x:auto!important;border-radius:0!important;line-height:1.55!important;}' +
         '.content-main pre code,.left-align pre code,.kh-content pre code,.section-content pre code,pre.sl-code-block code{background:transparent!important;border:none!important;padding:0!important;margin:0!important;color:var(--color-text-main)!important;font-size:inherit!important;}' +
@@ -2183,11 +2186,31 @@
     }
   };
 
+  /* ========== RESPONSIVE TABLES (移动端表格自适应包裹) ========== */
+  var ResponsiveTable = {
+    init: function() {
+      var tables = document.querySelectorAll('.content-main table, .left-align table, .kh-content table, .section-content table, table.sl-table');
+      for (var i = 0; i < tables.length; i++) {
+        var table = tables[i];
+        var parent = table.parentElement;
+        if (parent && !parent.classList.contains('sl-table-wrapper') &&
+            !parent.classList.contains('table-container') &&
+            !parent.classList.contains('table-responsive')) {
+          var wrapper = E('div');
+          wrapper.className = 'sl-table-wrapper';
+          parent.insertBefore(wrapper, table);
+          wrapper.appendChild(table);
+        }
+      }
+    }
+  };
+
   /* ========== START ========== */
   var _started = false;
   function start() {
     if (_started) return;
     _started = true;
+    try { ResponsiveTable.init(); } catch(e) { console.warn('[SL] ResponsiveTable error:', e.message); }
     try { SitePref.init(); } catch(e) { console.warn('[SL] SitePref error:', e.message); }
     try { TopBar.init(); } catch(e) { console.warn('[SL] TopBar error:', e.message); }
     try { Search.init(); } catch(e) { console.warn('[SL] Search error:', e.message); }

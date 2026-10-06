@@ -1398,25 +1398,49 @@ MathJax = {
 
 ---
 
-## 18. 正文表格 — `table` / `.sl-table`
+## 18. 正文表格 — `table` / `.sl-table` / `.sl-table-wrapper`
 
-**用途**：文章与知识词条中的结构化数据展示。支持 Markdown 表格语法 `| 表头 |` 渲染输出的原始 `<table>` 以及带有 `.sl-table` 类名的表格。
+**用途**：文章与知识词条中的结构化数据展示。支持 Markdown 表格语法 `| 表头 |` 渲染输出的原始 `<table>` 以及带有 `.sl-table` 类名的表格。移动端下表格通过 `.sl-table-wrapper` 外层容器实现横向滚动，杜绝因宽表格撑破文章纸皮而触发移动浏览器整体视口缩小。
 
 **标准样式（style.css）**：
 
 ```css
+/* 表格响应式外层容器 */
+.sl-table-wrapper,
+.table-container,
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: var(--space-md) 0;
+}
+
 .content-main table,
 .left-align table,
 .kh-content table,
 .section-content table,
 table.sl-table {
+  display: block;
   width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   border-collapse: collapse;
   margin: var(--space-md) 0;
   font-size: 14px;
   line-height: 1.6;
   border: var(--line-width) solid var(--color-border);
   border-radius: 0;
+}
+
+.sl-table-wrapper table,
+.table-container table,
+.table-responsive table {
+  display: table;
+  width: 100%;
+  min-width: 100%;
+  margin: 0;
 }
 
 .content-main th,
@@ -1475,6 +1499,22 @@ html[data-sl-variant="dark"] .section-content tr:nth-child(even),
 html[data-sl-variant="dark"] table.sl-table tr:nth-child(even) {
   background-color: rgba(255, 255, 255, 0.025);
 }
+
+@media (max-width: 768px) {
+  .content-main th,
+  .content-main td,
+  .left-align th,
+  .left-align td,
+  .kh-content th,
+  .kh-content td,
+  .section-content th,
+  .section-content td,
+  table.sl-table th,
+  table.sl-table td {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
 ```
 
 **Markdown 语法与 HTML 模板**：
@@ -1486,29 +1526,31 @@ html[data-sl-variant="dark"] table.sl-table tr:nth-child(even) {
 | 单元格内容 | 单元格内容 | 单元格内容 |
 ```
 
-或原生 HTML：
+或标准响应式 HTML：
 
 ```html
-<table class="sl-table">
-  <thead>
-    <tr>
-      <th>表头一</th>
-      <th>表头二</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>数据一</td>
-      <td>数据二</td>
-    </tr>
-  </tbody>
-</table>
+<div class="sl-table-wrapper">
+  <table class="sl-table">
+    <thead>
+      <tr>
+        <th>表头一</th>
+        <th>表头二</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>数据一</td>
+        <td>数据二</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 ```
 
 **规范要求**：
 - 边框与背景一律走主题令牌（`var(--color-border)`、`var(--color-bg-subtle)`），严禁硬编码十六进制颜色。
 - 禁用圆角（`border-radius: 0`），维持全站扁平化设计。
-- 表格在小屏幕（如手机端）中应可正常自适应显示或横向滚动，不得超出容器造成破坏性溢出。
+- 表格在小屏幕（如手机端 ≤768px）中统一置入 `.sl-table-wrapper` 容器支持横向平滑滚动，表格自身不可撑破纸皮导致移动端整体版心缩小变形。`library-dynamic.js` 会自动为正文中未包裹的 `table` 补齐 `.sl-table-wrapper`，裸 `table` 亦有 `display: block; max-width: 100%; overflow-x: auto;` 兜底。
 - 若在信息框（如 `.function-box-blue`、`.quote-box-grey`）中放置 Markdown 表格，必须在 `<div>` 起始与闭合标签两侧留有**空行**，以便 Markdown 引擎正确解析。
 
 ---

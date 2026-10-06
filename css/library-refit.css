@@ -1013,17 +1013,28 @@ html.kh-side-off .kh-side-tab { opacity: 1; pointer-events: auto; transform: tra
 }
 
 /* 正文列：两端对齐 + 中文标点挤压（出版物排印习惯）
-   增加 overflow-wrap: break-word 允许长算式与英文词安全折行，
-   避免两端对齐时因不可拆分长词将整块字符推至下一行而使上一行字间距被异常拉伸 */
+   增加 overflow-wrap: break-word 与 word-break: break-all 允许长算式与连续符号在行边界安全折行，
+   杜绝因长不可分词整块推至下一行而使上一行文字间距被异常拉伸分摊；末行强制靠左 */
 .content-main p,
 .left-align p,
 .kh-content p {
   margin: 0 0 1.15em 0;
   text-align: justify;
-  text-justify: inter-ideograph;
+  text-align-last: left;
   hanging-punctuation: first;
   overflow-wrap: break-word;
-  word-break: normal;
+  word-break: break-all;
+}
+
+/* 表格响应式外层容器：小屏水平滚动，杜绝撑破纸皮导致页面缩放 */
+.sl-table-wrapper,
+.table-container,
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: var(--space-md) 0;
 }
 html[data-sl-indent="on"] .content-main p,
 html[data-sl-indent="on"] .left-align p { text-indent: 2em; }
