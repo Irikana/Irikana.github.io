@@ -2305,6 +2305,127 @@ details summary.summary-large {
   line-height: 1.8;
 }
 
+/* ========== Content Table (正文标准表格) ========== */
+
+.content-main table,
+.left-align table,
+.kh-content table,
+.section-content table,
+table.sl-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  font-size: 14px;
+  line-height: 1.6;
+  border: var(--line-width) solid var(--color-border);
+  border-radius: 0;
+}
+
+.content-main th,
+.content-main td,
+.left-align th,
+.left-align td,
+.kh-content th,
+.kh-content td,
+.section-content th,
+.section-content td,
+table.sl-table th,
+table.sl-table td {
+  border: var(--line-width) solid var(--color-border);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.content-main th,
+.left-align th,
+.kh-content th,
+.section-content th,
+table.sl-table th {
+  background-color: var(--color-bg-subtle);
+  font-weight: 600;
+  color: var(--color-text-main);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.content-main tr:nth-child(even),
+.left-align tr:nth-child(even),
+.kh-content tr:nth-child(even),
+.section-content tr:nth-child(even),
+table.sl-table tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+@media (prefers-color-scheme: dark) {
+  .content-main tr:nth-child(even),
+  .left-align tr:nth-child(even),
+  .kh-content tr:nth-child(even),
+  .section-content tr:nth-child(even),
+  table.sl-table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.025);
+  }
+}
+html.force-dark-mode .content-main tr:nth-child(even),
+html.force-dark-mode .left-align tr:nth-child(even),
+html.force-dark-mode .kh-content tr:nth-child(even),
+html.force-dark-mode .section-content tr:nth-child(even),
+html.force-dark-mode table.sl-table tr:nth-child(even),
+html[data-sl-variant="dark"] .content-main tr:nth-child(even),
+html[data-sl-variant="dark"] .left-align tr:nth-child(even),
+html[data-sl-variant="dark"] .kh-content tr:nth-child(even),
+html[data-sl-variant="dark"] .section-content tr:nth-child(even),
+html[data-sl-variant="dark"] table.sl-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.025);
+}
+
+/* ========== Inline Code & Code Block (代码与代码块) ========== */
+
+.content-main :not(pre) > code,
+.left-align :not(pre) > code,
+.kh-content :not(pre) > code,
+.section-content :not(pre) > code,
+code.sl-inline-code {
+  font-family: var(--sl-font-code, 'Consolas', 'Monaco', 'Courier New', monospace);
+  font-size: 0.88em;
+  background-color: var(--color-bg-subtle);
+  color: var(--color-accent);
+  padding: 2px 6px;
+  margin: 0 2px;
+  border: var(--line-width) solid var(--color-border);
+  border-radius: 0;
+  vertical-align: baseline;
+}
+
+.content-main pre,
+.left-align pre,
+.kh-content pre,
+.section-content pre,
+pre.sl-code-block {
+  background-color: var(--color-bg-subtle);
+  border: var(--line-width) solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0;
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+  overflow-x: auto;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.content-main pre code,
+.left-align pre code,
+.kh-content pre code,
+.section-content pre code,
+pre.sl-code-block code {
+  font-family: var(--sl-font-code, 'Consolas', 'Monaco', 'Courier New', monospace);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: var(--color-text-main);
+  font-size: inherit;
+}
+
 /* ========== Meta Registry Table (元数据注册表) ========== */
 
 .meta-registry-table {

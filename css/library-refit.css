@@ -1012,7 +1012,9 @@ html.kh-side-off .kh-side-tab { opacity: 1; pointer-events: auto; transform: tra
   padding: 0 !important;
 }
 
-/* 正文列：两端对齐 + 中文标点挤压（出版物排印习惯） */
+/* 正文列：两端对齐 + 中文标点挤压（出版物排印习惯）
+   增加 overflow-wrap: break-word 允许长算式与英文词安全折行，
+   避免两端对齐时因不可拆分长词将整块字符推至下一行而使上一行字间距被异常拉伸 */
 .content-main p,
 .left-align p,
 .kh-content p {
@@ -1020,6 +1022,8 @@ html.kh-side-off .kh-side-tab { opacity: 1; pointer-events: auto; transform: tra
   text-align: justify;
   text-justify: inter-ideograph;
   hanging-punctuation: first;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 html[data-sl-indent="on"] .content-main p,
 html[data-sl-indent="on"] .left-align p { text-indent: 2em; }

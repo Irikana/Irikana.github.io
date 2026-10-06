@@ -1398,6 +1398,198 @@ MathJax = {
 
 ---
 
+## 18. 正文表格 — `table` / `.sl-table`
+
+**用途**：文章与知识词条中的结构化数据展示。支持 Markdown 表格语法 `| 表头 |` 渲染输出的原始 `<table>` 以及带有 `.sl-table` 类名的表格。
+
+**标准样式（style.css）**：
+
+```css
+.content-main table,
+.left-align table,
+.kh-content table,
+.section-content table,
+table.sl-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  font-size: 14px;
+  line-height: 1.6;
+  border: var(--line-width) solid var(--color-border);
+  border-radius: 0;
+}
+
+.content-main th,
+.content-main td,
+.left-align th,
+.left-align td,
+.kh-content th,
+.kh-content td,
+.section-content th,
+.section-content td,
+table.sl-table th,
+table.sl-table td {
+  border: var(--line-width) solid var(--color-border);
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.content-main th,
+.left-align th,
+.kh-content th,
+.section-content th,
+table.sl-table th {
+  background-color: var(--color-bg-subtle);
+  font-weight: 600;
+  color: var(--color-text-main);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.content-main tr:nth-child(even),
+.left-align tr:nth-child(even),
+.kh-content tr:nth-child(even),
+.section-content tr:nth-child(even),
+table.sl-table tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.015);
+}
+
+@media (prefers-color-scheme: dark) {
+  .content-main tr:nth-child(even),
+  .left-align tr:nth-child(even),
+  .kh-content tr:nth-child(even),
+  .section-content tr:nth-child(even),
+  table.sl-table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.025);
+  }
+}
+html.force-dark-mode .content-main tr:nth-child(even),
+html.force-dark-mode .left-align tr:nth-child(even),
+html.force-dark-mode .kh-content tr:nth-child(even),
+html.force-dark-mode .section-content tr:nth-child(even),
+html.force-dark-mode table.sl-table tr:nth-child(even),
+html[data-sl-variant="dark"] .content-main tr:nth-child(even),
+html[data-sl-variant="dark"] .left-align tr:nth-child(even),
+html[data-sl-variant="dark"] .kh-content tr:nth-child(even),
+html[data-sl-variant="dark"] .section-content tr:nth-child(even),
+html[data-sl-variant="dark"] table.sl-table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.025);
+}
+```
+
+**Markdown 语法与 HTML 模板**：
+
+```markdown
+| 列名称一 | 列名称二 | 列名称三 |
+| --- | --- | --- |
+| 单元格内容 | 单元格内容 | 单元格内容 |
+| 单元格内容 | 单元格内容 | 单元格内容 |
+```
+
+或原生 HTML：
+
+```html
+<table class="sl-table">
+  <thead>
+    <tr>
+      <th>表头一</th>
+      <th>表头二</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>数据一</td>
+      <td>数据二</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+**规范要求**：
+- 边框与背景一律走主题令牌（`var(--color-border)`、`var(--color-bg-subtle)`），严禁硬编码十六进制颜色。
+- 禁用圆角（`border-radius: 0`），维持全站扁平化设计。
+- 表格在小屏幕（如手机端）中应可正常自适应显示或横向滚动，不得超出容器造成破坏性溢出。
+- 若在信息框（如 `.function-box-blue`、`.quote-box-grey`）中放置 Markdown 表格，必须在 `<div>` 起始与闭合标签两侧留有**空行**，以便 Markdown 引擎正确解析。
+
+---
+
+## 19. 代码与代码块 — `code` / `pre`
+
+**用途**：行内术语、按键、命令或多行代码片段展示。支持 Markdown 反引号行内代码 `` `code` `` 与围栏代码块 ```` ```js ... ``` ```` 渲染。
+
+**标准样式（style.css）**：
+
+```css
+.content-main :not(pre) > code,
+.left-align :not(pre) > code,
+.kh-content :not(pre) > code,
+.section-content :not(pre) > code,
+code.sl-inline-code {
+  font-family: var(--sl-font-code, 'Consolas', 'Monaco', 'Courier New', monospace);
+  font-size: 0.88em;
+  background-color: var(--color-bg-subtle);
+  color: var(--color-accent);
+  padding: 2px 6px;
+  margin: 0 2px;
+  border: var(--line-width) solid var(--color-border);
+  border-radius: 0;
+  vertical-align: baseline;
+}
+
+.content-main pre,
+.left-align pre,
+.kh-content pre,
+.section-content pre,
+pre.sl-code-block {
+  background-color: var(--color-bg-subtle);
+  border: var(--line-width) solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0;
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+  overflow-x: auto;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.content-main pre code,
+.left-align pre code,
+.kh-content pre code,
+.section-content pre code,
+pre.sl-code-block code {
+  font-family: var(--sl-font-code, 'Consolas', 'Monaco', 'Courier New', monospace);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: var(--color-text-main);
+  font-size: inherit;
+}
+```
+
+**Markdown 语法与 HTML 模板**：
+
+行内代码：
+```markdown
+使用 `git status` 命令检查状态。
+```
+
+代码块：
+````markdown
+```javascript
+function greet() {
+  console.log("Hello, Shepherd's Library!");
+}
+```
+````
+
+**规范要求**：
+- 行内代码与代码块必须使用直角边框（`border-radius: 0`）。
+- 行内代码高亮文字走强调色 `var(--color-accent)`，底色走 `var(--color-bg-subtle)`。
+- 代码块左侧具备 `4px solid var(--color-accent)` 重点标识边框，并在横向超出时自动开启横向滚动条（`overflow-x: auto`）。
+
+---
+
 ## 附录：响应式断点汇总
 
 | 断点 | 适用场景 | 关键变化 |

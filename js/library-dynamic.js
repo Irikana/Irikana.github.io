@@ -833,7 +833,7 @@
   };
 
   /* ========== 8. VERSION ========== */
-  var Ver = { v: 'alpha-024',
+  var Ver = { v: 'alpha-025',
     init: function() {
       var footer = $q('.copyright-color') || $q('footer .copyright-text') || $q('.copyright-text');
       if (!footer || $q('.sl-version')) return;
@@ -890,6 +890,13 @@
         '.function-box-blue{background-color:var(--sl-box-info-bg)!important;border:1px solid var(--color-border)!important;border-left:4px solid var(--sl-box-info-edge)!important;color:var(--sl-box-info-ink)!important;font-size:15px!important;line-height:1.7!important;padding:16px!important;margin:8px 0!important;}' +
         '.notice-box-red{background-color:var(--sl-box-warn-bg)!important;border:1px solid var(--color-border)!important;border-left:4px solid var(--sl-box-warn-edge)!important;color:var(--sl-box-warn-ink)!important;font-size:15px!important;line-height:1.8!important;padding:16px!important;margin:16px 0!important;}' +
         '.quote-box-grey{background-color:var(--color-bg-subtle)!important;border:1px solid var(--color-border)!important;border-left:3px solid var(--color-text-light)!important;font-style:italic!important;color:var(--color-text-secondary)!important;padding:16px!important;margin:8px 0!important;}' +
+        /* 正文表格与代码构件安全网兜底 */
+        '.content-main table,.left-align table,.kh-content table,.section-content table,table.sl-table{border-collapse:collapse!important;width:100%!important;border:1px solid var(--color-border)!important;margin:16px 0!important;font-size:14px!important;line-height:1.6!important;border-radius:0!important;}' +
+        '.content-main th,.content-main td,.left-align th,.left-align td,.kh-content th,.kh-content td,.section-content th,.section-content td,table.sl-table th,table.sl-table td{border:1px solid var(--color-border)!important;padding:8px 12px!important;}' +
+        '.content-main th,.left-align th,.kh-content th,.section-content th,table.sl-table th{background-color:var(--color-bg-subtle)!important;font-weight:600!important;border-bottom:2px solid var(--color-border)!important;}' +
+        '.content-main :not(pre)>code,.left-align :not(pre)>code,.kh-content :not(pre)>code,.section-content :not(pre)>code,code.sl-inline-code{font-family:var(--sl-font-code,monospace)!important;background-color:var(--color-bg-subtle)!important;color:var(--color-accent)!important;padding:2px 6px!important;margin:0 2px!important;border:1px solid var(--color-border)!important;border-radius:0!important;font-size:0.88em!important;}' +
+        '.content-main pre,.left-align pre,.kh-content pre,.section-content pre,pre.sl-code-block{background-color:var(--color-bg-subtle)!important;border:1px solid var(--color-border)!important;border-left:4px solid var(--color-accent)!important;padding:16px!important;margin:16px 0!important;overflow-x:auto!important;border-radius:0!important;line-height:1.55!important;}' +
+        '.content-main pre code,.left-align pre code,.kh-content pre code,.section-content pre code,pre.sl-code-block code{background:transparent!important;border:none!important;padding:0!important;margin:0!important;color:var(--color-text-main)!important;font-size:inherit!important;}' +
         /* 阅读进度条 */
         '#sl-reading-progress{position:fixed;top:0;left:0;height:6px;background:#7fb3d5;z-index:9999;transition:width 0.1s ease-out;width:0;pointer-events:none;}' +
         /* 隐藏内联目录 */
