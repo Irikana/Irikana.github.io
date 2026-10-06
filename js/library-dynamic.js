@@ -73,6 +73,7 @@
   /* ========== 1. SEARCH ========== */
   var Search = {
     data: [
+      {t:'Antigravity两周额度耗尽',u:toAbs(ROOT+'library/paper/Two Weekly Limit on Antigravity Ran Out.html'),k:'Antigravity两周额度耗尽 Two Weekly Limit on Antigravity Ran Out 信息文章 新闻 新闻'},
       {t:'计算生活费记录',u:toAbs(ROOT+'library/paper/Calculate The Allowance Record.html'),k:'计算生活费记录 Calculate The Allowance Record 信息文章 新闻 新闻'},
       {t:'转向Gemini',u:toAbs(ROOT+'library/paper/Turn to Gemini.html'),k:'转向Gemini Turn to Gemini 信息文章 新闻 新闻'},
       {t:'IC惊现课程表接口',u:toAbs(ROOT+'library/paper/Schedule API Might Be In INSTLAB Cloud.html'),k:'IC惊现课程表接口 Schedule API Might Be In INSTLAB Cloud 信息文章 新闻 新闻'},
