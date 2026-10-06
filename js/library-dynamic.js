@@ -73,6 +73,7 @@
   /* ========== 1. SEARCH ========== */
   var Search = {
     data: [
+      {t:'本地部署Qwen 3.5 4B',u:toAbs(ROOT+'library/paper/Locally Hosted Qwen 3.5 4B.html'),k:'本地部署Qwen 3.5 4B Locally Hosted Qwen 3.5 4B 信息文章 新闻 新闻'},
       {t:'Antigravity两周额度耗尽',u:toAbs(ROOT+'library/paper/Two Weekly Limit on Antigravity Ran Out.html'),k:'Antigravity两周额度耗尽 Two Weekly Limit on Antigravity Ran Out 信息文章 新闻 新闻'},
       {t:'计算生活费记录',u:toAbs(ROOT+'library/paper/Calculate The Allowance Record.html'),k:'计算生活费记录 Calculate The Allowance Record 信息文章 新闻 新闻'},
       {t:'转向Gemini',u:toAbs(ROOT+'library/paper/Turn to Gemini.html'),k:'转向Gemini Turn to Gemini 信息文章 新闻 新闻'},
