@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>牧羊人图书馆 - 2026年10月13日 更新日志</title>
+<meta name="description" content="牧羊人图书馆 - 存放所有知识之地">
+<meta name="keywords" content="图书馆,知识,学习,牧羊人">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/library-refit.css">
+<script>(function(){var d={};try{d=JSON.parse(localStorage.getItem('sl_site-pref')||'{}')||{}}catch(e){}var h=document.documentElement;function s(k,v){h.setAttribute('data-sl-'+k,d[k]||v)}s('palette','classic');s('type','songti');s('size','normal');s('measure','normal');h.setAttribute('data-sl-indent',d.indent===false?'off':'on');var m='system';try{m=JSON.parse(localStorage.getItem('sl_theme')||'"system"')}catch(e){}var k=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;h.setAttribute('data-sl-variant',(m==='dark'||(m==='system'&&k))?'dark':'light')})();</script>
+</head>
+<body>
+<header class="main-container logo-align">
+  <div class="logo-header-row"><img src="../image/logo.png" class="logo-border logo-container logo-img-custom" alt="牧羊人图书馆 Logo"><img src="../image/logo_text.png" class="logo-size logo-size-custom" alt="牧羊人图书馆"></div>
+  <div class="slogan-container">
+    <hr class="slogan-line slogan-line-left">
+    <span class="slogan-text">存放所有知识之地</span>
+    <hr class="slogan-line slogan-line-right">
+  </div>
+  <div class="section-padding page-title-main">2026年10月13日 更新日志</div>
+</header>
+
+<main class="content-row content-bg-white">
+  <div class="content-width-limiter">
+    <div class="content-main">
+      <div class="quote-box-grey">
+        <div class="left-align">2026-10-13 · 海报新闻日期居中对齐修复 · 读者操作复制引用条目支持发布日期 · 视觉组件四处同步 · alpha-027</div>
+      </div>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-1" class="section-title-text-main">一、主馆变更</h2>
+        <div class="section-content left-align">
+          <p><strong>1. 海报新闻日期居中对齐修复（<code>css/style.css</code>、<code>css/library-refit.css</code>、<code>js/library-dynamic.js</code>）</strong></p>
+          <p>- 深入排查海报新闻上传后日期未相对海报居中问题：此前在优化长算式两端对齐时，向正文段落（<code>.content-main p</code>）增加了 <code>text-align-last: left</code> 规则；海报新闻中的日期元素为单行段落 <code>&lt;p class="news-featured-date"&gt;</code>，在浏览器渲染规范中，单行文本即属于末行，被继承的 <code>text-align-last: left</code> 强制拉向左缘，导致标题居中而日期靠左。</p>
+          <p>- 在 <code>css/style.css</code>、<code>css/library-refit.css</code> 及 <code>js/library-dynamic.js</code>（<code>StyleEnforcer</code> 安全网）中补充显式针对 <code>.news-featured-info p</code> 与 <code>.news-featured-date</code> 的 <code>text-align: center !important; text-align-last: center !important;</code> 规则，彻底消除末行左对齐规则对海报日期的干扰，确保日期相对海报及标题垂直轴线始终完美居中。</p>
+          <p><strong>2. 读者操作复制引用条目改为展示发布日期（<code>js/library-dynamic.js</code>）</strong></p>
+          <p>- 读者在文章与知识词条页点击「读者操作」中的「复制引用条目」时，原逻辑生成的格式为抓取当前日期的「（访问日期：YYYY年M月D日）。」，未能体现文章的真实发表时效。</p>
+          <p>- 升级 <code>ReaderActions</code> 模块：新增 <code>date()</code> 智能解析逻辑，优先从页面元数据（<code>.article-meta</code>、<code>.kh-entry-meta</code>）中提取「发布日期：」（或 <code>Published:</code>），缺失时平滑回退至「创建日期：」（或 <code>Created:</code>）或「最后更新：」；提取出的日期字符串自动归一化为标准的 <code>YYYY年M月D日</code> 格式，去除分秒后缀；若页面完全缺失元数据日期则回退至当天日期。</p>
+          <p>- 生成的引用字符串更新为「作者：《标题》，牧羊人图书馆，URL（发布日期：YYYY年M月D日）。」；英文版页面对应生成英文版标准引用格式；<code>author()</code> 同时兼容英文 <code>Author:</code> 标签。</p>
+          <p><strong>3. 全局版本号递增</strong></p>
+          <p>- <code>js/library-dynamic.js</code> 中的 <code>var Ver</code> 升级至 <code>alpha-027</code>，通过 <code>node --check</code> 语法校验。</p>
+        </div>
+      </section>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-2" class="section-title-text-main">二、知识馆变更</h2>
+        <div class="section-content left-align">
+          <p><strong>1. 词条读者操作引用规则同步生效</strong></p>
+          <p>- 知识馆各分类词条页底部的读者操作构件（<code>.reader-actions</code>）全面继承本次发布日期抓取与归一化逻辑，引用时优先读取词条创建日期与最后更新日期并标注为「发布日期」，不再输出浏览时的访问日期。</p>
+        </div>
+      </section>
+
+      <section class="notice-header page-header-section">
+        <h2 id="section-3" class="section-title-text-main">三、规范变更</h2>
+        <div class="section-content left-align">
+          <p><strong>1. 视觉组件标准四处严格同步</strong></p>
+          <p>- 权威源 <code>.trae/rules/visual-components.md</code>、站内展示页 <code>library/visual-components.html</code>、技能镜像 <code>.zcode/skills/sl-visual-components/SKILL.md</code> 与 <code>.reasonix/skills/sl-visual-components/SKILL.md</code> 同步更新第 3.6c 节（读者操作）与第 4 节（海报新闻），确立发布日期抓取契约与 <code>text-align-last: center</code> 居中规范，展示页更新至 <code>alpha-027</code>。</p>
+          <p><strong>2. 网站总规范版本号同步</strong></p>
+          <p>- <code>Irikana.github.io/.trae/rules/project_rules.md</code> 与两套技能中的当前版本号同步推进至 <code>alpha-027</code>。</p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer-row footer-row-alt footer-gradient">
+  <div class="nav-center">
+    <div class="padding-10 copyright-color copyright-text">© 2026 薛柯道 KeDao Xue 牧羊人图书馆 Shepherd's Library<br>保留所有权利 未经许可，不得擅自转载、修改或用于商业用途<br></div>
+  </div>
+</footer>
+
+<div class="mobile-nav">
+  <div class="mobile-nav-title">便携式导航仪</div>
+  <div class="mobile-nav-links">
+    <a href="../index.html" class="mobile-nav-link">图书馆主页</a>
+    <a href="../library/intro.html" class="mobile-nav-link">图书馆入门</a>
+    <a href="../library/rule.html" class="mobile-nav-link">图书馆规则</a>
+    <a href="../library/feature.html" class="mobile-nav-link">图书馆功能</a>
+    <a href="../navigator.html" target="_blank" class="mobile-nav-link">导航枢纽</a>
+  </div>
+</div>
+
+<div class="quick-nav">
+  <div class="quick-nav-title">便携式导航仪</div>
+  <div class="quick-nav-hint">光标移到此处展开</div>
+  <div class="quick-nav-content">
+    <a href="../index.html" class="quick-nav-item">图书馆主页</a>
+    <a href="../library/intro.html" class="quick-nav-item">图书馆入门</a>
+    <a href="../library/rule.html" class="quick-nav-item">图书馆规则</a>
+    <a href="../library/feature.html" class="quick-nav-item">图书馆功能</a>
+  </div>
+</div>
+
+<button title="回到顶部" aria-label="回到顶部" class="float-button back-to-top">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+<button title="导航枢纽" aria-label="导航枢纽" class="float-button nav-hub">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+</button>
+
+<script src="../js/library-dynamic.js"></script>
+</body>
+</html>

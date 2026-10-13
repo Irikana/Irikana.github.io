@@ -1395,6 +1395,7 @@ html[data-sl-variant="dark"] .sl-pop-toast { box-shadow: 0 4px 14px rgba(0, 0, 0
 
 .news-featured-info {
   padding: var(--space-sm) 0;
+  text-align: center;
 }
 
 .news-featured-title {
@@ -1402,6 +1403,7 @@ html[data-sl-variant="dark"] .sl-pop-toast { box-shadow: 0 4px 14px rgba(0, 0, 0
   font-weight: 600;
   color: var(--color-text);
   margin: 0 0 var(--space-xs) 0;
+  text-align: center;
 }
 
 .news-featured-date,
@@ -1409,6 +1411,11 @@ html[data-sl-variant="dark"] .sl-pop-toast { box-shadow: 0 4px 14px rgba(0, 0, 0
   font-size: 13px;
   color: var(--color-text-light);
   margin: 0 0 var(--space-sm) 0;
+}
+
+.news-featured-date {
+  text-align: center;
+  text-align-last: center;
 }
 
 .news-featured-hint {

@@ -1052,8 +1052,11 @@ html[data-sl-indent="on"] .section-content > p:first-child::first-letter {
 /* 新闻卡片内的文字不参与正文两端对齐与首行缩进
    （海报新闻的日期是 <p>，被上面的 justify + 缩进规则推离了中轴） */
 .content-main .news-featured-info p,
-.content-main .news-featured-title {
+.content-main .news-featured-title,
+.news-featured-info .news-featured-date,
+.news-featured-info .news-featured-title {
   text-align: center !important;
+  text-align-last: center !important;
   text-indent: 0 !important;
 }
 .content-main .news-featured-info p { margin-bottom: 0; }

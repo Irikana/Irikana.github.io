@@ -583,17 +583,49 @@
       for (var i = 0; i < items.length; i++) {
         var label = $q('.article-meta-label, .kh-entry-meta-label', items[i]);
         var value = $q('.article-meta-value, .kh-entry-meta-value', items[i]);
-        if (label && value && /^作者[:：]?$/.test(label.textContent.replace(/\s/g, ''))) {
+        if (label && value && /^(?:作者|Author)[:：]?$/i.test(label.textContent.replace(/\s/g, ''))) {
           var author = value.textContent.trim();
           if (author) return author;
         }
       }
       return '薛柯道';
     },
-    citation: function() {
+    date: function() {
+      var items = $qa('.article-meta-item, .kh-entry-meta-item');
+      var pub = '', cre = '', upd = '';
+      for (var i = 0; i < items.length; i++) {
+        var label = $q('.article-meta-label, .kh-entry-meta-label', items[i]);
+        var value = $q('.article-meta-value, .kh-entry-meta-value', items[i]);
+        if (!label || !value) continue;
+        var t = label.textContent.replace(/\s/g, '');
+        var v = value.textContent.trim();
+        if (!v) continue;
+        if (/^(?:发布日期|Published)[:：]?$/i.test(t)) {
+          pub = v;
+        } else if (/^(?:创建日期|Created)[:：]?$/i.test(t)) {
+          cre = v;
+        } else if (/^(?:最后更新|Updated|LastUpdated)[:：]?$/i.test(t)) {
+          upd = v;
+        }
+      }
+      var raw = pub || cre || upd;
+      if (raw) {
+        var m = raw.match(/(\d{4})[年/-](\d{1,2})[月/-](\d{1,2})/);
+        if (m) {
+          return m[1] + '年' + parseInt(m[2], 10) + '月' + parseInt(m[3], 10) + '日';
+        }
+        return raw;
+      }
       var d = new Date();
-      var date = d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
-      return this.author() + '：《' + this.title() + '》，牧羊人图书馆，' + this.url() + '（访问日期：' + date + '）。';
+      return d.getFullYear() + '年' + (d.getMonth() + 1) + '月' + d.getDate() + '日';
+    },
+    citation: function() {
+      var date = this.date();
+      var isEn = location.pathname.indexOf('/en/') > -1 || (document.documentElement && document.documentElement.lang === 'en');
+      if (isEn) {
+        return this.author() + ', "' + this.title() + '", Shepherd\'s Library, ' + this.url() + ' (Published: ' + date + ').';
+      }
+      return this.author() + '：《' + this.title() + '》，牧羊人图书馆，' + this.url() + '（发布日期：' + date + '）。';
     },
     feedback: function(btn, ok) {
       if (!btn) return;
@@ -835,7 +867,7 @@
   };
 
   /* ========== 8. VERSION ========== */
-  var Ver = { v: 'alpha-026',
+  var Ver = { v: 'alpha-027',
     init: function() {
       var footer = $q('.copyright-color') || $q('footer .copyright-text') || $q('.copyright-text');
       if (!footer || $q('.sl-version')) return;
@@ -956,7 +988,7 @@
         '.kh-content h2{color:var(--color-text)!important;border-bottom:2px solid var(--color-accent)!important;}' +
         '.kh-content h3{color:var(--color-text-secondary)!important;}.kh-content p{color:var(--color-text-secondary)!important;}' +
         /* 海报新闻的文字不参与正文两端对齐，日期回到中轴 */
-        '.news-featured-info .news-featured-date,.news-featured-info .news-featured-title{text-align:center!important;text-indent:0!important;}';
+        '.news-featured-info .news-featured-date,.news-featured-info .news-featured-title{text-align:center!important;text-align-last:center!important;text-indent:0!important;}';
       document.head.appendChild(style);
     }
   };

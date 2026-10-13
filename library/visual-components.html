@@ -44,7 +44,7 @@
             <div class="function-box-blue">
               <p>本文档定义了项目中所有 UI 组件的标准样式。开发新页面或修改现有页面时，应直接复制对应组件的样式代码，以确保全站视觉一致性。</p>
               <p>每个组件下方展示「实际渲染效果」和「对应代码」，方便直观对比参考。</p>
-              <p>本页最后同步：alpha-025（与 .trae/rules/visual-components.md 及 style.css / library-refit.css / library-dynamic.js 实际实现对齐）。</p>
+              <p>本页最后同步：alpha-027（与 .trae/rules/visual-components.md 及 style.css / library-refit.css / library-dynamic.js 实际实现对齐）。</p>
             </div>
           </div>
         </section>
@@ -375,7 +375,7 @@
 
                 <ul>
                   <li>只在存在 <code>.article-meta</code> 或 <code>.kh-entry-meta</code> 的页面生成；文章页放在正文末尾，知识词条页放在移动页脚之前。</li>
-                  <li>链接会移除 query 与 hash；引用条目格式为「作者：《标题》，牧羊人图书馆，URL（访问日期：YYYY年M月D日）。」</li>
+                  <li>链接会移除 query 与 hash；引用条目格式为「作者：《标题》，牧羊人图书馆，URL（发布日期：YYYY年M月D日）。」；发布日期从文章元数据的「发布日期：」取值（缺失时回退至「创建日期：」或「最后更新：」，缺失元数据时回退至当日日期）。</li>
                   <li>剪贴板权限失败时继续走 textarea 回退；成功与失败都在按钮上反馈，失败另发警告级轻提示。</li>
                   <li>样式唯一实现位于 <code>css/style.css</code>，直角、主题令牌配色、窄屏可换行；页面与生成器不得内联副本。</li>
                 </ul>
@@ -570,7 +570,7 @@
                   <li>海报位始终保持 <strong>1 个</strong>；新增海报新闻时替换左侧 poster，被替换的旧海报新闻降级为文字新闻插入右侧列表（若右侧已满 6 条则挤出最旧一条）</li>
                   <li>文字卡片只放标题 + 日期，<strong>不放正文内容</strong>；<code>data-date</code> 格式 <code>YYYY-MM-DD</code>，用于排序（按日期降序）</li>
                   <li>海报图片路径：<code>./image/poster/{路径}/{文件名}.png</code>；中英文主页的新闻卡片需同步添加</li>
-                  <li><strong>文字对齐</strong>：<code>.news-featured-info</code> 内的标题与日期一律居中，且不参与正文的两端对齐与首行缩进——<code>&lt;p class="news-featured-date"&gt;</code> 会被 refit 的 <code>.content-main p</code>（justify + 缩进 2em）命中而偏出中轴，豁免规则写在 <code>css/library-refit.css</code>「4. 页面骨架」段末尾，StyleEnforcer 有同名兜底</li>
+                  <li><strong>文字对齐</strong>：<code>.news-featured-info</code> 内的标题与日期一律居中（包含 <code>text-align-last: center !important</code> 确保单行日期居中），且不参与正文的两端对齐与首行缩进——<code>&lt;p class="news-featured-date"&gt;</code> 不得被 refit 的 <code>.content-main p</code>（justify + <code>text-align-last: left</code> + 缩进 2em）偏出中轴，豁免规则写在 <code>css/library-refit.css</code>「4. 页面骨架」段末尾，<code>style.css</code> 与 StyleEnforcer 同步兜底</li>
                 </ul>
 
                 <p style="font-weight:600;margin-top:16px;margin-bottom:8px;">容量与排序规矩：</p>

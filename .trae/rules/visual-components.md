@@ -489,7 +489,7 @@ details details {
 - 只在页面存在 `.article-meta` 或 `.kh-entry-meta` 时生成；普通功能页、列表页、更新日志页不生成。
 - 文章页追加在 `.content-main` 末尾；知识词条页插入 `.kh-main` 内、`.kh-footer-mobile` 之前。隐藏态不存在，不得预留空白占位。
 - 「复制链接」使用去掉 query 与 hash 的当前永久地址。
-- 「复制引用条目」格式固定为 `作者：《标题》，牧羊人图书馆，URL（访问日期：YYYY年M月D日）。`。标题依次取 `.page-title-main`、`.kh-entry-title`、清理后的 `document.title`；作者从元数据的「作者：」字段取值，缺失时回退为「薛柯道」。
+- 「复制引用条目」格式固定为 `作者：《标题》，牧羊人图书馆，URL（发布日期：YYYY年M月D日）。`。标题依次取 `.page-title-main`、`.kh-entry-title`、清理后的 `document.title`；作者从元数据的「作者：」字段取值，缺失时回退为「薛柯道」；发布日期优先从元数据的「发布日期：」取值，缺失时回退至「创建日期：」或「最后更新：」，并归一化为 `YYYY年M月D日`（缺失元数据时回退至当日日期）。英文页面输出 `Author, "Title", Shepherd's Library, URL (Published: Date).`。
 - 剪贴板优先使用 `navigator.clipboard.writeText`；权限拒绝或 Promise 失败时必须继续回退到临时 textarea + `document.execCommand('copy')`，不得静默中止。成功与失败都要在按钮文字上反馈，失败时另发警告级轻提示。
 - 唯一样式实现位于 `css/style.css`。按钮为直角、主题令牌配色，窄屏允许换行并平均分配宽度；页面与生成器不得内联 `.reader-actions*` 样式。
 
@@ -648,7 +648,7 @@ details details {
 - 新增海报新闻时替换左侧 poster；被替换的旧海报新闻降级为文字新闻插入右侧列表（若右侧已满 6 条则挤出最旧一条）
 - 海报图片路径：`./image/poster/{路径}/{文件名}.png`
 - 中英文主页的新闻卡片需同步添加
-- **文字对齐**：`.news-featured-info` 内的标题与日期一律居中，且不参与正文的两端对齐与首行缩进——`<p class="news-featured-date">` 会被 refit 的 `.content-main p`（justify + 缩进 2em）命中而偏出中轴，豁免规则写在 `css/library-refit.css`「4. 页面骨架」段末尾，StyleEnforcer 有同名兜底
+- **文字对齐**：`.news-featured-info` 内的标题与日期一律居中（包含 `text-align-last: center !important` 确保单行日期居中），且不参与正文的两端对齐与首行缩进——`<p class="news-featured-date">` 不得被 refit 的 `.content-main p`（justify + `text-align-last: left` + 缩进 2em）偏出中轴，豁免规则写在 `css/library-refit.css`「4. 页面骨架」段末尾，`style.css` 与 StyleEnforcer 同步兜底
 
 ### news.html 列表项 — `.news-list-item-text-only`
 
