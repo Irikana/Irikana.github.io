@@ -73,6 +73,7 @@
   /* ========== 1. SEARCH ========== */
   var Search = {
     data: [
+      {t:'大失败',u:toAbs(ROOT+'library/paper/The Big Failure.html'),k:'大失败 The Big Failure 信息文章 新闻 新闻'},
       {t:'庞然大物',u:toAbs(ROOT+'library/paper/A Huge Stuff.html'),k:'庞然大物 A Huge Stuff 信息文章 新闻 新闻'},
       {t:'本地部署Qwen 3.5 4B',u:toAbs(ROOT+'library/paper/Locally Hosted Qwen 3.5 4B.html'),k:'本地部署Qwen 3.5 4B Locally Hosted Qwen 3.5 4B 信息文章 新闻 新闻'},
       {t:'Antigravity两周额度耗尽',u:toAbs(ROOT+'library/paper/Two Weekly Limit on Antigravity Ran Out.html'),k:'Antigravity两周额度耗尽 Two Weekly Limit on Antigravity Ran Out 信息文章 新闻 新闻'},
